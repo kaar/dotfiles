@@ -58,3 +58,6 @@ unset _ps1_symbol
 
 # Fixup git-bash in non login env
 # shopt -q login_shell || . ~/.config/git-prompt.sh 
+
+# Load bash completion.
+source /usr/share/bash-completion/completions/git
