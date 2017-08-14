@@ -33,3 +33,5 @@
 	keepbackup = false
 [core]
 	autocrlf = false
+[push]
+	default = simple
