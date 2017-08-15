@@ -33,5 +33,6 @@
 	keepbackup = false
 [core]
 	autocrlf = false
+	editor = vim
 [push]
 	default = simple
