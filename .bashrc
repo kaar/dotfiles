@@ -18,3 +18,4 @@ source ~/.config/git-prompt.sh
 
 # Load bash completion.
 source /usr/share/bash-completion/completions/git
+source ~/.config/tmux.completion.bash
