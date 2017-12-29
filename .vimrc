@@ -1,4 +1,5 @@
 "source ~/.vimrc"
+syntax on
 let mapleader = " "
 set hlsearch
 set ignorecase
