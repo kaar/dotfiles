@@ -67,6 +67,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Nerd Tree
+Plugin 'scrooloose/nerdtree'
+
 " Rails 
 Plugin 'tpope/vim-rails.git'
 
@@ -102,3 +105,13 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" --------
+" NerdTree
+" --------
+" Show NerdTree On startup on directiry
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Map NerdTree to Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+
