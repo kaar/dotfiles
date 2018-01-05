@@ -1,4 +1,8 @@
 "source ~/.vimrc"
+" Notes
+" ======== 
+" :so %, Reload vim rc 
+
 syntax on
 let mapleader = " "
 set hlsearch
