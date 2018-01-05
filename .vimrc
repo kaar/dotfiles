@@ -76,6 +76,8 @@ Plugin 'tpope/vim-rails.git'
 " CtrlP
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Vim Ruby
+Plugin 'vim-ruby/vim-ruby'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
