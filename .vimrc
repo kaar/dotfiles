@@ -22,6 +22,10 @@ nnoremap <leader>h <c-w><c-h>
 nnoremap <leader>j <c-w><c-j>
 nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
+nnoremap <leader>q <c-w>q
+nnoremap <leader>a <esc>ggVG<CR> " Select all text in file
+
+" Visual studio Specific mappings
 nnoremap <leader>n :vsc resharper.resharper_gotofile<cr>
 nnoremap <leader>e :vsc resharper.resharper_gotorecentfiles<cr>
 nnoremap <leader><S-n> :vsc resharper.resharper_gotosymbol<cr>
