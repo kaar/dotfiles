@@ -5,6 +5,9 @@
 
 " Settings
 syntax on
+" load indent file for the current filetype
+filetype indent on
+filetype plugin indent on
 let mapleader = " "
 set hlsearch
 set ignorecase
@@ -16,6 +19,16 @@ set number
 set relativenumber
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
+" Turn off vi compatibility
+set nocompatible
+set smartindent
+set autoindent
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 
 " Mappings
 imap jj <Esc>
@@ -46,22 +59,6 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
-
-" Turn off vi compatibility
-set nocompatible
-
-set smartindent
-set autoindent
-
-" load indent file for the current filetype
-filetype indent on
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
 
 " ------
 " Vundle
