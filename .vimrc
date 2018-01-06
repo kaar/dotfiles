@@ -27,6 +27,7 @@ set expandtab                   " On pressing tab, insert 4 spaces
 set nobackup                    " don't want no backup files
 set nowritebackup               " don't make a backup before overwriting a file
 set noswapfile                  " no swap files
+set autoread                    " Auto-reload buffers when files are changed on disk
 
 " Mappings
 imap jj <Esc>
