@@ -9,7 +9,7 @@ syntax on
 filetype indent on
 filetype plugin indent on
 let mapleader = " "
-set hlsearch
+set hlsearch                    " highlight the search
 set ignorecase
 set smartcase
 set incsearch
@@ -17,18 +17,16 @@ set clipboard=unnamed
 set autoindent
 set number
 set relativenumber
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
-" Turn off vi compatibility
-set nocompatible
+set synmaxcol=1200              " Syntax coloring lines that are too long just slows down the world
+set nocompatible                " Turn off vi compatibility
 set smartindent
 set autoindent
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
+set tabstop=4                   " show existing tab with 4 spaces width
+set shiftwidth=4                " when indenting with '>', use 4 spaces width
+set expandtab                   " On pressing tab, insert 4 spaces
+set nobackup                    " don't want no backup files
+set nowritebackup               " don't make a backup before overwriting a file
+set noswapfile                  " no swap files
 
 " Mappings
 imap jj <Esc>
