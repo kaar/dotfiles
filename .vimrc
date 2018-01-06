@@ -3,6 +3,7 @@
 " ======== 
 " :so %, Reload vim rc 
 
+" Settings
 syntax on
 let mapleader = " "
 set hlsearch
@@ -13,7 +14,10 @@ set clipboard=unnamed
 set autoindent
 set number
 set relativenumber
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=1200
 
+" Mappings
 imap jj <Esc>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>- :split<cr>
