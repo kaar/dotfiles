@@ -41,6 +41,12 @@ nnoremap <leader>l <c-w><c-l>
 nnoremap <leader>q <c-w>q
 nnoremap <leader>a <esc>ggVG<CR> " Select all text in file
 
+"Move lines"
+nnoremap <C-j> <Esc> :m .+1<CR>
+nnoremap <C-k> <Esc> :m .-2<CR>
+inoremap <C-j> <Esc> :m .+1<CR>i
+inoremap <C-k> <Esc> :m .-2<CR>i
+
 " Visual studio Specific mappings
 nnoremap <leader>n :vsc resharper.resharper_gotofile<cr>
 nnoremap <leader>e :vsc resharper.resharper_gotorecentfiles<cr>
