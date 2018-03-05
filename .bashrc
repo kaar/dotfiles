@@ -17,11 +17,11 @@ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 source ~/.config/git-prompt.sh
 
 # Load bash completion PC. 
-# source /usr/share/bash-completion/completions/git
-# source ~/.config/tmux.completion.bash
+source /usr/share/bash-completion/completions/git
+source ~/.config/tmux.completion.bash
 
 
 # Load bash completion Mac
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+#if [ -f $(brew --prefix)/etc/bash_completion ]; then
+#  . $(brew --prefix)/etc/bash_completion
+#fi
