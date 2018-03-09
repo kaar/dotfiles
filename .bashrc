@@ -25,3 +25,5 @@ source ~/.config/tmux.completion.bash
 #if [ -f $(brew --prefix)/etc/bash_completion ]; then
 #  . $(brew --prefix)/etc/bash_completion
 #fi
+
+alias explorer='~/dotfiles/open_explorer.sh'
