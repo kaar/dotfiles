@@ -33,6 +33,7 @@
 [mergetool "vsdiffmerge"]
 	keepbackup = false
 [core]
+    pager = ~/dotfiles/diff-so-fancy | less -rx1,5
 	autocrlf = false
 	editor = vim
 [push]
