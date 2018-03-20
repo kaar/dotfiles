@@ -1,10 +1,11 @@
 [alias]
-	l = log --graph --decorate --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	l = log --oneline --graph --decorate --all 
 	co = checkout
 	ci = commit
 	st = status
 	br = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	type = cat-file -t
 	dump = cat-file -p
 	sdiff = difftool -y -t vsdiffmerge
