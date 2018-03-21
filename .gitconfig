@@ -1,5 +1,5 @@
 [alias]
-	l = log --oneline --graph --decorate --all 
+	l = log --oneline --graph --decorate --all
 	dc = diff --cached
 	co = checkout
 	ci = commit
@@ -34,7 +34,7 @@
 [mergetool "vsdiffmerge"]
 	keepbackup = false
 [core]
-    pager = ~/dotfiles/diff-so-fancy | less -rx1,5
+	pager = ~/dotfiles/diff-so-fancy | less -rx1,5
 	autocrlf = false
 	editor = vim
 [push]
