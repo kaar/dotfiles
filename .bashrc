@@ -27,3 +27,4 @@ source ~/.config/tmux.completion.bash
 #fi
 
 alias explorer='~/dotfiles/open_explorer.sh'
+alias code='~/dotfiles/open_vs_code.sh'
