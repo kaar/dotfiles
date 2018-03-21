@@ -23,7 +23,7 @@ set smartindent
 set autoindent
 set tabstop=4                   " show existing tab with 4 spaces width
 set shiftwidth=4                " when indenting with '>', use 4 spaces width
-set expandtab                   " On pressing tab, insert 4 spaces
+set noexpandtab                 " On pressing tab, insert tab
 set nobackup                    " don't want no backup files
 set nowritebackup               " don't make a backup before overwriting a file
 set noswapfile                  " no swap files
