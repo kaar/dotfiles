@@ -5,6 +5,6 @@ if [[ $remote_url != *"github"* ]]; then
   exit;
 fi
 
-github_url=$(sed -e 's/git@github.com:/http:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
+github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
 # Open url in chrome
 /c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe $github_url
