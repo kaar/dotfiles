@@ -10,14 +10,14 @@
 # System-wide bashrc file
 
 parse_git_branch() {
-git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 # git promot
 source ~/.config/git-prompt.sh
 
 # Load bash completion PC. 
-source /usr/share/bash-completion/completions/git
+source ~/dotfiles/.git-completion.bash
 source ~/.config/tmux.completion.bash
 
 
@@ -26,5 +26,17 @@ source ~/.config/tmux.completion.bash
 #  . $(brew --prefix)/etc/bash_completion
 #fi
 
+# Workaround for Docker for Windows in Git Bash.
+docker()
+{
+        (export MSYS_NO_PATHCONV=1; "docker.exe" "$@")
+}
+
 alias explorer='~/dotfiles/open_explorer.sh'
-alias code='~/dotfiles/open_vs_code.sh'
+#alias code='/c/Program\ Files/Microsoft\ VS\ Code/Code.exe'
+alias code='code.cmd'
+alias solve='git diff --name-only --diff-filter=U | xargs code -n'
+alias choco='/c/ProgramData/chocolatey/bin/choco'
+alias github='~/dotfiles/open_github.sh'
+alias github-pr='~/dotfiles/github_pr.sh'
+
