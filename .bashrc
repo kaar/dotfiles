@@ -39,4 +39,5 @@ alias solve='git diff --name-only --diff-filter=U | xargs code -n'
 alias choco='/c/ProgramData/chocolatey/bin/choco'
 alias github='~/dotfiles/open_github.sh'
 alias github-pr='~/dotfiles/github_pr.sh'
+alias github-new='~/dotfiles/github_new.sh'
 
