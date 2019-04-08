@@ -1,41 +1,42 @@
 [alias]
-	l = log --oneline --graph --decorate --all
-	dc = diff --cached
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	type = cat-file -t
-	dump = cat-file -p
-	sdiff = difftool -y -t vsdiffmerge
-        browse = !explorer `git config remote.origin.url`
-        glog = log --oneline --decorate --all --graph
-[user]
-	name = Caspar Nettelbladt
-[user]
-	email = caspar.nettelbladt@sectra.com
+    l = log --oneline --graph --decorate --all
+    dc = diff --cached
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    type = cat-file -t
+    dump = cat-file -p
+    sdiff = difftool -y -t vsdiffmerge
+    browse = !explorer `git config remote.origin.url`
 [diff]
-	tool = vsdiffmerge
+    tool = d
 [difftool]
-	prompt = true
+    prompt = true
 [difftool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
 [difftool "vsdiffmerge"]
-	keepbackup = false
+    keepbackup = false
 [merge]
-	tool = vsdiffmerge
-[mergetool]
-	prompt = true
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
 [mergetool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
-	trustexitcode = true
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+    trustexitcode = true
 [mergetool "vsdiffmerge"]
-	keepbackup = false
+    keepbackup = false
 [core]
-	pager = ~/dotfiles/diff-so-fancy | less -rx1,5
-	autocrlf = false
+    # Removed tabbing for some reason. Dont know why it was added...
+    #pager = ~/dotfiles/diff-so-fancy | sed 's/\\t/    /' | less -rx1,5
+    #pager = ~/dotfiles/diff-so-fancy  | less -rx1,5
 	editor = vim
+	autocrlf = true
+	excludesfile = ~/.gitignore
 [push]
-	default = simple
+	default = current
+
+[winUpdater]
+	recentlySeenVersion = 2.21.0.windows.1
