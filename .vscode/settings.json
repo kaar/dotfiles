@@ -1,0 +1,16 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.integrated.shellArgs.windows": ["--login", "-i"],
+    "terminal.integrated.cwd": "C:/Home",
+    "window.zoomLevel": 1,
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "terminal.integrated.cursorBlinking": true,
+    "breadcrumbs.enabled": true
+}
