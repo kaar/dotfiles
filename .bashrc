@@ -42,6 +42,10 @@ open_visual_studio()
     /c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2017/Professional/Common7/IDE/devenv.exe $* & > /dev/null
 }
 
+# https://www.atlassian.com/git/tutorials/dotfiles 
+# Create an alias config which will be used instead of the regular git to interact with configuration repository.
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
 alias explorer='~/dotfiles/open_explorer.sh'
 #alias code='/c/Program\ Files/Microsoft\ VS\ Code/Code.exe'
 alias code='code.cmd'
