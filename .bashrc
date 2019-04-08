@@ -7,7 +7,24 @@
 
 # /etc/bash.bashrc: executed by bash(1) for interactive shells.
 
-# System-wide bashrc file
+# Install dotfiles onto a new system
+#
+# Setup alias in current terminal
+# alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# Clone
+# git clone --bare git@github.com:kaar/dotfiles.git $HOME/.cfg
+#
+# Checkout
+# config checkout
+# config config --local status.showUntrackedFiles no
+#
+# Usage
+# config status
+# config add .vimrc
+# config commit -m "Add vimrc"
+# config add .bashrc
+# config commit -m "Add bashrc"
+# config push
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
