@@ -10,7 +10,7 @@
 # System-wide bashrc file
 
 parse_git_branch() {
-        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 # git promot
@@ -44,19 +44,19 @@ open_visual_studio()
 
 # https://www.atlassian.com/git/tutorials/dotfiles 
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-alias explorer='~/dotfiles/open_explorer.sh'
+alias explorer='~/.scripts/open_explorer.sh'
 #alias code='/c/Program\ Files/Microsoft\ VS\ Code/Code.exe'
 alias code='code.cmd'
 alias solve='git diff --name-only --diff-filter=U | xargs code -n'
 alias choco='/c/ProgramData/chocolatey/bin/choco'
-alias github='~/dotfiles/open_github.sh'
-alias github-pr='~/dotfiles/github_pr.sh'
-alias github-new='~/dotfiles/github_new.sh'
+alias github='~/.scripts/open_github.sh'
+alias github-pr='~/.scripts/github_pr.sh'
+alias github-new='~/.scripts/github_new.sh'
 alias main='cd ~/Dev/main'
 alias chrome='open_chrome'
 alias tc='open_chrome http://teamcity.stockholm.cint.com:8080/ &'
 alias vs="open_visual_studio"
-alias cs='~/dotfiles/code_search.sh'
+alias cs='~/.scripts/code_search.sh'
 alias tip="echo 'If applied, this commit will'"
