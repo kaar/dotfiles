@@ -14,11 +14,11 @@ parse_git_branch() {
 }
 
 # git promot
-source ~/.config/git-prompt.sh
+source ~/.scripts/git-prompt.sh
 
 # Load bash completion PC. 
-source ~/dotfiles/.git-completion.bash
-source ~/.config/tmux.completion.bash
+source ~/.scripts/.git-completion.bash
+source ~/.scripts/tmux.completion.bash
 
 
 # Load bash completion Mac
