@@ -63,6 +63,11 @@ open_visual_studio()
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Add directory colors when running bash outside of gitbash
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
+
 alias explorer='~/.scripts/open_explorer.sh'
 #alias code='/c/Program\ Files/Microsoft\ VS\ Code/Code.exe'
 alias code='code.cmd'
