@@ -44,10 +44,10 @@ source ~/.scripts/tmux.completion.bash
 #fi
 
 # Workaround for Docker for Windows in Git Bash.
-docker()
-{
-    (export MSYS_NO_PATHCONV=1; "docker.exe" "$@")
-}
+# docker()
+# {
+#     (export MSYS_NO_PATHCONV=1; "docker.exe" "$@")
+# }
 
 open_chrome()
 {
