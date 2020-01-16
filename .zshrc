@@ -98,4 +98,16 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+chrome="/mnt/c/Program Files (x86)/Google/Chrome/Application/"
+export PATH="$chrome:$PATH"
+
+# Set dircolors
 eval `dircolors ~/.dircolors.256dark`
+
+# Aliases
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

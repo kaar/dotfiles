@@ -10,4 +10,4 @@ github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <
 branch=$(git rev-parse --abbrev-ref HEAD)
 github_pr_url="$github_url/compare/master...$branch"
 echo $github_pr_url
-/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe $github_pr_url
+chrome.exe $github_pr_url
