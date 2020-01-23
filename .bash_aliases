@@ -9,3 +9,4 @@ alias tc='open_chrome http://teamcity.stockholm.cint.com:8080/ &'
 alias vs="open_visual_studio"
 alias cs='~/.scripts/code_search.sh'
 alias tip="echo 'If applied, this commit will'"
+alias todo='echo "$@" >> ~/notes/todo.md'
