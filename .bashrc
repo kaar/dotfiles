@@ -31,11 +31,11 @@ parse_git_branch() {
 }
 
 # git promot
-source ~/.scripts/git-prompt.sh
+# source ~/.scripts/git-prompt.sh
 
 # Load bash completion PC. 
-source ~/.scripts/.git-completion.bash
-source ~/.scripts/tmux.completion.bash
+# source ~/.scripts/.git-completion.bash
+# source ~/.scripts/tmux.completion.bash
 
 
 # Load bash completion Mac
