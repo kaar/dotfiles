@@ -111,3 +111,4 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+export DOCKER_HOST=tcp://localhost:2375
