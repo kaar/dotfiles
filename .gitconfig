@@ -40,3 +40,6 @@
 
 [winUpdater]
 	recentlySeenVersion = 2.21.0.windows.1
+[user]
+	email = caspar.nettelbladt@cint.com
+	name = Caspar Nettelbladt
