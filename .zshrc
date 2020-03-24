@@ -100,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 
 chrome="/mnt/c/Program Files (x86)/Google/Chrome/Application/"
 export PATH="$chrome:$PATH"
+export PATH="~/.scripts:%PATH"
 
 # Set dircolors
 eval `dircolors ~/.dircolors.256dark`
