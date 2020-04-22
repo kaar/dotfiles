@@ -11,6 +11,7 @@
     dump = cat-file -p
     sdiff = difftool -y -t vsdiffmerge
     browse = !explorer `git config remote.origin.url`
+    sync = pull --all --prune
 [diff]
     tool = d
 [difftool]
