@@ -16,7 +16,7 @@ alias main='cd ~/Dev/main'
 alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 alias tc='open_chrome http://teamcity.stockholm.cint.com:8080/ &'
 alias vs="open_visual_studio"
-alias cs='~/.scripts/code_search.sh'
+alias cs='code_search'
 alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
 alias title='set_windows_terminal_title'
@@ -55,4 +55,9 @@ function github_create_pull_request()
 function open_visual_studio()
 {
 	devenv.exe $@ &
+}
+
+function code_search()
+{
+	grep $1 $(find ${2:-src/} -iname "*.cs")
 }
