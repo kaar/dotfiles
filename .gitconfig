@@ -12,6 +12,7 @@
     sdiff = difftool -y -t vsdiffmerge
     browse = !explorer `git config remote.origin.url`
     sync = pull --all --prune
+    undo = "!f() { git reset --hard @{${1-1}}; }; f"
 [diff]
     tool = d
 [difftool]
