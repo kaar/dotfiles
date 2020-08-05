@@ -47,3 +47,5 @@
 [user]
     email = caspar.nettelbladt@cint.com
     name = Caspar Nettelbladt
+[apply]
+    whitespace = fix
