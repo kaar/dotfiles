@@ -20,3 +20,17 @@ alias vs="open_visual_studio"
 alias cs='~/.scripts/code_search.sh'
 alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
+
+# Set windows title in windows terminal
+function title()
+{
+	# If no arguments provided
+	if [ $# -eq 0 ]; then
+		# use current dir as title
+		echo -ne "\033]0;${PWD##*/}\a" ;
+	else
+		# Set Title by parameter
+		echo -ne "\033]0;$@\a" ;
+	fi
+}
+
