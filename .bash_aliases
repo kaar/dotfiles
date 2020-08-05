@@ -51,3 +51,8 @@ function github_create_pull_request()
 	echo $github_pr_url
 	chrome.exe $github_pr_url
 }
+
+function open_visual_studio()
+{
+	devenv.exe $@ &
+}
