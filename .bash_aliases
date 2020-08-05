@@ -21,6 +21,7 @@ alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
 alias title='set_windows_terminal_title'
 alias github-pr='github_create_pull_request'
+alias reload='source ~/.bashrc'
 
 
 # Set windows title in windows terminal
