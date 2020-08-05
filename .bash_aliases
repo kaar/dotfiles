@@ -19,9 +19,12 @@ alias vs="open_visual_studio"
 alias cs='~/.scripts/code_search.sh'
 alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
+alias title='set_windows_terminal_title'
+alias github-pr='github_create_pull_request'
+
 
 # Set windows title in windows terminal
-function title()
+function set_windows_terminal_title()
 {
 	# If no arguments provided
 	if [ $# -eq 0 ]; then
@@ -33,7 +36,7 @@ function title()
 	fi
 }
 
-function github-pr()
+function github_create_pull_request()
 {
 	remote_url=$(git config remote.origin.url)
 	if [[ $remote_url != *"github"* ]]; then
