@@ -33,15 +33,15 @@
     # Removed tabbing for some reason. Dont know why it was added...
     #pager = ~/dotfiles/diff-so-fancy | sed 's/\\t/    /' | less -rx1,5
     #pager = ~/dotfiles/diff-so-fancy  | less -rx1,5
-	editor = vim
-	excludesfile = ~/.gitignore
-	autocrlf = true
-	pager = ~/.scripts/diff-so-fancy | less --tabs=4 -RFX
+    editor = vim
+    excludesfile = ~/.gitignore
+    autocrlf = true
+    pager = ~/.scripts/diff-so-fancy | less --tabs=4 -RFX
 [push]
-	default = current
+    default = current
 
 [winUpdater]
-	recentlySeenVersion = 2.21.0.windows.1
+    recentlySeenVersion = 2.21.0.windows.1
 [user]
-	email = caspar.nettelbladt@cint.com
-	name = Caspar Nettelbladt
+    email = caspar.nettelbladt@cint.com
+    name = Caspar Nettelbladt
