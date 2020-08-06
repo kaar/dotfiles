@@ -55,10 +55,24 @@ function github_create_pull_request()
 
 function open_visual_studio()
 {
-    devenv.exe $@ &
+    if has_arguments $@ ; then
+        devenv.exe $@ &
+    else
+        devenv.exe $(find . -name '*.sln') &
+    fi
+    # devenv.exe $@ &
 }
 
 function code_search()
 {
     grep $1 $(find ${2:-src/} -iname "*.cs")
+}
+
+function has_arguments()
+{
+    if [ $# -eq 0 ]; then
+        return 1
+    else
+        return 0
+    fi
 }
