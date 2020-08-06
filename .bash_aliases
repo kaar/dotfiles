@@ -27,38 +27,38 @@ alias reload='source ~/.bashrc'
 # Set windows title in windows terminal
 function set_windows_terminal_title()
 {
-	# If no arguments provided
-	if [ $# -eq 0 ]; then
-		# use current dir as title
-		echo -ne "\033]0;${PWD##*/}\a" ;
-	else
-		# Set Title by parameter
-		echo -ne "\033]0;$@\a" ;
-	fi
+    # If no arguments provided
+    if [ $# -eq 0 ]; then
+        # use current dir as title
+        echo -ne "\033]0;${PWD##*/}\a" ;
+    else
+        # Set Title by parameter
+        echo -ne "\033]0;$@\a" ;
+    fi
 }
 
 function github_create_pull_request()
 {
-	remote_url=$(git config remote.origin.url)
-	if [[ $remote_url != *"github"* ]]; then
-		echo "Not a github url"
-		exit;
-	fi
+    remote_url=$(git config remote.origin.url)
+    if [[ $remote_url != *"github"* ]]; then
+        echo "Not a github url"
+        exit;
+    fi
 
-	github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
-	# Open url in chrome
-	branch=$(git rev-parse --abbrev-ref HEAD)
-	github_pr_url="$github_url/compare/master...$branch"
-	echo $github_pr_url
-	chrome.exe $github_pr_url
+    github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
+    # Open url in chrome
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    github_pr_url="$github_url/compare/master...$branch"
+    echo $github_pr_url
+    chrome.exe $github_pr_url
 }
 
 function open_visual_studio()
 {
-	devenv.exe $@ &
+    devenv.exe $@ &
 }
 
 function code_search()
 {
-	grep $1 $(find ${2:-src/} -iname "*.cs")
+    grep $1 $(find ${2:-src/} -iname "*.cs")
 }
