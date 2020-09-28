@@ -13,6 +13,7 @@
     browse = !explorer `git config remote.origin.url`
     sync = pull --all --prune
     undo = "!f() { git reset --hard @{${1-1}}; }; f"
+    addnew = !git add $(git ls-files -o --exclude-standard)
 [diff]
     tool = d
 [difftool]
