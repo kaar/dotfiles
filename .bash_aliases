@@ -27,10 +27,10 @@ alias ts='tmux-split-cmd'
 
 
 # Splits command into a new pane that closes
-function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" }
+function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" ; }
 
 # Reload config files
-function reload() { source ~/.bashrc }
+function reload() { source ~/.bashrc ; }
 
 # Pipes output into vim
 function vim_edit_output() { "$@" | vim - ; }
