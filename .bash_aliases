@@ -21,8 +21,19 @@ alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
 alias title='set_windows_terminal_title'
 alias github-pr='github_create_pull_request'
-alias reload='source ~/.bashrc'
+alias v='vim_edit_output'
+alias reload='reload'
+alias ts='tmux-split-cmd'
 
+
+# Splits command into a new pane that closes
+function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" }
+
+# Reload config files
+function reload() { source ~/.bashrc }
+
+# Pipes output into vim
+function vim_edit_output() { "$@" | vim - ; }
 
 # Set windows title in windows terminal
 function set_windows_terminal_title()
