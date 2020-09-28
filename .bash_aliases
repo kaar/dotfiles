@@ -24,7 +24,11 @@ alias github-pr='github_create_pull_request'
 alias v='vim_edit_output'
 alias reload='reload'
 alias ts='tmux-split-cmd'
-
+# https://github.com/chubin/cheat.sh#programming-languages-cheat-sheets
+# mkdir -p ~/bin/
+# curl https://cht.sh/:cht.sh > ~/bin/cht.sh
+# chmod +x ~/bin/cht.sh
+alias cheat='~/bin/cht.sh'
 
 # Splits command into a new pane that closes
 function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" ; }
