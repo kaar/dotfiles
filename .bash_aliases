@@ -30,6 +30,35 @@ alias ts='tmux-split-cmd'
 # chmod +x ~/bin/cht.sh
 alias cheat='~/bin/cht.sh'
 
+# Github CLI
+# https://github.com/cli/cli
+# https://cli.github.com/manual
+# Set editor to VSCode
+# gh config set editor code --wait
+alias gist='gh gist'
+alias gl='gh gist list'
+alias gc='gh gist create'
+alias ge='gist_edit'
+alias gv='gist_view'
+
+# Opens interactive list of gists for edit
+# Requires iselect (apt install iselect) and github cli
+function gist_edit()
+{
+    selected_gist="$(gh gist list | iselect -a)"
+    gist_hash="$(echo $selected_gist | cut -d' ' -f1)"
+    gh gist edit $gist_hash
+}
+
+# Opens interactive list of gists to view
+function gist_view()
+{
+    selected_gist="$(gh gist list | iselect -a)"
+    gist_hash="$(echo $selected_gist | cut -d' ' -f1)"
+    gh gist view $gist_hash
+}
+
+
 # Splits command into a new pane that closes
 function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" ; }
 
