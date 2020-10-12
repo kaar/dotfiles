@@ -138,3 +138,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Load tmux completion
+. ~/.completion/tmux
