@@ -8,22 +8,32 @@ alias egrep='egrep --color=auto'
 alias explorer='explorer.exe'
 alias docker='docker.exe'
 alias choco='/c/ProgramData/chocolatey/bin/choco'
-alias github='~/.scripts/open_github.sh'
-alias github-new='~/.scripts/github_new.sh'
+
+
 alias pipeline='~/.scripts/open_azure_pipelines.sh'
 alias pl='~/.scripts/open_azure_pipelines.sh'
 alias main='cd ~/Dev/main'
-alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+
 alias tc='open_chrome http://teamcity.stockholm.cint.com:8080/ &'
 alias vs="open_visual_studio"
 alias cs='code_search'
 alias tip="echo 'If applied, this commit will'"
 alias todo='vim ~/notes/todo.md'
 alias title='set_windows_terminal_title'
-alias github-pr='github_create_pull_request'
+
 alias v='vim_edit_output'
 alias reload='reload'
 alias ts='tmux-split-cmd'
+
+# GitHub
+alias github-pr='github_create_pull_request'
+alias github='github_open'
+
+# Browser
+alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+alias firefox='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
+alias browse='firefox -new-tab'
+
 # https://github.com/chubin/cheat.sh#programming-languages-cheat-sheets
 # mkdir -p ~/bin/
 # curl https://cht.sh/:cht.sh > ~/bin/cht.sh
@@ -80,6 +90,19 @@ function set_windows_terminal_title()
         echo -ne "\033]0;$@\a" ;
     fi
 }
+function github_open()
+{
+    remote_url=$(git config remote.origin.url)
+    if [[ $remote_url != *"github"* ]]; then
+    echo "Not a github url"
+    exit;
+    fi
+
+    github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
+
+    # Open url in browser
+    browse $github_url
+}
 
 function github_create_pull_request()
 {
@@ -90,11 +113,11 @@ function github_create_pull_request()
     fi
 
     github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
-    # Open url in chrome
+    # Open url in browser
     branch=$(git rev-parse --abbrev-ref HEAD)
     github_pr_url="$github_url/compare/master...$branch"
     echo $github_pr_url
-    chrome.exe $github_pr_url
+    browse $github_pr_url
 }
 
 function open_visual_studio()
