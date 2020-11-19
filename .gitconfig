@@ -41,3 +41,5 @@
     name = Caspar Nettelbladt
 [apply]
     whitespace = fix
+[pull]
+    rebase = true
