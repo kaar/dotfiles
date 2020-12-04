@@ -43,3 +43,5 @@
     whitespace = fix
 [pull]
     rebase = true
+[branch "master"]
+        mergeoptions = --no-ff
