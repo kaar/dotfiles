@@ -31,7 +31,6 @@
     #pager = ~/dotfiles/diff-so-fancy  | less -rx1,5
     editor = vim
     excludesfile = ~/.gitignore
-    autocrlf = true
     pager = ~/.scripts/diff-so-fancy | less --tabs=4 -RFX
     whitespace = blank-at-eol,blank-at-eof
 [winUpdater]
