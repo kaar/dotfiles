@@ -33,6 +33,9 @@ alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.ex
 alias firefox='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 alias browse='firefox -new-tab'
 
+# Generic
+alias guid='uuid'
+
 # https://github.com/chubin/cheat.sh#programming-languages-cheat-sheets
 # mkdir -p ~/bin/
 # curl https://cht.sh/:cht.sh > ~/bin/cht.sh
