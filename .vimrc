@@ -57,12 +57,6 @@ nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
 inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
 inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
 
-" Visual studio Specific mappings
-nnoremap <leader>n :vsc resharper.resharper_gotofile<cr>
-nnoremap <leader>e :vsc resharper.resharper_gotorecentfiles<cr>
-nnoremap <leader><S-n> :vsc resharper.resharper_gotosymbol<cr>
-nnoremap <leader>f :vsc resharper.resharper_reformatcode<cr>
-
 " Disable Arrow keys in Escape mode
 map <up> <nop>
 map <down> <nop>
