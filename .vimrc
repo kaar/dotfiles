@@ -13,7 +13,6 @@ syntax on
 " load indent file for the current filetype
 filetype indent on
 filetype plugin indent on
-let mapleader = " "
 set hlsearch                    " highlight the search
 set ignorecase
 set smartcase
@@ -35,23 +34,28 @@ set nowritebackup               " don't make a backup before overwriting a file
 set noswapfile                  " no swap files
 set autoread                    " Auto-reload buffers when files are changed on disk
 
-" Mappings
-imap jj <Esc>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>- :split<cr>
-nnoremap <leader>/ :vsplit<cr>
+" mappings
+let mapleader = " "					" space; leader key
+imap jj <Esc>						" remap escape
+nnoremap <leader>w :w<cr>			" file write
+nnoremap <leader>- :split<cr>		" split
+nnoremap <leader>/ :vsplit<cr>		" split vertical
+" movement
 nnoremap <leader>h <c-w><c-h>
 nnoremap <leader>j <c-w><c-j>
 nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
-nnoremap <leader>q <c-w>q
-nnoremap <leader>a <esc>ggVG<CR> " Select all text in file
 
-"Move lines"
-nnoremap <C-j> <Esc> :m .+1<CR>
-nnoremap <C-k> <Esc> :m .-2<CR>
-inoremap <C-j> <Esc> :m .+1<CR>i
-inoremap <C-k> <Esc> :m .-2<CR>i
+nnoremap <leader>q <c-w>q			" quit
+nnoremap <leader>a <esc>ggVG<CR>    " Select all text in file
+
+" move lines
+nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
+nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
+
+" insert-mode mappings
+inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
+inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
 
 " Visual studio Specific mappings
 nnoremap <leader>n :vsc resharper.resharper_gotofile<cr>
