@@ -34,12 +34,25 @@ set nowritebackup               " don't make a backup before overwriting a file
 set noswapfile                  " no swap files
 set autoread                    " Auto-reload buffers when files are changed on disk
 
+" netrw
+let g:netrw_liststyle = 3		" change directory view
+let g:netrw_banner = 0			" remove banner
+let g:netrw_winsize = 20		" explorer width in percent
+let g:netrw_browse_split = 2    " open file; 1 = h-split, 2=v-split, 3 = new tab, 4 = prev window
+let g:netrw_altv = 1			" ???
+"augroup ProjectDrawer
+"	autocmd!
+"    autocmd VimEnter * :Vexplore
+"augroup END
+
+
 " mappings
 let mapleader = " "					" space; leader key
 imap jj <Esc>						" remap escape
 nnoremap <leader>w :w<cr>			" file write
 nnoremap <leader>- :split<cr>		" split
 nnoremap <leader>/ :vsplit<cr>		" split vertical
+
 " movement
 nnoremap <leader>h <c-w><c-h>
 nnoremap <leader>j <c-w><c-j>
@@ -48,6 +61,29 @@ nnoremap <leader>l <c-w><c-l>
 
 nnoremap <leader>q <c-w>q			" quit
 nnoremap <leader>a <esc>ggVG<CR>    " Select all text in file
+
+" netrw
+nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
+nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
+
+" tabs
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+nnoremap th :tabnext<CR>			" th; next tab
+nnoremap tl :tabprev<CR>			" tl; prev tabjh
+nnoremap <C-t>     :tabnew<CR>		" ctrl+t; new tab
+" "nnoremap tn :tabnew<CR>
+
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
 
 " move lines
 nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
