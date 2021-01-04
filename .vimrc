@@ -85,6 +85,10 @@ inoremap <C-S-tab> <Esc>:tabprevious<CR>i
 inoremap <C-tab>   <Esc>:tabnext<CR>i
 inoremap <C-t>     <Esc>:tabnew<CR>
 
+" add timestamp
+nnoremap <F5> "=strftime("%c")<CR>P
+inoremap <F5> <C-R>=strftime("%c")<CR>
+
 " move lines
 nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
 nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
