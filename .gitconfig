@@ -36,11 +36,11 @@
 [winUpdater]
     recentlySeenVersion = 2.21.0.windows.1
 [user]
-    email = caspar.nettelbladt@cint.com
+    email = caspar.n@gmail.com
     name = Caspar Nettelbladt
 [apply]
     whitespace = fix
 [pull]
     rebase = true
 [branch "master"]
-        mergeoptions = --no-ff
+    mergeoptions = --no-ff
