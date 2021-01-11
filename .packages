@@ -2,7 +2,16 @@
 # sudo apt-get install $(awk -f ~/.awk/skip_hash.awk ~/.packages)
 # ./.scripts/install-packages.sh
 
+# General
 tig
-golang-go
-neovim
 
+# Lanugages
+golang-go
+
+# Tools
+neovim
+fzf
+ripgrep
+universal-ctags
+silversearcher-ag
+fd-find
