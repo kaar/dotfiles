@@ -8,6 +8,11 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+    " FZF & vim-rooter
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    Plug 'junegunn/fzf.vim'
+    Plug 'airblade/vim-rooter'
+
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " File Explorer
