@@ -17,7 +17,6 @@ alias pipeline='~/.scripts/open_azure_pipelines.sh'
 alias pl='~/.scripts/open_azure_pipelines.sh'
 alias main='cd ~/Dev/main'
 
-alias tc='open_chrome http://teamcity.stockholm.cint.com:8080/ &'
 alias vs="open_visual_studio"
 alias cs='code_search'
 alias tip="echo 'If applied, this commit will'"
