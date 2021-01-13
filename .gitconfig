@@ -43,3 +43,5 @@
     mergeoptions = --no-ff
 [include]
 	path = ~/.config/git/user
+[includeIf "gitdir:~/Dev"]
+	path = ~/.config/git/windows
