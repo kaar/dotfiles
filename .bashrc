@@ -117,3 +117,8 @@ fi
 
 # Load tmux completion
 . ~/.completion/tmux
+
+# FZF config
+# /usr/share/doc/fzf/README.Debian
+source ~/.config/fzf/key-bindings.bash
+source ~/.config/fzf/completion.bash
