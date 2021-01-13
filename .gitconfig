@@ -42,4 +42,4 @@
 [branch "master"]
     mergeoptions = --no-ff
 [include]
-        path = ~/.config/git/user
+	path = ~/.config/git/user
