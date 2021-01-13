@@ -35,12 +35,11 @@
     whitespace = blank-at-eol,blank-at-eof
 [winUpdater]
     recentlySeenVersion = 2.21.0.windows.1
-[user]
-    email = caspar.n@gmail.com
-    name = Caspar Nettelbladt
 [apply]
     whitespace = fix
 [pull]
     rebase = true
 [branch "master"]
     mergeoptions = --no-ff
+[include]
+        path = ~/.config/git/user
