@@ -24,6 +24,9 @@ alias v='vim_edit_output'
 alias reload='reload'
 alias ts='tmux-split-cmd'
 
+# Vim
+alias vim='nvim'
+
 # GitHub
 alias github-pr='github_create_pull_request'
 alias github='github_open'
