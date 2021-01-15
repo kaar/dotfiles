@@ -23,6 +23,7 @@ alias title='set_windows_terminal_title'
 alias v='vim_edit_output'
 alias reload='reload'
 alias ts='tmux-split-cmd'
+alias install-packages='~/.scripts/install-packages.sh'
 
 # Vim
 alias vim='nvim'
