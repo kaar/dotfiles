@@ -27,6 +27,7 @@ alias install-packages='~/.scripts/install-packages.sh'
 
 # Vim
 alias vim='nvim'
+alias fd='fdfind'
 
 # GitHub
 alias github-pr='github_create_pull_request'
