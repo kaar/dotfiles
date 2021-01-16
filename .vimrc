@@ -17,8 +17,7 @@ set hlsearch                    " highlight the search
 set ignorecase
 set smartcase
 set incsearch
-"set clipboard=unamed            "sets the default copy register to be *
-"set clipboard=unamedplus        "sets the default copy register to be +
+set clipboard+=unnamedplus
 set autoindent
 set number
 set relativenumber
