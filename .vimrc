@@ -17,7 +17,7 @@ set hlsearch                    " highlight the search
 set ignorecase
 set smartcase
 set incsearch
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set autoindent
 set number
 set relativenumber
