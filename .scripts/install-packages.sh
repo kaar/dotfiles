@@ -20,7 +20,7 @@ curl --silent https://cheat.sh/:bash_completion > ~/.config/cht.sh/completion.ba
 
 ## Tmux Plugin Manager, https://github.com/tmux-plugins/tpm
 header "Tmux Plugin Manager"
-TMUX_PLUGINS=~/.config/tmux/plugins/tpm
+TMUX_PLUGINS=~/.tmux/plugins/tpm
 mkdir -p $TMUX_PLUGINS
 if [[ -d "$TMUX_PLUGINS/.git" ]]
 then
