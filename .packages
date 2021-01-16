@@ -17,3 +17,6 @@ silversearcher-ag
 
 # https://github.com/sharkdp/fd
 fd-find
+
+# https://github.com/stedolan/jq
+jq
