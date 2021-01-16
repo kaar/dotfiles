@@ -28,3 +28,13 @@ then
 else
 	git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGINS"
 fi
+
+## bat, https://github.com/sharkdp/bat
+# Download *.deb file from github releases. apt source version was broken
+header "Bat"
+curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
+	| grep "browser_download_url.*bat_.*_amd64.deb" \
+	| cut -d '"' -f 4 \
+	| wget -O "bat.deb" -qi - \
+	&& sudo dpkg -i "bat.deb" \
+	&& rm "bat.deb"
