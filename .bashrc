@@ -124,6 +124,9 @@ fi
 source ~/.config/fzf/key-bindings.bash
 source ~/.config/fzf/completion.bash
 
+# cheat.sh
+source ~/.config/cht.sh/completion.bash
+
 # Load wsl-1 specific config
 # TODO: Handle this using ENV variable of something like that
 if [ -f ~/.config/bash/wsl.bash ]; then
