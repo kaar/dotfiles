@@ -123,6 +123,11 @@ fi
 # /usr/share/doc/fzf/README.Debian
 source ~/.config/fzf/key-bindings.bash
 source ~/.config/fzf/completion.bash
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fdfind --type f'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 
 # cheat.sh
 source ~/.config/cht.sh/completion.bash
