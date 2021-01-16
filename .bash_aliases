@@ -8,6 +8,10 @@ alias egrep='egrep --color=auto'
 alias explorer='explorer.exe'
 alias choco='/c/ProgramData/chocolatey/bin/choco'
 
+# safety features
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 alias pipeline='~/.scripts/open_azure_pipelines.sh'
 alias pl='~/.scripts/open_azure_pipelines.sh'
