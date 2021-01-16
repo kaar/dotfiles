@@ -133,7 +133,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 source ~/.config/cht.sh/completion.bash
 
 # Load wsl-1 specific config
-# TODO: Handle this using ENV variable of something like that
-if [ -f ~/.config/bash/wsl.bash ]; then
-    source ~/.config/bash/wsl.bash
+# WSL 1 specific settings.
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+	source ~/.config/bash/wsl.bash
 fi
