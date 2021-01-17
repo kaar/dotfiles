@@ -1,4 +1,4 @@
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
-PROMPT_COMMAND='__git_ps1 "\[\e[34m\]\w\[\e[m\]" "\[\] "'
+PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[m\]" "\[\] "'
