@@ -40,10 +40,7 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 source ~/.bash_aliases
 
 # Prompt
-source ~/.git-prompt.sh
-GIT_PS1_SHOWCOLORHINTS=1
-PS1='\[\033[01;34m\]\w\[\033[00m\] \$ '
-PROMPT_COMMAND='__git_ps1 "\[\033[01;34m\]\w\[\033[00m\]" " \033]0;${PWD##*/}\a"'
+source ~/.config/bash/prompt.sh
 
 # PATH config
 export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/:$PATH"

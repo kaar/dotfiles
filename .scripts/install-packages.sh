@@ -38,3 +38,7 @@ curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
 	| wget -O "bat.deb" -qi - \
 	&& sudo dpkg -i "bat.deb" \
 	&& rm "bat.deb"
+
+## Download git-prompt.sh
+header "git-prompt.sh"
+curl --silent https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.config/bash/git-prompt.sh
