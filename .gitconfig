@@ -41,7 +41,8 @@
     rebase = true
 [branch "master"]
     mergeoptions = --no-ff
-[include]
+
+[includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/user
-[includeIf "gitdir:~/Dev"]
+[includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/windows
