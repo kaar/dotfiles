@@ -1,0 +1,93 @@
+
+// To view the default settings, hold "alt" while clicking on the "Settings" button.
+// For documentation on these settings, see: https://aka.ms/terminal-documentation
+
+{
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  // Add any keybinding overrides to this array.
+  // To unbind a default keybinding, set the command to "unbound"
+  "alwaysShowTabs": false,
+  "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+  "keybindings": [
+    // Font size
+    { "command": { "action": "adjustFontSize", "delta": -1 }, "keys": "ctrl+-" },
+    { "command": { "action": "adjustFontSize", "delta": 1 }, "keys": "ctrl+=" },
+    // Split
+    { "command": { "action": "splitPane", "split": "horizontal"}, "keys": "alt+shift+-" },
+    { "command": { "action": "splitPane", "split": "vertical"}, "keys": "alt+shift+e" },
+    // Move Focus
+    { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+down" },
+    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+up" },
+    { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+left" },
+    { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+right" },
+    // Switch tabs
+    { "command": { "action": "switchToTab", "index": 0 }, "keys": "alt+1" },
+    { "command": { "action": "switchToTab", "index": 1 }, "keys": "alt+2" },
+    { "command": { "action": "switchToTab", "index": 2 }, "keys": "alt+3" },
+    { "command": { "action": "switchToTab", "index": 3 }, "keys": "alt+4" },
+    { "command": { "action": "switchToTab", "index": 4 }, "keys": "alt+5" },
+    { "command": { "action": "switchToTab", "index": 5 }, "keys": "alt+6" },
+    { "command": { "action": "switchToTab", "index": 6 }, "keys": "alt+7" },
+    { "command": { "action": "switchToTab", "index": 7 }, "keys": "alt+8" },
+    { "command": { "action": "switchToTab", "index": 8 }, "keys": "alt+9" }
+  ],
+  "profiles": [
+    {
+      "guid": "{9578782a-01d9-4029-b121-1bd8d2653917}",
+      "hidden": false,
+      "name": "Git Bash",
+      "commandline": "C:\\Program Files\\Git\\bin\\bash.exe --cd-to-home",
+      "startingDirectory": "%HOME%",
+      "colorScheme": "Campbell",
+      
+      "fontFace": "Consolas",
+      "closeOnExit": true
+    },
+    {
+      // Make changes here to the powershell.exe profile
+      "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+      "name": "Windows PowerShell",
+      "commandline": "powershell.exe",
+      "hidden": false
+    },
+    {
+      // Make changes here to the cmd.exe profile
+      "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+      "name": "cmd",
+      "commandline": "cmd.exe",
+      "hidden": false
+    },
+    {
+      "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+      "hidden": false,
+      "name": "Azure Cloud Shell",
+      "source": "Windows.Terminal.Azure",
+      "useAcrylic": false,
+      "acrylicOpacity": 0.75
+    },
+    {
+        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": false,
+        "name": "Ubuntu",
+        "source": "Windows.Terminal.Wsl",
+        "startingDirectory" : "\\\\wsl$\\Ubuntu\\home\\kaar"
+    },
+    {
+        "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
+        "hidden": false,
+        "name": "Ubuntu-18.04",
+        "source": "Windows.Terminal.Wsl"
+    },
+    {
+        "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+        "hidden": false,
+        "name": "Ubuntu-20.04",
+        "source": "Windows.Terminal.Wsl"
+    }
+  ],
+  "requestedTheme": "dark",
+  // Add custom color schemes to this array
+  "schemes": [],
+  "showTabsInTitlebar": true,
+  "showTerminalTitleInTitlebar": true
+}
