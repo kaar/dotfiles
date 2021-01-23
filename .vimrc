@@ -59,42 +59,37 @@ nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
 
 nnoremap <leader>q <c-w>q			" quit
-nnoremap <leader>a <esc>ggVG<CR>    " Select all text in file
+nnoremap <leader>a <esc>ggVG<CR>    " select all
 
+" buffers
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+" tabs
+" A tab page is a collection of windows and does not represent open files
+" Use tabs for different projects almost like terminal tabs
+nnoremap <C-t> :tabnew<CR>			" new tab
+nnoremap td    :tabclose<CR>		" close tab
+nnoremap th    :tabnext<CR>			" next tab
+nnoremap tl    :tabprev<CR>			" prev tabjh
+
+" add timestamp
+" nnoremap <F5> "=strftime("%c")<CR>P
+" inoremap <F5> <C-R>=strftime("%c")<CR>
+
+" File explorer
 " netrw
 nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
 nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
 
-" tabs
-nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
-" Alternatively use
-nnoremap th :tabnext<CR>			" th; next tab
-nnoremap tl :tabprev<CR>			" tl; prev tabjh
-nnoremap <C-t>     :tabnew<CR>		" ctrl+t; new tab
-" "nnoremap tn :tabnew<CR>
-
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>
-
-" add timestamp
-nnoremap <F5> "=strftime("%c")<CR>P
-inoremap <F5> <C-R>=strftime("%c")<CR>
-
 " move lines
 nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
 nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
-
-" insert-mode mappings
 inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
 inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
+
+
+" fzf
+nmap <C-P> :FZF<CR>
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
