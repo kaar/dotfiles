@@ -1,3 +1,6 @@
 .cfg
 .vscode-server/
 .ssh/
+.cache/*
+.yarnrc
+tmp/*
