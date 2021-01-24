@@ -6,12 +6,36 @@ header() {
 version() {
 	echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
 }
+packages="
+# Usage
+# sudo apt-get install $(awk -f ~/.awk/skip_hash.awk ~/.packages)
+# ./.scripts/install-packages.sh
 
+# General
+tig
 
-# Install all packates in ~/.packages
-sudo apt update
+# Tools
+neovim
+ripgrep
+universal-ctags
+silversearcher-ag
+
+# https://github.com/sharkdp/fd
+fd-find
+
+# https://github.com/stedolan/jq
+jq
+
+# GitHub CLI, https://github.com/cli/cli
+gh
+"
+
+# Install all packages
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+#sudo apt update
 sudo apt upgrade
-sudo apt install $(awk -f ~/.awk/skip_hash.awk ~/.packages)
+sudo apt install $(echo "${packages}" | awk -f ~/.awk/skip_hash.awk)
 
 # Manual install
 BIN=~/.bin
