@@ -5,9 +5,6 @@
 # General
 tig
 
-# Lanugages
-golang-go
-
 # Tools
 neovim
 ripgrep

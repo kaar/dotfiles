@@ -1,7 +1,12 @@
-# Load colors
-function header() {
+
+header() {
 	echo -e "\033[0;33m$1\033[0m"
 }
+# Make version into a comparable integer
+version() {
+	echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
+}
+
 
 # Install all packates in ~/.packages
 sudo apt update
@@ -57,3 +62,18 @@ curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
 ## Download git-prompt.sh
 header "git-prompt.sh"
 curl --silent https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.config/bash/git-prompt.sh
+
+## Go, https://github.com/golang/go
+header "Go"
+GOVERSION=1.15.7
+INSTALLED_GOVERSION=$(go version | grep -Po "(\d+\.)+\d+")
+GO_DOWNLOAD_LINK="https://golang.org/dl/go${GOVERSION}.linux-amd64.tar.gz"
+if [ $(version $GOVERSION) -gt $(version $INSTALLED_GOVERSION) ]
+then
+	echo "Install Golang $GOVERSION"
+	curl -fL "${GO_DOWNLOAD_LINK}" | sudo tar -C /usr/local -xzf -
+	echo "Create symbolic link /usr/local/go/bin/go -> /usr/bin/go"
+	sudo ln -fs /usr/local/go/bin/go /usr/bin/go
+else
+	echo "Already latest version $GOVERSION"
+fi
