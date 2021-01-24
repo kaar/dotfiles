@@ -45,6 +45,10 @@ let g:netrw_altv = 1			" ???
 "augroup END
 
 
+" FZF
+" add installed path to &runtimepat
+set rtp+=~/.bin/fzf
+
 " mappings
 let mapleader = " "					" space; leader key
 imap jj <Esc>						" remap escape

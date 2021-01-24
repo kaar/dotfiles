@@ -29,6 +29,21 @@ else
 	git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGINS" --depth=1
 fi
 
+## FZF, https://github.com/junegunn/fzf
+header "FZF"
+FZF_PATH=${BIN}/fzf
+REPO="https://github.com/junegunn/fzf.git"
+if [[ ! -d $FZF_PATH ]]
+then
+	echo "Clone ${REPO}"
+	git clone --depth 1 $REPO $FZF_PATH
+fi
+# Only downloads the latest binary from GitHub
+# ~/.bin/fzf is needed for loading into vim
+~/.bin/fzf/install --bin
+echo "Create symbolic link ${FZF_PATH}/fzf -> /usr/bin/fzf"
+sudo ln -sf ~/.bin/fzf/bin/fzf /usr/bin/fzf
+
 ## bat, https://github.com/sharkdp/bat
 # Download *.deb file from github releases. apt source version was broken
 header "Bat"
