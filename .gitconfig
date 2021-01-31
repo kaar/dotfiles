@@ -42,6 +42,10 @@
 [branch "master"]
     mergeoptions = --no-ff
 
+[user]
+    email = caspar.n@gmail.com
+    name = Caspar Nettelbladt
+
 [includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/user
 [includeIf "gitdir:~/Dev/"]
