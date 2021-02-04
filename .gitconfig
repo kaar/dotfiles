@@ -41,6 +41,9 @@
     rebase = true
 [branch "master"]
     mergeoptions = --no-ff
+[user]
+	name = Caspar Nettelbladt
+	email = caspar.n@gmail.com
 
 [user]
     email = caspar.n@gmail.com
@@ -48,5 +51,6 @@
 
 [includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/user
+
 [includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/windows
