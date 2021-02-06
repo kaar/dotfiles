@@ -1,0 +1,4 @@
+checked_for_update_at: 2021-02-06T16:34:57.5097366+01:00
+latest_release:
+    version: v1.5.0
+    url: https://github.com/cli/cli/releases/tag/v1.5.0
