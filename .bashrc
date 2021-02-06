@@ -48,6 +48,12 @@ export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 export PATH="$PATH:~/.bin/"
 
+# TEMP
+export TMP="${HOME}/.tmp"
+export TEMP="${HOME}/.tmp"
+mkdir -p "${TMP}"
+mkdir -p "${TMP}/.vim"
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
