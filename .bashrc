@@ -86,12 +86,8 @@ source /usr/share/bash-completion/bash_completion
 source ~/.completion/tmux
 
 # FZF
-# ---
-# auto-completion
 source ~/.config/fzf/completion.bash
-# key bindings
 source ~/.config/fzf/key-bindings.bash
-
 # Setting fd as the default source for fzf
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 # To apply the command to CTRL-T as well
