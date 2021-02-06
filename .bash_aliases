@@ -29,6 +29,9 @@ alias reload='reload'
 alias ts='tmux-split-cmd'
 alias install-packages='~/.scripts/install-packages.sh'
 
+# Notes
+alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes sync'
+
 # Vim
 alias vim='nvim'
 alias fd='fdfind'
