@@ -22,16 +22,14 @@ set autoindent
 set number
 set relativenumber
 set synmaxcol=1200              " Syntax coloring lines that are too long just slows down the world
-set nocompatible                " Turn off vi compatibility
 set smartindent
 set autoindent
 set tabstop=4                   " show existing tab with 4 spaces width
 set shiftwidth=4                " when indenting with '>', use 4 spaces width
-set noexpandtab                 " On pressing tab, insert tab
-set nobackup                    " don't want no backup files
-set nowritebackup               " don't make a backup before overwriting a file
-set noswapfile                  " no swap files
 set autoread                    " Auto-reload buffers when files are changed on disk
+set backup 						" tell vim to keep a backup file
+set backupdir=~/.tmp/vim		" tell vim where to put its backup files
+set dir=~/.tmp/vim				" tell vim where to put swap files
 
 " netrw
 let g:netrw_liststyle = 3		" change directory view
