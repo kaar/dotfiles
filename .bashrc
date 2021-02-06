@@ -37,7 +37,7 @@ esac
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Aliases
-source ~/.bash_aliases
+source ~/.aliases
 
 # Prompt
 source ~/.config/bash/prompt.sh
