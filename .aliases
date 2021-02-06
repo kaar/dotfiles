@@ -36,6 +36,7 @@ alias fd='fdfind'
 
 # TODO
 alias todo='gh gist edit c85070135d504c644d6c60ac025c4bcd'
+alias cint-todo='gh gist edit ef259eead3d865e32c659d4c40ba3789'
 
 # GitHub
 alias github-pr='github_create_pull_request'
