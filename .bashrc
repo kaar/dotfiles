@@ -52,7 +52,7 @@ export PATH="$PATH:~/.bin/"
 export TMP="${HOME}/.tmp"
 export TEMP="${HOME}/.tmp"
 mkdir -p "${TMP}"
-mkdir -p "${TMP}/.vim"
+mkdir -p "${TMP}/vim"
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
