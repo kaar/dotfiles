@@ -20,11 +20,10 @@ alias main='cd ~/Dev/main'
 alias vs="open_visual_studio"
 alias cs='code_search'
 alias tip="echo 'If applied, this commit will'"
-alias todo='vim ~/notes/todo.md'
 alias title='set_windows_terminal_title'
 
 alias v='vim_edit_output'
-alias reload='reload'
+alias reload='source ~/.bashrc ;'
 alias ts='tmux-split-cmd'
 alias install-packages='~/.scripts/install-packages.sh'
 
@@ -34,6 +33,10 @@ alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes s
 # Vim
 alias vim='nvim'
 alias fd='fdfind'
+
+# TODO
+alias todo='vim ~/notes/todo.md'
+
 
 # GitHub
 alias github-pr='github_create_pull_request'
@@ -84,9 +87,6 @@ function gist_view()
 
 # Splits command into a new pane that closes
 function tmux-split-cmd() { tmux split-window -h -t $TMUX_PANE "$*" ; }
-
-# Reload config files
-function reload() { source ~/.bashrc ; }
 
 # Pipes output into vim
 function vim_edit_output() { "$@" | vim - ; }
