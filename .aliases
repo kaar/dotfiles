@@ -25,7 +25,7 @@ alias title='set_windows_terminal_title'
 alias v='vim_edit_output'
 alias reload='source ~/.bashrc ;'
 alias ts='tmux-split-cmd'
-alias install-packages='~/.scripts/install-packages.sh'
+alias install-packages='~/.install/default.sh'
 
 # Notes
 alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes sync'
@@ -36,7 +36,6 @@ alias fd='fdfind'
 
 # TODO
 alias todo='vim ~/notes/todo.md'
-
 
 # GitHub
 alias github-pr='github_create_pull_request'

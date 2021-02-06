@@ -43,6 +43,7 @@ source ~/.aliases
 source ~/.config/bash/prompt.sh
 
 # PATH config
+export BIN="$HOME/.bin"
 export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/:$PATH"
 export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
