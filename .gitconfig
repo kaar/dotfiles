@@ -20,11 +20,14 @@
 [difftool]
     prompt = true
 [merge]
-    tool = vscode
+	tool = vimdiff
+	conflictstyle = diff3
 [mergetool "vscode"]
     cmd = code --wait $MERGED
 [mergetool "vsdiffmerge"]
     keepbackup = false
+[mergetool]
+	prompt = false
 [core]
     # Removed tabbing for some reason. Dont know why it was added...
     #pager = ~/dotfiles/diff-so-fancy | sed 's/\\t/    /' | less -rx1,5
