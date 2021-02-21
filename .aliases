@@ -31,7 +31,7 @@ alias install-packages='~/.install/default.sh'
 alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes sync'
 
 # Vim
-alias vim='nvim'
+
 alias fd='fdfind'
 
 # TODO

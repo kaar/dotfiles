@@ -17,7 +17,6 @@ sudo apt update
 
 packages="
 tig
-neovim
 ripgrep
 universal-ctags
 silversearcher-ag
