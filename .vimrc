@@ -13,23 +13,56 @@ syntax on
 " load indent file for the current filetype
 filetype indent on
 filetype plugin indent on
-set hlsearch                    " highlight the search
+
+" highlight the search
+set hlsearch
 set ignorecase
+
 set smartcase
 set incsearch
 set clipboard=unnamedplus
-set autoindent
+
 set number
-set relativenumber
-set synmaxcol=1200              " Syntax coloring lines that are too long just slows down the world
-set smartindent
+" set relativenumber
+
+" disable relative line numbers, remove no to sample it
+set norelativenumber
+
+" syntax coloring lines that are too long just slows down the world
+set synmaxcol=1200
+
+" automatically indent new lines
 set autoindent
-set tabstop=4                   " show existing tab with 4 spaces width
-set shiftwidth=4                " when indenting with '>', use 4 spaces width
-set autoread                    " Auto-reload buffers when files are changed on disk
-set backup 						" tell vim to keep a backup file
-set backupdir=~/.tmp/vim		" tell vim where to put its backup files
-set dir=~/.tmp/vim				" tell vim where to put swap files
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set smartindent
+set smarttab
+
+" replace tabs with spaces automatically
+set expandtab
+
+" stop vim from silently fucking with files that it shouldn't
+set nofixendofline
+
+" auto-reload buffers when files are changed on disk
+set autoread
+
+" tell vim to keep a backup file
+set backup
+
+" tell vim where to put its backup files
+set backupdir=~/.tmp/vim
+
+" tell vim where to put swap files
+set dir=~/.tmp/vim
+
+" stop vim from silently fucking with files that it shouldn't
+set nofixendofline
+
+" let me see more
+set scrolloff=10
 
 " netrw
 let g:netrw_liststyle = 3		" change directory view
