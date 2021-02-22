@@ -10,6 +10,7 @@ let &t_te.="\e[0 q"
 
 " Settings
 syntax on
+colorscheme ron
 " load indent file for the current filetype
 filetype indent on
 filetype plugin indent on
