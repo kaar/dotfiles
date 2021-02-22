@@ -48,6 +48,7 @@ export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professiona
 export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 export PATH="$PATH:~/.bin/"
+export PATH="$PATH:/mnt/c/Program Files (x86)/JetBrains/JetBrains Rider 211.4961.12/bin"
 
 # TEMP
 export TMP="${HOME}/.tmp"
