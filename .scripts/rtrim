@@ -1,0 +1,3 @@
+#!/bin/sh
+# -l switch autochomps each line read and then adds a newline back
+exec perl -pli -e "s/\s*$//" "$@"
