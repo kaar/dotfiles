@@ -39,4 +39,5 @@ install cheat
 install fzf
 install git-prompt
 install go
+install kubectl
 
