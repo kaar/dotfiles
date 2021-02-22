@@ -1,0 +1,3 @@
+#!/bin/sh
+# stolen from https://github.com/rwxrob/dotfiles/blob/master/scripts/pie
+exec perl -p -i -e "$@" # so fucking better than sed and/or awk
