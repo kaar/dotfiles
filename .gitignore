@@ -7,3 +7,4 @@ tmp/*
 .azure/
 .tmp/
 .kube/
+.config/gh/state.yml
