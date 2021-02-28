@@ -1,3 +1,7 @@
+## Tmux, https://github.com/tmux/tmux
+sudo apt update 
+sudo apt install tmux
+
 ## Tmux Plugin Manager, https://github.com/tmux-plugins/tpm
 TMUX_PLUGINS=~/.tmux/plugins/tpm
 mkdir -p $TMUX_PLUGINS
