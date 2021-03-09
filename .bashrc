@@ -40,6 +40,7 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 source ~/.aliases
 
 # Prompt
+# Has to remove as i get "-bash: __git_ps1: command not found"
 source ~/.config/bash/prompt.sh
 
 # PATH config
@@ -82,8 +83,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # enable programmable completion features
-source /usr/share/bash-completion/bash_completion
-
+# This did not work on a newly installed debian machine
+# source /usr/share/bash-completion/bash_completion
+if [ -f /etc/bash_completion ]; then
+   source /etc/bash_completion
+fi
 # Load tmux completion
 source ~/.completion/tmux
 
