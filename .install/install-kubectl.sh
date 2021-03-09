@@ -6,16 +6,18 @@ echo "Installed: v$installed"
 echo "Latest: v$latest"
 
 # Download latest release
-curl -LOs "https://dl.k8s.io/release/v${latest}/bin/linux/amd64/kubectl"
+curl -Ls --output /tmp/kubectl "https://dl.k8s.io/release/v${latest}/bin/linux/amd64/kubectl"
 
 # Download the kubectl checksum file
-curl -LOs "https://dl.k8s.io/v${latest}/bin/linux/amd64/kubectl.sha256"
+# curl -Ls --output /tmp/kubectl.sha256 "https://dl.k8s.io/v${latest}/bin/linux/amd64/kubectl.sha256"
 
 # Validate the kubectl binary against the checksum file:
-echo "$(<kubectl.sha256) kubectl" | sha256sum --check
+# echo "$(<kubectl.sha256) kubectl" | sha256sum --check
 
 # Install
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+sudo install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
 
 # Test to ensure the version you installed is up-to-date
 kubectl version --client
+
+rm -rf /tmp/kubectl
