@@ -15,6 +15,8 @@
 echo "deb https://weechat.org/ubuntu groovy main" | sudo tee /etc/apt/sources.list.d/weechat.list
 echo "deb-src https://weechat.org/ubuntu groovy main" | sudo tee -a /etc/apt/sources.list.d/weechat.list
 
+sudo apt-key adv --keyserver hkps://keys.openpgp.org --recv-keys 11E9DE8848F2B65222AA75B8D1820DB22A11534E
+
 sudo apt-get update
 sudo apt-get install weechat-curses weechat-plugins weechat-python weechat-perl
 
