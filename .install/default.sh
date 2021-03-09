@@ -10,34 +10,38 @@ version() {
 
 install() {
 	header "Installing $1"
-	~/.install/"${1}.sh"
+	~/.install/"install-${1}.sh"
 }
 
 sudo apt update
 
 packages="
+curl
+jq
+man
 tig
 ripgrep
 universal-ctags
 silversearcher-ag
 fd-find
-jq
-gh
+bash-completion
 "
 
 # Install all packages
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
+#sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+#sudo apt-add-repository https://cli.github.com/packages
 #sudo apt update
-sudo apt upgrade
+#sudo apt upgrade
+#sudo apt install ${packages}
 sudo apt install ${packages}
 
-
-install bat
+install gh
+install ripgrep
+#install bat
 install tmux
 install cheat
 install fzf
 install git-prompt
-install go
+#install golang
 install kubectl
 

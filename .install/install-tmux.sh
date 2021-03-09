@@ -1,5 +1,4 @@
 ## Tmux, https://github.com/tmux/tmux
-sudo apt update 
 sudo apt install tmux
 
 ## Tmux Plugin Manager, https://github.com/tmux-plugins/tpm

@@ -1,10 +1,15 @@
 ## Kubectl,https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
+installed=$(kubectl version --client | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
+latest=$(curl -L -s https://dl.k8s.io/release/stable.txt | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
+echo "Installed: v$installed"
+echo "Latest: v$latest"
+
 # Download latest release
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LOs "https://dl.k8s.io/release/v${latest}/bin/linux/amd64/kubectl"
 
 # Download the kubectl checksum file
-curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+curl -LOs "https://dl.k8s.io/v${latest}/bin/linux/amd64/kubectl.sha256"
 
 # Validate the kubectl binary against the checksum file:
 echo "$(<kubectl.sha256) kubectl" | sha256sum --check
