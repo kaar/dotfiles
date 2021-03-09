@@ -45,7 +45,9 @@ source ~/.config/bash/prompt.sh
 
 # New
 export NEW_TEMPLATES="$HOME/repos/kaar/new/templates"
-source $HOME/repos/kaar/new/src/completion.bash
+if [ -x $HOME/repos/kaar/new/src/completion.bash ]; then
+  source $HOME/repos/kaar/new/src/completion.bash
+fi
 
 # PATH config
 export BIN="$HOME/.bin"
