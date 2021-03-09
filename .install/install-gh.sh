@@ -7,10 +7,14 @@ latest_release=$(curl -sL https://api.github.com/repos/cli/cli/releases/latest \
   | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 
 # Download latest
-curl -LOs https://github.com/cli/cli/releases/download/v${latest_release}/gh_${latest_release}_linux_amd64.deb
+package_name="gh_${latest_release}_linux_amd64.deb"
+curl -Ls --output /tmp/${package_name} https://github.com/cli/cli/releases/download/v${latest_release}/${package_name}
 
 # Install downloaded latest
-sudo dpkg -i gh_${latest_release}_linux_amd64.deb 
+sudo dpkg -i /tmp/${package_name}
+
+# Remove downloaded package
+rm -rf /tmp/${package_name}
 
 
 
