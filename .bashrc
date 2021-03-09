@@ -43,6 +43,10 @@ source ~/.aliases
 # Has to remove as i get "-bash: __git_ps1: command not found"
 source ~/.config/bash/prompt.sh
 
+# New
+export NEW_TEMPLATES="$HOME/repos/kaar/new/templates"
+source $HOME/repos/kaar/new/src/completion.bash
+
 # PATH config
 export BIN="$HOME/.bin"
 export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/:$PATH"
