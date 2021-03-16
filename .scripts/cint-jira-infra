@@ -1,0 +1,3 @@
+#!/bin/sh
+
+win-chrome "https://cint.atlassian.net/browse/INFRA-${1}"
