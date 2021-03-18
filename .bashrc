@@ -43,19 +43,29 @@ source ~/.aliases
 # Has to remove as i get "-bash: __git_ps1: command not found"
 source ~/.config/bash/prompt.sh
 
-# New
-export NEW_TEMPLATES="$HOME/repos/kaar/new/templates"
-if [ -x $HOME/repos/kaar/new/src/completion.bash ]; then
-  source $HOME/repos/kaar/new/src/completion.bash
+## Bash Completion
+
+# enable programmable completion features
+# This did not work on a newly installed debian machine
+# source /usr/share/bash-completion/bash_completion
+if [ -f /etc/bash_completion ]; then
+   source /etc/bash_completion
 fi
 
-# PATH config
+# Local custom completion scripts
+for bcfile in ~/.config/bash_completion.d/* ; do
+  [ -f "$bcfile" ] && . $bcfile
+done
+
+## PATH config
 export BIN="$HOME/.bin"
 export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/:$PATH"
 export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 export PATH="$PATH:~/.bin/"
 export PATH="$PATH:/mnt/c/Program Files (x86)/JetBrains/JetBrains Rider 211.4961.12/bin"
+# Path for New templates
+export NEW_TEMPLATES="$HOME/repos/kaar/new/templates"
 
 # TEMP
 export TMP="${HOME}/.tmp"
@@ -88,14 +98,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# enable programmable completion features
-# This did not work on a newly installed debian machine
-# source /usr/share/bash-completion/bash_completion
-if [ -f /etc/bash_completion ]; then
-   source /etc/bash_completion
-fi
-# Load tmux completion
-source ~/.completion/tmux
 
 # FZF
 source ~/.config/fzf/completion.bash
