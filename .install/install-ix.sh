@@ -2,7 +2,6 @@
 ## IX, http://ix.io/
 
 if [ -z "$(which ix)" ]; then
-  ix_bin="~/.local/bin/ix"
   curl ix.io/client > ~/.local/bin/ix
   chmod +x ~/.local/bin/ix
   echo "IX installed."
