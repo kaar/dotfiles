@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -40,7 +42,7 @@ alias cint-todo='gh gist edit ef259eead3d865e32c659d4c40ba3789'
 
 # GitHub
 alias github-pr='github_create_pull_request'
-alias github='github_open'
+alias github='github-open'
 
 # Browser
 alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
@@ -102,19 +104,6 @@ function set_windows_terminal_title()
         # Set Title by parameter
         echo -ne "\033]0;$@\a" ;
     fi
-}
-function github_open()
-{
-    remote_url=$(git config remote.origin.url)
-    if [[ $remote_url != *"github"* ]]; then
-    echo "Not a github url"
-    exit;
-    fi
-
-    github_url=$(sed -e 's/git@github.com:/https:\/\/github.com\//' -e 's/\.git//' <<< $remote_url)
-
-    # Open url in browser
-    browse $github_url
 }
 
 function github_create_pull_request()
