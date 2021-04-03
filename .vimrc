@@ -66,11 +66,11 @@ set nofixendofline
 set scrolloff=10
 
 " netrw
-let g:netrw_liststyle = 3		" change directory view
-let g:netrw_banner = 0			" remove banner
-let g:netrw_winsize = 20		" explorer width in percent
-let g:netrw_browse_split = 2    " open file; 1 = h-split, 2=v-split, 3 = new tab, 4 = prev window
-let g:netrw_altv = 1			" ???
+" let g:netrw_liststyle = 3		" change directory view
+" let g:netrw_banner = 0			" remove banner
+" let g:netrw_winsize = 20		" explorer width in percent
+" let g:netrw_browse_split = 2    " open file; 1 = h-split, 2=v-split, 3 = new tab, 4 = prev window
+" let g:netrw_altv = 1			" ???
 "augroup ProjectDrawer
 "	autocmd!
 "    autocmd VimEnter * :Vexplore
