@@ -72,6 +72,10 @@ export TEMP="${HOME}/.tmp"
 mkdir -p "${TMP}"
 mkdir -p "${TMP}/vim"
 
+## Scripts
+export SCRIPTS="${HOME}/.scripts"
+export PATH="${SCRIPTS}:$PATH"
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
