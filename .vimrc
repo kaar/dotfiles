@@ -154,3 +154,15 @@ augroup commenting_blocks_of_code
 augroup END
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+command! Config execute ":e $HOME/.vimrc"
+augroup standard_group
+  " Reload file on focus/enter. This seems to break in Windows.
+  " https://stackoverflow.com/a/20418591
+  " Still have a bug where last search highlight on :Reload
+  if !has("win32")
+    autocmd FocusGained,BufEnter * :silent! !
+  endif
+
+  command! Reload execute "source ~/.vimrc"
+augroup END
