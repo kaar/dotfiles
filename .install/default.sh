@@ -13,6 +13,8 @@ install() {
 	~/.install/"install-${1}.sh"
 }
 
+mkdir -p $HOME/.local/bin
+
 sudo apt update
 
 packages="

@@ -7,6 +7,7 @@
 ## keyrate          - reset
 
 BIN=$HOME/.local/bin
+mkdir -p $BIN
 
 if [ -z "$(which keyrate)" ]; then
   curl -sfL "https://github.com/EricTetz/keyrate/releases/download/v1.0/keyrate.exe" \
