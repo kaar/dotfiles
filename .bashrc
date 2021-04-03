@@ -38,10 +38,7 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Aliases
 source "$HOME/.config/shell.d/aliases.sh"
-
-# Prompt
-# Has to remove as i get "-bash: __git_ps1: command not found"
-source ~/.config/bash/prompt.sh
+source "$HOME/.config/shell.d/prompt.sh"
 
 ## Bash Completion
 
