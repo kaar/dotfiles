@@ -43,7 +43,7 @@ install ripgrep
 install tmux
 install cheat
 install fzf
-install git-prompt
+#install git-prompt
 #install golang
-install kubectl
+#install kubectl
 
