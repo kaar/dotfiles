@@ -114,8 +114,8 @@ nnoremap tl    :tabprev<CR>			" prev tabjh
 
 " File explorer
 " netrw
-nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
-nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
+" nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
+" nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
 
 " move lines
 nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
