@@ -103,10 +103,10 @@ nnoremap <leader>b :buffers<CR>:buffer<Space>
 " tabs
 " A tab page is a collection of windows and does not represent open files
 " Use tabs for different projects almost like terminal tabs
-nnoremap <C-t> :tabnew<CR>			" new tab
-nnoremap td    :tabclose<CR>		" close tab
-nnoremap th    :tabnext<CR>			" next tab
-nnoremap tl    :tabprev<CR>			" prev tabjh
+" nnoremap <C-t> :tabnew<CR>      " new tab
+" nnoremap td    :tabclose<CR>    " close tab
+" nnoremap th    :tabnext<CR>     " next tab
+" nnoremap tl    :tabprev<CR>     " prev tabjh
 
 " add timestamp
 " nnoremap <F5> "=strftime("%c")<CR>P
