@@ -18,6 +18,7 @@ mkdir -p $HOME/.local/bin
 sudo apt update
 
 packages="
+dnsutils
 wget
 curl
 jq
