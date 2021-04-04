@@ -1,0 +1,4 @@
+#!/bin/sh
+
+open "https://google.com/search?q=$@"
+

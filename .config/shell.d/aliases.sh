@@ -27,6 +27,8 @@ alias reload='source ~/.bashrc ;'
 alias ts='tmux-split-cmd'
 alias install-packages='~/.install/default.sh'
 
+alias '?'=google
+
 # Notes
 alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes sync'
 

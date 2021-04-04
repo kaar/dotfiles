@@ -9,4 +9,5 @@ if [ $# -eq 0 ] ; then
   exit 0
 fi
 
-firefox '-new-tab' $@
+url="$@"
+firefox -new-tab "${url}"
