@@ -5,10 +5,7 @@
 path="${SCRIPTS}/${1}"
 
 if [ -e "${path}" ]; then
-  read -p "${1} already exists. Edit? [Y/n] " yes
-  case "${yes}" in
-    y|yes|yep|yeppers|yeah|ok|okay) exec vim "${path}"
-  esac
+  exec vim "${path}"
   exit 0
 fi
 
