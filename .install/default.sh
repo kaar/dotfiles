@@ -18,6 +18,7 @@ mkdir -p $HOME/.local/bin
 sudo apt update
 
 packages="
+wget
 curl
 jq
 man
