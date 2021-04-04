@@ -8,3 +8,4 @@ tmp/*
 .tmp/
 .kube/
 .config/gh/state.yml
+.config/gh/hosts.yml
