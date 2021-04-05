@@ -1,0 +1,15 @@
+_notes_complete()
+{
+    local cur prev opts
+
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="$(ls ${NOTES})"
+
+    if [ ${COMP_CWORD} = 1 ]; then
+      COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+      __ltrim_colon_completions "$cur"
+    fi
+    return 0
+}
+complete -F _notes_complete notes

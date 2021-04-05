@@ -1,0 +1,28 @@
+#!/bin/bash
+[ ! -n "${NOTES}" ] && echo "NOTES not set" && exit 1;
+[ ! -n "${1}" ] && echo "usage: notes <filename>" && exit 1;
+
+path="${NOTES}/${1}"
+message=""
+
+if [ -e "${path}" ]; then
+  message="update ${1}"
+  vim "${path}"
+else
+  message="add ${1}"
+  printf "# ${1}" > "${path}"
+  vim +2 "${path}"
+fi
+
+[ $? -eq 0 ] || exit 1
+
+# TODO: Add patch (git add -p ${path}
+read -p 'Commit changes [y,n]?' commit
+
+if [[ ! $commit =~ ^[Yy] ]]; then
+  exit
+fi
+
+cd "${NOTES}"
+git add "${path}"
+git commit -m"${message}"

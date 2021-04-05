@@ -36,9 +36,9 @@ esac
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-# Aliases
 source "$HOME/.config/shell.d/aliases.sh"
 source "$HOME/.config/shell.d/prompt.sh"
+source "$HOME/.config/shell.d/env.sh"
 
 ## Bash Completion
 
@@ -68,10 +68,6 @@ export TMP="${HOME}/.tmp"
 export TEMP="${HOME}/.tmp"
 mkdir -p "${TMP}"
 mkdir -p "${TMP}/vim"
-
-## Scripts
-export SCRIPTS="${HOME}/.scripts"
-export PATH="${SCRIPTS}:$PATH"
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
