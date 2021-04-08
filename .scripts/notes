@@ -10,7 +10,7 @@ if [ -e "${path}" ]; then
   vim "${path}"
 else
   message="add ${1}"
-  printf "# ${1}" > "${path}"
+  printf "# Title" > "${path}"
   vim +2 "${path}"
 fi
 
