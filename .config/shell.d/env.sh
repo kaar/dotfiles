@@ -8,4 +8,4 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 
 # Rider
 rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.1/bin/"
-[ -d "${rider}" ] && export PATH="${rider}:$PATH" || echo "Rider is not loaded into path"
+[ -d "${rider}" ] && export PATH="${rider}:$PATH"

@@ -1,4 +1,5 @@
 #!/bin/sh
+[ -z "$(which rider64.exe)" ] && echo "Rider is not loaded into path" && exit 1;
 
 if [ $# -eq 0 ] ; then
   rider64.exe $(find . -name '*.sln') > /dev/null 2>&1 &
