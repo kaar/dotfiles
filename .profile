@@ -30,3 +30,8 @@ fi
 if [ -d "$HOME/.scripts" ] ; then
   PATH="$HOME/.scripts:$PATH"
 fi
+
+# If WSL (Windows) load wsl specific profile
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+  source ${HOME}/.config/shell.d/wsl-profile.sh
+fi
