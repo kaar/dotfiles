@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+usage="usage: clone <usage/repository>"
+[ ! -n "${REPOS}" ] && echo "REPOS not set" && exit 1;
+[ ! -n "${1}" ] && echo "$usage" && exit 1;
+## Check if $1 contains / 
+[ "${1##*/*}" ] && echo "$usage" && exit 1;
+
+user=${1%/*}
+repository=${1##*/}
+
+path="${REPOS}/${user}/${repository}"
+url="git@github.com:${user}/${repository}"
+# git clone ${url} $path
+git clone ${url} ${path}
+echo "git clone ${url} -> ${path}"
+
+
