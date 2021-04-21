@@ -29,6 +29,10 @@ alias install-packages='~/.install/default.sh'
 
 alias '?'=google
 
+# Kubectl
+alias k=kubectl
+complete -F __start_kubectl k
+
 # Notes
 alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes sync'
 
