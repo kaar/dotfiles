@@ -12,3 +12,6 @@ export REPOS="${HOME}/repos"
 # Rider
 rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.1/bin/"
 [ -d "${rider}" ] && export PATH="${rider}:$PATH"
+
+# Where cd should look for completion
+export CDPATH=.:~:~/Dev
