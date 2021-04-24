@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # To be able to run minikube in WSL
 export DOCKER_CERT_PATH='/mnt/c/home/.minikube/certs'
 

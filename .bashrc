@@ -39,6 +39,10 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 source "$HOME/.config/shell.d/aliases.sh"
 source "$HOME/.config/shell.d/prompt.sh"
 source "$HOME/.config/shell.d/env.sh"
+# Load WSL specific config
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+  source "$HOME/.config/shell.d/wsl.sh"
+fi
 
 ## Bash Completion
 
@@ -79,8 +83,3 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# Load wsl-1 specific config
-# WSL 1 specific settings.
-if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-	source ~/.config/bash/wsl.bash
-fi
