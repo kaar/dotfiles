@@ -44,19 +44,22 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
   source "$HOME/.config/shell.d/wsl.sh"
 fi
 
-## Bash Completion
-
-# enable programmable completion features
-# This did not work on a newly installed debian machine
-# source /usr/share/bash-completion/bash_completion
+# Bash Completion
 if [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
 fi
 
-# Local custom completion scripts
+# Local bash completion
 for bcfile in ~/.config/bash_completion.d/* ; do
-  [ -f "$bcfile" ] && . $bcfile
+  [ -f "$bcfile" ] && source $bcfile
 done
+
+# dircolors
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+## Settings
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -78,8 +81,4 @@ shopt -s checkwinsize
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
 
-# dircolors
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
 
