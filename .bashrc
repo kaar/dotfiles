@@ -54,21 +54,6 @@ for bcfile in ~/.config/bash_completion.d/* ; do
   [ -f "$bcfile" ] && . $bcfile
 done
 
-## PATH config
-export BIN="$HOME/.bin"
-export PATH="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/:$PATH"
-export GOPATH="$HOME/Go" # or any directory to put your Go code
-export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
-export PATH="$PATH:~/.bin/"
-# Path for New templates
-export NEW_TEMPLATES="$HOME/repos/kaar/new/templates"
-
-# TEMP
-export TMP="${HOME}/.tmp"
-export TEMP="${HOME}/.tmp"
-mkdir -p "${TMP}"
-mkdir -p "${TMP}/vim"
-
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -93,7 +78,6 @@ stty -ixon
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-
 
 # FZF
 source ~/.config/fzf/completion.bash
