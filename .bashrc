@@ -79,14 +79,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# FZF
-source ~/.config/fzf/completion.bash
-source ~/.config/fzf/key-bindings.bash
-# Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fdfind --type f'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
 # cheat.sh
 source ~/.config/cht.sh/completion.bash
 
