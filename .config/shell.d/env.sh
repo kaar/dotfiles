@@ -25,9 +25,8 @@ rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.1/bin/"
 export PATH="${SCRIPTS}:$PATH"
 
 # TEMP
-export TMP="${HOME}/.tmp"
-export TEMP="${HOME}/.tmp"
-mkdir -p "${TMP}"
+export TMP="/tmp"
+export TEMP="/tmp"
 mkdir -p "${TMP}/vim"
 
 # FZF
