@@ -1,5 +1,7 @@
 #!/bin/sh
 
+## Location for installation scripts
+export INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
 export BIN="$HOME/.local/bin"
 export NOTES="${HOME}/notes"

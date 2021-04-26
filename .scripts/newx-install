@@ -1,0 +1,16 @@
+#!/bin/sh
+usage="Create new install script in ${INSTALL}\nusage: newx-install <name>"
+
+[ ! -n "${INSTALL}" ] && echo "INSTALL not set" && exit 1;
+[ ! -n "${1}" ] && echo "$usage" && exit 1;
+
+path="${INSTALL}/${1}"
+
+if [ -e "${path}" ]; then
+  exec vim "${path}"
+  exit 0
+fi
+
+printf "#!/bin/sh\n\n" > "${path}"
+chmod +x "${path}"
+exec vim +2 "${path}"
