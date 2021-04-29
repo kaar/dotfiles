@@ -1,12 +1,15 @@
 #!/bin/sh
 set -e
 
+## TODO: Add support for GitHub URL
+
 usage="usage: clone <usage/repository>"
 [ ! -n "${REPOS}" ] && echo "REPOS not set" && exit 1;
 [ ! -n "${1}" ] && echo "$usage" && exit 1;
 ## Check if $1 contains / 
 [ "${1##*/*}" ] && echo "$usage" && exit 1;
 
+## Split input "<user>/<repository>"
 user=${1%/*}
 repository=${1##*/}
 
