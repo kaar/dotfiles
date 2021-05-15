@@ -1,0 +1,4 @@
+#!/bin/bash
+## Helm, https://helm.sh/, https://helm.sh/docs/intro/install/
+## Install helm into /usr/local/bin/helm
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
