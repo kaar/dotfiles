@@ -1,3 +1,4 @@
 #!/bin/sh
-
-docker run -it "$1"
+name=$1
+shift
+exec docker run -it --rm -h "$name" --name "$name" "$namr" "$@"
