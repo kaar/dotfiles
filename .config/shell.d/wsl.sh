@@ -10,7 +10,7 @@ alias cint-connect='rasdial "NextGen VPN2Cint-test"'
 alias cint-disconnect='cint-connect /DISCONNECT'
 
 vs="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/"
-rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.1/bin/"
+rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.2/bin/"
 
 # WSL Specific paths
 export PATH="$PATH:$vs:$rider:"
