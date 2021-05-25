@@ -2,8 +2,8 @@
 
 dist=$(uname -r)
 if [[ "${dist}" =~ "arch" ]]; then
-  pacman -S $@
+  sudo pacman -S --needed $@
 else
-  apt install $@
+  sudo apt install $@
 fi
 
