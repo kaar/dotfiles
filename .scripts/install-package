@@ -1,0 +1,9 @@
+#!/bin/sh
+
+dist=$(uname -r)
+if [[ "${dist}" =~ "arch" ]]; then
+  pacman -S $@
+else
+  apt install $@
+fi
+
