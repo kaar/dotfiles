@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+install-package i3-wm
+
+# dmenu for searching applications
+install-package dmenu
+
+# Cycle focus, Alt Tab <https://github.com/altdesktop/i3ipc-python/blob/master/examples/i3-cycle-focus.py>
+pip3 install i3ipc
+
+script="${HOME}/.config/i3/i3-cycle-focus.py"
+curl -s https://raw.githubusercontent.com/altdesktop/i3ipc-python/master/examples/i3-cycle-focus.py > $script
+chmod +x "${script}"
+
+
