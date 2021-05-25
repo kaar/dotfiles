@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt update
-sudo apt install python3
-# Package manager
-sudo apt install python3-pip
+install-package \
+  python \
+  python-pip
+
