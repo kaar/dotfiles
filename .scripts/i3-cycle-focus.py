@@ -89,7 +89,7 @@ class FocusWatcher:
                 logging.info('switching window')
                 windows = await self.get_valid_windows()
                 logging.info('valid windows = {}'.format(windows))
-                for window_id in self.window_list[self.window_index + 1:]:
+                for window_id in self.window_list[self.window_index:]:
                     if window_id not in windows:
                         self.window_list.remove(window_id)
                     else:
