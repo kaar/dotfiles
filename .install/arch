@@ -1,0 +1,11 @@
+dnsutils
+wget
+curl
+jq
+man
+tig
+ripgrep
+fd
+bash-completion
+code
+
