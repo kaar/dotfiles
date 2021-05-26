@@ -59,6 +59,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 exec_always --no-startup-id i3-cycle-focus.py --active-workspace --delay 2.0
 bindsym $mod+Tab exec --no-startup-id i3-cycle-focus.py --switch
 
+# mouse focus
+focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
