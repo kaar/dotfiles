@@ -9,3 +9,5 @@ fd
 bash-completion
 code
 github-cli
+network-manager-applet
+xss-lock
