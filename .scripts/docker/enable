@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Enable Docker Service"
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
