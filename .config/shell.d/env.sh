@@ -12,6 +12,9 @@ export REPOS="${HOME}/repos"
 # Where cd should look for completion
 export CDPATH=.:~:~/Dev
 
+# Browser
+export BROWSER=firefox
+
 # GO
 export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
