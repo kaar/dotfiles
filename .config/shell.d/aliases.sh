@@ -38,7 +38,7 @@ alias sync-notes='git --git-dir="${HOME}/notes/.git" --work-tree=${HOME}/notes s
 
 # Vim
 
-alias fd='fdfind'
+# alias fd='fdfind'
 
 # TODO
 alias todo='gh gist edit c85070135d504c644d6c60ac025c4bcd'

@@ -194,3 +194,11 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
+
+
+
+call plug#begin('~/.vim/plugged')
+  Plug 'scrooloose/nerdtree'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+call plug#end()
