@@ -109,6 +109,10 @@ nnoremap <leader>a <esc>ggVG<CR>    " select all
 " buffers
 nnoremap <leader>b :buffers<CR>:buffer<Space>
 
+" copy/paste
+vnoremap <leader>y "+y
+map <leader>p "+p
+
 " tabs
 " A tab page is a collection of windows and does not represent open files
 " Use tabs for different projects almost like terminal tabs
