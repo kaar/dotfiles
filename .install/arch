@@ -13,3 +13,4 @@ network-manager-applet
 xss-lock
 gvim
 docker
+tmux
