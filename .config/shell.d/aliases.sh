@@ -32,8 +32,6 @@ alias github-pr='github_create_pull_request'
 alias github='github-open'
 
 # Browser
-alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
-alias firefox='/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe'
 alias browse='firefox -new-tab'
 
 # Generic
