@@ -48,12 +48,11 @@
 	name = Caspar Nettelbladt
 	email = caspar.n@gmail.com
 
-[user]
-    email = caspar.n@gmail.com
-    name = Caspar Nettelbladt
-
 [includeIf "gitdir:~/Dev/"]
 	path = ~/.config/git/user
 
 [includeIf "gitdir:~/Dev/"]
-	path = ~/.config/git/windows
+  path = ~/.config/git/windows
+
+[includeIf "gitdir:~/repos/tibbercom/"]
+  path = ~/.config/git/tibber
