@@ -17,6 +17,3 @@ path="${REPOS}/${user}/${repository}"
 url="git@github.com:${user}/${repository}"
 # git clone ${url} $path
 git clone ${url} ${path}
-echo "git clone ${url} -> ${path}"
-
-
