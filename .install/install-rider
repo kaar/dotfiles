@@ -1,11 +1,11 @@
 #!/bin/sh
 ## Rider, <https://www.jetbrains.com/rider/download>
 
-BIN=$HOME/.local/bin
+local_bin=$HOME/.local/bin
 temp=$(mktemp -d)
 wget "https://download.jetbrains.com/rider/JetBrains.Rider-2021.1.2.tar.gz?_ga=2.79229396.1713588638.1619196292-1155658700.1570448110" \
   -O "${temp}/rider.tar.gz"
 cd $temp
 
 echo $temp
-sudo tar -xzf "${temp}/rider.tar.gz" -C /opt
+tar -xzf "${temp}/rider.tar.gz" -C "${local_bin}"
