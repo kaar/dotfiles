@@ -10,7 +10,7 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 # Source code repositories
 export REPOS="${HOME}/repos"
 # Where cd should look for completion
-export CDPATH=.:~:~/Dev
+export CDPATH="."
 
 # Browser
 export BROWSER=firefox
