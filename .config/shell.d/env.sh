@@ -23,8 +23,8 @@ export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 export PATH="${SCRIPTS}:$PATH"
 
 # TEMP
-export TMP="/tmp"
-export TEMP="/tmp"
+export TMP=".tmp"
+export TEMP=".tmp"
 mkdir -p "${TMP}/vim"
 
 # FZF
