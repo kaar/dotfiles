@@ -14,3 +14,5 @@ xss-lock
 gvim
 docker
 tmux
+unzip
+dotnet-sdk
