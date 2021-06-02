@@ -81,4 +81,5 @@ shopt -s checkwinsize
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
 
-
+# load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
