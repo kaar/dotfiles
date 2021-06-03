@@ -18,3 +18,6 @@ tmp/*
 notes
 repos
 .tig_history
+.npmrc
+.nuget/
+.xsession-errors
