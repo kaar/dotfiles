@@ -39,10 +39,16 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 source "$HOME/.config/shell.d/aliases.sh"
 source "$HOME/.config/shell.d/prompt.sh"
 source "$HOME/.config/shell.d/env.sh"
+source "$HOME/.config/shell.d/nvm.sh"
+source "$HOME/.config/shell.d/aws.sh"
+
+
 # Load WSL specific config
 if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
   source "$HOME/.config/shell.d/wsl.sh"
 fi
+
+
 
 # Bash Completion
 if [ -f /etc/bash_completion ]; then
@@ -81,5 +87,3 @@ shopt -s checkwinsize
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
 
-# load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
