@@ -1,1 +1,1 @@
-sudo iwctl station wlan0 connect Tomato50
+iwctl station wlan0 connect Tomato50
