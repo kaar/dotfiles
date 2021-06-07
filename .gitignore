@@ -21,3 +21,6 @@ repos
 .npmrc
 .nuget/
 .xsession-errors
+.bash_logout
+.bash_history
+.Xauthority
