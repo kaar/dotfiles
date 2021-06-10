@@ -21,3 +21,4 @@ aws-cli
 yubikey-manager
 xorg-xrandr
 pass
+fzf
