@@ -36,19 +36,15 @@ esac
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-source "$HOME/.config/shell.d/aliases.sh"
-source "$HOME/.config/shell.d/prompt.sh"
-source "$HOME/.config/shell.d/env.sh"
-source "$HOME/.config/shell.d/nvm.sh"
-source "$HOME/.config/shell.d/aws.sh"
-
+# Load all scripts in shell.d
+for file in ~/.config/shell.d/*.sh ; do
+  [ -f "$file" ] && source $file
+done
 
 # Load WSL specific config
 if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-  source "$HOME/.config/shell.d/wsl.sh"
+  source "$HOME/.config/shell/wsl.sh"
 fi
-
-
 
 # Bash Completion
 if [ -f /etc/bash_completion ]; then
