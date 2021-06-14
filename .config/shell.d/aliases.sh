@@ -37,6 +37,9 @@ alias browse='firefox -new-tab'
 # Generic
 alias guid='uuid'
 
+# AWS
+alias aws-session='source ${SCRIPTS}/aws/get-session-token.sh'
+
 function github_create_pull_request()
 {
     remote_url=$(git config remote.origin.url)
