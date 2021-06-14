@@ -38,7 +38,7 @@ alias browse='firefox -new-tab'
 alias guid='uuid'
 
 # AWS
-alias aws-session='source ${SCRIPTS}/aws/get-session-token.sh'
+alias aws-session='source ${SCRIPTS}/aws/get-session-token.sh $(${SCRIPTS}/op/get-totp "Amazon")'
 
 function github_create_pull_request()
 {
