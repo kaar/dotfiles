@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
 [ ! -n "${SCRIPTS}" ] && echo "SCRIPTS not set" && exit 1;
 [ ! -n "${1}" ] && echo "usage: newscript <name>" && exit 1;
 
@@ -9,6 +14,11 @@ if [ -e "${path}" ]; then
   exit 0
 fi
 
-printf "#!/bin/sh\n\n" > "${path}"
+printf '#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+' > "${path}"
 chmod +x "${path}"
 exec vim +2 "${path}"
