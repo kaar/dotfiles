@@ -15,7 +15,6 @@ alias rm='rm -i'
 
 alias reload='source ~/.bashrc ;'
 alias install-packages='~/.install/default.sh'
-alias arch-install='${INSTALL}/arch-install'
 
 alias '?'=google
 
