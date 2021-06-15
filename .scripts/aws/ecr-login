@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+token=$(${SCRIPTS}/aws/ecr-token)
+echo $token | docker login -u "AWS" "${AWS_ECR}" --password-stdin

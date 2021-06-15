@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+aws ecr get-login-password --region "$AWS_REGION"
