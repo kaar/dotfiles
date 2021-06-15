@@ -23,3 +23,5 @@ xorg-xrandr
 pass
 fzf
 bat
+docker-compose
+fzf
