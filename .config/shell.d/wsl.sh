@@ -1,4 +1,9 @@
 #!/bin/sh
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+  echo "Load WSL profile"
+else
+  return
+fi
 
 # Use docker on windows
 alias clip='clip.exe'
@@ -6,8 +11,6 @@ alias dotnet='dotnet.exe'
 
 # Cint
 alias rasdial='/mnt/c/Windows/System32/rasdial.exe'
-alias cint-connect='rasdial "NextGen VPN2Cint-test"'
-alias cint-disconnect='cint-connect /DISCONNECT'
 
 vs="/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/"
 rider="/mnt/c/Program Files/JetBrains/JetBrains Rider 2021.1.2/bin/"

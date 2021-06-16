@@ -41,11 +41,6 @@ for file in ~/.config/shell.d/*.sh ; do
   [ -f "$file" ] && source $file
 done
 
-# Load WSL specific config
-if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-  source "$HOME/.config/shell/wsl.sh"
-fi
-
 # Bash Completion
 if [ -f /etc/bash_completion ]; then
    source /etc/bash_completion
