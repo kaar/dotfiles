@@ -23,9 +23,8 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 # TODO
-alias todo='gh gist edit c85070135d504c644d6c60ac025c4bcd'
-alias cint-todo='gh gist edit ef259eead3d865e32c659d4c40ba3789'
-alias tibber-todo='gh gist edit 45b02e0cd35a5c6fc58be1b7c389733b'
+alias todo='gh gist edit ${GIST_TODO}'
+alias tibber-todo='gh gist edit ${GIST_TODO_TIBBER}'
 
 # GitHub
 alias github-pr='github_create_pull_request'
