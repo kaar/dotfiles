@@ -22,9 +22,10 @@ alias '?'=google
 alias k=kubectl
 complete -F __start_kubectl k
 
-# TODO
+# Gists
 alias todo='gh gist edit ${GIST_TODO}'
 alias tibber-todo='gh gist edit ${GIST_TODO_TIBBER}'
+alias ideas='gh gist edit ${GIST_IDEAS}'
 
 # GitHub
 alias github-pr='github_create_pull_request'
