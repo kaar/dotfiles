@@ -18,6 +18,11 @@ alias install-packages='~/.install/default.sh'
 
 alias '?'=google
 
+# Vim
+alias vim='nvim'
+alias vi='vim'
+alias v='vim'
+
 # Kubectl
 alias k=kubectl
 complete -F __start_kubectl k
