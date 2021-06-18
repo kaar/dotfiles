@@ -1,0 +1,10 @@
+#!/bin/sh
+# https://aur.archlinux.org/packages/neovim-nightly-bin/
+
+repo="$(mktemp -d)/neovim"
+
+git clone https://aur.archlinux.org/neovim-nightly-bin.git --depth 1 "${repo}"
+
+cd "${repo}"
+makepkg -si
+rm -rf "${repo}"
