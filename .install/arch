@@ -16,6 +16,7 @@ docker
 tmux
 unzip
 dotnet-sdk
+aspnet-runtime
 w3m
 aws-cli
 yubikey-manager
