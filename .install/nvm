@@ -1,0 +1,10 @@
+#!/bin/sh
+# https://github.com/nvm-sh/nvm
+
+# clones repository into $HOME/.config/nvm ($NVM_DIR)
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+cp "${HOME}/.config/nvm/bash_completion" "${HOME}/.config/bash_completion.d/nvm"
+
+
+

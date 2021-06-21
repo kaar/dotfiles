@@ -4,8 +4,9 @@
 package=$1
 [ -z "$(pacman -Ss "${package}")" ] && echo "${package} does not exist." && exit 1;
 
-echo "${package}" >> "${INSTALL}/arch"
-echo "${package} added to ${INSTALL}/arch"
+arch_package_file="${INSTALL}/arch/packages"
+echo "${package}" >> "${arch_package_file}"
+echo "${package} added to ${arch_package_file}"
 
 read -p "Install packages? [y,n]? " install
 
