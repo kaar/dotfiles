@@ -1,0 +1,10 @@
+#!/bin/sh
+# https://aur.archlinux.org/packages/postman-bin/?O=10&PP=10
+
+repo="$(mktemp -d)/postman"
+url="https://aur.archlinux.org/postman-bin.git"
+git clone "${url}" --depth 1 "${repo}"
+
+cd "${repo}"
+makepkg -si
+rm -rf "${repo}"
