@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ $# -eq 0 ] ; then
-  $HOME/.local/bin/JetBrains\ Rider-2021.1.2/bin/rider.sh $(find . -name '*.sln') > /dev/null 2>&1 &
-else
-  $HOME/.local/bin/JetBrains\ Rider-2021.1.2/bin/rider.sh $@ > /dev/null 2>&1 &
-fi
