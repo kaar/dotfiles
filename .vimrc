@@ -63,10 +63,10 @@ set autoread
 set backup
 
 " tell vim where to put its backup files
-set backupdir=~/.tmp/vim
+set backupdir=/tmp/vim
 
 " tell vim where to put swap files
-set dir=~/.tmp/vim
+set dir=/tmp/vim
 
 " stop vim from silently fucking with files that it shouldn't
 set nofixendofline
