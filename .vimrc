@@ -113,6 +113,24 @@ nnoremap <leader>b :buffers<CR>:buffer<Space>
 vnoremap <leader>y "+y
 map <leader>p "+p
 
+" Emacs-Like in insert mode
+" Ctrl+a: Go to beginning of the line [Normal Mode && Insert Mode]
+map <C-a> <ESC>^
+imap <C-a> <ESC>I
+" Ctrl+e: Go to end of line [Normal Mode && Insert Mode]
+map <C-e> <ESC>$
+imap <C-e> <ESC>A
+" Alt+f: Backward a word [Insert Mode]
+inoremap <M-f> <ESC><Space>Wi
+" Alt+b: Forward a word [Insert Mode]
+inoremap <M-b> <Esc>Bi
+" Alt+d: Delete a word (backward) [Insert Mode]
+inoremap <M-d> <ESC>cW
+
+" maps gX to use xdg-open with a relative filepath under your cursor
+nnoremap gX :silent :execute
+  \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
+
 " tabs
 " A tab page is a collection of windows and does not represent open files
 " Use tabs for different projects almost like terminal tabs
