@@ -3,12 +3,24 @@
 " ======== 
 " :so %, Reload vim rc 
 
-" Settings
+" === SETTINGS ===
+" === Visual Settings ===
+" syntax highlight
 syntax on
+" color schema
 colorscheme ron
 " load indent file for the current filetype
 filetype indent on
 filetype plugin indent on
+" show line numbers
+set number
+" set relativenumber
+" disable relative line numbers, remove no to sample it
+set norelativenumber
+" syntax coloring lines that are too long just slows down the world
+set synmaxcol=1200
+" let me see more
+set scrolloff=10
 
 " === Search ===
 " ignore case for search
@@ -33,19 +45,8 @@ if executable(s:clip)
     augroup END
 endif
 
-" === Visual Settings ===
-" show line numbers
-set number
-" set relativenumber
-" disable relative line numbers, remove no to sample it
-set norelativenumber
-" syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
 
-" let me see more
-set scrolloff=10
-
-" Text and Formating
+" === Text and Formating ===
 " automatically indent new lines
 set autoindent
 " tab length
@@ -59,7 +60,7 @@ set smarttab
 set expandtab
 
 " stop vim from silently fucking with files that it shouldn't
-" set nofixendofline
+set nofixendofline
 
 " === Files and Backup ===
 " auto-reload buffers when files are changed on disk
@@ -95,41 +96,52 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " add installed path to &runtimepat
 set rtp+=~/.bin/fzf
 
-" mappings
-let mapleader = " "					" space; leader key
-imap jj <Esc>						" remap escape
-nnoremap <leader>w :w<cr>			" file write
-nnoremap <leader>- :split<cr>		" split
-nnoremap <leader>/ :vsplit<cr>		" split vertical
+" === Keybindings ===
+" space; leader key
+let mapleader = " "
+" remap escape
+imap jj <Esc>
+" split
+nnoremap <leader>- :split<cr>
+" split vertical
+nnoremap <leader>/ :vsplit<cr>
+" quit
+nnoremap <leader>q <c-w>q
+" write
+nnoremap <leader>w :w<cr>
+" select all
+nnoremap <leader>a <esc>ggVG<CR>
+" buffers
+nnoremap <leader>b :buffers<CR>:buffer<Space>
 
-" movement
+" movement panes
 nnoremap <leader>h <c-w><c-h>
 nnoremap <leader>j <c-w><c-j>
 nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
 
-nnoremap <leader>q <c-w>q			" quit
-nnoremap <leader>a <esc>ggVG<CR>    " select all
-
-" buffers
-nnoremap <leader>b :buffers<CR>:buffer<Space>
+" move lines (Ctrl+[j,k,l,m])
+nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
+nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
+inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
+inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
 
 " copy/paste
 vnoremap <leader>y "+y
 map <leader>p "+p
 
 " Emacs-Like in insert mode
-" Ctrl+a: Go to beginning of the line [Normal Mode && Insert Mode]
+" Go to beginning of the line [Normal Mode && Insert Mode]
 map <C-a> <ESC>^
 imap <C-a> <ESC>I
-" Ctrl+e: Go to end of line [Normal Mode && Insert Mode]
+" Go to end of line [Normal Mode && Insert Mode]
 map <C-e> <ESC>$
 imap <C-e> <ESC>A
-" Alt+f: Backward a word [Insert Mode]
+" Backward a word [Insert Mode]
 inoremap <M-f> <ESC><Space>Wi
-" Alt+b: Forward a word [Insert Mode]
+" Forward a word [Insert Mode]
 inoremap <M-b> <Esc>Bi
-" Alt+d: Delete a word (backward) [Insert Mode]
+" Delete a word (backward) [Insert Mode]
 inoremap <M-d> <ESC>cW
 
 " maps gX to use xdg-open with a relative filepath under your cursor
@@ -152,13 +164,6 @@ nnoremap gX :silent :execute
 " netrw
 " nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
 " nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
-
-" move lines
-nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
-nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
-inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
-inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
-
 
 " fzf
 nmap <C-P> :FZF<CR>
