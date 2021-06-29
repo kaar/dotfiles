@@ -91,6 +91,9 @@ set autowrite
 set nobackup
 set noswapfile
 set nowritebackup
+" Don't use Ex mode, use Q for formatting.
+" Revert with ":unmap Q".
+map Q gq
 
 " ### Spelling ###
 " language
