@@ -79,6 +79,10 @@ set backupdir=/tmp
 " tell vim where to put swap files
 set dir=/tmp
 
+" === Spelling ===
+set spelllang=en_us
+"set spellfile=TOOD
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " netrw
 " let g:netrw_liststyle = 3		" change directory view
@@ -218,3 +222,5 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
+
+
