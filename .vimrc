@@ -15,12 +15,18 @@ colorscheme ron
 filetype indent on
 filetype plugin indent on
 
-" highlight the search
-set hlsearch
+" === Search ===
+" ignore case for search
 set ignorecase
-
-set smartcase
+" highlight and match when typing
 set incsearch
+" highlight matching search results
+set hlsearch
+" <F3> toggle search highlight
+nnoremap <F3> :set hlsearch!<CR>
+
+" === Clipboard (Copy/Paste) ===
+set smartcase
 set clipboard=unnamedplus
 
 " WSL yank support
@@ -32,18 +38,22 @@ if executable(s:clip)
     augroup END
 endif
 
+" === Visual Settings ===
+" show line numbers
 set number
 " set relativenumber
-
 " disable relative line numbers, remove no to sample it
 set norelativenumber
-
 " syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
 
+" let me see more
+set scrolloff=10
+
+" Text and Formating
 " automatically indent new lines
 set autoindent
-
+" tab length
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
@@ -54,8 +64,9 @@ set smarttab
 set expandtab
 
 " stop vim from silently fucking with files that it shouldn't
-set nofixendofline
+" set nofixendofline
 
+" === Files and Backup ===
 " auto-reload buffers when files are changed on disk
 set autoread
 
@@ -68,11 +79,6 @@ set backupdir=/tmp
 " tell vim where to put swap files
 set dir=/tmp
 
-" stop vim from silently fucking with files that it shouldn't
-set nofixendofline
-
-" let me see more
-set scrolloff=10
 
 " netrw
 " let g:netrw_liststyle = 3		" change directory view
