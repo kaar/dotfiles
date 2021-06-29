@@ -129,6 +129,15 @@ nnoremap <leader>a <esc>ggVG<CR>
 " buffers
 nnoremap <leader>b :buffers<CR>:buffer<Space>
 
+" function keys
+map <F1> :set number!<CR> :set relativenumber!<CR>
+" toggle search highlight
+nnoremap <F3> :set hlsearch!<CR>
+" visulize whitespaces
+map <F4> :set list!<CR>
+map <F5> :set cursorline!<CR>
+map <F7> :set spell!<CR>
+
 " movement panes
 nnoremap <leader>h <c-w><c-h>
 nnoremap <leader>j <c-w><c-j>
