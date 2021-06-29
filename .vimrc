@@ -49,8 +49,6 @@ set smartcase
 set incsearch
 " highlight matching search results
 set hlsearch
-" <F3> toggle search highlight
-nnoremap <F3> :set hlsearch!<CR>
 " disable search highlighting with <C-L> (redraw screen)
 nnoremap <C-L> :nohl<CR><C-L>
 
