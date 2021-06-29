@@ -245,4 +245,5 @@ augroup END
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
 
-
+" read private vim config
+" set rtp^=~/.vimprivate
