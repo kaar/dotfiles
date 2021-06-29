@@ -136,10 +136,12 @@ vnoremap <Leader>" c"<C-r>""<Esc>
 " fzf
 nmap // :BLines<CR>
 nmap ?? :Rg<CR>
-nmap bu :Buffers<CR>
+" fucks up b key. Also not using buffers that much
+" nmap bu :Buffers<CR>
 nmap cc :Commands<CR>
 nmap cm :Commits<CR>
-
+nmap <C-P> :Files<CR>
+nmap <leader>p :Files<CR>
 
 " function keys
 map <F1> :set number!<CR> :set relativenumber!<CR>
@@ -199,8 +201,6 @@ nnoremap gX :silent :execute
 " nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
 " nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
 
-" fzf
-nmap <C-P> :FZF<CR>
 
 " Commenting blocks of code.
 " ,cc - commment
