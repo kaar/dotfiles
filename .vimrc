@@ -81,7 +81,8 @@ set expandtab
 set nofixendofline
 " enough for line numbers + gutter within 80 standard
 set textwidth=72
-
+" enable omni-completion, Insert Mode: <C-X><C-O>
+set omnifunc=syntaxcomplete#Complete
 
 " ### Files and Backup ###
 " auto-reload buffers when files are changed on disk
@@ -139,6 +140,12 @@ nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
 nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
 inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
 inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
+
+" completion menu
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 
 " copy/paste
 vnoremap <leader>y "+y
