@@ -7,6 +7,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias explorer='explorer.exe'
 alias d='docker'
+alias tmp='vim $(mktemp)'
 
 # safety features
 alias cp='cp -i'
