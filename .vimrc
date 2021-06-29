@@ -1,10 +1,7 @@
-"source ~/.vimrc"
-" Notes
-" ======== 
-" :so %, Reload vim rc 
+" https://github.com/kaar/dotfiles/blob/master/.vimrc
 
-" === SETTINGS ===
-" === Visual Settings ===
+" # SETTINGS #
+" ### Visual ###
 " syntax highlight
 syntax on
 " color schema
@@ -22,7 +19,7 @@ set synmaxcol=1200
 " let me see more
 set scrolloff=10
 
-" === Search ===
+" ### Search ###
 " ignore case for search
 set ignorecase
 " highlight and match when typing
@@ -32,7 +29,7 @@ set hlsearch
 " <F3> toggle search highlight
 nnoremap <F3> :set hlsearch!<CR>
 
-" === Clipboard (Copy/Paste) ===
+" ### Clipboard (Copy/Paste) ###
 set smartcase
 set clipboard=unnamedplus
 
@@ -46,7 +43,7 @@ if executable(s:clip)
 endif
 
 
-" === Text and Formating ===
+" ### Text and Formating ###
 " automatically indent new lines
 set autoindent
 " tab length
@@ -55,29 +52,25 @@ set softtabstop=2
 set shiftwidth=2
 set smartindent
 set smarttab
-
 " replace tabs with spaces automatically
 set expandtab
-
 " stop vim from silently fucking with files that it shouldn't
 set nofixendofline
 
-" === Files and Backup ===
+" ### Files and Backup ###
 " auto-reload buffers when files are changed on disk
 set autoread
-
 " tell vim to keep a backup file
 set backup
-
 " tell vim where to put its backup files
 set backupdir=/tmp
-
 " tell vim where to put swap files
 set dir=/tmp
 
-" === Spelling ===
+" ### Spelling ###
+" language
 set spelllang=en_us
-"set spellfile=TOOD
+" activate for *.md
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 " netrw
@@ -91,12 +84,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 "    autocmd VimEnter * :Vexplore
 "augroup END
 
-
-" FZF
-" add installed path to &runtimepat
-set rtp+=~/.bin/fzf
-
-" === Keybindings ===
+" # KEYBINDINGS #
 " space; leader key
 let mapleader = " "
 " remap escape
@@ -130,7 +118,7 @@ inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
 vnoremap <leader>y "+y
 map <leader>p "+p
 
-" Emacs-Like in insert mode
+" *** Emacs-Like in insert mode ***
 " Go to beginning of the line [Normal Mode && Insert Mode]
 map <C-a> <ESC>^
 imap <C-a> <ESC>I
