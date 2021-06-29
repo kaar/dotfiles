@@ -1,4 +1,4 @@
 #!/bin/sh
 
-iwctl station wlan0 connect $1
+iwctl station wlan0 connect "${1}"
 
