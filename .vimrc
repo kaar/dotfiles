@@ -248,9 +248,16 @@ let g:pandoc#modules#disabled = ["folding", "spell"]
 " # PLUGINS #
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vimplugins')
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'preservim/nerdtree'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'airblade/vim-rooter'
   call plug#end()
+
+  " ### auto-pairs ###
+  " activate fly mode
+  let g:AutoPairsFlyMode = 1
 endif
 
 " read private vim config
