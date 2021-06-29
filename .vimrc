@@ -28,10 +28,14 @@ set nofoldenable
 " visualize whitespace characters
 " Activate by :set list
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+" visual break lines smarter
+set linebreak
 
 " ### Search ###
 " ignore case for search
 set ignorecase
+" unless uppercase is used in search string
+set smartcase
 " highlight and match when typing
 set incsearch
 " highlight matching search results
@@ -40,7 +44,6 @@ set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
 " ### Clipboard (Copy/Paste) ###
-set smartcase
 set clipboard=unnamedplus
 
 " WSL yank support
@@ -51,7 +54,6 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
-
 
 " ### Text and Formating ###
 " automatically indent new lines
@@ -66,6 +68,9 @@ set smarttab
 set expandtab
 " stop vim from silently fucking with files that it shouldn't
 set nofixendofline
+" enough for line numbers + gutter within 80 standard
+set textwidth=72
+
 
 " ### Files and Backup ###
 " auto-reload buffers when files are changed on disk
