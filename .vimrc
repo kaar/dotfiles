@@ -30,6 +30,9 @@ set nofoldenable
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 " visual break lines smarter
 set linebreak
+" better command-line completion
+set wildmenu
+
 " Mode-dependent cursor in vim (Mintty)
 " still needed in gh gist edit, not sure why
 let &t_ti.="\e[1 q"
@@ -48,6 +51,8 @@ set incsearch
 set hlsearch
 " <F3> toggle search highlight
 nnoremap <F3> :set hlsearch!<CR>
+" disable search highlighting with <C-L> (redraw screen)
+nnoremap <C-L> :nohl<CR><C-L>
 
 " ### Clipboard (Copy/Paste) ###
 set clipboard=unnamedplus
