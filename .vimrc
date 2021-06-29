@@ -129,6 +129,14 @@ nnoremap <leader>a <esc>ggVG<CR>
 " buffers
 nnoremap <leader>b :buffers<CR>:buffer<Space>
 
+" fzf
+nmap // :BLines<CR>
+nmap ?? :Rg<CR>
+nmap bu :Buffers<CR>
+nmap cc :Commands<CR>
+nmap cm :Commits<CR>
+
+
 " function keys
 map <F1> :set number!<CR> :set relativenumber!<CR>
 " toggle search highlight
@@ -232,6 +240,14 @@ augroup END
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
+
+" # PLUGINS #
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+  call plug#begin('~/.vimplugins')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  call plug#end()
+endif
 
 " read private vim config
 " set rtp^=~/.vimprivate
