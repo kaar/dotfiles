@@ -1,0 +1,5 @@
+source ~/.vimrc
+
+" rename element
+map <leader>r <Action>(RenameElement)
+map <leader>o <Action>(FileStructurePopup)
