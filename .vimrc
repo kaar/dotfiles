@@ -70,12 +70,12 @@ set nofixendofline
 " ### Files and Backup ###
 " auto-reload buffers when files are changed on disk
 set autoread
-" tell vim to keep a backup file
-set backup
-" tell vim where to put its backup files
-set backupdir=/tmp
-" tell vim where to put swap files
-set dir=/tmp
+" automatically write files when changing when multiple files open
+set autowrite
+" more risky, but cleaner
+set nobackup
+set noswapfile
+set nowritebackup
 
 " ### Spelling ###
 " language
