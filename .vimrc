@@ -126,6 +126,9 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>a <esc>ggVG<CR>
 " buffers
 nnoremap <leader>b :buffers<CR>:buffer<Space>
+" quote word
+nnoremap <Leader>" ciw"<C-r>""<Esc>
+vnoremap <Leader>" c"<C-r>""<Esc>
 
 " fzf
 nmap // :BLines<CR>
