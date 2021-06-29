@@ -18,6 +18,16 @@ set norelativenumber
 set synmaxcol=1200
 " let me see more
 set scrolloff=10
+" turn col and row position on in bottom right
+set ruler " see ruf for formatting
+" show command and insert mode
+set showmode
+" disable automatic folding at all times
+set foldmethod=manual
+set nofoldenable
+" visualize whitespace characters
+" Activate by :set list
+set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 
 " ### Search ###
 " ignore case for search
