@@ -30,6 +30,12 @@ set nofoldenable
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 " visual break lines smarter
 set linebreak
+" Mode-dependent cursor in vim (Mintty)
+" still needed in gh gist edit, not sure why
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 " ### Search ###
 " ignore case for search
