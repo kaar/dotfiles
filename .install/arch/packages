@@ -28,3 +28,4 @@ docker-compose
 fzf
 shellcheck
 thunderbird
+inetutils
