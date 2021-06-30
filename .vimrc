@@ -128,7 +128,7 @@ nnoremap <leader>w :w<cr>
 " select all
 nnoremap <leader>a <esc>ggVG<CR>
 " buffers
-nnoremap <leader>b :buffers<CR>:buffer<Space>
+nnoremap <leader>b :Buffers<CR>
 " quote word
 nnoremap <Leader>" ciw"<C-r>""<Esc>
 vnoremap <Leader>" c"<C-r>""<Esc>
