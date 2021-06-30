@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# prints absolute file path.
+usage="usage: fp <file>"
+[ ! -n "${1}" ] && echo "$usage" && exit 1;
+
+readlink -f "$1"
