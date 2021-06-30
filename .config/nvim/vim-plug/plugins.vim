@@ -15,9 +15,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
-    " File Explorer
+
+    " NERDTree
     Plug 'scrooloose/NERDTree'
+
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
+    " vim tmux navigator, https://github.com/christoomey/vim-tmux-navigator
+    Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
+
+" ### auto-pairs ###
+" activate fly mode
+let g:AutoPairsFlyMode = 1
