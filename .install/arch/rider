@@ -1,0 +1,10 @@
+#!/bin/sh
+# https://aur.archlinux.org/packages/rider/
+
+repo="$(mktemp -d)/rider"
+url="https://aur.archlinux.org/rider.git"
+git clone "${url}" --depth 1 "${repo}"
+
+cd "${repo}"
+makepkg -si
+rm -rf "${repo}"
