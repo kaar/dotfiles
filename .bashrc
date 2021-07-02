@@ -64,20 +64,22 @@ set -o vi
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+shopt -s checkwinsize # check the window size and update LINES,COLUMNS
+shopt -s histappend   # don't override history
+shopt -s autocd       # change to named directory
+shopt -s cdspell      # autocorrects cd misspellings
+
+# ignore case for TAB completion
+bind "set completion-ignore-case on"
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
-
