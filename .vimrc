@@ -133,6 +133,8 @@ nnoremap <leader>b :Buffers<CR>
 " quote word
 nnoremap <Leader>" ciw"<C-r>""<Esc>
 vnoremap <Leader>" c"<C-r>""<Esc>
+" check file in shellcheck:
+map <leader>s :!clear && shellcheck -x %<CR>
 
 " fzf
 nmap // :BLines<CR>
