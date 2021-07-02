@@ -27,6 +27,23 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 call plug#end()
 
-" ### auto-pairs ###
+" auto-pairs
 " activate fly mode
 let g:AutoPairsFlyMode = 1
+
+" # vim-markdown (vim-polyglot)
+" https://github.com/plasticboy/vim-markdown
+" disable auto insert bullets
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+" # NERDTree
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
