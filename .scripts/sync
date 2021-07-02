@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+echo "sync $HOME"
+git --git-dir=$HOME/.cfg/ --work-tree=$HOME sync
+echo "sync $HOME/notes"
+git -C "$HOME/notes" sync
+echo "sync $HOME/tibber-notes"
+git -C "$HOME/tibber-notes" sync
