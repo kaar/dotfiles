@@ -50,6 +50,7 @@ set incsearch
 " highlight matching search results
 set hlsearch
 " disable search highlighting with <C-L> (redraw screen)
+" stopped working because of vim-tmux-navigator plugin
 nnoremap <C-L> :nohl<CR><C-L>
 
 " ### Clipboard (Copy/Paste) ###
