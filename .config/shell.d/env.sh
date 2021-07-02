@@ -35,3 +35,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # NVM
 export NVM_DIR="$HOME/.config/nvm"
+
+### "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
