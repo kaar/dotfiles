@@ -100,7 +100,7 @@ map Q gq
 " language
 set spelllang=en_us
 " activate for *.md
-autocmd BufRead,BufNewFile *.md setlocal spell
+" autocmd BufRead,BufNewFile *.md setlocal spell
 
 " netrw
 " let g:netrw_liststyle = 3		" change directory view
