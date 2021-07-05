@@ -25,6 +25,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " vim tmux navigator, https://github.com/christoomey/vim-tmux-navigator
     Plug 'christoomey/vim-tmux-navigator'
 
+    " Golang
+    Plug 'fatih/vim-go'
+
 call plug#end()
 
 " auto-pairs
