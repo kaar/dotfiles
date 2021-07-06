@@ -8,6 +8,7 @@ alias egrep='egrep --color=auto'
 alias explorer='explorer.exe'
 alias d='docker'
 alias tmp='vim $(mktemp)'
+alias g='git'
 
 # safety features
 alias cp='cp -i'
