@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 ## TODO: Add support for GitHub URL
 
-usage="usage: clone <usage/repository>"
+usage="usage: clone <user/repository> <git-flags>"
 [ -z "${REPOS}" ] && echo "REPOS not set" && exit 1;
 [ -z "${1}" ] && echo "$usage" && exit 1;
 ## Check if $1 contains / 
@@ -12,8 +12,10 @@ usage="usage: clone <usage/repository>"
 ## Split input "<user>/<repository>"
 user=${1%/*}
 repository=${1##*/}
+flags="${*:2}"
 
 path="${REPOS}/${user}/${repository}"
 url="git@github.com:${user}/${repository}"
 # git clone ${url} $path
-git clone "${url}" "${path}"
+git clone ${flags-} "${url}" "${path}"
+echo "${path}"
