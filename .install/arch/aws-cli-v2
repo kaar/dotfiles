@@ -1,0 +1,13 @@
+#!/bin/sh
+# https://aur.archlinux.org/packages/datagrip/
+# https://www.jetbrains.com/datagrip/
+# Database IDE
+
+
+repo="$(mktemp -d)/aws-cli-v2"
+url="https://aur.archlinux.org/aws-cli-v2-bin.git"
+git clone "${url}" --depth 1 "${repo}"
+
+cd "${repo}"
+makepkg -si
+rm -rf "${repo}"
