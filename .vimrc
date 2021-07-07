@@ -79,7 +79,7 @@ set expandtab
 " stop vim from silently fucking with files that it shouldn't
 set nofixendofline
 " enough for line numbers + gutter within 80 standard
-set textwidth=72
+" set textwidth=72
 " enable omni-completion, Insert Mode: <C-X><C-O>
 set omnifunc=syntaxcomplete#Complete
 
