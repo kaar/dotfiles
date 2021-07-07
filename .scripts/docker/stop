@@ -3,7 +3,3 @@
 echo "Stop Docker Service"
 sudo systemctl stop docker.service
 sudo systemctl stop containerd.service
-
-echo "Disable Docker Service"
-sudo systemctl disable docker.service
-sudo systemctl disable containerd.service
