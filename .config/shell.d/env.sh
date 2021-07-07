@@ -19,13 +19,8 @@ export BROWSER=firefox
 export GOPATH="$HOME/Go" # or any directory to put your Go code
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
-
+# PATH
 export PATH="${SCRIPTS}:$PATH"
-
-# TEMP
-export TMP=".tmp"
-export TEMP=".tmp"
-mkdir -p "${TMP}/vim"
 
 # FZF
 # Setting fd as the default source for fzf
