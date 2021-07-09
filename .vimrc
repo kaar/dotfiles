@@ -195,6 +195,9 @@ inoremap <M-d> <ESC>cW
 nnoremap gX :silent :execute
   \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
 
+" format json using jq
+command! JsonFormat :execute '%!jq .'
+
 " add timestamp
 " nnoremap <F5> "=strftime("%c")<CR>P
 " inoremap <F5> <C-R>=strftime("%c")<CR>
