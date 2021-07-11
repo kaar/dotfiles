@@ -8,4 +8,4 @@ if [ $# -eq 0 ] ; then
 fi
 
 url="$@"
-${BROWSER} -new-tab "${url}"
+exec ${BROWSER} -new-tab "${url}"
