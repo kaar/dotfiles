@@ -18,7 +18,8 @@ alias rm='rm -i'
 alias reload='source ~/.bashrc ;'
 alias install-packages='~/.install/default.sh'
 
-alias '?'=google
+alias '?'=duck
+#alias '?'=google
 
 # Vim
 alias vim='nvim'
