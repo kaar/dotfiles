@@ -1,0 +1,7 @@
+#!/bin/sh
+link="https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$*"
+exec w3m "$link"
+#exec lynx "https://lite.duckduckgo.com/lite?kd=-1&kp=-1&q=$*" # 🦆
+#exec lynx "duckduckgo.com/lite?q=$*" # 🦆
+#exec lynx "duckduckgo.com/lite?q=$*"
+
