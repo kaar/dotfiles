@@ -197,6 +197,7 @@ nnoremap gX :silent :execute
 
 " format json using jq
 command! JsonFormat :execute '%!jq .'
+command VimEdit :execute 'e ~/.vimrc'
 
 " add timestamp
 " nnoremap <F5> "=strftime("%c")<CR>P
