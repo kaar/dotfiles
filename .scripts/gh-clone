@@ -16,7 +16,7 @@ flags="${*:2}"
 
 path="${REPOS}/${user}/${repository}"
 url="git@github.com:${user}/${repository}"
-echo "${repository}:${url}" >> "${path}/.clone"
 # git clone ${url} $path
 git clone ${flags-} "${url}" "${path}"
+echo "${repository}:${url}" >> "${REPOS}/${user}/.clone"
 echo "${path}"
