@@ -1,0 +1,8 @@
+{
+    "cSpell.userWords": [
+        "tibber"
+    ],
+    "window.menuBarVisibility": "toggle",
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/init.vim"
+}
