@@ -51,6 +51,10 @@ for bcfile in ~/.config/bash_completion.d/* ; do
   [ -f "$bcfile" ] && source $bcfile
 done
 
+# nvm
+[[ -f "/usr/share/nvm/init-nvm.sh" ]] \
+  && source "/usr/share/nvm/init-nvm.sh"
+
 # dircolors
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
