@@ -199,6 +199,11 @@ nnoremap gX :silent :execute
 command! JsonFormat :execute '%!jq .'
 command VimEdit :execute 'e ~/.vimrc'
 
+" rename tmux window when open *.md files
+autocmd BufReadPost,FileReadPost,BufNewFile *.md call system("tmux rename-window " . expand("%"))
+" rename tmux window to current directory then closing markdown file
+autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
+
 " add timestamp
 " nnoremap <F5> "=strftime("%c")<CR>P
 " inoremap <F5> <C-R>=strftime("%c")<CR>
