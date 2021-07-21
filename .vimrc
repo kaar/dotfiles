@@ -196,7 +196,7 @@ nnoremap gX :silent :execute
   \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
 
 " format json using jq
-command! JsonFormat :execute '%!jq .'
+command! FormatJson :execute '%!jq .'
 command VimEdit :execute 'e ~/.vimrc'
 
 " rename tmux window when open *.md files
