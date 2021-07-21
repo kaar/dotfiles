@@ -79,9 +79,6 @@ shopt -s histappend   # don't override history
 shopt -s autocd       # change to named directory
 shopt -s cdspell      # autocorrects cd misspellings
 
-# ignore case for TAB completion
-bind "set completion-ignore-case on"
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
