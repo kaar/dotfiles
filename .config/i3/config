@@ -60,7 +60,7 @@ exec_always --no-startup-id i3-cycle-focus.py --active-workspace --delay 2.0
 bindsym $mod+Tab exec --no-startup-id i3-cycle-focus.py --switch
 
 # mouse focus
-focus_follows_mouse on
+focus_follows_mouse off
 mouse_warping none
 
 # change focus
