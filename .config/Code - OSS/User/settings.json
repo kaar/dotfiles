@@ -2,7 +2,13 @@
     "cSpell.userWords": [
         "tibber"
     ],
-    "window.menuBarVisibility": "toggle",
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/vscode.vim"
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/vscode.vim",
+    "keyboard.dispatch": "keyCode",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "breadcrumbs.enabled": false,
+    "workbench.activityBar.visible": false,
+    "window.menuBarVisibility": "toggle",
+    "window.zoomLevel": 2
 }
