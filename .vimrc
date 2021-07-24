@@ -212,14 +212,9 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 
 command! Config execute ":e $HOME/.vimrc"
 
-" NERDTree
-" nnoremap <leader>n :NERDTreeFocus<CR>
-" nnoremap <C-n> :NERDTreeToggle<CR>
-" nnoremap <C-f> :NERDTreeFind<CR>
-
-" Start NERDTree when Vim is started without file arguments.
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" NerdTree
+map <C-b> :NERDTreeToggle<CR>
+map <C-f> :NERDTreeFind<CR>
 
 " Pandoc
 
