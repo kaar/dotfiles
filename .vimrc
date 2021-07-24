@@ -102,17 +102,6 @@ set spelllang=en_us
 " activate for *.md
 " autocmd BufRead,BufNewFile *.md setlocal spell
 
-" netrw
-" let g:netrw_liststyle = 3		" change directory view
-" let g:netrw_banner = 0			" remove banner
-" let g:netrw_winsize = 20		" explorer width in percent
-" let g:netrw_browse_split = 2    " open file; 1 = h-split, 2=v-split, 3 = new tab, 4 = prev window
-" let g:netrw_altv = 1			" ???
-"augroup ProjectDrawer
-"	autocmd!
-"    autocmd VimEnter * :Vexplore
-"augroup END
-
 " # KEYBINDINGS #
 " space; leader key
 let mapleader = " "
@@ -139,8 +128,6 @@ map <leader>s :!clear && shellcheck -x %<CR>
 " fzf
 nmap // :BLines<CR>
 nmap ?? :Rg<CR>
-" fucks up b key. Also not using buffers that much
-" nmap bu :Buffers<CR>
 nmap cc :Commands<CR>
 nmap cm :Commits<CR>
 nmap <C-P> :Files<CR>
@@ -204,15 +191,6 @@ autocmd BufReadPost,FileReadPost,BufNewFile *.md call system("tmux rename-window
 " rename tmux window to current directory then closing markdown file
 autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
 
-" add timestamp
-" nnoremap <F5> "=strftime("%c")<CR>P
-" inoremap <F5> <C-R>=strftime("%c")<CR>
-
-" File explorer
-" netrw
-" nnoremap <C-e> :Vexplore<CR>		" ctrl+e; open netrw explore
-" nnoremap <leader> e :Vexplor<CR>	" leader+e; open netr explore
-
 
 " Commenting blocks of code.
 " ,cc - commment
@@ -231,17 +209,6 @@ noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<C
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 command! Config execute ":e $HOME/.vimrc"
-augroup standard_group
-  " Reload file on focus/enter. This seems to break in Windows.
-  " https://stackoverflow.com/a/20418591
-  " Still have a bug where last search highlight on :Reload
-  if !has("win32")
-    autocmd FocusGained,BufEnter * :silent! !
-  endif
-
-  command! Reload execute "source ~/.vimrc"
-augroup END
-
 
 " NERDTree
 " nnoremap <leader>n :NERDTreeFocus<CR>
