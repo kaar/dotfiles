@@ -182,7 +182,7 @@ inoremap <M-d> <ESC>cW
 
 " maps gX to use xdg-open with a relative filepath under your cursor
 nnoremap gX :silent :execute
-  \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
+            \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
 
 " format json using jq
 command! FormatJson :execute '%!jq .'
@@ -199,13 +199,13 @@ autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
 " ,cu - uncomment
 
 augroup commenting_blocks_of_code
-  autocmd!
-  autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-  autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-  autocmd FileType conf,fstab       let b:comment_leader = '# '
-  autocmd FileType tex              let b:comment_leader = '% '
-  autocmd FileType mail             let b:comment_leader = '> '
-  autocmd FileType vim              let b:comment_leader = '" '
+    autocmd!
+    autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+    autocmd FileType conf,fstab       let b:comment_leader = '# '
+    autocmd FileType tex              let b:comment_leader = '% '
+    autocmd FileType mail             let b:comment_leader = '> '
+    autocmd FileType vim              let b:comment_leader = '" '
 augroup END
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
