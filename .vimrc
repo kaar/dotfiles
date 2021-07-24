@@ -124,6 +124,8 @@ nnoremap <Leader>" ciw"<C-r>""<Esc>
 vnoremap <Leader>" c"<C-r>""<Esc>
 " check file in shellcheck:
 map <leader>s :!clear && shellcheck -x %<CR>
+" format file
+nmap <leader>ff ggVG=
 
 " fzf
 nmap // :BLines<CR>
