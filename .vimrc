@@ -2,36 +2,25 @@
 
 " # SETTINGS #
 " ### Visual ###
-" syntax highlight
-syntax on
-" color schema
-colorscheme ron
-" load indent file for the current filetype
+syntax on               " syntax highlight
+colorscheme ron         " color schema
 filetype indent on
 filetype plugin indent on
-" show line numbers
-set number
-" set relativenumber
-" disable relative line numbers, remove no to sample it
-set norelativenumber
-" syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
-" let me see more
-set scrolloff=10
-" turn col and row position on in bottom right
-set ruler " see ruf for formatting
-" show command and insert mode
-set showmode
-" disable automatic folding at all times
-set foldmethod=manual
-set nofoldenable
+set number              " show line numbers
+set norelativenumber    " disable relative line numbers, remove no to sample it
+set synmaxcol=1200      " syntax coloring lines that are too long just slows down the world
+set scrolloff=10        " let me see more
+set ruler               " see ruf for formatting
+set showmode            " show command and insert mode
+set foldmethod=manual   " manual folding
+set nofoldenable        " disable automatic folding at all times
+set linebreak           " visual break lines smarter
+set wildmenu            " better command-line completion
+
+
 " visualize whitespace characters
 " Activate by :set list
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
-" visual break lines smarter
-set linebreak
-" better command-line completion
-set wildmenu
 
 " Mode-dependent cursor in vim (Mintty)
 " still needed in gh gist edit, not sure why
@@ -41,17 +30,10 @@ let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
 " ### Search ###
-" ignore case for search
-set ignorecase
-" unless uppercase is used in search string
-set smartcase
-" highlight and match when typing
-set incsearch
-" highlight matching search results
-set hlsearch
-" disable search highlighting with <C-L> (redraw screen)
-" stopped working because of vim-tmux-navigator plugin
-nnoremap <C-L> :nohl<CR><C-L>
+set ignorecase          " ignore case for search
+set smartcase           " unless uppercase is used in search string
+set incsearch           " highlight and match when typing
+set hlsearch            " highlight matching search results
 
 " ### Clipboard (Copy/Paste) ###
 set clipboard=unnamedplus
@@ -66,38 +48,31 @@ if executable(s:clip)
 endif
 
 " ### Text and Formating ###
-" automatically indent new lines
-set autoindent
-" tab length
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set smartindent
-set smarttab
-" replace tabs with spaces automatically
-set expandtab
-" stop vim from silently fucking with files that it shouldn't
-set nofixendofline
+set autoindent          " automatically indent new lines
+set tabstop=2           " tab length
+set softtabstop=2       " number of spaces in tab when editing
+set shiftwidth=2        " number of spaces when shift ident
+set smartindent         " be smart with indent
+set smarttab            " be smart with tab
+set expandtab           " replace tabs with spaces automatically
+set nofixendofline      " stop vim from silently fucking with files that it shouldn't
+
 " enough for line numbers + gutter within 80 standard
 " set textwidth=72
 " enable omni-completion, Insert Mode: <C-X><C-O>
 set omnifunc=syntaxcomplete#Complete
 
 " ### Files and Backup ###
-" auto-reload buffers when files are changed on disk
-set autoread
-" automatically write files when changing when multiple files open
-set autowrite
-" more risky, but cleaner
-set nobackup
-set noswapfile
-set nowritebackup
-" Don't use Ex mode, use Q for formatting.
-" Revert with ":unmap Q".
-map Q gq
+set autoread            " auto-reload buffers when files are changed on disk
+set autowrite           " automatically write files when changing when multiple files open
+set nobackup            " more risky, but cleaner
+set noswapfile          " noswapfile
+set nowritebackup       " write without backup
+
+" Disable Ex mode
+map Q <Nop>
 
 " ### Spelling ###
-" language
 set spelllang=en_us
 " activate for *.md
 " autocmd BufRead,BufNewFile *.md setlocal spell
