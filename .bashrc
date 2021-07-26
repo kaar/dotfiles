@@ -63,7 +63,7 @@ fi
 ## Settings
 
 # vi mode
-set -o vi
+# set -o vi
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
