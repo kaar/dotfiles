@@ -184,20 +184,27 @@ inoremap <M-d> <ESC>cW
 nnoremap gX :silent :execute
             \ "!xdg-open" expand('%:p:h') . "/" . expand("<cfile>") " &"<cr>
 
+" NerdTree
+map <C-b> :NERDTreeToggle<CR>
+map <C-f> :NERDTreeFind<CR>
+
+" ### Commands ###
+
 " format json using jq
 command! FormatJson :execute '%!jq .'
-command VimEdit :execute 'e ~/.vimrc'
+command! VimEdit execute ':e ~/.vimrc'
+command! VimReload execute ':source ~/.vimrc'
+
+" ### Auto Commands ###
 
 " rename tmux window when open *.md files
 autocmd BufReadPost,FileReadPost,BufNewFile *.md call system("tmux rename-window " . expand("%"))
 " rename tmux window to current directory then closing markdown file
 autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
 
-
 " Commenting blocks of code.
 " ,cc - commment
 " ,cu - uncomment
-
 augroup commenting_blocks_of_code
     autocmd!
     autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
@@ -206,20 +213,60 @@ augroup commenting_blocks_of_code
     autocmd FileType tex              let b:comment_leader = '% '
     autocmd FileType mail             let b:comment_leader = '> '
     autocmd FileType vim              let b:comment_leader = '" '
+    autocmd FileType csharp           let b:comment_leader = '# '
 augroup END
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-command! Config execute ":e $HOME/.vimrc"
+" Remove trailing whitespace on write
+autocmd BufWritePre * %s/\s\+$//e
 
-" NerdTree
-map <C-b> :NERDTreeToggle<CR>
-map <C-f> :NERDTreeFind<CR>
 
-" Pandoc
+" ### PLUGINS ###
+call plug#begin('~/.vim/plugged')
+
+    " FZF & vim-rooter
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    Plug 'junegunn/fzf.vim'
+    Plug 'airblade/vim-rooter'
+
+    " Better Syntax Support
+    Plug 'sheerun/vim-polyglot'
+
+    " NERDTree
+    Plug 'scrooloose/NERDTree'
+
+    " Auto pairs for '(' '[' '{'
+    Plug 'jiangmiao/auto-pairs'
+
+    " vim tmux navigator, https://github.com/christoomey/vim-tmux-navigator
+    Plug 'christoomey/vim-tmux-navigator'
+
+    " Golang
+    Plug 'fatih/vim-go'
+
+call plug#end()
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
 
-" read private vim config
-" set rtp^=~/.vimprivate
+" auto-pairs
+" activate fly mode
+let g:AutoPairsFlyMode = 1
+
+" # vim-markdown (vim-polyglot)
+" https://github.com/plasticboy/vim-markdown
+" disable auto insert bullets
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+" # NERDTree
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
