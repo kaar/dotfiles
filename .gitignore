@@ -55,3 +55,8 @@ repos
 .w3m/
 .xsession-errors.old
 Downloads/
+.vim/plugged/
+.vim/.netrwhist
+.thunderbird/
+.npm/
+.templateengine/
