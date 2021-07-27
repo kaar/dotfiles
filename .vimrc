@@ -206,9 +206,6 @@ Plug 'scrooloose/NERDTree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 
-" Golang
-Plug 'fatih/vim-go'
-
 call plug#end()
 
 " Disable folding
