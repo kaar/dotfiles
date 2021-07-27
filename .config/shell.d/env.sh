@@ -33,3 +33,6 @@ export NVM_DIR="$HOME/.config/nvm"
 
 ### "bat" as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# dotnet
+export PATH="~/.dotnet/tools:$PATH"
