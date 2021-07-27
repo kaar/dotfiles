@@ -198,25 +198,16 @@ autocmd BufWritePre * %s/\s\+$//e
 " ### PLUGINS ###
 call plug#begin('~/.vim/plugged')
 
-    " FZF & vim-rooter
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-    Plug 'junegunn/fzf.vim'
-    Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/NERDTree'
+Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
 
-    " Better Syntax Support
-    Plug 'sheerun/vim-polyglot'
-
-    " NERDTree
-    Plug 'scrooloose/NERDTree'
-
-    " Auto pairs for '(' '[' '{'
-    Plug 'jiangmiao/auto-pairs'
-
-    " vim tmux navigator, https://github.com/christoomey/vim-tmux-navigator
-    Plug 'christoomey/vim-tmux-navigator'
-
-    " Golang
-    Plug 'fatih/vim-go'
+" Golang
+Plug 'fatih/vim-go'
 
 call plug#end()
 
