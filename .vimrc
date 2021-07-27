@@ -17,9 +17,8 @@ set nofoldenable        " disable automatic folding at all times
 set linebreak           " visual break lines smarter
 set wildmenu            " better command-line completion
 
-
 " visualize whitespace characters
-" Activate by :set list
+" Activate <F4> (:set list)
 set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 
 " Mode-dependent cursor in vim (Mintty)
@@ -108,7 +107,6 @@ nmap ?? :Rg<CR>
 nmap cc :Commands<CR>
 nmap cm :Commits<CR>
 nmap <C-P> :Files<CR>
-nmap <leader>p :Files<CR>
 
 " function keys
 map <F1> :set number!<CR> :set relativenumber!<CR>
@@ -126,10 +124,10 @@ nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
 
 " move lines (Ctrl+[j,k,l,m])
-nnoremap <C-j> <Esc> :m .+1<CR>     " ctrl+j; move line down
-nnoremap <C-k> <Esc> :m .-2<CR>     " ctrl+k; move line up
-inoremap <C-j> <Esc> :m .+1<CR>i    " ctrl+j; move line down
-inoremap <C-k> <Esc> :m .-2<CR>i    " ctrl+k; move line up
+nnoremap <C-j> <Esc> :m .+1<CR>
+nnoremap <C-k> <Esc> :m .-2<CR>
+inoremap <C-j> <Esc> :m .+1<CR>i
+inoremap <C-k> <Esc> :m .-2<CR>i
 
 " completion menu
 inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
