@@ -36,6 +36,114 @@ esac
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# ----------------------- environment variables ----------------------
+export TERM=xterm-256color
+export EDITOR=vim
+export VISUAL=vim
+export EDITOR_PREFIX=vim
+
+export INSTALL="${HOME}/.install"
+export SCRIPTS="${HOME}/.scripts"
+export NOTES="${HOME}/notes"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export REPOS="${HOME}/repos"
+export BROWSER=firefox
+export NVM_DIR="$HOME/.config/nvm"
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# go
+export GOPATH=~/.local/share/go
+export GOBIN=/usr/bin/go
+export GOPROXY=direct
+export CGO_ENABLED=0
+
+# dotnet
+export DOTNET_TOOLS="$HOME/.dotnet/tools"
+
+# ------------------------------ cdpath ------------------------------
+
+export CDPATH=.:\
+~/repos/:\
+~
+
+# ------------------------------- path -------------------------------
+
+export PATH="$SCRIPTS:$PATH"
+export PATH="$DOTNET_TOOLS:$PATH"
+export PATH="$GOPATH:$PATH"
+
+# ------------------------------- pager ------------------------------
+if test -x /usr/bin/lesspipe; then
+  export LESSOPEN="| /usr/bin/lesspipe %s";
+  export LESSCLOSE="/usr/bin/lesspipe %s %s";
+fi
+
+# "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# ----------------------------- dircolors ----------------------------
+
+if command -v dircolors &>/dev/null; then
+  if test -r ~/.dircolors; then
+    eval "$(dircolors -b ~/.dircolors)"
+  else
+    eval "$(dircolors -b)"
+  fi
+fi
+
+# ------------------------------ aliases -----------------------------
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias scripts='cd $SCRIPTS'
+alias install='cd $INSTALL'
+
+# safety features
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+alias reload='source ~/.bashrc ;'
+alias install-packages='~/.install/default.sh'
+
+alias '?'=duck
+#alias '?'=google
+
+# Vim
+alias vim='nvim'
+alias vi='vim'
+alias v='vim'
+
+# Kubectl
+alias k=kubectl
+complete -F __start_kubectl k
+
+alias d='docker'
+alias g='git'
+
+# Gists
+alias todo='gh gist edit ${GIST_TODO}'
+alias tibber-todo='gh gist edit ${GIST_TODO_TIBBER}'
+alias ideas='gh gist edit ${GIST_IDEAS}'
+
+# GitHub
+alias github-pr='github-create-pr'
+alias github='github-open'
+
+# Browser
+alias browse='firefox -new-tab'
+
+# AWS
+alias aws-session='source ${SCRIPTS}/aws/get-session-token.sh $(${SCRIPTS}/op/get-totp "Amazon")'
+
 # Load all scripts in shell.d
 for file in ~/.config/shell.d/*.sh ; do
   [ -f "$file" ] && source $file
