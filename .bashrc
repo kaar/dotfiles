@@ -160,35 +160,33 @@ for bcfile in ~/.config/bash_completion.d/* ; do
 done
 
 # nvm
-[[ -f "/usr/share/nvm/init-nvm.sh" ]] \
-  && source "/usr/share/nvm/init-nvm.sh"
-
-# dircolors
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
+  source "/usr/share/nvm/init-nvm.sh"
 fi
 
-## Settings
+# ------------------------------ prompt -------------------------------
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 
-# vi mode
-set -o vi
+#PS1='${PWD#"${PWD%/*/*}/"} \$ '
+PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\W\[\e[m\]" "\[\] "'
 
-# don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+# ------------------------------ settings -----------------------------
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+set -o vi               # replace readline with vi mode
+HISTCONTROL=ignoreboth  # No duplicated lines
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize # check the window size and update LINES,COLUMNS
-shopt -s histappend   # don't override history
-shopt -s autocd       # change to named directory
-shopt -s cdspell      # autocorrects cd misspellings
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
+shopt -s histappend     # don't override history
+shopt -s autocd         # change to named directory
+shopt -s cdspell        # autocorrects cd misspellings
+shopt -s autocd         # change to named directory
+shopt -s cmdhist        # save multi-line commands in history as single line
+shopt -s dotglob
+shopt -s expand_aliases # expand aliases
 
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
