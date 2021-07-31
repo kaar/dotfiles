@@ -124,10 +124,10 @@ nnoremap <leader>k <c-w><c-k>
 nnoremap <leader>l <c-w><c-l>
 
 " move lines (Ctrl+[j,k,l,m])
-nnoremap <C-j> <Esc> :m .+1<CR>
-nnoremap <C-k> <Esc> :m .-2<CR>
-inoremap <C-j> <Esc> :m .+1<CR>i
-inoremap <C-k> <Esc> :m .-2<CR>i
+inoremap <C-j> <Esc> :m .+1<CR>==
+inoremap <C-k> <Esc> :m .-2<CR>==
+nnoremap <C-j> <Esc> :m .+1<CR>==
+nnoremap <C-k> <Esc> :m .-2<CR>==
 
 " completion menu
 inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
