@@ -141,6 +141,12 @@ vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 vnoremap <leader>p "_dP
 
+" undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
 " *** Emacs-Like in insert mode ***
 " Go to beginning of the line [Normal Mode && Insert Mode]
 map <C-a> <ESC>^
