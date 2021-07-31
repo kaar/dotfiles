@@ -136,8 +136,10 @@ inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 
 " copy/paste
+nnoremap <leader>y "+y
 vnoremap <leader>y "+y
-map <leader>p "+p
+nnoremap <leader>Y gg"+yG
+vnoremap <leader>p "_dP
 
 " *** Emacs-Like in insert mode ***
 " Go to beginning of the line [Normal Mode && Insert Mode]
