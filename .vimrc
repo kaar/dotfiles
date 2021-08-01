@@ -7,7 +7,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/NERDTree'
-Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 " https://github.com/morhetz/gruvbox
 Plug 'morhetz/gruvbox'
