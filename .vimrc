@@ -1,9 +1,25 @@
 " https://github.com/kaar/dotfiles/blob/master/.vimrc
 
+" ### PLUGINS ###
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/NERDTree'
+Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
+" https://github.com/morhetz/gruvbox
+Plug 'morhetz/gruvbox'
+call plug#end()
+
+
 " # SETTINGS #
 " ### Visual ###
 syntax on               " syntax highlight
-colorscheme ron         " color schema
+colorscheme gruvbox     " color schema:
+set background=dark
+
 filetype indent on
 filetype plugin indent on
 set number              " show line numbers
@@ -202,19 +218,6 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 " Remove trailing whitespace on write
 autocmd BufWritePre * %s/\s\+$//e
 
-
-" ### PLUGINS ###
-call plug#begin('~/.vim/plugged')
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
-Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/NERDTree'
-Plug 'jiangmiao/auto-pairs'
-Plug 'christoomey/vim-tmux-navigator'
-
-call plug#end()
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
