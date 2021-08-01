@@ -13,7 +13,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 call plug#end()
 
-
 " # SETTINGS #
 " ### Visual ###
 syntax on               " syntax highlight
@@ -185,6 +184,13 @@ nnoremap gX :silent :execute
 map <C-b> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize=38
+
 " ### Commands ###
 
 " format json using jq
@@ -232,13 +238,3 @@ let g:AutoPairsFlyMode = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
-" # NERDTree
-" Uncomment to autostart the NERDTree
-" autocmd vimenter * NERDTree
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '►'
-let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeShowLineNumbers=1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize=38
