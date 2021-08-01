@@ -181,11 +181,11 @@ imap <C-a> <ESC>I
 map <C-e> <ESC>$
 imap <C-e> <ESC>A
 " Backward a word [Insert Mode]
-inoremap <M-f> <ESC><Space>Wi
-" Forward a word [Insert Mode]
 inoremap <M-b> <Esc>Bi
+" Forward a word [Insert Mode]
+inoremap <M-f> <ESC><Space>Wi
 " Delete a word (backward) [Insert Mode]
-inoremap <M-d> <ESC>cW
+inoremap <M-d> <ESC><Space>cW
 
 " maps gX to use xdg-open with a relative filepath under your cursor
 nnoremap gX :silent :execute
