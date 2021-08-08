@@ -61,3 +61,12 @@ Downloads/
 .npm/
 .templateengine/
 .circleci
+.config/Postman
+.config/browsh
+.config/mimeapps.list
+.config/tmux/plugins
+.config/nvim/autoload
+Go/
+aws
+tibber*
+.tmux/
