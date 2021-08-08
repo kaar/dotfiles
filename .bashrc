@@ -166,6 +166,8 @@ if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
 fi
 
 # ------------------------------ prompt -------------------------------
+source ~/.config/git/git-prompt.sh
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
