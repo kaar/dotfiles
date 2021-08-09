@@ -1,3 +1,5 @@
 #!/bin/sh
 
+# https://opensource.com/article/19/7/xcli://opensource.com/article/19/7/xclip
+#TODO if file passed use "xclip -sel clip $1"
 xclip -rmlastnl -sel clip
