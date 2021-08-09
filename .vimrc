@@ -159,6 +159,11 @@ inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
+" release my pinky
+nnoremap ; :
+" swap them around
+" nnoremap : ;
+
 " *** Emacs-Like in insert mode ***
 " Go to beginning of the line [Normal Mode && Insert Mode]
 map <C-a> <ESC>^
@@ -242,3 +247,13 @@ let g:AutoPairsFlyMode = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
+" ### Functions
+function! FixLastSpellingError()
+    " mm    - set mark m at cursor pos
+    " [s    - move to the previous misspelled word
+    " 1z=   - pick first spelling suggestions
+    " 1m    - jump to the mark m
+    normal! mm[s1z=`m
+endfunction
+
+nnoremap <leader>sp :call FixLastSpellingError()<cr>
