@@ -257,3 +257,10 @@ function! FixLastSpellingError()
 endfunction
 
 nnoremap <leader>sp :call FixLastSpellingError()<cr>
+
+function! PasteAsMarkdownLink()
+    normal! pI* [](
+    normal! A)
+endfunction
+
+nnoremap <leader>pl :call PasteAsMarkdownLink()<cr>
