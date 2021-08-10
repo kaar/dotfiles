@@ -98,7 +98,8 @@ nnoremap <leader>- :split<cr>
 " split vertical
 nnoremap <leader>/ :vsplit<cr>
 " quit
-nnoremap <leader>q <c-w>q
+nnoremap <leader>q :bd<cr>
+nnoremap <leader>cq <c-w>q
 " write
 nnoremap <leader>w :w<cr>
 " select all
@@ -152,6 +153,10 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 vnoremap <leader>p "_dP
+
+" jump buffers
+nmap J :bnext<CR>
+nmap K :bprev<CR>
 
 " undo break points
 " inoremap , ,<c-g>u
