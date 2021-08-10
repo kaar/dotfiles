@@ -154,10 +154,10 @@ nnoremap <leader>Y gg"+yG
 vnoremap <leader>p "_dP
 
 " undo break points
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap ! !<c-g>u
-inoremap ? ?<c-g>u
+" inoremap , ,<c-g>u
+" inoremap . .<c-g>u
+" inoremap ! !<c-g>u
+" inoremap ? ?<c-g>u
 
 " release my pinky
 nnoremap ; :
