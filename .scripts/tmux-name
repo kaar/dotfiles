@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Name the current window to the current directory name
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+tmux rename-window "${PWD##*/}"
