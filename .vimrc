@@ -112,6 +112,7 @@ nnoremap <leader>b :Buffers<CR>
 " quote word
 nnoremap <Leader>" ciw"<C-r>""<Esc>
 vnoremap <Leader>" c"<C-r>""<Esc>
+
 " check file in shellcheck:
 map <leader>s :!clear && shellcheck -x %<CR>
 " format file
@@ -212,8 +213,18 @@ inoremap <S-Tab> <C-D>
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-" ### Commands ###
+" auto-center
+nmap G Gzz
+nmap n nzz
+nmap N Nzz
+nmap } }zz
+nmap { {zz
 
+" paste clipboard as markdown link
+nmap <leader>pl i* []()<ESC>PF]i
+
+" ### Commands ###
+"
 " format json using jq
 command! FormatJson :execute '%!jq .'
 command! VimEdit execute ':e ~/.vimrc'
@@ -269,10 +280,3 @@ function! FixLastSpellingError()
 endfunction
 
 nnoremap <leader>sp :call FixLastSpellingError()<cr>
-
-function! PasteAsMarkdownLink()
-    normal! pI* [](
-    normal! A)
-endfunction
-
-nnoremap <leader>pl :call PasteAsMarkdownLink()<cr>
