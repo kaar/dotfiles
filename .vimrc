@@ -30,10 +30,12 @@ set foldmethod=manual   " manual folding
 set nofoldenable        " disable automatic folding at all times
 set linebreak           " visual break lines smarter
 set wildmenu            " better command-line completion
+set cursorline          " show line cursor
+set relativenumber
 
 " visualize whitespace characters
 " Activate <F4> (:set list)
-set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>,eol:¬
 
 " Mode-dependent cursor in vim (Mintty)
 " still needed in gh gist edit, not sure why
