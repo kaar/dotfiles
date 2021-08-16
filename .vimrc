@@ -246,7 +246,9 @@ noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<C
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Remove trailing whitespace on write
-autocmd BufWritePre * %s/\s\+$//e
+" autocmd BufWritePre * %s/\s\+$//e
+" Mark trailing spaces as errors
+match ErrorMsg '\s\+$'
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
