@@ -82,6 +82,9 @@ set nobackup            " more risky, but cleaner
 set noswapfile          " noswapfile
 set nowritebackup       " write without backup
 
+" avoid most of the 'Hit Enter ...' messages
+set shortmess=aoOtTI
+
 " Disable Ex mode
 map Q <Nop>
 
@@ -89,6 +92,9 @@ map Q <Nop>
 set spelllang=en_us
 " activate for *.md
 " autocmd BufRead,BufNewFile *.md setlocal spell
+
+" start at last place you were editing
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " # KEYBINDINGS #
 " space; leader key
@@ -145,6 +151,9 @@ inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 
 " copy/paste
+" make Y consitent with D and C (yank til end)
+map Y y$
+
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
@@ -214,6 +223,10 @@ nmap { {zz
 
 " paste clipboard as markdown link
 nmap <leader>pl i* []()<ESC>PF]i
+
+" use arrows for number increment/decrement
+nnoremap <up> <C-a>
+nnoremap <down> <C-x>
 
 " ### Commands ###
 "
