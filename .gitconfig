@@ -5,6 +5,7 @@
     ci = commit
     st = status
     br = branch
+    s = switch
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     type = cat-file -t
