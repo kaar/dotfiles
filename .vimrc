@@ -127,9 +127,7 @@ nmap <C-P> :Files<CR>
 
 " function keys
 map <F1> :set number!<CR> :set relativenumber!<CR>
-" toggle search highlight
-nnoremap <F3> :set hlsearch!<CR>
-" visulize whitespaces
+map <F3> :set hlsearch!<CR>
 map <F4> :set list!<CR>
 map <F5> :set cursorline!<CR>
 map <F7> :set spell!<CR>
