@@ -98,8 +98,9 @@ nnoremap <leader>- :split<cr>
 " split vertical
 nnoremap <leader>/ :vsplit<cr>
 " quit
-nnoremap <leader>q :bd<cr>
-nnoremap <leader>cq <c-w>q
+nnoremap <leader>q <c-w>q
+" close buffer
+nnoremap <leader>c :bd<cr>
 " write
 nnoremap <leader>w :w<cr>
 " select all
