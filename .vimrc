@@ -155,8 +155,12 @@ nnoremap <leader>Y gg"+yG
 vnoremap <leader>p "_dP
 
 " jump buffers
-nmap J :bnext<CR>
-nmap K :bprev<CR>
+" nmap J :bnext<CR>
+" nmap K :bprev<CR>
+
+" line break
+nmap <C-CR> m'a<CR><Esc>`'
+" nmap K m'a<CR><Esc>`'
 
 " undo break points
 " inoremap , ,<c-g>u
