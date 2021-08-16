@@ -134,12 +134,6 @@ map <F4> :set list!<CR>
 map <F5> :set cursorline!<CR>
 map <F7> :set spell!<CR>
 
-" movement panes
-nnoremap <leader>h <c-w><c-h>
-nnoremap <leader>j <c-w><c-j>
-nnoremap <leader>k <c-w><c-k>
-nnoremap <leader>l <c-w><c-l>
-
 " move lines (Ctrl+[j,k,l,m])
 inoremap <C-j> <Esc> :m .+1<CR>==
 inoremap <C-k> <Esc> :m .-2<CR>==
@@ -255,7 +249,6 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 
 " Remove trailing whitespace on write
 autocmd BufWritePre * %s/\s\+$//e
-
 
 " Disable folding
 let g:pandoc#modules#disabled = ["folding", "spell"]
