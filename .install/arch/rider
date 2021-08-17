@@ -1,8 +1,9 @@
 #!/bin/sh
 # https://aur.archlinux.org/packages/rider/
 
-repo="$(mktemp -d)/rider"
 url="https://aur.archlinux.org/rider.git"
+
+repo="$(mktemp -d)/$(basename $0)"
 git clone "${url}" --depth 1 "${repo}"
 
 cd "${repo}"
