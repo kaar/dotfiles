@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+usage="usage: $(basename $0) <title>"
+title=${1:?$usage}
+
+gh issue create --title "$title"
