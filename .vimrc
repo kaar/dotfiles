@@ -228,6 +228,10 @@ nmap <leader>pl i* []()<ESC>PF]i
 nnoremap <up> <C-a>
 nnoremap <down> <C-x>
 
+" move cursor position back and forth in change list
+nnoremap <left> g;
+nnoremap <right> g,
+
 " ### Commands ###
 "
 " format json using jq
