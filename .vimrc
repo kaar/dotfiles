@@ -139,10 +139,12 @@ map <F5> :set cursorline!<CR>
 map <F7> :set spell!<CR>
 
 " move lines (Ctrl+[j,k,l,m])
-inoremap <C-j> <Esc> :m .+1<CR>==
-inoremap <C-k> <Esc> :m .-2<CR>==
-nnoremap <C-j> <Esc> :m .+1<CR>==
-nnoremap <C-k> <Esc> :m .-2<CR>==
+inoremap <C-j> <Esc> :m .+1<CR>==i
+inoremap <C-k> <Esc> :m .-2<CR>==i
+
+" collides with vim-tmux-navigator
+"nnoremap <C-j> <Esc> :m .+1<CR>==
+"nnoremap <C-k> <Esc> :m .-2<CR>==
 
 " completion menu
 inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
