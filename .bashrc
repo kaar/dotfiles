@@ -160,6 +160,9 @@ for bcfile in ~/.config/bash_completion.d/* ; do
   [ -f "$bcfile" ] && source $bcfile
 done
 
+# aws
+complete -C 'aws_completer' aws
+
 # nvm
 if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
   source "/usr/share/nvm/init-nvm.sh"
