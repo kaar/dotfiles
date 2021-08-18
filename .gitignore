@@ -67,7 +67,7 @@ Downloads/
 .config/tmux/plugins
 .config/nvim/autoload
 Go/
-aws
+~/aws/*
 tibber*
 .tmux/
 Dev
