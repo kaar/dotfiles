@@ -115,9 +115,20 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>a <esc>ggVG<CR>
 " buffers
 nnoremap <leader>b :Buffers<CR>
-" quote word
-nnoremap <Leader>" ciw"<C-r>""<Esc>
-vnoremap <Leader>" c"<C-r>""<Esc>
+
+" quick pair word and selection
+nnoremap <leader>" ciw"<C-r>""<Esc>
+vnoremap <leader>" c"<C-r>""<Esc>
+nnoremap <leader>' ciw'<C-r>"'<Esc>
+vnoremap <leader>' c'<C-r>"'<Esc>
+nnoremap <leader>( ciw(<C-r>")<Esc>
+vnoremap <leader>( c(<C-r>")<Esc>
+nnoremap <leader>[ ciw[<C-r>"]<Esc>
+vnoremap <leader>[ c[<C-r>"]<Esc>
+nnoremap <leader>{ ciw{<C-r>"}<Esc>
+vnoremap <leader>{ c{<C-r>"}<Esc>
+nnoremap <leader>` ciw`<C-r>"`<Esc>
+vnoremap <leader>` c`<C-r>"`<Esc>
 
 " check file in shellcheck:
 map <leader>s :!clear && shellcheck -x %<CR>
