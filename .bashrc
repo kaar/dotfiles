@@ -73,6 +73,7 @@ export CDPATH=.:\
 export PATH="$SCRIPTS:$PATH"
 export PATH="$DOTNET_TOOLS:$PATH"
 export PATH="$GOPATH:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # ------------------------------- pager ------------------------------
 if test -x /usr/bin/lesspipe; then
