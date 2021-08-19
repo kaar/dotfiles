@@ -118,9 +118,8 @@ alias '?'=duck
 #alias '?'=google
 
 # Vim
+alias vi='\vim'   # Normal vim
 alias vim='nvim'
-alias vi='vim'
-alias v='vim'
 
 # Kubectl
 alias k=kubectl

@@ -1,21 +1,9 @@
 " https://github.com/kaar/dotfiles/blob/master/.vimrc
 
-" ### PLUGINS ###
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
-Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/NERDTree'
-Plug 'christoomey/vim-tmux-navigator'
-" https://github.com/morhetz/gruvbox
-Plug 'morhetz/gruvbox'
-call plug#end()
-
 " # SETTINGS #
 " ### Visual ###
 syntax on               " syntax highlight
-colorscheme gruvbox     " color schema:
+colorscheme ron         " color schema:
 set background=dark
 
 filetype indent on
@@ -39,10 +27,11 @@ set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>,eol:¬
 
 " Mode-dependent cursor in vim (Mintty)
 " still needed in gh gist edit, not sure why
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+" don't need it as long as i use xterm-256color
+" let &t_ti.="\e[1 q"
+" let &t_SI.="\e[5 q"
+" let &t_EI.="\e[1 q"
+" let &t_te.="\e[0 q"
 
 " ### Search ###
 set ignorecase          " ignore case for search
