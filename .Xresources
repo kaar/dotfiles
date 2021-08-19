@@ -1,7 +1,7 @@
 #ifdef SRVR_arch_desktop
   Xft.dpi: 80
 #else
-  Xft.dpi: 220
+  Xft.dpi: 150
 #endif
 
 ! These might also be useful depending on your monitor and personal preference:
