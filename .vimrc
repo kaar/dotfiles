@@ -28,10 +28,12 @@ set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>,eol:¬
 " Mode-dependent cursor in vim (Mintty)
 " still needed in gh gist edit, not sure why
 " don't need it as long as i use xterm-256color
-" let &t_ti.="\e[1 q"
-" let &t_SI.="\e[5 q"
-" let &t_EI.="\e[1 q"
-" let &t_te.="\e[0 q"
+" well well...still needed to not keep insert mode in block mode
+" I most be missing some setting
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 " ### Search ###
 set ignorecase          " ignore case for search
