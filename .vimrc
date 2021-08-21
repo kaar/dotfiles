@@ -156,6 +156,16 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 " make Y consitent with D and C (yank til end)
 map Y y$
 
+" keep things center
+" n - next
+" N - previews
+" zz - center
+" zv - open folds
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
