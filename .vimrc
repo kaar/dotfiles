@@ -144,6 +144,10 @@ map <F7> :set spell!<CR>
 inoremap <C-j> <Esc> :m .+1<CR>==i
 inoremap <C-k> <Esc> :m .-2<CR>==i
 
+" Move text in visual mode
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " collides with vim-tmux-navigator
 "nnoremap <C-j> <Esc> :m .+1<CR>==
 "nnoremap <C-k> <Esc> :m .-2<CR>==
@@ -154,10 +158,6 @@ inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 
-" copy/paste
-" make Y consitent with D and C (yank til end)
-map Y y$
-
 " keep things center
 " n - next
 " N - previews
@@ -167,11 +167,15 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-
+" yank & paste
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
 vnoremap <leader>p "_dP
+
+" copy/paste
+" make Y consitent with D and C (yank til end)
+map Y y$
 
 " jump buffers
 " nmap J :bnext<CR>
