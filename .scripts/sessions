@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Attach to tmux sessions
+
+set -o errexit
+set -o pipefail
+
+if [[ -n $TMUX ]]; then
+  current_session=$(tmux display-message -p '#S')
+  echo "Already in session $current_session"
+  exit 1
+fi
+
+target=$(tmux ls | cut -d: -f1 | fzf --reverse)
+[ -z $target ] && exit 1;
+
+tmux attach-session -t $target
