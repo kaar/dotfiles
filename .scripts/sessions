@@ -4,13 +4,30 @@
 set -o errexit
 set -o pipefail
 
+switch-session() {
+  local target
+  target=$(tmux ls | cut -d: -f1 | fzf --reverse)
+  [ -z "$target" ] && exit 1;
+
+  tmux switch -t "$target"
+}
+
+attach-to-session() {
+  local target
+  target=$(tmux ls | cut -d: -f1 | fzf --reverse)
+  [ -z "$target" ] && exit 1;
+
+  tmux attach-session -t "$target"
+}
+
 if [[ -n $TMUX ]]; then
   current_session=$(tmux display-message -p '#S')
-  echo "Already in session $current_session"
-  exit 1
+  read -rp "Already in session '$current_session', switch? [y,n]? " switch_session
+  if [[ ! $switch_session =~ ^[Yy] ]]; then
+    exit
+  else
+    switch-session && exit;
+  fi
 fi
 
-target=$(tmux ls | cut -d: -f1 | fzf --reverse)
-[ -z $target ] && exit 1;
-
-tmux attach-session -t $target
+attach-to-session
