@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+gist_id=$(gh gist list | fzf | cut -f1)
+
+gh gist edit "$gist_id"
