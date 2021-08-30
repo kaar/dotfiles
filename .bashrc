@@ -37,9 +37,9 @@ esac
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # ----------------------- environment variables ----------------------
-export EDITOR=vim
-export VISUAL=vim
-export EDITOR_PREFIX=vim
+export EDITOR=nvim
+export VISUAL=nvim
+export EDITOR_PREFIX=nvim
 
 export INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
