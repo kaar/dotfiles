@@ -1,5 +1,9 @@
 #!/bin/sh
 
-# https://opensource.com/article/19/7/xcli://opensource.com/article/19/7/xclip
-#TODO if file passed use "xclip -sel clip $1"
-xclip -rmlastnl -sel clip
+if [[ "$#" -eq 0 ]] ; then
+  # copy from stdin
+  xclip -rmlastnl -sel clip
+else
+  # copy content of file
+  xclip -sel clip "$1"
+fi
