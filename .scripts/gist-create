@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+gist_link=$(gh gist create "$1")
+echo $gist_link
+echo $gist_link | clip
+# Cool script. Delete all gists with the name hello
+# gh gist list | grep hello | cut -f1 | xargs -I {} gh gist delete '{}'
