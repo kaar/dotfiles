@@ -15,7 +15,6 @@ if [ -e "${path}" ]; then
 fi
 
 printf '#!/usr/bin/env bash
-
 set -o errexit
 set -o nounset
 set -o pipefail
