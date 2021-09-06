@@ -62,7 +62,7 @@ set smartindent         " be smart with indent
 set smarttab            " be smart with tab
 set expandtab           " replace tabs with spaces automatically
 set nofixendofline      " stop vim from silently fucking with files that it shouldn't
-set textwidth=72        " enough for line numbers + gutter within 80 standard
+" set textwidth=72        " enough for line numbers + gutter within 80 standard
 set nowrap              " no wrapping of text
 set omnifunc=syntaxcomplete#Complete    " enable omni-completion, Insert Mode: <C-X><C-O>
 
