@@ -41,7 +41,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 export EDITOR_PREFIX=nvim
 
-export INSTALL="${HOME}/.install"
+export PACKAGE_INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
 export NOTES="${HOME}/notes"
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -104,7 +104,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias scripts='cd $SCRIPTS'
-alias install='cd $INSTALL'
+alias install='cd $PACKAGE_INSTALL'
 
 # safety features
 alias cp='cp -i'

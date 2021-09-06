@@ -1,10 +1,10 @@
 #!/bin/sh
-usage="Create new install script in ${INSTALL}\nusage: newx-install <name>"
+usage="Create new install script in ${PACKAGE_INSTALL}\nusage: newx-install <name>"
 
-[ ! -n "${INSTALL}" ] && echo "INSTALL not set" && exit 1;
+[ ! -n "${PACKAGE_INSTALL}" ] && echo "PACKAGE_INSTALL not set" && exit 1;
 [ ! -n "${1}" ] && echo "$usage" && exit 1;
 
-path="${INSTALL}/${1}"
+path="${PACKAGE_INSTALL}/${1}"
 
 if [ -e "${path}" ]; then
   exec vim "${path}"

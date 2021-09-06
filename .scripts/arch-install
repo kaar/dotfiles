@@ -4,4 +4,4 @@
 sudo pacman -Syu
 
 # install all packages in arch file
-sudo pacman -Syy --needed - < "${INSTALL}/arch/packages"
+sudo pacman -Syy --needed - < "${PACKAGE_INSTALL}/arch/packages"

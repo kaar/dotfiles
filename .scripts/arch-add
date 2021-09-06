@@ -1,10 +1,10 @@
 #!/bin/sh
-# Adds package to $INSTALL/arch
+# Adds package to $PACKAGE_INSTALL/arch
 
 package=$1
 [ -z "$(pacman -Ss "${package}")" ] && echo "${package} does not exist." && exit 1;
 
-arch_package_file="${INSTALL}/arch/packages"
+arch_package_file="${PACKAGE_INSTALL}/arch/packages"
 echo "${package}" >> "${arch_package_file}"
 echo "${package} added to ${arch_package_file}"
 
