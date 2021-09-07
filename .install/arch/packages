@@ -31,3 +31,5 @@ inetutils
 go
 go-tools
 postgresql
+python-pipenv
+pyenv
