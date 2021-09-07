@@ -169,13 +169,29 @@ fi
 
 # ------------------------------ prompt -------------------------------
 source ~/.config/git/git-prompt.sh
-
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 
-#PS1='${PWD#"${PWD%/*/*}/"} \$ '
-PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\W\[\e[m\]" "\[\] "'
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[1;33m\]"
+GREEN="\[\033[0;32m\]"
+BLUE="\[\033[1;34m\]"
+PURPLE="\[\033[0;35m\]"
+LIGHT_RED="\[\033[1;31m\]"
+LIGHT_GREEN="\[\033[1;32m\]"
+WHITE="\[\033[1;37m\]"
+LIGHT_GRAY="\[\033[0;37m\]"
+COLOR_NONE="\[\e[0m\]"
+
+if test -z "$VIRTUAL_ENV" ; then
+    PYTHON_VIRTUALENV=""
+else
+    PYTHON_VIRTUALENV="${YELLOW}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+fi
+
+PROMPT_COMMAND='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
+PS1='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
 
 # ------------------------------ settings -----------------------------
 
