@@ -144,6 +144,11 @@ alias browse='firefox -new-tab'
 # AWS
 alias aws-session='source ${SCRIPTS}/aws/get-session-token.sh $(${SCRIPTS}/op/get-totp "Amazon")'
 
+# other
+alias aws-cloudwatch='open ${AWS_URL_CLOUDWATCH}'
+alias aws-console='open ${AWS_URL_CONSOLE}'
+alias aws-iam='open ${AWS_URL_IAM}'
+
 # Load all scripts in shell.d
 for file in ~/.config/shell.d/*.sh ; do
   [ -f "$file" ] && source $file
