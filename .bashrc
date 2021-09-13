@@ -37,9 +37,9 @@ esac
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # ----------------------- environment variables ----------------------
-export EDITOR=nvim
-export VISUAL=nvim
-export EDITOR_PREFIX=nvim
+export EDITOR=vim
+export VISUAL=vim
+export EDITOR_PREFIX=vim
 
 export PACKAGE_INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
@@ -116,10 +116,6 @@ alias install-packages='~/.install/default.sh'
 
 alias '?'=duck
 #alias '?'=google
-
-# Vim
-alias vi='\vim'   # Normal vim
-alias vim='nvim'
 
 # Kubectl
 alias k=kubectl
