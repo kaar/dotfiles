@@ -146,7 +146,7 @@ alias aws-console='open ${AWS_URL_CONSOLE}'
 alias aws-iam='open ${AWS_URL_IAM}'
 
 # python
-alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src"'
+alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
 
 # Load all scripts in shell.d
 for file in ~/.config/shell.d/*.sh ; do
