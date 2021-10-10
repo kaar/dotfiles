@@ -175,6 +175,10 @@ if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
   source "/usr/share/nvm/init-nvm.sh"
 fi
 
+
+# ------------------------------ bind ---------------------------------
+bind -x '"\C-j":sessions'
+
 # ------------------------------ prompt -------------------------------
 source ~/.config/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
