@@ -125,6 +125,10 @@ alias d='docker'
 alias g='git'
 alias gist='gh gist'
 
+alias n='nvim'
+alias v='vim'
+alias l='lvim'
+
 # Gists
 alias todo='gh gist edit ${GIST_TODO}'
 alias tibber-todo='gh gist edit ${GIST_TODO_TIBBER}'
