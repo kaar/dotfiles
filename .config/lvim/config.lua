@@ -102,7 +102,7 @@ lvim.lang.python.linters = {
 
 -- Additional Plugins
 lvim.plugins = {
-    {"morhetz/gruvbox"},
+    {"sainnhe/gruvbox-material"},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
