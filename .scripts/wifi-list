@@ -1,4 +1,5 @@
 #!/bin/sh
 
-iwctl station wlan0 get-networks
+# iwctl station wlan0 get-networks
+nmcli device wifi list
 
