@@ -33,3 +33,5 @@ go-tools
 postgresql
 python-pipenv
 pyenv
+networkmanager
+network-manager-applet
