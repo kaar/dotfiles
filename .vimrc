@@ -263,9 +263,9 @@ command! VimReload execute ':source ~/.vimrc'
 " ### Auto Commands ###
 
 " rename tmux window when open *.md files
-autocmd BufReadPost,FileReadPost,BufNewFile *.md call system("tmux rename-window " . expand("%"))
+" autocmd BufReadPost,FileReadPost,BufNewFile *.md call system("tmux rename-window " . expand("%"))
 " rename tmux window to current directory then closing markdown file
-autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
+" autocmd VimLeave *.md call system("tmux rename-window " . expand('%:p:h:t'))
 
 " Commenting blocks of code.
 " ,cc - commment
