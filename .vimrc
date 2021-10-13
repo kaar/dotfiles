@@ -106,6 +106,9 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>a <esc>ggVG<CR>
 " buffers
 nnoremap <leader>b :Buffers<CR>
+" toggle search highlight
+nnoremap <leader>h :set hlsearch!<CR>
+
 
 " quick pair word and selection
 nnoremap <leader>" ciw"<C-r>""<Esc>
