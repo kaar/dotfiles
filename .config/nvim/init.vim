@@ -19,4 +19,4 @@ source ~/.vimrc
 " ### .vimrc overrides ###
 colorscheme gruvbox
 
-source ~/.config/nvim/lsp.vim
+" source ~/.config/nvim/lsp.vim
