@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'morhetz/gruvbox'  " gruvbox colorschema
   Plug 'neovim/nvim-lspconfig'
+  Plug 'tpope/vim-fugitive'
 call plug#end()
 
 source ~/.vimrc

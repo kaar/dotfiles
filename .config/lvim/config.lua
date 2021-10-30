@@ -116,6 +116,7 @@ lvim.lang.python.linters = {
 -- Additional Plugins
 lvim.plugins = {
     {"sainnhe/gruvbox-material"},
+    {"tpope/vim-fugitive"},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
