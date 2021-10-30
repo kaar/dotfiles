@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+open "https://mail.google.com/mail/u/0/#inbox"
