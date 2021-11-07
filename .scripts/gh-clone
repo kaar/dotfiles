@@ -15,6 +15,10 @@ repository=${1##*/}
 flags="${*:2}"
 
 path="${REPOS}/${user}/${repository}"
+if [ -d "${path}" ]; then
+    echo "Repository already cloned"
+    exit 1
+fi
 url="git@github.com:${user}/${repository}"
 # git clone ${url} $path
 git clone ${flags-} "${url}" "${path}"
