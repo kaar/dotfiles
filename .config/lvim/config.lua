@@ -151,6 +151,7 @@ lvim.plugins = {
     {"sainnhe/gruvbox-material"},
     {"tpope/vim-fugitive"},
     {"github/copilot.vim"},
+    {"christoomey/vim-tmux-navigator"},
 }
 -- https://github.com/LunarVim/LunarVim/issues/1856
 -- configure copilot
