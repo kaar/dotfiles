@@ -13,11 +13,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'tpope/vim-fugitive'
   Plug 'github/copilot.vim'
+  Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
 source ~/.vimrc
 
 " ### .vimrc overrides ###
-colorscheme gruvbox
+colorscheme gruvbox-material
 
 " source ~/.config/nvim/lsp.vim
