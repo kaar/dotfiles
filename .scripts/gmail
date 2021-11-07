@@ -3,4 +3,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+
+# caspar@tibber.com
 open "https://mail.google.com/mail/u/0/#inbox"
+
+# caspar.n@gmail.com
+# open "https://mail.google.com/mail/u/1/#inbox"
