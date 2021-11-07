@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'  " gruvbox colorschema
   Plug 'neovim/nvim-lspconfig'
   Plug 'tpope/vim-fugitive'
+  Plug 'github/copilot.vim'
 call plug#end()
 
 source ~/.vimrc
