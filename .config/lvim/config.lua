@@ -163,29 +163,29 @@ local cmp = require "cmp"
 
 
 -- map copilot to ctrl-e
--- lvim.builtin.cmp.mapping["<C-e>"] = function(fallback)
---   cmp.mapping.abort()
---   local copilot_keys = vim.fn["copilot#Accept"]()
---   if copilot_keys ~= "" then
---     vim.api.nvim_feedkeys(copilot_keys, "i", true)
---   else
---     fallback()
---   end
--- end
-
--- re-map tab to use copilot
-lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
+lvim.builtin.cmp.mapping["<C-e>"] = function(fallback)
+  cmp.mapping.abort()
+  local copilot_keys = vim.fn["copilot#Accept"]()
+  if copilot_keys ~= "" then
+    vim.api.nvim_feedkeys(copilot_keys, "i", true)
   else
-    local copilot_keys = vim.fn["copilot#Accept"]()
-    if copilot_keys ~= "" then
-      vim.api.nvim_feedkeys(copilot_keys, "i", true)
-    else
-      fallback()
-    end
+    fallback()
   end
 end
+
+-- re-map tab to use copilot
+-- lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   else
+--     local copilot_keys = vim.fn["copilot#Accept"]()
+--     if copilot_keys ~= "" then
+--       vim.api.nvim_feedkeys(copilot_keys, "i", true)
+--     else
+--       fallback()
+--     end
+--   end
+-- end
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
