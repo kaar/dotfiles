@@ -1,9 +1,17 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-if [[ "$#" -eq 0 ]] ; then
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# if no argument are passed
+if [ $# -eq 0 ] ; then
   # copy from stdin
   xclip -rmlastnl -sel clip
-else
+fi
+
+# if one argument is passed and is a file
+if [ $# -eq 1 ] && [ -f $1 ] ; then
   # copy content of file
   xclip -sel clip "$1"
 fi
