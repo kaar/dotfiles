@@ -1,0 +1,94 @@
+version: 2.1
+
+# Executors define the underlying technology or environment
+# which the jobs are run within.
+# In this case we are using a docker image as the environment.
+executors:
+  builder:
+    docker:
+      - image: cimg/base:2021.04
+
+# Orbs are reusable packages of configuration
+# https://circleci.com/docs/2.0/orb-intro/
+#
+# Here we use a orb provided by circle ci that implements
+# aws ecr using aws cli.
+# https://circleci.com/developer/orbs/orb/circleci/aws-ecr
+#
+# Required config needed for aws-ecr orb commands is taken from
+# environment variables defined in the context AWS.
+# https://circleci.com/docs/2.0/contexts/
+orbs:
+  aws-ecr: circleci/aws-ecr@7.0.0
+
+# Jobs are building blocks of the build process and is
+# a collection of steps that perform a specific task.
+jobs:
+  # The job `build` does a build of the Dockerfile
+  # by first checking out the code and then uses the
+  # aws-ecr command to build the docker image.
+  #
+  # `setup_remote_docker` is required to be able to run
+  # docker commands within another docker image.
+  # https://circleci.com/docs/2.0/building-docker-images/
+  build:
+    executor: builder
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - aws-ecr/build-image:
+          repo: tibber/cron
+
+  # `deploy` job runs the `aws-ecr` command to
+  # build and push docker images to Amazon Elastic Container Registry (ECR).
+  #
+  # It then runs `deploy_aws.sh` that creates and pushes
+  # task and container definitions to Amazon Elastic Container Service (ECS).
+  deploy:
+    executor: builder
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - aws-ecr/build-and-push-image:
+          create-repo: false
+          dockerfile: Dockerfile
+          path: .
+          repo: tibber/cron
+          tag: "latest,1.0.$CIRCLE_BUILD_NUM"
+      - run:
+          name: Deploy App to AWS
+          command: |
+            ./deploy_aws.sh
+
+# Workflows are responsible for orchestrating multiple jobs
+# by defining rules for how they are run.
+# Here you can define requirements, filters and passing context
+# into jobs.
+# https://circleci.com/docs/2.0/workflows/?section=pipelines
+#
+# Here we can see example of making a sequential build where
+# `deploy` is dependent on the success of `build` and also
+# the requirement of only doing deploy if the workflow is run
+# on the branch `master`.
+#
+# Here the context `AWS` is included and provides the needed
+# configuration needed for aws-ecr commands by setting the
+# required Environment Variables.
+# https://circleci.com/docs/2.0/contexts/
+#
+# Tibber defined contexts can be found under organization settings.
+# https://app.circleci.com/settings/organization/github/tibbercom/contexts
+workflows:
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+          context:
+            - AWS
