@@ -1,17 +1,20 @@
 #!/bin/bash
 set -e
 
-## TODO: Add support for GitHub URL
+# Remove string "hello" from beggining of argument
 
 usage="usage: clone <user/repository> <git-flags>"
 [ -z "${REPOS}" ] && echo "REPOS not set" && exit 1;
 [ -z "${1}" ] && echo "$usage" && exit 1;
+
+url="${1#https://github.com/}"
+
 ## Check if $1 contains / 
-[ "${1##*/*}" ] && echo "$usage" && exit 1;
+[ "${url##*/*}" ] && echo "$usage" && exit 1;
 
 ## Split input "<user>/<repository>"
-user=${1%/*}
-repository=${1##*/}
+user=${url%/*}
+repository=${url##*/}
 flags="${*:2}"
 
 path="${REPOS}/${user}/${repository}"
@@ -19,8 +22,8 @@ if [ -d "${path}" ]; then
     echo "Repository already cloned"
     exit 1
 fi
-url="git@github.com:${user}/${repository}"
+git_url="git@github.com:${user}/${repository}"
 # git clone ${url} $path
-git clone ${flags-} "${url}" "${path}"
-echo "${repository}:${url}" >> "${REPOS}/${user}/.clone"
+git clone ${flags-} "${git_url}" "${path}"
+echo "${repository}:${git_url}" >> "${REPOS}/${user}/.clone"
 echo "${path}"
