@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+xrandr --output DP-2 --mode 5120x1440 --rate 120
