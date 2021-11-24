@@ -5,4 +5,12 @@ set -o pipefail
 set -o nounset
 
 
+# install node
+echo "Install Node using NVM"
+nvim install node
+
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+
+# Install codespell
+echo "Install codespell"
+pip install codespell
