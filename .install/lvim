@@ -11,6 +11,6 @@ nvim install node
 
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
-# Install codespell
-echo "Install codespell"
-pip install codespell
+# Install python dependencies
+echo "Install python dependencies"
+pip install codespell flake8 isort black
