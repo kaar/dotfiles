@@ -17,4 +17,4 @@ else
 fi
 
 cd $neovim_source
-make CMAKE_INSTALL_PREFIX="$HOME/.local" install
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$HOME/.local" install
