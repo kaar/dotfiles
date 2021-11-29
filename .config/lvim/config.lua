@@ -23,10 +23,6 @@ lvim.lsp.diagnostics.virtual_text = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
--- Easy insertion of a trailing ; or , from insert mode
-lvim.keys.insert_mode[";;"] = "<ESC>A;<ESC>"
-lvim.keys.insert_mode["::"] = "<ESC>A:<ESC>"
-
 -- Maintain the cursor position when yanking a visual selection
 -- http://ddrscott.github.io/blog/2016/yank-without-jank/
 lvim.keys.visual_mode["y"] = "myy`y"
