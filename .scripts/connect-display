@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-intern=eDP1
-extern=DP2
+# intern=eDP1
+# extern=DP2
 
 #if xrandr | grep "$extern disconnected"; then
     #xrandr --output $extern --off --output $intern --auto
@@ -12,4 +12,32 @@ extern=DP2
     # xrandr --output "$intern" --off --output "$extern" --auto
 #fi
 # xrandr --output eDP1 --mode 3840x2400 --output DP3 --mode 2048x1080 --left-of eDP1
-xrandr --output DP2 --auto --right-of eDP1
+# xrandr --output DP2 --auto --right-of eDP1
+
+# if argument is equal to samsung
+case "$1" in
+    samsung)
+        xrandr --output DP-2 --mode 5120x1440 --rate 120
+        ;;
+    # logout)
+    #     i3-msg exit
+    #     ;;
+    # suspend)
+    #     lock && systemctl suspend
+    #     ;;
+    # hibernate)
+    #     lock && systemctl hibernate
+    #     ;;
+    # reboot)
+    #     systemctl reboot
+    #     ;;
+    # shutdown)
+    #     systemctl poweroff
+    #     ;;
+    *)
+        echo "Usage: $0 {samsung}"
+        exit 2
+esac
+# if [ "$1" = "samsung" ]; then
+#     xrandr --output DP-2 --mode 5120x1440 --rate 120
+# fi
