@@ -10,7 +10,7 @@ set -o pipefail
 path="${SCRIPTS}/${1}"
 
 if [ -e "${path}" ]; then
-  exec $EDITOR "${path}"
+  exec lvim "${path}"
   exit 0
 fi
 
