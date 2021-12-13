@@ -5,6 +5,8 @@ set -o nounset
 set -o pipefail
 
 
+# sudo pacman -S base-devel cmake unzip ninja tree-sitter curl
+
 repository="git@github.com:neovim/neovim.git"
 neovim_source="$REPOS/neovim/neovim"
 
