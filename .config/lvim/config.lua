@@ -19,18 +19,9 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.lsp.diagnostics.virtual_text = false
 -- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
+-- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
-
--- Maintain the cursor position when yanking a visual selection
--- http://ddrscott.github.io/blog/2016/yank-without-jank/
-lvim.keys.visual_mode["y"] = "myy`y"
-lvim.keys.visual_mode["Y"] = "myY`y"
-
--- Paste replace visual selection without copying it
-lvim.keys.visual_mode["<leader>p"] = '"_dP'
-
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
