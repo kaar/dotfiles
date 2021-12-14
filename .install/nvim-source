@@ -10,7 +10,7 @@ neovim_source="$REPOS/neovim/neovim"
 
 if [ -d "$neovim_source" ]; then
   cd "$neovim_source"
-  echo "Neovim already cloned. Pull: $neovim_source"
+  echo "Neovim already cloned. Update: $neovim_source"
   git pull
 else
   git clone $repository $neovim_source
