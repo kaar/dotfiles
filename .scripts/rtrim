@@ -1,3 +1,9 @@
 #!/bin/sh
 # -l switch autochomps each line read and then adds a newline back
-exec perl -pli -e "s/\s*$//" "$@"
+
+if [ $# -eq 0 ]
+then
+  echo "No filename given"
+else
+  exec perl -pli -e "s/\s*$//" "$@"
+fi
