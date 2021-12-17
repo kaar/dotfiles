@@ -38,9 +38,9 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias c=config
 
 # ----------------------- environment variables ----------------------
-export EDITOR=vim
-export VISUAL=vim
-export EDITOR_PREFIX=vim
+export EDITOR=nvim
+export VISUAL=nvim
+export EDITOR_PREFIX=nvim
 
 export PACKAGE_INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
