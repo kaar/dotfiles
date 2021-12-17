@@ -1,2 +1,4 @@
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
-
+#!/bin/bash
+if [ -f ~/.bashrc ]; then
+  source $HOME/.bashrc
+fi
