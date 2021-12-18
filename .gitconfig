@@ -35,7 +35,7 @@
     #pager = ~/dotfiles/diff-so-fancy  | less -rx1,5
     editor = vim
     excludesfile = ~/.gitignore
-    pager = ~/.scripts/diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RFX
     whitespace = blank-at-eol,blank-at-eof
 [winUpdater]
     recentlySeenVersion = 2.21.0.windows.1
@@ -51,3 +51,5 @@
 
 [includeIf "gitdir:~/repos/tibbercom/"]
   path = ~/.config/git/tibber
+[interactive]
+	diffFilter = diff-so-fancy --patch
