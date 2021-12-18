@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dir="$REPOS/so-fancy/diff-so-fancy"
+repo_url="https://github.com/so-fancy/diff-so-fancy"
+if [ ! -d "$dir" ]; then
+  git clone $repo_url $dir
+else
+  cd $dir || exit
+  git pull
+fi
+
+echo "Create symbolic link"
+echo "$dir/diff-so-fancy -> $HOME/.local/bin/diff-so-fancy"
+ln -si $dir/diff-so-fancy $HOME/.local/bin/diff-so-fancy
