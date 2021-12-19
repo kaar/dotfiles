@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Requirements
+# ============
+# https://www.rust-lang.org/tools/install
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#
+# libgit2, CMake
+#
+
+repository="https://github.com/ogham/exa.git"
+source_path="$REPOS/ogham/exa"
+
+if [ -d "$source_path" ]; then
+  cd "$source_path"
+  echo "Exa already cloned. Update: $source_path"
+  git pull
+else
+  git clone $repository $source_path
+fi
+
+cd $source_path
+cargo build --release
+ln -sf $source_path/target/release/exa $HOME/.local/bin/exa
+ln -sf $source_path/completions/bash/exa $XDG_CONFIG_HOME/bash_completion.d/exa.bash
