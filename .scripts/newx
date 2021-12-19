@@ -10,7 +10,7 @@ set -o pipefail
 path="${SCRIPTS}/${1}"
 
 if [ -e "${path}" ]; then
-  exec lvim "${path}"
+  exec $EDITOR "${path}"
   exit 0
 fi
 
@@ -20,4 +20,4 @@ set -o nounset
 set -o pipefail
 ' > "${path}"
 chmod +x "${path}"
-exec vim +2 "${path}"
+exec $EDITOR +2 "${path}"
