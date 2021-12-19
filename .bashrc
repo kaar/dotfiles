@@ -95,8 +95,8 @@ if command -v dircolors &>/dev/null; then
 fi
 
 # ------------------------------ aliases -----------------------------
-alias ls='exa --long --header --git'
-alias ll='ls -alF'
+alias ls='exa'
+alias ll='ls --long --header --git'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
