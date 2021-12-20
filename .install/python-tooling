@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# dependencies needed for python development in vim
+pip install black flake8 isort mypy pytest pytest-cov codespell 
