@@ -7,10 +7,10 @@ usage="Create new install script in ${PACKAGE_INSTALL}\nusage: newx-install <nam
 path="${PACKAGE_INSTALL}/${1}"
 
 if [ -e "${path}" ]; then
-  exec vim "${path}"
+  exec $EDITOR "${path}"
   exit 0
 fi
 
 printf "#!/bin/sh\n\n" > "${path}"
 chmod +x "${path}"
-exec vim +2 "${path}"
+exec $EDITOR +2 "${path}"
