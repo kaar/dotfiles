@@ -30,15 +30,9 @@
 [mergetool]
 	prompt = false
 [core]
-    # Removed tabbing for some reason. Dont know why it was added...
-    #pager = ~/dotfiles/diff-so-fancy | sed 's/\\t/    /' | less -rx1,5
-    #pager = ~/dotfiles/diff-so-fancy  | less -rx1,5
-    editor = vim
-    excludesfile = ~/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
-    whitespace = blank-at-eol,blank-at-eof
-[winUpdater]
-    recentlySeenVersion = 2.21.0.windows.1
+  editor = lvim
+  pager = diff-so-fancy | less --tabs=4 -RFX
+  whitespace = blank-at-eol,blank-at-eof
 [apply]
     whitespace = fix
 [pull]
@@ -52,4 +46,4 @@
 [includeIf "gitdir:~/repos/tibbercom/"]
   path = ~/.config/git/tibber
 [interactive]
-	diffFilter = diff-so-fancy --patch
+  diffFilter = diff-so-fancy --patch
