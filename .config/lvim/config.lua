@@ -153,14 +153,6 @@ linters.setup {
   }
 }
 
--- set an additional linter
-lvim.lang.python.linters = {
-  {
-    exe = "flake8",
-  }
-}
-
-
 -- lvim.keys.normal_mode = {
 --  -- Navigate buffers
 --  ["<Tab>"] = "",
