@@ -16,6 +16,7 @@
     undo = "!f() { git reset --hard @{${1-1}}; }; f"
     addnew = !git add $(git ls-files -o --exclude-standard)
     new = ls-files -o --exclude-standard
+    ld = log -p
 [diff]
     tool = d
 [difftool]
