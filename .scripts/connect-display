@@ -14,10 +14,14 @@
 # xrandr --output eDP1 --mode 3840x2400 --output DP3 --mode 2048x1080 --left-of eDP1
 # xrandr --output DP2 --auto --right-of eDP1
 
+function samsung() {
+  xrandr --output DP-2 --mode 5120x1440 --rate 120 --output HDMI-0 --off
+}
+
 # if argument is equal to samsung
 case "$1" in
     samsung)
-        xrandr --output DP-2 --mode 5120x1440 --rate 120
+        samsung
         ;;
     # logout)
     #     i3-msg exit
