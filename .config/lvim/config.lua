@@ -128,7 +128,7 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { exe = "flake8", filetypes = { "python" }, args = { "--max-line-length=120"} },
-  { exe = "shellcheck", filetypes = { "sh", "bash" } },
+  { exe = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
   { exe = "codespell", filetypes = { "javascript", "python" } },
   { exe = "eslint", filetypes = { "javascript", "typescript" } },
 }
