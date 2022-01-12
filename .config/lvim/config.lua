@@ -121,36 +121,16 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { exe = "black", filetypes = { "python" } },
   { exe = "isort", filetypes = { "python" } },
-  {
-    exe = "prettier",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--print-with", "120" },
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "typescript", "typescriptreact" },
-  },
+  { exe = "prettier", filetypes = { "javascript", "typescript", "css", "html", "yaml" }, args = {"--print-width 120", "--single-quote" } },
 }
-
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { exe = "flake8", filetypes = { "python" }, args = { "--max-line-length=120"} },
-  {
-    exe = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    args = { "--severity", "warning" },
-  },
-  {
-    exe = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "javascript", "python" },
-  },
-  {
-    exe = "eslint",
-    filetypes = { "javascript", "typescript" },
-  }
+  { exe = "shellcheck", filetypes = { "sh", "bash" } },
+  { exe = "codespell", filetypes = { "javascript", "python" } },
+  { exe = "eslint", filetypes = { "javascript", "typescript" } },
 }
 
 -- lvim.keys.normal_mode = {
