@@ -122,7 +122,7 @@ bindsym $mod+a focus parent
 
 set $ws1 "1: term"
 set $ws2 "2: Firefox"
-set $ws3 "3"
+set $ws3 "3: Rider"
 set $ws4 "4: Slack"
 set $ws5 "5"
 set $ws6 "6"
