@@ -1,0 +1,1 @@
+/home/tibber/repos/ogham/exa/completions/bash/exa
