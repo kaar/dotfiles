@@ -48,7 +48,6 @@ export NOTES="${HOME}/notes"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export REPOS="${HOME}/repos"
 export BROWSER=firefox
-export NVM_DIR="$HOME/.config/nvm"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f'
@@ -171,9 +170,10 @@ done
 complete -C 'aws_completer' aws
 
 # nvm
-if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
-  source "/usr/share/nvm/init-nvm.sh"
-fi
+# https://github.com/nvm-sh/nvm
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
 
 # ------------------------------ bind ---------------------------------
