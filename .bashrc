@@ -180,7 +180,7 @@ export NVM_DIR="$HOME/.config/nvm"
 bind -x '"\C-j":sessions'
 
 # ------------------------------ prompt -------------------------------
-source ~/.config/git/git-prompt.sh
+source $HOME/.config/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
