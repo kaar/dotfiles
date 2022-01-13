@@ -121,7 +121,11 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { exe = "black", filetypes = { "python" } },
   { exe = "isort", filetypes = { "python" } },
-  { exe = "prettier", filetypes = { "javascript", "typescript", "css", "html", "yaml" }, args = {"--print-width 120", "--single-quote" } },
+  {
+    exe = "prettier",
+    filetypes = { "javascript", "typescript", "css", "html", "yaml" },
+    args = {"--print-width 180", "--single-quote", "--trailing-comma", "none" },
+  },
 }
 
 -- -- set additional linters
