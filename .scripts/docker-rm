@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+containers=$(docker ps -qa)
+# if containers is empty exit
+if [[ -z "$containers" ]]; then
+  echo "No containers to remove"
+  exit 0
+fi
+docker rm $containers
