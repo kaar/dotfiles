@@ -17,6 +17,8 @@
     addnew = !git add $(git ls-files -o --exclude-standard)
     new = ls-files -o --exclude-standard
     ld = log -p
+    wt = worktree
+
 [diff]
     tool = d
 [difftool]
