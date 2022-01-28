@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+temp=$(mktemp -d)
+url=https://github.com/github/licensed/releases/download/3.4.2/licensed-3.4.2-linux-x64.tar.gz
+install_dir=$HOME/.local/bin
+
+curl -fL $url | tar -xz -C $temp
+mv $temp/licensed $install_dir
