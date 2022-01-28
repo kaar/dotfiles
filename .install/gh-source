@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# <https://github.com/cli/cli/blob/trunk/docs/source.md>
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+app="gh"
+repository="https://github.com/cli/cli.git"
+source_path="$REPOS/cli/cli"
+
+if [ -d "$source_path" ]; then
+  cd "$source_path"
+  echo "$app already cloned. Update: $source_path"
+  git pull
+else
+  git clone $repository $source_path
+  echo "$app cloned into: $source_path"
+fi
+
+cd $source_path
+echo "Building $app"
+echo $source_path
+make install prefix=$HOME/.local
