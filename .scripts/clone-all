@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+# This script will clone all tibber repos into REPOS/tibber/X with depth 1
+# Example clone-all tibber $HOME/tmp-repos
+usage="usage: $1 <user/org> <path>
+Example: $0 tibber $HOME/repos"
+[ -z $1 ] && echo "$usage" && exit 1;
+[ -z $2 ] && echo "$usage" && exit 1;
+
+org=$1
+path=$2
+MAX_REPOS=300
+
+function gh_clone() {
+  # Clone repo $1 into path $2
+  # Example my-org/org-repo -> $HOME/repos/my-org/org-repo
+  repo_path=$1
+  git_url="git@github.com:${repo_path}.git"
+  git clone --depth 1 $git_url $path/$1
+}
+
+repos=$(gh repo list $org --limit $MAX_REPOS | cut -f1)
+echo "Cloning repos from $org into $path"
+for repo in $repos; do
+  echo "Cloning $repo"
+  gh_clone $repo $path
+done
