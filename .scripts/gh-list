@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+# This script will clone all tibber repos into REPOS/tibber/X with depth 1
+# Example clone-all tibber $HOME/tmp-repos
+usage="usage: $1 <user/org> <path>
+Example: $0 tibber $HOME/repos"
+[ -z $1 ] && echo "$usage" && exit 1;
+
+org=$1
+MAX_REPOS=300
+
+gh repo list $org --limit $MAX_REPOS --no-archived | cut -f1
