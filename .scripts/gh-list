@@ -11,4 +11,7 @@ Example: $0 tibber $HOME/repos"
 org=$1
 MAX_REPOS=300
 
-gh repo list $org --limit $MAX_REPOS --no-archived | cut -f1
+# gh repo list $org --limit $MAX_REPOS --no-archived | cut -f1
+
+gh repo list $org --limit $MAX_REPOS --json name,primaryLanguage,url --no-archived \
+  | jq -r '.[] | [.name, .primaryLanguage.name, .url] | @csv'
