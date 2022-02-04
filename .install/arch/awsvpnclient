@@ -1,5 +1,32 @@
 #!/bin/sh
 # https://aws.amazon.com/vpn/client-vpn-download/
+# https://aur.archlinux.org/packages/awsvpnclient/
+#
+# Please note the following requirements for AWS VPN Client:
+#
+# * If you depend on DNS servers from VPN you need to have a running
+# systemd-resolved.service. Please ensure it does not conflict with any
+# other DNS resolver service or configuration you may use.
+#
+# sudo systemctl enable systemd-resolved.service \
+#   && sudo systemctl start systemd-resolved.service
+#
+# * You have to enable and start the awsvpnclient.service after
+# installation:
+#
+# sudo systemctl enable awsvpnclient \
+#   && sudo systemctl start awsvpnclient
+#
+# For troubelshooting its worth checking first the logs:
+# /home/$USER/.config/AWSVPNClient/
+# /var/log/aws-vpn-client/$USER/
+#
+#
+# See also the official docs:
+# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
+#
+# If you face any other problem please check the troubleshooting guide (DNS issues):
+# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/linux-troubleshooting.html#aws-provided-client
 
 url="https://aur.archlinux.org/awsvpnclient.git"
 
