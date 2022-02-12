@@ -18,6 +18,12 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.lsp.diagnostics.virtual_text = false
+
+-- Mappings
+-- paste as markdown link
+vim.api.nvim_set_keymap('n', '<Leader>pl', 'i* []()<ESC>PF]i', { noremap = true, silent = false })
+
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
