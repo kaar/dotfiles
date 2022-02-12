@@ -150,6 +150,7 @@ lvim.plugins = {
     {"github/copilot.vim"},
     {"christoomey/vim-tmux-navigator"},
     {"farmergreg/vim-lastplace"},
+    {"arcticicestudio/nord-vim"},
 }
 -- https://github.com/LunarVim/LunarVim/issues/1856
 -- configure copilot
