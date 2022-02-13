@@ -21,7 +21,7 @@ lvim.lsp.diagnostics.virtual_text = false
 
 -- Mappings
 -- paste as markdown link
-vim.cmd("nmap <leader>pl i* []()<ESC>PF]i")
+vim.cmd("nmap <F2> i* []()<ESC>PF]i")
 
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
