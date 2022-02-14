@@ -3,7 +3,7 @@
 n=0
 until [ "$n" -ge 5 ]
 do
-  iwctl station wlan0 connect "${1}" && break
+  nmcli dev wifi connect $1 && break
   n=$((n+1))
   sleep 3
 done
