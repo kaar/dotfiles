@@ -130,7 +130,6 @@ alias v='vim'
 alias l='lvim'
 
 # Gists
-alias todo='gh gist edit ${GIST_TODO}'
 alias ideas='gh gist edit ${GIST_IDEAS}'
 
 # GitHub
