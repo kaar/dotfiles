@@ -131,7 +131,6 @@ alias l='lvim'
 
 # Gists
 alias todo='gh gist edit ${GIST_TODO}'
-alias tibber-todo='gh gist edit ${GIST_TODO_TIBBER}'
 alias ideas='gh gist edit ${GIST_IDEAS}'
 
 # GitHub
