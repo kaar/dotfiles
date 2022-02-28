@@ -1,7 +1,9 @@
 #!/bin/sh
 
+# update keyring
+pacman -Sy archlinux-keyring
 # upgrade packages
-sudo pacman -Syu
+pacman -Syu
 
 # install all packages in arch file
-sudo pacman -Syy --needed - < "${PACKAGE_INSTALL}/arch/packages"
+# sudo pacman -Syy --needed - < "${PACKAGE_INSTALL}/arch/packages"
