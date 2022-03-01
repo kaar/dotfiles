@@ -96,8 +96,8 @@ fi
 
 # ------------------------------ aliases -----------------------------
 alias ls='exa'
-alias ll='ls --long --header --git'
-alias la='ls -A'
+alias ll='ls --long --group-directories-first --header --git'
+alias la='ls --all --group-directories-first -1'
 alias l='ls -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
