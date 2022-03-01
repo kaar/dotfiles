@@ -31,7 +31,7 @@
 	prompt = false
 [core]
   editor = lvim
-  pager = delta
+  pager = diff-so-fancy | less --tabs=4 -RFX
   whitespace = blank-at-eol,blank-at-eof
 [apply]
     whitespace = fix
@@ -47,7 +47,7 @@
   path = ~/.config/git/tibber
 
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = diff-so-fancy --patch
 
 [delta]
     navigate = true  # use n and N to move between diff sections
