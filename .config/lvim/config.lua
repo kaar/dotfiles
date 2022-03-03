@@ -128,8 +128,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { exe = "black", filetypes = { "python" } },
-  { exe = "isort", filetypes = { "python" } },
+  { exe = "isort", filetype = { "python"} },
+  { exe = "black", filetype = { "python"} },
   {
     exe = "prettier",
     filetypes = { "javascript", "typescript", "css", "html", "yaml" },
