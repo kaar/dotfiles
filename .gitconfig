@@ -15,6 +15,7 @@
     new = ls-files -o --exclude-standard
     ld = log -p
     wt = worktree
+    get = co origin/master --
 
 [diff]
     tool = d
