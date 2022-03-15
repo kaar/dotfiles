@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import sys
+
+sum = 0
+count = 0
+for line in sys.stdin:
+    line = line.strip()
+    num = float(line)
+    sum += num
+    count += 1
+
+print("Sum:", sum)
+print("Count:", count)
+print("Average:", sum / count)
