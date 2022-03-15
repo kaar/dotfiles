@@ -3,12 +3,21 @@ import sys
 
 sum = 0
 count = 0
+max = 0
+min = sys.maxsize
 for line in sys.stdin:
     line = line.strip()
     num = float(line)
+    # find the max of all the num
+    if num > max:
+        max = num
+    if num < min:
+        min = num
     sum += num
     count += 1
 
 print("Sum:", sum)
 print("Count:", count)
 print("Average:", sum / count)
+print("Max:", max)
+print("Min:", min)
