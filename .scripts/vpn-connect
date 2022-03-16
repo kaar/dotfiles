@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+/opt/awsvpnclient/AWS\ VPN\ Client > /dev/null 2>&1 &
+
