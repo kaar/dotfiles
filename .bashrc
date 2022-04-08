@@ -140,7 +140,8 @@ alias github='github-open'
 alias browse='firefox -new-tab'
 
 # AWS
-alias aws-session='~/aws/scripts/set-session-token'
+alias aws-session='aws sso login'
+
 # other
 alias aws-cloudwatch='open ${AWS_URL_CLOUDWATCH}'
 alias aws-console='open ${AWS_URL_CONSOLE}'
