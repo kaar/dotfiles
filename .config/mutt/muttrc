@@ -26,7 +26,7 @@ set quit         = ask-yes # Ask before quitting, default to yes
 # Sidebar View Options
 # -----------------------------------------------
 
-set sidebar_visible = yes
+set sidebar_visible = no
 set sidebar_format  = '%B%* %N/%S'
 set sidebar_width   = 25
 color sidebar_new color221 color233
