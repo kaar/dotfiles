@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-TEMPLATES_DIR="$(dirname "${BASH_SOURCE[0]}")/templates"
+set -o errexit
+set -o nounset
+set -o pipefail
+
+TEMPLATES=${TEMPLATES:-${XDG_CONFIG_HOME}/templates}
 
 usage="Usage: $(basename $0) <template name>
 list - list templates"
@@ -13,25 +17,25 @@ fi
 
 # if first argument is equal to list then list all templates
 if [[ "$1" == "list" ]]; then
-  ls "$TEMPLATES_DIR"
+  ls "$TEMPLATES"
   exit 0
 fi
 
 # if content of argument is file then cat it
-if [[ -f "${TEMPLATES_DIR}/${1}" ]]; then
-  cat "$TEMPLATES_DIR/$1"
+if [[ -f "${TEMPLATES}/${1}" ]]; then
+  cat "$TEMPLATES/$1"
 else
   echo "Template not found"
   exit 1
 fi
 
 # if content of argument is a directory copy all files to current directory
-if [[ -d "$TEMPLATES_DIR/$1" ]]; then
+if [[ -d "$TEMPLATES/$1" ]]; then
   # ask if user want to copy all files
   read -p "Do you want to copy all files from template? [y/N] " -n 1 -r
   # if yes then copy all files
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    cp -r "$TEMPLATES_DIR/$1"/* .
+    cp -r "$TEMPLATES/$1"/* .
   else
     echo "Files will be copied to current directory"
   fi
