@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# utc
+# echo "$(date -u +"%Y-%m-%dT%H:%M:%S")"
+
+# utc with timezone
+# echo "$(date -u +"%Y-%m-%dT%H:%M:%S%:z")"
+
+# local
+echo "$(date +"%Y-%m-%dT%H:%M:%S%:z")"
