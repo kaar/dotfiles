@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Download a file from url link using gh-cli
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# url example:
+# https://api.github.com/repos/tibber/tibber-cron/contents/src/index.js
+url="$1"
+
+# get filename from url
+# filename="$(echo "$url" | sed -E 's/.*\/([^/]+)$/\1/')"
+# echo "filename: $filename"
+gh api $url \
+  | jq -r '.content' | base64 -d
