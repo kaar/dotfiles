@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Diff current branch from where it split from master
+git diff "$(git merge-base --fork-point master)"

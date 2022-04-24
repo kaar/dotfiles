@@ -16,6 +16,7 @@
     ld = log -p
     wt = worktree
     get = co origin/master --
+    bdiff = !git-branch-diff
 
 [diff]
     tool = d
