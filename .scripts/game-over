@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Shutdown
+set -o errexit
+set -o nounset
+set -o pipefail
+
+echo "Shutdown sequence initiated"
+sleep 1
+
+for i in {3..1}; do
+  echo "$i"
+  sleep 1
+done
+
+echo "MISSION FAILED!"
+sleep 1
+shutdown now
