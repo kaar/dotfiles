@@ -85,14 +85,7 @@ fi
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # ----------------------------- dircolors ----------------------------
-
-if command -v dircolors &>/dev/null; then
-  if test -r ~/.dircolors; then
-    eval "$(dircolors -b ~/.dircolors.gruvbox)"
-  else
-    eval "$(dircolors -b)"
-  fi
-fi
+eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/gruvbox)"
 
 # ------------------------------ aliases -----------------------------
 alias ls='exa'
