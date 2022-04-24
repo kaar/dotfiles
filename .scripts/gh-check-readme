@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# Check if README.md exists for all repositories for the given owner
+set -o nounset
+set -o pipefail
+
+SEP=","
+LIMIT=300
+owner="$1"
+
+if [ -z "$owner" ]; then
+  echo "Usage: $0 <owner>"
+  exit 1
+fi
+
+repos=$(gh repo list $owner -L $LIMIT --json=name --jq=".[].name")
+echo "REPOSITORY${SEP}README"
+for repo in $repos; do
+  gh api repos/$owner/$repo/contents/README.md --silent 2> /dev/null
+  if [ $? -eq 0 ]; then
+    echo "${repo}${SEP}YES"
+    continue
+  else
+    echo "${repo}${SEP}NO"
+  fi
+done
