@@ -8,4 +8,8 @@ prompt: disable
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
+    pr-web: pr view --web
+    inew: issue create --title
+    iview: issue view --comments
+    pview: pr view --comments
+    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
