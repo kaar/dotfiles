@@ -99,3 +99,5 @@ aws
 playground/
 python/
 .yarn/
+.config/AWSVPNClient
+.config/get-proxy
