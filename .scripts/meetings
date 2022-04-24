@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# Meetings - A simple script to manage meetings
+# Meetings location: ~/XDG_CONFIG_HOME/meetings
+#
+# Meetings template
+# Title: <title>
+# Description: <description>
+# Link: <link>
+set -o errexit
+set -o pipefail
+
+MEETINGS=${MEETINGS:-${XDG_CONFIG_HOME}/meetings}
+
+show_meetings() {
+  for file in $MEETINGS/*; do
+    title=$(grep -oP '^Title: \K(.*$)' $file)
+    description=$(grep -oP '^Description: \K(.*$)' $file)
+    link=$(grep -oP '^Link: \K(.*$)' $file)
+    echo "$title" "($description)"
+    echo "  $link"
+  done
+}
+
+list_meetings() {
+  ls $MEETINGS
+}
+
+open_meeting() {
+  local meeting=$1
+  if [[ -f "$MEETINGS/$meeting" ]]; then
+    link=$(grep -oP "^Link: \K.*$" ~/.config/meetings/standup)
+    open $link
+  else
+    echo "No such meeting: $meeting"
+  fi
+}
+
+# if $1 is empty
+if [[ -z "$1" ]]; then
+  show_meetings
+elif [[ "$1" == "list" ]]; then
+  list_meetings
+elif [[ "$1" == "open" ]]; then
+  open_meeting $2
+else
+  open_meeting $1
+fi

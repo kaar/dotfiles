@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+_meetings_completion()
+{
+    COMPREPLY=( $(compgen -W "$(meetings list)" -- "${COMP_WORDS[COMP_CWORD]}") )
+}
+
+complete -F _meetings_completion meetings
