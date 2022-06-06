@@ -2,6 +2,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export LD_DEBUG=True
 /opt/awsvpnclient/AWS\ VPN\ Client > /dev/null 2>&1 &
 
