@@ -18,19 +18,18 @@
     get = co origin/master --
     bdiff = !git-branch-diff
 
-[diff]
-    tool = d
-[difftool]
-    prompt = true
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
-[mergetool "vscode"]
-    cmd = code --wait $MERGED
-[mergetool "vsdiffmerge"]
-    keepbackup = false
+[diff]
+  tool = vimdiff
 [mergetool]
 	prompt = false
+[mergetool "vimdiff"]
+  cmd = lvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = false
+
 [core]
   editor = lvim
   pager = diff-so-fancy | less --tabs=4 -RFX
