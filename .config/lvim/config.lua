@@ -66,8 +66,14 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
-lvim.builtin.nvimtree.setup.disable_netrw = false
-lvim.builtin.nvimtree.setup.hijack_netrw = false
+-- gx only works when using netrw
+-- https://github.com/kyazdani42/nvim-tree.lua/issues/226
+-- https://github.com/LunarVim/LunarVim/issues/2319
+-- lvim.builtin.nvimtree.setup.disable_netrw = false
+-- lvim.builtin.nvimtree.setup.hijack_netrw = false
+
+-- This solves the problem of gx no working with nvim-tree
+vim.api.nvim_set_keymap('n', 'gx', '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>', { noremap = true, silent = true })
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
