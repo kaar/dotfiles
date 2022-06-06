@@ -216,3 +216,6 @@ shopt -s expand_aliases # expand aliases
 
 # Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
 stty -ixon
+
+# direnv
+eval "$(direnv hook bash)"
