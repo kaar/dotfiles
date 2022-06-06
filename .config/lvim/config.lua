@@ -138,19 +138,19 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { exe = "isort", args = { "--profile black" }, filetype = { "python"} },
-  { exe = "black", filetype = { "python"} },
+  { exe = "isort", filetype = { "python" } },
+  { exe = "black", filetype = { "python" } },
   {
     exe = "prettier",
     filetypes = { "javascript", "typescript", "css", "html", "yaml" },
-    args = {"--print-width 180", "--single-quote", "--trailing-comma", "none" },
+    args = { "--print-width 180", "--single-quote", "--trailing-comma", "none" },
   },
 }
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { exe = "flake8", filetypes = { "python" }, args = { "--max-line-length=120"} },
+  { exe = "flake8", filetypes = { "python" }, args = { "--max-line-length=120" } },
   { exe = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
   { exe = "codespell", filetypes = { "javascript", "python" } },
   { exe = "eslint", filetypes = { "javascript", "typescript" } },
@@ -164,14 +164,27 @@ linters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-    {"sainnhe/gruvbox-material"},
-    {"tpope/vim-fugitive"},
-    {"github/copilot.vim"},
-    {"christoomey/vim-tmux-navigator"},
-    {"farmergreg/vim-lastplace"},
-    {"arcticicestudio/nord-vim"},
-    {"hashivim/vim-terraform"},
+  { "sainnhe/gruvbox-material" },
+  { "tpope/vim-fugitive" },
+  { "github/copilot.vim" },
+  { "christoomey/vim-tmux-navigator" },
+  { "farmergreg/vim-lastplace" },
+  { "arcticicestudio/nord-vim" },
+  { "hashivim/vim-terraform" },
+  { "preservim/vimux" },
+  { "vim-test/vim-test" },
+  { "skywind3000/asyncrun.vim" },
 }
+-- vim-test
+-- vim.cmd('let test#strategy = "asyncrun"')
+vim.cmd('let test#strategy = "neovim"')
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Test",
+  f = { "<cmd>TestFile<cr>", "File" },
+  n = { "<cmd>TestNearest<cr>", "Nearest" },
+  s = { "<cmd>TestSuite<cr>", "Suite" },
+}
+
 -- https://github.com/LunarVim/LunarVim/issues/1856
 -- configure copilot
 vim.g.copilot_no_tab_map = true
