@@ -154,6 +154,7 @@ linters.setup {
   { exe = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
   { exe = "codespell", filetypes = { "javascript", "python" } },
   { exe = "eslint", filetypes = { "javascript", "typescript" } },
+  { exe = "pylint", filetypes = { "python" } },
 }
 
 -- lvim.keys.normal_mode = {
