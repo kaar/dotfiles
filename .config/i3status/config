@@ -12,6 +12,7 @@ general {
 }
 
 # order += "ipv6"
+order += "cpu_usage"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery 0"
@@ -20,14 +21,20 @@ order += "load"
 order += "memory"
 order += "tztime local"
 
+cpu_usage {
+        format = " CPU: %usage"
+        degraded_threshold = 90
+        max_threshold = 95
+}
+
 wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
-        format_down = "W: down"
+        format_up = "📶 W: (%quality at %essid) %ip"
+        format_down = "📶 W: down"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+        format_up = "🔌 E: %ip (%speed)"
+        format_down = "🔌 E: down"
 }
 
 battery 0 {
@@ -46,7 +53,7 @@ battery all {
 }
 
 disk "/" {
-        format = "%avail"
+        format = "💽 %avail"
 }
 
 load {
@@ -54,11 +61,11 @@ load {
 }
 
 memory {
-        format = "%used | %available"
+        format = "💾 %used | %available"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+        format = "📅 %Y-%m-%d 🕠 %H:%M:%S"
 }
