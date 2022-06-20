@@ -9,6 +9,7 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
     pr-web: pr view --web
+    checks: pr checks --watch
     inew: issue create --title
     iview: issue view --comments
     pview: pr view --comments
