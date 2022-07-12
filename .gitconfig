@@ -18,6 +18,9 @@
     get = co origin/master --
     bdiff = !git-branch-diff
 
+[add.interactive]
+    useBuiltin = false
+
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
