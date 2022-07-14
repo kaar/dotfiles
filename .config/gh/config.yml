@@ -5,7 +5,7 @@ editor: lvim
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prompt: disable
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
-pager:
+pager: less -R
 # Aliases allow you to create nicknames for gh commands
 aliases:
     pr-web: pr view --web
