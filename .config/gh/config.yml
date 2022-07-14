@@ -8,6 +8,7 @@ prompt: disable
 pager: less -R
 # Aliases allow you to create nicknames for gh commands
 aliases:
+    reviews: search prs --review-requested "kaar" --state open
     pr-web: pr view --web
     checks: pr checks --watch
     inew: issue create --title
