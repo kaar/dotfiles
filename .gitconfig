@@ -6,6 +6,7 @@
     st = status
     br = branch
     s = switch
+    cp = cherry-pick
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     sdiff = difftool -y -t vsdiffmerge
@@ -17,6 +18,7 @@
     wt = worktree
     get = co origin/master --
     bdiff = !git-branch-diff
+    recent = "branch --sort=committerdate"
 
 [add.interactive]
     useBuiltin = false
