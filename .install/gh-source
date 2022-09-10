@@ -22,3 +22,6 @@ cd $source_path
 echo "Building $app"
 echo $source_path
 make install prefix=$HOME/.local
+
+echo "Generate completion"
+gh completion -s bash > $HOME/.config/bash_completion.d/gh
