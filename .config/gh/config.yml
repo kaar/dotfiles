@@ -5,13 +5,17 @@ editor: lvim
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prompt: disable
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
-pager: less -R
+pager: less
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    reviews: search prs --review-requested "kaar" --state open
-    pr-web: pr view --web
-    checks: pr checks --watch
-    inew: issue create --title
-    iview: issue view --comments
-    pview: pr view --comments
-    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+  reviews: search prs --review-requested "kaar" --state open
+  pr-web: pr view --web
+  checks: pr checks --watch
+  inew: issue create --title
+  iview: issue view --comments
+  pview: pr view --comments
+  co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+  iv: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
+  gist-view: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist view "$id"'
+  gist-edit: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist edit "$id"'
+  bug: issue create --label "bug"
