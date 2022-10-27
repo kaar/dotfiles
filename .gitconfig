@@ -9,6 +9,7 @@
     cp = cherry-pick
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     sdiff = difftool -y -t vsdiffmerge
     sync = pull --all --prune
     undo = "!f() { git reset --hard @{${1-1}}; }; f"
@@ -18,7 +19,8 @@
     wt = worktree
     get = co origin/master --
     bdiff = !git-branch-diff
-    recent = "branch --sort=committerdate"
+    ; recent = "!f() { git s $(git br --sort=committerdate | grep -v '*' | fzf; ); }; f"
+    recent = branch --sort=committerdate
 
 [add.interactive]
     useBuiltin = false
@@ -49,7 +51,7 @@
 	name = Caspar Nettelbladt
 	email = caspar.n@gmail.com
 
-[includeIf "gitdir:~/repos/tibbercom/"]
+[includeIf "gitdir:~/repos/tibber/"]
   path = ~/.config/git/tibber
 
 [interactive]
