@@ -1,0 +1,387 @@
+#!/usr/bin/env python3
+"""
+Parses GitHub notifications from stdin
+CLI:
+`gh api /notifications`
+
+Example:
+```json
+[
+  {
+    "id": "3805352459",
+    "unread": true,
+    "reason": "subscribed",
+    "updated_at": "2022-06-22T07:08:04Z",
+    "last_read_at": null,
+    "subject": {
+      "title": "Get Netherlands Single home up",
+      "url": "https://api.github.com/repos/tibber/tibber-pyml/issues/1235",
+      "latest_comment_url": "https://api.github.com/repos/tibber/tibber-pyml/issues/comments/1162729843",
+      "type": "Issue"
+    },
+    "repository": {
+      "id": 124776132,
+      "node_id": "MDEwOlJlcG9zaXRvcnkxMjQ3NzYxMzI=",
+      "name": "tibber-pyml",
+      "full_name": "tibber/tibber-pyml",
+      "private": true,
+      "owner": {
+        "login": "tibber",
+        "id": 16310890,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjE2MzEwODkw",
+        "avatar_url": "https://avatars.githubusercontent.com/u/16310890?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/tibber",
+        "html_url": "https://github.com/tibber",
+        "followers_url": "https://api.github.com/users/tibber/followers",
+        "following_url": "https://api.github.com/users/tibber/following{/other_user}",
+        "gists_url": "https://api.github.com/users/tibber/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/tibber/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/tibber/subscriptions",
+        "organizations_url": "https://api.github.com/users/tibber/orgs",
+        "repos_url": "https://api.github.com/users/tibber/repos",
+        "events_url": "https://api.github.com/users/tibber/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/tibber/received_events",
+        "type": "Organization",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/tibber/tibber-pyml",
+      "description": null,
+      "fork": false,
+      "url": "https://api.github.com/repos/tibber/tibber-pyml",
+      "forks_url": "https://api.github.com/repos/tibber/tibber-pyml/forks",
+      "keys_url": "https://api.github.com/repos/tibber/tibber-pyml/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/tibber/tibber-pyml/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/tibber/tibber-pyml/teams",
+      "hooks_url": "https://api.github.com/repos/tibber/tibber-pyml/hooks",
+      "issue_events_url": "https://api.github.com/repos/tibber/tibber-pyml/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/tibber/tibber-pyml/events",
+      "assignees_url": "https://api.github.com/repos/tibber/tibber-pyml/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/tibber/tibber-pyml/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/tibber/tibber-pyml/tags",
+      "blobs_url": "https://api.github.com/repos/tibber/tibber-pyml/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/tibber/tibber-pyml/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/tibber/tibber-pyml/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/tibber/tibber-pyml/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/tibber/tibber-pyml/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/tibber/tibber-pyml/languages",
+      "stargazers_url": "https://api.github.com/repos/tibber/tibber-pyml/stargazers",
+      "contributors_url": "https://api.github.com/repos/tibber/tibber-pyml/contributors",
+      "subscribers_url": "https://api.github.com/repos/tibber/tibber-pyml/subscribers",
+      "subscription_url": "https://api.github.com/repos/tibber/tibber-pyml/subscription",
+      "commits_url": "https://api.github.com/repos/tibber/tibber-pyml/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/tibber/tibber-pyml/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/tibber/tibber-pyml/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/tibber/tibber-pyml/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/tibber/tibber-pyml/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/tibber/tibber-pyml/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/tibber/tibber-pyml/merges",
+      "archive_url": "https://api.github.com/repos/tibber/tibber-pyml/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/tibber/tibber-pyml/downloads",
+      "issues_url": "https://api.github.com/repos/tibber/tibber-pyml/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/tibber/tibber-pyml/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/tibber/tibber-pyml/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/tibber/tibber-pyml/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/tibber/tibber-pyml/labels{/name}",
+      "releases_url": "https://api.github.com/repos/tibber/tibber-pyml/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/tibber/tibber-pyml/deployments"
+    },
+    "url": "https://api.github.com/notifications/threads/3805352459",
+    "subscription_url": "https://api.github.com/notifications/threads/3805352459/subscription"
+  }
+]
+```
+"""
+import argparse
+import asyncio
+import json
+import os
+import webbrowser
+from dataclasses import dataclass, field
+from datetime import datetime
+from itertools import groupby
+from typing import Optional
+
+import aiohttp
+import requests
+
+GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+
+
+# "subject": {
+#   "title": "Get Netherlands Single home up",
+#   "url": "https://api.github.com/repos/tibber/tibber-pyml/issues/1235",
+#   "latest_comment_url": "https://api.github.com/repos/tibber/tibber-pyml/issues/comments/1162729843",
+#   "type": "Issue"
+# },
+
+
+@dataclass
+class Subject:
+    title: str
+    url: str
+    latest_comment_url: str
+    type: str
+
+
+@dataclass
+class Notification:
+    subject: Subject
+    url: str
+    repository_name: str
+    unread: bool
+    updated_at: datetime
+    web_link: str = field(init=False, default="")
+
+    def __post_init__(self):
+        if self.subject.url is not None:
+            web_link = self.subject.url.replace(
+                "https://api.github.com/repos/", "https://github.com/"
+            )
+            web_link = web_link.replace("pulls", "pull")
+            self.web_link = web_link
+
+    def __str__(self):
+        max_len = 40
+        title = (
+            self.subject.title[:max_len] + "..."
+            if len(self.subject.title) > max_len
+            else self.subject.title
+        )
+
+        return ";".join(
+            [
+                set_color(bcolors.HEADER, title),
+                self.repository_name,
+                str(self.updated_at),
+                str(self.web_link),
+            ]
+        )
+
+
+@dataclass
+class PullRequest:
+    url: str
+    title: str
+    state: str
+    html_url: str
+
+    def __str__(self):
+        max_len = 40
+        title = (
+            self.title[:max_len] + "..." if len(self.title) > max_len else self.title
+        )
+
+        return ";".join(
+            [
+                set_color(bcolors.HEADER, title),
+                str(self.html_url),
+            ]
+        )
+
+
+@dataclass
+class Issue(Notification):
+    ...
+
+
+class bcolors:
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
+def ok_print(text):
+    color_print(bcolors.OKGREEN, text)
+
+
+def color_print(color, text):
+    print(set_color(color, text))
+
+
+def set_color(color, text):
+    return f"{color}{text}{bcolors.ENDC}"
+
+
+def bold(text):
+    return set_color(bcolors.BOLD, text)
+
+
+def search_pull_requests(assignee):
+    response = requests.get(
+        "https://api.github.com/search/issues",
+        params={"q": f"type:pr assignee:{assignee}", "per_page": 100},
+        headers={
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    return response.json()
+
+
+def reviews(reviewer) -> list[PullRequest]:
+    response = requests.get(
+        "https://api.github.com/search/issues",
+        params={"q": f"type:pr review-requested:{reviewer} is:open", "per_page": 100},
+        headers={
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    pull_requests = response.json()["items"]
+    return [
+        PullRequest(
+            url=pull_request["url"],
+            title=pull_request["title"],
+            state=pull_request["state"],
+            html_url=pull_request["html_url"],
+        )
+        for pull_request in pull_requests
+    ]
+
+
+def fetch_notifications() -> list[Notification]:
+    response = requests.get(
+        "https://api.github.com/notifications",
+        headers={
+            # "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    notifications = response.json()
+    return [
+        Notification(
+            subject=Subject(**notification["subject"]),
+            repository_name=notification["repository"]["name"],
+            unread=notification["unread"],
+            updated_at=datetime.strptime(
+                notification["updated_at"], "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            url=notification["url"],
+        )
+        for notification in notifications
+    ]
+
+
+def get_diff(url):
+    response = requests.get(
+        url,
+        headers={
+            "Accept": "application/vnd.github.v3.diff",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    return response.text
+
+
+def fetch_pull_request(url) -> PullRequest:
+    response = requests.get(
+        url,
+        headers={
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    pr = response.json()
+    return PullRequest(
+        url=url,
+        state=pr["state"],
+        title=pr["title"],
+        html_url=pr["html_url"],
+    )
+
+
+def fetch_diff(url):
+    response = requests.get(
+        url,
+        headers={
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"token {GITHUB_TOKEN}",
+        },
+    )
+    return response.json()
+
+
+async def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--issue", help="Output issues", action="store_true")
+    parser.add_argument("--pr", nargs="?", help="Output PRs", type=int, const=0)
+    parser.add_argument("--diff", help="Output diff", action="store_true")
+    parser.add_argument("--web", help="Open in web", action="store_true")
+    parser.add_argument("--done", help="Mark as done", action="store_true")
+    parser.add_argument("--assigned", help="Assigned PR/Issues", action="store_true")
+    parser.add_argument("--review", help="Review PR/Issues", action="store_true")
+    args = parser.parse_args()
+
+    if args.review:
+        pull_requests = reviews("kaar")
+        for pull_request in pull_requests:
+            print(pull_request)
+        exit(0)
+
+    if args.assigned:
+        prs = search_pull_requests("kaar")
+        for pr in prs["items"]:
+            print(pr["title"])
+        # print(prs)
+        exit(0)
+
+    if args.issue:
+        issues = [
+            notification
+            for notification in fetch_notifications()
+            if notification.subject.type == "Issue"
+        ]
+
+        issue_by_repo = groupby(issues, lambda x: x.repository_name)
+        for repo, issues in issue_by_repo:
+            repo_title = f"=== {repo} ==="
+            print("\n{}".format(repo_title))
+            for issue in issues:
+                if issue.unread:
+                    print("* {} {}".format(issue.subject.title, issue.web_link))
+                else:
+                    print("{} {}".format(issue.subject.title, issue.web_link))
+        await asyncio.sleep(1)
+
+    if args.pr == 0:
+        pull_request_notifications = [
+            notification
+            for notification in fetch_notifications()
+            if notification.subject.type == "PullRequest"
+        ]
+
+        for i, notification in enumerate(pull_request_notifications):
+            if notification.unread:
+                ok_print(f"#{i+1};{notification}")
+            else:
+                print(f"#{i+1};{notification}")
+
+        print(f"Pull Requests: {len(pull_request_notifications)}")
+    if args.pr > 0:
+        # Print a specific PR or maybe open it in browser
+        pull_request_notifications = [
+            notification
+            for notification in fetch_notifications()
+            if notification.subject.type == "PullRequest"
+        ]
+        pr = pull_request_notifications[args.pr - 1]
+        if args.diff:
+            print(get_diff(pr.url))
+        if args.web:
+            webbrowser.open(pr.web_link)
+        if args.done:
+            print(pr.url)
+        else:
+            print(pr)
+
+        print(f"Pull Requests: {len(pull_request_notifications)}")
+
+
+asyncio.run(main())

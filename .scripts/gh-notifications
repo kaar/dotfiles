@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -o errexit
-set -o nounset
 set -o pipefail
 
-open https://github.com/notifications
+if [ "$1" == "--web" ]; then
+  open https://github.com/notifications
+  exit 0
+fi
+
+# read json from std in
+
+# Print notifications
+# gh-parser -h
+# gh api /notifications | gh-parser --issue
+# gh api /notifications | gh-parser --pr
+# gh-parser --assigned
+
+gh-parser --pr | column -t -s ";"
