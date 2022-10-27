@@ -64,8 +64,10 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+
+-- lvim.builtin.nvimtree.setup.view.side = "left"
+-- lvim.builtin.nvimtree.show_icons.git = 0
+
 -- gx only works when using netrw
 -- https://github.com/kyazdani42/nvim-tree.lua/issues/226
 -- https://github.com/LunarVim/LunarVim/issues/2319
@@ -73,7 +75,8 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- lvim.builtin.nvimtree.setup.hijack_netrw = false
 
 -- This solves the problem of gx no working with nvim-tree
-vim.api.nvim_set_keymap('n', 'gx', '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gx', '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>',
+  { noremap = true, silent = true })
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -152,9 +155,9 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { exe = "flake8", filetypes = { "python" }, args = { "--max-line-length=120" } },
   { exe = "shellcheck", filetypes = { "sh", "bash" }, args = { "--severity", "warning" } },
-  { exe = "codespell", filetypes = { "javascript", "python" }, args = { "--ignore-words", "spell/en.utf-8.add"}},
+  { exe = "codespell", filetypes = { "javascript", "python" }, args = { "--ignore-words", "spell/en.utf-8.add" } },
   { exe = "eslint", filetypes = { "javascript", "typescript" } },
-  { exe = "pylint", filetypes = { "python" } },
+  -- { exe = "pylint", filetypes = { "python" } },
 }
 
 -- lvim.keys.normal_mode = {
@@ -175,15 +178,30 @@ lvim.plugins = {
   { "preservim/vimux" },
   { "vim-test/vim-test" },
   { "skywind3000/asyncrun.vim" },
+  { "tpope/vim-dispatch" },
+  { "hkupty/iron.nvim" },
+  { "geg2102/nvim-python-repl" },
 }
+require("nvim-python-repl").setup()
 -- vim-test
 -- vim.cmd('let test#strategy = "asyncrun"')
 vim.cmd('let test#strategy = "neovim"')
+-- vim.cmd('let test#strategy = "dispatch"')
 lvim.builtin.which_key.mappings["t"] = {
   name = "Test",
   f = { "<cmd>TestFile<cr>", "File" },
   n = { "<cmd>TestNearest<cr>", "Nearest" },
   s = { "<cmd>TestSuite<cr>", "Suite" },
+}
+
+-- Run commands
+lvim.builtin.which_key.mappings["r"] = {
+  name = "Run",
+  p = { '<cmd>VimuxRunCommand("python " . bufname("%"))<cr>', "Python" },
+  i = { '<cmd>VimuxRunCommand("python -i " . bufname("%"))<cr>', "Python" },
+  -- l = { '<cmd>SendPyObject<cr>', "Line" },
+  -- s = { '<cmd>SendPySelection<cr>', "Selection" },
+  -- b = { '<cmd>SendPyBuffer<cr>', "Buffer" },
 }
 
 -- https://github.com/LunarVim/LunarVim/issues/1856
@@ -206,6 +224,44 @@ lvim.builtin.cmp.mapping["<C-e>"] = function(fallback)
   end
 end
 
+local iron = require("iron.core")
+
+iron.setup {
+  config = {
+    -- Whether a repl should be discarded or not
+    scratch_repl = true,
+    -- Your repl definitions come here
+    repl_definition = {
+      sh = {
+        command = {"zsh"}
+      }
+    },
+    -- How the repl window will be displayed
+    -- See below for more information
+    repl_open_cmd = require('iron.view').bottom(40),
+  },
+  -- Iron doesn't set keymaps by default anymore.
+  -- You can set them here or manually add keymaps to the functions in iron.core
+  keymaps = {
+    send_motion = "<space>sc",
+    visual_send = "<space>sc",
+    send_file = "<space>sf",
+    send_line = "<space>sl",
+    send_mark = "<space>sm",
+    mark_motion = "<space>mc",
+    mark_visual = "<space>mc",
+    remove_mark = "<space>md",
+    cr = "<space>s<cr>",
+    interrupt = "<space>s<space>",
+    exit = "<space>sq",
+    clear = "<space>cl",
+  },
+  -- If the highlight is on, you can change how it looks
+  -- For the available options, check nvim_set_hl
+  highlight = {
+    italic = true
+  }
+}
 -- re-map tab to use copilot
 -- lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
 --   if cmp.visible() then
