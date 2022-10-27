@@ -19,3 +19,5 @@ aliases:
   gist-view: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist view "$id"'
   gist-edit: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist edit "$id"'
   bug: issue create --label "bug"
+  bugs: issue list --label "bug"
+  feature: issue create --label "enhancement"
