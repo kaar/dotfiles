@@ -27,6 +27,11 @@ _tailscale()
 				IP_AND_HOSTNAME=$(tailscale status 2>&1  | awk '{print $1"\n"$2}')
 				COMPREPLY=( $(compgen -W "$IP_AND_HOSTNAME" -- "$cur" ))
 				;;
+        "ssh")
+          IP_AND_HOSTNAME=$(tailscale status 2>&1  | awk '{print $1"\n"$2}')
+          COMPREPLY=( $(compgen -W "$IP_AND_HOSTNAME" -- "$cur" ))
+        ;;
+
 			esac
 		fi
 	fi
@@ -34,4 +39,4 @@ _tailscale()
 
 # (complete -p | grep -q tailscale) || \
 # 	complete -F _tailscale tailscale
-complete -F _tailscale tailscale
+complete -F _tailscale tailscale ts

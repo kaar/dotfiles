@@ -136,6 +136,9 @@ alias browse='firefox -new-tab'
 # AWS
 alias aws-session='aws sso login'
 
+# tailscale
+alias ts='tailscale'
+
 # other
 alias aws-cloudwatch='open ${AWS_URL_CLOUDWATCH}'
 alias aws-console='open ${AWS_URL_CONSOLE}'
