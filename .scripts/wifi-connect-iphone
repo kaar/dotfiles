@@ -1,0 +1,11 @@
+#!/bin/bash
+
+n=0
+until [ "$n" -ge 5 ]
+do
+  nmcli dev wifi connect "$SSID" && break
+  nmcli dev wifi rescan
+  n=$((n+1))
+  sleep 3
+
+done
