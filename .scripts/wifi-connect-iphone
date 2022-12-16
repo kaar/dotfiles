@@ -4,11 +4,12 @@ SSID="Caspar iPhone"
 echo -n "Trying to connect to $SSID"
 
 n=0
-until [ "$n" -ge 5 ]
+until [ "$n" -ge 10 ]
 do
-  echo "."
+  echo -n "."
   nmcli dev wifi connect "$SSID" 2>/dev/null && break
   nmcli dev wifi rescan
   n=$((n+1))
   sleep 3
 done
+echo ""
