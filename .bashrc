@@ -222,3 +222,4 @@ stty -ixon
 
 # direnv
 eval "$(direnv hook bash)"
+. "$HOME/.cargo/env"
