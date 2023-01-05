@@ -24,3 +24,30 @@ aliases:
   bug: issue create --label "bug"
   bugs: issue list --label "bug"
   feature: issue create --label "enhancement"
+  repos: |
+    !gh api --paginate graphql -f owner="$1" -f query='
+      query($owner: String!, $per_page: Int = 100, $endCursor: String) {
+        repositoryOwner(login: $owner) {
+          repositories(first: $per_page, after: $endCursor, ownerAffiliations: OWNER) {
+              nodes { nameWithOwner }
+              pageInfo { hasNextPage endCursor }
+            }
+          }
+        }
+      ' | jq -r '.data.repositoryOwner.repositories.nodes[].nameWithOwner' | sort
+  orgs: |
+    !gh api --paginate graphql  -f query='
+    query {
+      viewer {
+        id
+        name
+        organizations(first: 100) {
+          nodes {
+            id
+            name
+          }
+        }
+      }
+    } ' | jq -r '.data.viewer.organizations[][] | .id + " " + .name'
+  status: |
+    !gh api graphql -f emoji="${1%% *}" -f msg="${1#* }" -f query='mutation ($msg: String!, $emoji: String) {changeUserStatus(input:{message:$msg,emoji:$emoji}) {status { message, emoji }}}'
