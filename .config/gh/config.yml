@@ -16,11 +16,14 @@ aliases:
   pv: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view "$id" --comments'
   pl: pr list
   pc: pr checks --watch
+  view: pr view --web
+  diff: pr diff
 
   co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
   # issue
   il: issue list --limit 50
   iv: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
+  io: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue edit "$id"'
   bug: issue create --label "bug"
   bugs: issue list --label "bug"
   feature: issue create --label "enhancement"
@@ -51,3 +54,4 @@ aliases:
     } ' | jq -r '.data.viewer.organizations[][] | .id + " " + .name'
   status: |
     !gh api graphql -f emoji="${1%% *}" -f msg="${1#* }" -f query='mutation ($msg: String!, $emoji: String) {changeUserStatus(input:{message:$msg,emoji:$emoji}) {status { message, emoji }}}'
+  question: issue create --label "question"
