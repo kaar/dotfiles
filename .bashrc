@@ -92,7 +92,8 @@ eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/gruvbox)"
 
 # ------------------------------ aliases -----------------------------
 alias ls='exa'
-alias ll='ls --long --group-directories-first --header --git'
+alias ll='exa --long --git --group-directories-first --no-filesize --no-time --no-permissions --no-user'
+# alias ll='ls --long --group-directories-first --header --git'
 alias la='ls --all --group-directories-first -1'
 alias l='ls -CF'
 alias grep='grep --color=auto'
