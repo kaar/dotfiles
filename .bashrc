@@ -84,6 +84,9 @@ fi
 # "bat" as manpager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# poetry
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+
 # ----------------------------- dircolors ----------------------------
 eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/gruvbox)"
 
