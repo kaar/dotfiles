@@ -27,6 +27,54 @@
 #
 # If you face any other problem please check the troubleshooting guide (DNS issues):
 # https://docs.aws.amazon.com/vpn/latest/clientvpn-user/linux-troubleshooting.html#aws-provided-client
+#
+#
+#
+# VPN
+# 
+# [VPN Solution](https://www.notion.so/tibber/RFC009-VPN-Solution-a833c2a9c1244f2b99c5dcea1c4a636f)
+# 
+# ## awsvpnclient
+# <https://aur.archlinux.org/packages/awsvpnclient>
+# 
+# Restart service:
+# `sudo systemctl restart awsvpnclient`
+# 
+# 
+# ```
+# # If you depend on DNS servers from VPN you need to have a running systemd-resolved.service.
+# sudo systemctl enable systemd-resolved.service && sudo systemctl start systemd-resolved.service
+# ```
+# 
+# 
+# ```
+# systemctl status awsvpnclient.service
+# chmod 000 ~/.config/AWSVPNClient/awsvpnclientmetrics.db
+# 
+# eval $(dbus-launch --sh-syntax)
+# /opt/awsvpnclient/AWS VPN Client
+# ```
+# 
+# ## Troubleshoot
+# * [Broken after updated version](https://tibber.slack.com/archives/C7ARM9Q9X/p1650355457497169)
+# 
+# 
+# Add `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1`
+# in both `.desktop` and for `systemd service` user.
+# 
+# @trond
+# > ok, so:
+# > in /usr/share/applications/awsvpnclient.desktop prepend env DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 to the Exec command
+# > in systemctl edit awsvpnclient.service, add [Service]\nEnvironment=DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 and reload systemctl/restart awsvpnclient
+# > connected and all is well
+# Script:
+# #!/usr/bin/env bash
+# set -o errexit
+# set -o nounset
+# set -o pipefail
+# export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+# export LD_DEBUG=True
+# /opt/awsvpnclient/AWS\ VPN\ Client > /dev/null 2>&1 &
 
 url="https://aur.archlinux.org/awsvpnclient.git"
 
