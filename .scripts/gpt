@@ -1,67 +1,144 @@
-#!/usr/bin/env bash
-set -o errexit
-set -o pipefail
+#!/usr/bin/env python3
 
-OPENAI_API_KEY=$(pass OpenAI/OPENAI_API_KEY)
+import argparse
+import json
+import logging
+import os
+import sys
 
-help() {
-  echo "Usage: gpt <command> <args>"
-  echo "       gpt <command> --help"
-  echo "       gpt --help"
-  echo "       gpt commifg"
-  echo "       gpt --version"
-  echo ""
-  echo "Commands:"
-  echo "  help        Show this help message"
-  echo "  version     Show the version of gpt"
-}
+import openai
 
-commit() {
-  if [ -z "$1" ]; then
-    diff=$(git diff --cached)
-  elif [ "$1" == "-" ]; then
-    diff=$(cat)
-  else
-    echo "Usage: gpt commit [-]"
-    return
-  fi
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-  prompt="I want you to act like a git commit message writer. I will input a git diff and your job is to convert it into a useful commit message. Do not preface the commit with anything, use the present tense, return a complete sentence, and do not repeat yourself: $diff"
-  prompt=$(echo -n "$prompt" | jq -sRr @uri)
+LOG = logging.getLogger(__name__)
 
-  response=$(curl -s https://api.openai.com/v1/completions \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
-    -d '{
-    "model": "text-davinci-003",
-    "prompt": "'"$prompt"'",
-    "temperature": 0,
-    "max_tokens": 60,
-    "top_p": 1.0,
-    "frequency_penalty": 0.0,
-    "presence_penalty": 0.0
-  }')
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="%(message)s",
+)
 
-  echo "$response" | jq -r '.choices[0].text' | sed 's/%0A//g' | sed 's/Commit message: //g' | sed '/^$/d'
-}
 
-command="$1"
+def debug(event, code=None, language=None):
+    def create_message():
+        message = f"{event}"
 
-case "$command" in
-  help)
-    help
-    ;;
-  version)
-    echo "0.1.0"
-    ;;
-  commit)
-    shift
-    commit "$@"
-    ;;
-  *)
-    echo "Unknown command: $command"
-    echo ""
-    help
-    exit 1
-    ;;
-esac
+        if code:
+            languages = {
+                "python": "python",
+                "py": "py",
+                "json": "json",
+                None: "",
+            }
+
+            message += f"\n```{languages[language]}\n{code}\n```"
+
+        return message
+
+    LOG.debug("%s", create_message())
+
+
+def question(question):
+    prompt_template = f"""
+I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "Unknown".
+
+Q: What is human life expectancy in the United States?
+A: Human life expectancy in the United States is 78 years.
+
+Q: Who was president of the United States in 1955?
+A: Dwight D. Eisenhower was president of the United States in 1955.
+
+Q: Which party did he belong to?
+A: He belonged to the Republican Party.
+
+Q: What is the square root of banana?
+A: Unknown
+
+Q: How does a telescope work?
+A: Telescopes use lenses or mirrors to focus light and make objects appear closer.
+
+Q: Where were the 1992 Olympics held?
+A: The 1992 Olympics were held in Barcelona, Spain.
+
+Q: How many squigs are in a bonk?
+A: Unknown\n
+
+Q: {question}
+A: 
+"""
+    prompt = prompt_template
+    request = dict(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=0,
+        max_tokens=100,
+        top_p=1,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=["\n"],
+    )
+    debug("sending request", json.dumps(request, indent=1), "json")
+    response = openai.Completion.create(**request)
+    debug("response", json.dumps(response, indent=1), "json")
+
+    print(response.choices[0].text)
+
+
+def explain_code(code):
+    debug("explain code", code, "python")
+    MODELS = {
+        "TEXT": "text-davinci-003",
+        "CODE": "code-davinci-002",
+    }
+
+    STOP = '"""'
+    prompt_request = "\nHere is an explaination of the above code:"
+
+    prompt = code + STOP + prompt_request
+    request = dict(
+        model=MODELS["CODE"],
+        prompt=prompt,
+        temperature=0,
+        max_tokens=64,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=['"""'],
+    )
+    debug("sending request", json.dumps(request, indent=1), "json")
+    response = openai.Completion.create(**request)
+    debug("response", json.dumps(response, indent=1), "json")
+
+    print(response.choices[0].text)
+
+
+# CLI application gpt
+# Usage: gpt <command> [options]
+# Commands:
+#   code  Explain code
+# Options:
+#   -h, --help      Show this message and exit.
+#   -v, --verbose   Show verbose output
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="GPT-3 CLI application")
+
+    parser.add_argument("command", choices=["code", "question"], help="Command to run")
+    parser.add_argument(
+        "-v", "--verbose", action="store_true", help="Show verbose output"
+    )
+    args = parser.parse_args()
+
+    if args.verbose:
+        LOG.setLevel(logging.DEBUG)
+        LOG.debug("Verbose output enabled")
+        print("Verbose output enabled")
+
+    subcommand = args.command
+
+    if subcommand == "code":
+        explain_code(sys.stdin.read())
+        exit(0)
+    elif subcommand == "question":
+        query = input("Q: ")
+        question(query)
