@@ -38,8 +38,57 @@ def debug(event, code=None, language=None):
     LOG.debug("%s", create_message())
 
 
+def request_completion(request) -> str:
+    debug("sending request", json.dumps(request, indent=1), "json")
+    response = openai.Completion.create(**request)
+    debug("response", json.dumps(response, indent=1), "json")
+
+    return response.choices[0].text
+
+
+def code_question(question):
+    prompt = f"""
+I am a highly intelligent python question answering bot. If you ask me a question about python or code in general, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "Unknown".
+
+Q: How to get the name of the function in python?
+A: In Python, you can get the name of a function by accessing the __name__ attribute of the function object. The __name__ attribute is a built-in attribute of all Python functions that contains the name of the function as a string.
+
+Q: 
+A: 
+
+Q: 
+A: 
+
+Q: 
+A: 
+
+Q: 
+A: 
+
+Q: 
+A: 
+
+Q: How many squigs are in a bonk?
+A: Unknown\n
+
+Q: {question}
+A: 
+"""
+    request = dict(
+        model="text-davinci-003",
+        prompt=prompt,
+        temperature=0,
+        max_tokens=100,
+        top_p=1,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
+        stop=["\n"],
+    )
+    response_text = request_completion(request)
+    print(response_text)
+
 def question(question):
-    prompt_template = f"""
+    prompt = f"""
 I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "Unknown".
 
 Q: What is human life expectancy in the United States?
@@ -66,7 +115,6 @@ A: Unknown\n
 Q: {question}
 A: 
 """
-    prompt = prompt_template
     request = dict(
         model="text-davinci-003",
         prompt=prompt,
@@ -77,26 +125,18 @@ A:
         presence_penalty=0.0,
         stop=["\n"],
     )
-    debug("sending request", json.dumps(request, indent=1), "json")
-    response = openai.Completion.create(**request)
-    debug("response", json.dumps(response, indent=1), "json")
-
-    print(response.choices[0].text)
+    response_text = request_completion(request)
+    print(response_text)
 
 
 def explain_code(code):
-    debug("explain code", code, "python")
-    MODELS = {
-        "TEXT": "text-davinci-003",
-        "CODE": "code-davinci-002",
-    }
-
     STOP = '"""'
-    prompt_request = "\nHere is an explaination of the above code:"
 
-    prompt = code + STOP + prompt_request
+    prompt = f"""{code}{STOP}
+Here is an explaination of the above code:"""
+
     request = dict(
-        model=MODELS["CODE"],
+        model="code-davinci-002",
         prompt=prompt,
         temperature=0,
         max_tokens=64,
@@ -105,11 +145,8 @@ def explain_code(code):
         presence_penalty=0.0,
         stop=['"""'],
     )
-    debug("sending request", json.dumps(request, indent=1), "json")
-    response = openai.Completion.create(**request)
-    debug("response", json.dumps(response, indent=1), "json")
-
-    print(response.choices[0].text)
+    response_text = request_completion(request)
+    print(response_text)
 
 
 # CLI application gpt
@@ -136,6 +173,7 @@ if __name__ == "__main__":
 
     subcommand = args.command
 
+    LOG.debug("Executing subcommand: %s", subcommand)
     if subcommand == "code":
         explain_code(sys.stdin.read())
         exit(0)
