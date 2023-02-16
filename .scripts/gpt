@@ -87,6 +87,7 @@ A:
     response_text = request_completion(request)
     print(response_text)
 
+
 def question(question):
     prompt = f"""
 I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "Unknown".
@@ -149,34 +150,181 @@ Here is an explaination of the above code:"""
     print(response_text)
 
 
-# CLI application gpt
-# Usage: gpt <command> [options]
+STOP = "\n"
+
+
+def read_input(args):
+    LOG.debug("args: %s", args)
+    if len(args) == 0:
+        LOG.debug("reading from stdin")
+        return sys.stdin.read()
+    else:
+        LOG.debug("reading from file")
+        with open(args[0], "r") as f:
+            return f.read()
+
+
+DEFAULT_MODEL = "text-davinci-003"
+DEFAULT_TEMPERATURE = 0
+DEFAULT_MAX_TOKENS = 64
+DEFAULT_TOP_P = 1.0
+DEFAULT_FREQUENCY_PENALTY = 0.0
+DEFAULT_PRESENCE_PENALTY = 0.0
+
+
+def main():
+    parser = argparse.ArgumentParser(description="OpenAI GPT-3 text completion")
+    parser.add_argument(
+        "file",
+        nargs="?",
+        type=argparse.FileType("r"),
+        default=sys.stdin,
+        help="input file",
+    )
+    parser.add_argument("--debug", action="store_true", help="enable debug output")
+    parser.add_argument(
+        "--temperature", type=float, default=DEFAULT_TEMPERATURE, help="temperature"
+    )
+    parser.add_argument(
+        "--max-tokens", type=int, default=DEFAULT_MAX_TOKENS, help="max tokens"
+    )
+    parser.add_argument("--top-p", type=float, default=DEFAULT_TOP_P, help="top p")
+    parser.add_argument(
+        "--frequency-penalty",
+        type=float,
+        default=DEFAULT_FREQUENCY_PENALTY,
+        help="frequency penalty",
+    )
+    parser.add_argument(
+        "--presence-penalty",
+        type=float,
+        default=DEFAULT_PRESENCE_PENALTY,
+        help="presence penalty",
+    )
+    # silent, no print of input
+    parser.add_argument(
+        "--silent", action="store_true", help="silent, no print of input"
+    )
+
+    args = parser.parse_args()
+
+    if args.debug:
+        LOG.setLevel(logging.DEBUG)
+        LOG.debug("Verbose output enabled")
+        LOG.debug("argv: %s", sys.argv)
+
+    input_text = args.file.read().strip()
+    LOG.debug("input: %s", input_text)
+
+    if not args.silent:
+        print(input_text)
+
+    request = dict(
+        model=DEFAULT_MODEL,
+        prompt=f"{input_text}{STOP}",
+        temperature=args.temperature,
+        max_tokens=args.max_tokens,
+        top_p=args.top_p,
+        frequency_penalty=args.frequency_penalty,
+        presence_penalty=args.presence_penalty,
+    )
+    text = request_completion(request)
+    print(text)
+
+    # try:
+    #     if "--debug" in sys.argv:
+    #         LOG.setLevel(logging.DEBUG)
+    #         LOG.debug("Verbose output enabled")
+    #         LOG.debug("argv: %s", sys.argv)
+    #         sys.argv.remove("--debug")
+
+    #     args = sys.argv[1:]
+    #     if len(args) == 0:
+    #         LOG.debug("reading from stdin")
+    #         input = sys.stdin.read()
+    #     else:
+    #         LOG.debug("reading from file")
+    #         with open(args[0], "r") as f:
+    #             input = f.read()
+    #     print(input)
+    #     request = dict(
+    #         model="text-davinci-003",
+    #         prompt=f"{input}{STOP}",
+    #         temperature=0,
+    #         max_tokens=64,
+    #         top_p=1.0,
+    #         frequency_penalty=0.0,
+    #         presence_penalty=0.0,
+    #     )
+    #     text = request_completion(request)
+    #     print(text)
+
+    # # if first argument is a file
+    # if os.path.isfile(args[0]):
+    #     with open(args[0], "r") as f:
+    #         query = f.read()
+    #         # TODO: sanity checks!!!!
+    #         response = standard_input(query)
+    #         print(response)
+    # else:
+    #     query = sys.stdin.read()
+    #     response = standard_input(query)
+    #     print(response)
+
+
+# Usage: gpt <file>
 # Commands:
-#   code  Explain code
+#   --code <code>  Explain code
+#   --question <question>  Ask a question
+#   --code-question <code-question>  Ask a code question
 # Options:
 #   -h, --help      Show this message and exit.
 #   -v, --verbose   Show verbose output
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="GPT-3 CLI application")
+    try:
+        main()
+    except KeyboardInterrupt:
+        LOG.debug("KeyboardInterrupt")
+        sys.exit(1)
+    # exit(0)
+    # parser = argparse.ArgumentParser(description="GPT-3 CLI application")
 
-    parser.add_argument("command", choices=["code", "question"], help="Command to run")
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Show verbose output"
-    )
-    args = parser.parse_args()
+    # parser.add_argument(
+    #     "-v", "--verbose", action="store_true", help="Show verbose output"
+    # )
+    # parser.add_argument("--code", help="Explain code")
+    # parser.add_argument("--question", help="Ask a question")
+    # parser.add_argument("--code-question", help="Ask a code question")
+    # parser.add_argument("--stdin", action="store_true", help="Read from stdin")
+    # parser.add_argument("--file", help="Read from file")
+    # args = parser.parse_args()
 
-    if args.verbose:
-        LOG.setLevel(logging.DEBUG)
-        LOG.debug("Verbose output enabled")
-        print("Verbose output enabled")
+    # if args.verbose:
+    #     LOG.setLevel(logging.DEBUG)
+    #     LOG.debug("Verbose output enabled")
+    #     print("Verbose output enabled")
 
-    subcommand = args.command
+    # if args.code:
+    #     explain_code(sys.stdin.read())
+    #     exit(0)
+    # elif args.question:
+    #     query = input("Q: ")
+    #     question(query)
+    # elif args.code_question:
+    #     pass
+    # elif args.stdin:
+    #     query = sys.stdin.read()
+    #     response = standard_input(query)
+    #     print(response)
+    # elif args.file:
+    #     print("file", args.file)
+    #     exit(0)
 
-    LOG.debug("Executing subcommand: %s", subcommand)
-    if subcommand == "code":
-        explain_code(sys.stdin.read())
-        exit(0)
-    elif subcommand == "question":
-        query = input("Q: ")
-        question(query)
+    #     with open(args.file, "r") as f:
+    #         query = f.read()
+    #         response = standard_input(query)
+    #         print(response)
+    # else:
+    #     parser.print_help()
+    #     exit(1)
