@@ -109,6 +109,7 @@ lvim.plugins = {
   { "tpope/vim-dispatch" },
   { "hkupty/iron.nvim" },
   { "geg2102/nvim-python-repl" },
+  { "tpope/vim-rhubarb" },
 }
 
 -- https://github.com/LunarVim/LunarVim/issues/1856
