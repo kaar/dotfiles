@@ -1,29 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
-if [ -z "${SCRIPTS:-}" ]; then
-  echo "SCRIPTS not set"
-  exit 1
-fi
-
-if [ -z "${1:-}" ]; then
-  echo "usage: $0 <name>"
-  exit 1
-fi
+[[ -z "${SCRIPTS:-}" ]] && printf "SCRIPTS not set\n" >&2 && exit 1
+[[ -z "${1:-}" ]] && printf "usage: %s <name>\n" "$0" >&2 && exit 1
 
 path="${SCRIPTS}/${1}"
 
-if [ ! -e "${path}" ]; then
-  cat <<EOF > "${path}"
+[[ ! -e "${path}" ]] && {
+cat <<EOF > "${path}"
 #!/usr/bin/env bash
 set -o errexit
 set -o nounset
 set -o pipefail
 EOF
-  chmod +x "${path}"
-fi
+chmod +x "${path}"
+}
 
 "${EDITOR:-vi}" +2 "${path}"
