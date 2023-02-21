@@ -4,20 +4,26 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-[ ! -n "${SCRIPTS}" ] && echo "SCRIPTS not set" && exit 1;
-[ ! -n "${1}" ] && echo "usage: newscript <name>" && exit 1;
+if [ -z "${SCRIPTS:-}" ]; then
+  echo "SCRIPTS not set"
+  exit 1
+fi
+
+if [ -z "${1:-}" ]; then
+  echo "usage: $0 <name>"
+  exit 1
+fi
 
 path="${SCRIPTS}/${1}"
 
-if [ -e "${path}" ]; then
-  exec $EDITOR "${path}"
-  exit 0
-fi
-
-printf '#!/usr/bin/env bash
+if [ ! -e "${path}" ]; then
+  cat <<EOF > "${path}"
+#!/usr/bin/env bash
 set -o errexit
 set -o nounset
 set -o pipefail
-' > "${path}"
-chmod +x "${path}"
-exec $EDITOR +2 "${path}"
+EOF
+  chmod +x "${path}"
+fi
+
+"${EDITOR:-vi}" +2 "${path}"
