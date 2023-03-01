@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+FILE_TYPE="py"
+
+SCRATCH_DIR="${HOME}/playground/scratch"
+dt=$(date +%Y%m%d%H%M%S)
+filename="$SCRATCH_DIR/${dt}.${FILE_TYPE}"
+
+# $EDITOR -c "set filetype=$FILE_TYPE" -c "startinsert" file_name
+$EDITOR -c "startinsert" -c "set filetype=$FILE_TYPE"
