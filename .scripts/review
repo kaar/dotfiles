@@ -4,6 +4,6 @@ set -o nounset
 set -o pipefail
 
 instructions="You are code reviewer. You will receive code or documentation that I would like you to review."
-file="$1"
+file="${1:-/dev/stdin}"
 
 gpt -i "$instructions" "$file"
