@@ -3,4 +3,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-gh pr checks --watch
+git diff --cached | git-gpt | git commit -eF -
