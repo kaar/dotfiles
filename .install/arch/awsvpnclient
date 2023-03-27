@@ -84,3 +84,9 @@ git clone "${url}" --depth 1 "${repo}"
 cd $repo || exit 1
 makepkg -si
 rm -rf "${repo}"
+
+# Restart serviced
+sudo systemctl restart awsvpnclient
+
+# Create symlink
+sudo ln -s /opt/awsvpnclient/AWS\ VPN\ Client /usr/bin/awsvpnclient
