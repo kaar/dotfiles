@@ -1,4 +1,9 @@
-## Kubectl,https://kubernetes.io/docs/tasks/tools/install-kubectl/
+#!/usr/bin/env bash
+# Kubectl,https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+set -o errexit
+set -o nounset
+set -o pipefail
 
 installed=$(kubectl version --client | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
 latest=$(curl -L -s https://dl.k8s.io/release/stable.txt | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')
