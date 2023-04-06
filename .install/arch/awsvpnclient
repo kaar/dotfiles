@@ -89,4 +89,5 @@ rm -rf "${repo}"
 sudo systemctl restart awsvpnclient
 
 # Create symlink
-sudo ln -s /opt/awsvpnclient/AWS\ VPN\ Client /usr/bin/awsvpnclient
+sudo ln -s /opt/awsvpnclient/AWS\ VPN\ Client /usr/local/bin/aws-vpn-client
+sudo ln -s /usr/local/bin/aws-vpn-client /usr/local/bin/vpn-client
