@@ -1,0 +1,18 @@
+#!/bin/sh
+
+REPOS=${REPOS:-/repos}
+REPO=$REPOS/nmap
+
+url=https://github.com/nmap/nmap 
+
+## Clone
+if [ ! -d "$REPO" ]; then
+    git clone $url "$REPO" --depth 1
+fi
+cd "${REPOS}/nmap/nmap" || exit 1
+git sync
+
+## Install
+./configure
+make
+sudo make install
