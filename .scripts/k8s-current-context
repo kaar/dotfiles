@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# CONTEXT_FILE="${XDG_CONFIG_HOME}/k8s/current-context"
+CONTEXT_FILE="${XDG_CONFIG_HOME}/i3status/k8s-current-context"
+# Get the current context
+current_context=$(kubectl config current-context)
+echo "Current context: ${current_context}"
+echo "$current_context" > "${CONTEXT_FILE}"
