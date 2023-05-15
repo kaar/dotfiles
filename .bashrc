@@ -55,9 +55,10 @@ export FZF_TMUX=1
 
 # go
 export GOPATH=~/.local/share/go
-export GOBIN=/usr/bin/go
+export GOBIN=~/.local/bin/go/
 export GOPROXY=direct
 export CGO_ENABLED=0
+export PATH="$GOBIN:$PATH"
 
 # dotnet
 export DOTNET_TOOLS="$HOME/.dotnet/tools"
@@ -71,7 +72,6 @@ export CDPATH=.:~/Dev/:
 
 export PATH="$SCRIPTS:$PATH"
 export PATH="$DOTNET_TOOLS:$PATH"
-export PATH="$GOPATH:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # ------------------------------- pager ------------------------------
