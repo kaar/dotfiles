@@ -63,6 +63,10 @@ export PATH="$GOBIN:$PATH"
 # dotnet
 export DOTNET_TOOLS="$HOME/.dotnet/tools"
 
+# python
+# makes pipenv install packages in the project directory
+export PIPENV_VENV_IN_PROJECT=1
+
 # ------------------------------ cdpath ------------------------------
 
 export CDPATH=.:~/Dev/:
