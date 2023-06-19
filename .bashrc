@@ -154,6 +154,9 @@ alias aws-iam='open ${AWS_URL_IAM}'
 # python
 alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
 
+# secrets
+alias source-secrets='source ~/.config/secrets.env'
+
 # Load all scripts in shell.d
 for file in ~/.config/shell.d/*.sh ; do
   [ -f "$file" ] && source $file
