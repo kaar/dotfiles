@@ -101,3 +101,7 @@ python/
 .yarn/
 .config/AWSVPNClient
 .config/get-proxy
+tibber-notes
+tmp/
+tibber-logs/
+DataGripProjects/
