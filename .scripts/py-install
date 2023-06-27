@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -z "${1}" ]]; then
+    echo "Usage: ${0} <python-package>"
+    exit 1
+fi
+
+sudo pacman -S --needed python-"${1}"
