@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+GDOC_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gdoc"
+help="Usage: gdoc <file> [options]
+
+This script is to organize gist documents
+
+Arguments:
+  file                  File to open or create
+
+Options:
+  --view                View the gist document
+  --list-files          List all local files
+  --completion          Print the completion script
+  -h, --help            Show this help message and exit.
+
+Paths:
+\$XDG_DATA_HOME/gdoc    Local file storage (default: $GDOC_DATA_HOME)
+
+Dependencies:
+  gh, bat
+
+Example:
+  gdoc file.txt"
+
+COMPLETION_SCRIPT='''#!/usr/bin/env bash
+
+_gdoc_completion()
+{
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+  files=$(gdoc --list-files)
+  local options="--view --list-files --completion -h --help"
+  COMPREPLY=( $(compgen -W "${files}" -- "${current_word}") )
+  COMPREPLY+=( $(compgen -W "${options}" -- "${current_word}") )
+}
+
+complete -F _gdoc_completion gdoc'''
+
+
+if [[ ! -d "$GDOC_DATA_HOME" ]]; then
+    mkdir -p "$GDOC_DATA_HOME"
+fi
+
+file_name=""
+view_file=false
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --list-files)
+          files=$(ls -1 "$GDOC_DATA_HOME")
+          # split on _ and get the second part
+          file_names=$(echo "$files" | cut -d'_' -f2)
+          echo "$file_names"
+            shift
+            shift
+            ;;
+        --view)
+          if [[ -z $file_name ]]; then
+            file_name="$2"
+          fi
+          view_file=true
+            shift
+            ;;
+        --completion)
+          echo "$COMPLETION_SCRIPT"
+          exit 0
+            ;;
+        -h|--help)
+            echo "$help"
+            exit 0
+            ;;
+        *)
+
+            if [[ -z $file_name ]]; then
+              file_name="$1"
+            fi
+            shift
+            ;;
+    esac
+done
+local_files=$(find "$GDOC_DATA_HOME" -type f -name "*_$file_name")
+
+if [[ -n "$local_files" ]]; then
+    if [[ "$view_file" = true ]]; then
+        for local_file in $local_files; do
+            bat "$local_file"
+        done
+        exit 0
+    fi
+
+    echo "Do you want to edit the local file? [y/n]"
+    read -r answer
+    if [[ "$answer" != "y" ]]; then
+        exit 1
+    fi
+
+    for local_file in $local_files; do
+        gist_id=$(echo "$local_file" | cut -d'/' -f7 | cut -d'_' -f1)
+        gh gist edit "$gist_id"
+        # TODO:
+        # handle case when gist is not found
+        # gist not found: aa55dab8f8ac79b1a42aba04c3dc642c
+        exit 0
+    done
+fi
+
+gist_url=$(gh gist create "$file_name")
+gist_id=$(echo "$gist_url" | cut -d'/' -f5)
+cp "$file_name" "$GDOC_DATA_HOME\/${gist_id}_${file_name}"
+
+echo "$gist_url"
+echo "$gist_url" | xclip -selection clipboard

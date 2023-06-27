@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+_gdoc_completion()
+{
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+  files=$(gdoc --list-files)
+  local options="--view --list-files --completion -h --help"
+  COMPREPLY=( $(compgen -W "${files}" -- "${current_word}") )
+  COMPREPLY+=( $(compgen -W "${options}" -- "${current_word}") )
+}
+
+complete -F _gdoc_completion gdoc
