@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+DEFAULT_LIMIT=50
+help="Usage: gsync [options] [directory]
+
+This script syncs all gists into a directory.
+
+Options:
+  --limit N          Set the limit to N (default: $DEFAULT_LIMIT).
+  -h, --help         Show this help message and exit.
+
+Arguments:
+  directory          The directory to sync gists to.
+
+Example:
+  gsync ~/.local/share/gists
+"
+
+# # Check if at least one argument was passed
+if [[ $# -eq 0 ]]; then
+    echo "$help"
+    exit 1
+fi
+
+limit="${DEFAULT_LIMIT}"
+gist_dir=""
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --limit)
+            limit="$2"
+            shift
+            shift
+            ;;
+        -h|--help)
+            echo "$help"
+            exit 0
+            ;;
+        *)
+            if [[ -z $gist_dir ]]; then
+                gist_dir="$1"
+            fi
+            shift
+            ;;
+    esac
+done
+
+if [[ ! -d "$gist_dir" ]]; then
+    echo "Directory does not exist: ${gist_dir}"
+    exit 1
+fi
+
+gist_list=$(gh gist list --limit "$limit" | cut -f 1,2)
+
+while read -r gist_id file_name; do
+  file_path="${gist_dir}/${gist_id}_${file_name}"
+  gh gist view "${gist_id}" > "${file_path}"
+  echo "Gist stored to ${file_path}"
+done <<< "$gist_list"
