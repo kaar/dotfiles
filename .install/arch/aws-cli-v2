@@ -1,13 +1,12 @@
 #!/bin/sh
-# https://aur.archlinux.org/packages/datagrip/
-# https://www.jetbrains.com/datagrip/
-# Database IDE
+# https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+# By default, the files are all installed to /usr/local/aws-cli, and a
+# symbolic link is created in /usr/local/bin
 
-
-repo="$(mktemp -d)/aws-cli-v2"
-url="https://aur.archlinux.org/aws-cli-v2-bin.git"
-git clone "${url}" --depth 1 "${repo}"
-
-cd "${repo}"
-makepkg -si
-rm -rf "${repo}"
+tmp_path="$(mktemp -d)/awscliv2"
+mkdir -p "${tmp_path}"
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "${tmp_path}/awscliv2.zip"
+cd "${tmp_path}"
+unzip awscliv2.zip
+sudo ./aws/install
+rm -rf "${tmp_path}"
