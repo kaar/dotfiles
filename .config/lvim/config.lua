@@ -110,6 +110,13 @@ lvim.plugins = {
   { "hkupty/iron.nvim" },
   { "geg2102/nvim-python-repl" },
   { "tpope/vim-rhubarb" },
+  {
+    "samueljoli/hurl.nvim",
+    config = function()
+      require('hurl').setup(
+      )
+    end,
+  }
 }
 
 -- https://github.com/LunarVim/LunarVim/issues/1856
