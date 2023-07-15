@@ -133,10 +133,6 @@ alias diff='difft'
 # Gists
 alias ideas='gh gist edit ${GIST_IDEAS}'
 
-# GitHub
-alias github-pr='github-create-pr'
-alias github='github-open'
-
 # Browser
 alias browse='firefox -new-tab'
 
