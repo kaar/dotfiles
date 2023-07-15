@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# if .git directory exists in current directory
-if [ -d .git ]; then
-  gh repo view --web
-else
-  open "https://github.com/"
-fi
