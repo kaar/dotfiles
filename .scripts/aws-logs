@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# LOG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/aws-logs"
+
+help="Usage: aws-logs <service-name> [options]
+
+This script queries AWS CloudWatch Logs
+
+Arguments:
+  <service-name>  The name of the service to query
+                  Optional if LOG_GROUP_NAME is set in your environment
+
+Options:
+  -h, --help      Show this help message and exit
+  -f, --file      FQuery file to us with jq
+  -s, --since     Only return logs newer than a relative duration like 5s, 2m, or 3h
+
+Examples:
+  aws-logs -f query.jq
+
+query.jq:
+select(.level == \"warning\")
+  | {timestamp: .timestamp, event: .event, state: .state}
+"
+
+JQ_FILE=""
+SINCE="10m"
+
+# Parse arguments
+# https://stackoverflow.com/a/14203146/1123955
+POSITIONAL_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --help|-h)
+        echo "$help"
+        exit 0
+        ;;
+    -f|--file)
+      JQ_FILE="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -s|--since)
+      SINCE="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+service="${POSITIONAL_ARGS[0]:-${LOG_GROUP_NAME:-}}"
+
+if [[ -z "$service" ]]; then
+    echo "$help"
+    exit 0
+fi
+
+jq_args=()
+if [[ -n "$JQ_FILE" ]]; then
+    jq_args+=("-f" "$JQ_FILE")
+fi
+
+aws logs tail "${service}" \
+ --format "short" \
+ --since "${SINCE}" \
+ | cut -d' ' -f2- \
+ | jq "${jq_args[@]}"
