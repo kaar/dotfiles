@@ -72,6 +72,12 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 --   --Enable completion triggered by <c-x><c-o>
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
+--
+
+-- Remeber last cursor position
+vim.cmd [[
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+]]
 
 -- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
 local formatters = require "lvim.lsp.null-ls.formatters"
