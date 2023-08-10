@@ -1,0 +1,7 @@
+#!/bin/sh
+# https://github.com/supabase/cli
+tmp_path="$(mktemp -d)"
+
+url="https://github.com/supabase/cli/releases/download/v1.84.0/supabase_1.84.0_linux_amd64.pkg.tar.zst"
+curl -L "${url}" -o "${tmp_path}/supabase.pkg.tar.zst" --create-dirs
+sudo pacman -U --noconfirm "${tmp_path}/supabase.pkg.tar.zst"
