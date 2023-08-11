@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+current_branch="$(git branch --show-current)"
+git push origin "$current_branch"
+gh pr create --head "$current_branch" --fill "$@"
+git push --set-upstream origin "$current_branch"
+gh pr view --web
