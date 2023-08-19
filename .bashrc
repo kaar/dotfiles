@@ -230,5 +230,7 @@ shopt -s expand_aliases # expand aliases
 stty -ixon
 
 # direnv
-eval "$(direnv hook bash)"
-. "$HOME/.cargo/env"
+# eval "$(direnv hook bash)"
+if [ -f /.cargo/env ]; then
+   source "$HOME/.cargo/env"
+fi
