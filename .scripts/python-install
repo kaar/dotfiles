@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -z "${1}" ]]; then
+  echo "Usage: python-install <package_name>"
+  exit 1
+fi
+
+INSTALL_DIR="${INSTALL:-$HOME/.install}"
+PYTHON_PACKAGE_FILE="$INSTALL_DIR/python_packages.txt"
+package_name="python-$1"
+sudo pacman -S "$package_name"
+echo "$package_name" >> "$PYTHON_PACKAGE_FILE"
