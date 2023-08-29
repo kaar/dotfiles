@@ -144,4 +144,4 @@ set editor = "vim +/^$ ++1 -c noh -c 'set spell'" # move the cursor under the he
 # -----------------------------------------------
 
 source ~/.config/mutt/colors-gruvbox-shuber.muttrc
-source ~/.config/mutt/colors-gruvbox-shuber-extended.muttrc
+# source ~/.config/mutt/colors-gruvbox-shuber-extended.muttrc
