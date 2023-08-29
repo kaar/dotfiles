@@ -177,7 +177,7 @@ alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
 alias source-secrets='. ~/.config/secrets.env'
 
 # gpt
-alias g='gpt -m'
+alias chat='gpt-chat'
 
 # Load all scripts in shell.d
 for file in ~/.config/shell.d/*.sh ; do
