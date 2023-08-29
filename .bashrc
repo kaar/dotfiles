@@ -174,7 +174,7 @@ alias aws-iam='open ${AWS_URL_IAM}'
 alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
 
 # secrets
-alias source-secrets='source ~/.config/secrets.env'
+alias source-secrets='. ~/.config/secrets.env'
 
 # gpt
 alias g='gpt -m'
