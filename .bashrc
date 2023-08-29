@@ -205,7 +205,7 @@ export NVM_DIR="$HOME/.config/nvm"
 
 
 # ------------------------------ bind ---------------------------------
-bind -x '"\C-j":sessions'
+# bind -x '"\C-j":sessions'
 
 # ------------------------------ prompt -------------------------------
 source $HOME/.config/git/git-prompt.sh
