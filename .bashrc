@@ -66,6 +66,8 @@ export DOTNET_TOOLS="$HOME/.dotnet/tools"
 # python
 # makes pipenv install packages in the project directory
 export PIPENV_VENV_IN_PROJECT=1
+# /home/tibber/repos/kaar/gpt-cli
+# export PYTHONPATH="$HOME/repos/kaar/gpt-cli"
 
 # ------------------------------ cdpath ------------------------------
 
