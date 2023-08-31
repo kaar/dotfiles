@@ -14,8 +14,12 @@
 # xrandr --output eDP1 --mode 3840x2400 --output DP3 --mode 2048x1080 --left-of eDP1
 # xrandr --output DP2 --auto --right-of eDP1
 
-function samsung() {
+samsung() {
   xrandr --output DP-2 --mode 5120x1440 --rate 120 --output HDMI-0 --off
+}
+
+tibber() {
+  xrandr --output DP-3 --auto --above eDP-1
 }
 
 # if argument is equal to samsung
@@ -23,6 +27,10 @@ case "$1" in
     samsung)
         samsung
         ;;
+    tibber)
+        tibber
+        ;;
+
     # logout)
     #     i3-msg exit
     #     ;;
@@ -39,7 +47,7 @@ case "$1" in
     #     systemctl poweroff
     #     ;;
     *)
-        echo "Usage: $0 {samsung}"
+        echo "Usage: $0 {samsung, tibber}"
         exit 2
 esac
 # if [ "$1" = "samsung" ]; then
