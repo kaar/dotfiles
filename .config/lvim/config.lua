@@ -80,6 +80,14 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 --
+--
+
+-- -- add `pyright` to `skipped_servers` list
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+-- -- remove `pyre` from `skipped_servers` list
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
+--   return server ~= "pyre"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- Remeber last cursor position
 vim.cmd [[
