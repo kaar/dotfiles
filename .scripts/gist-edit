@@ -4,6 +4,32 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-gist_id=$(gh gist list | fzf | cut -f1)
+# gist_id=$(gh gist list | fzf | cut -f1)
+file="$1"
+# If not a symlink exit
+if [[ ! -L "$file" ]]; then
+  # TODO: Do a better test for the gist path.
+  # Maybe have a gist repos system path
+  # $GISTS_PATH
+  # export GISTS_PATH="$HOME/repos/kaar/gists"
+  echo "Not a symlink to a gist"
+  exit 1
+fi
+# File is a symlink to a gist
+if [[ -L "$file" ]]; then
+  file=$(readlink "$file")
+fi
+
+# Get the gist id from the file
+gist_id=$(basename "$(dirname "$file")")
 
 gh gist edit "$gist_id"
+
+# echo "Editing $file"
+# Editing /home/tibber/repos/kaar/gists/73afe3ce7c40ffdc3bcfc7b7a9379c27/gist-create-test.md
+
+# TODO: Check if gist synlink
+# $EDITOR "$file"
+
+
+# gh gist edit "$gist_id"

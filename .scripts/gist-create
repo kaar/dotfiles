@@ -3,8 +3,27 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Link example:
+# https://gist.github.com/kaar/5bf69bbb4dd147789fc0652146c2f5fc
 gist_link=$(gh gist create "$1")
-echo $gist_link
-echo $gist_link | clip
+# gist id
+# gist_id=$(basename "$gist_link")
+# gist_id=$(echo $gist_link | cut -d'/' -f4)
+echo "$gist_link"
+echo "$gist_link" | clip
+# Clone the repostiry into $HOME/repos/kaar/gists/
+# repo_path=$HOME/repos/kaar/gists/$gist_id
+# gh gist clone "$gist_link" "$repo_path"
+# Rename file by adding .bak
+# mv "$1" "$1.bak"
+
+# Create symbolic link from $1 to $HOME/repos/kaar/gists/$gist_id
+# ln -s "$repo_path/$1" "$1"
+
+# Remove backup file
+# rm "$1.bak"
+
+
+
 # Cool script. Delete all gists with the name hello
 # gh gist list | grep hello | cut -f1 | xargs -I {} gh gist delete '{}'
