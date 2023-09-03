@@ -112,6 +112,7 @@ export MANPAGER="$EDITOR +Man!"
 
 # poetry
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # ----------------------------- dircolors ----------------------------
 eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/gruvbox)"
