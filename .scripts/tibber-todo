@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -o errexit
-set -o nounset
 set -o pipefail
 
-gh gist edit "$(pass GitHub/gist-todo-tibber)"
+if [[ "$1" == "--web" ]]; then
+  shift
+  gh gist view "$(pass GitHub/gist-todo-tibber)" "$@" --web
+  exit 0
+fi
+
+gh gist edit "$(pass GitHub/gist-todo-tibber)" "$@"
