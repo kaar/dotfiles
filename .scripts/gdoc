@@ -3,6 +3,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# TODO:
+# * Add source of gdoc. Not all gists should be part of gdoc
+#   * The source for which documents are in gdoc can be a gist itself
 
 GDOC_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gdoc"
 help="Usage: gdoc <file> [options]
@@ -110,7 +113,7 @@ fi
 
 gist_url=$(gh gist create "$file_name")
 gist_id=$(echo "$gist_url" | cut -d'/' -f5)
-cp "$file_name" "$GDOC_DATA_HOME\/${gist_id}_${file_name}"
+cp "$file_name" "${GDOC_DATA_HOME}/${gist_id}_${file_name}"
 
 echo "$gist_url"
 echo "$gist_url" | xclip -selection clipboard
