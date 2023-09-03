@@ -4,10 +4,21 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Options:
+# --rm: remove script
+
 [[ -z "${SCRIPTS:-}" ]] && printf "SCRIPTS not set\n" >&2 && exit 1
 [[ -z "${1:-}" ]] && printf "usage: %s <name>\n" "$0" >&2 && exit 1
 
 path="${SCRIPTS}/${1}"
+
+shift
+
+if [[ "${1:-}" == "--rm" ]]; then
+  rm -i "${path}"
+  echo "Removed ${path}"
+  exit 0
+fi
 
 [[ ! -e "${path}" ]] && {
 cat <<EOF > "${path}"
