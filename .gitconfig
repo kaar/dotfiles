@@ -1,39 +1,44 @@
 [alias]
-    l = log --oneline --graph --decorate --all
-    dc = diff --cached
-    co = checkout
-    ci = commit
-    st = status
-    br = branch
-    s = switch
-    cp = cherry-pick
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-    sdiff = difftool -y -t vsdiffmerge
-    sync = pull --all --prune
-    undo = "!f() { git reset --hard @{${1-1}}; }; f"
-    addnew = !git add $(git ls-files -o --exclude-standard)
-    new = ls-files -o --exclude-standard
-    ld = log -p
-    wt = worktree
-    get = co origin/master --
-    bdiff = !git-branch-diff
-    ; recent = "!f() { git s $(git br --sort=committerdate | grep -v '*' | fzf; ); }; f"
-    recent = branch --sort=committerdate
+  l = log --oneline --graph --decorate --all
+  dc = diff --cached
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  s = switch
+  cp = cherry-pick
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  ll = log --graph --decorate --all --pretty=format:'%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  sdiff = difftool -y -t vsdiffmerge
+  sync = pull --all --prune
+  undo = "!f() { git reset --hard @{${1-1}}; }; f"
+  addnew = !git add $(git ls-files -o --exclude-standard)
+  new = ls-files -o --exclude-standard
+  ld = log -p
+  wt = worktree
+  get = co origin/master --
+  bdiff = !git-branch-diff
+  ; recent = "!f() { git s $(git br --sort=committerdate | grep -v '*' | fzf; ); }; f"
+  recent = branch --sort=committerdate
+  untracked = ls-files --others --exclude-standard
 
 [add.interactive]
-    useBuiltin = false
+  useBuiltin = false
 
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+
 [diff]
   tool = vimdiff
+
 [mergetool]
 	prompt = false
+
 [mergetool "vimdiff"]
   cmd = lvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [difftool]
   prompt = false
 
@@ -41,12 +46,16 @@
   editor = lvim
   pager = diff-so-fancy | less --tabs=4 -RFX
   whitespace = blank-at-eol,blank-at-eof
+
 [apply]
-    whitespace = fix
+  whitespace = fix
+
 [pull]
-    rebase = true
+  rebase = true
+
 [branch "master"]
-    mergeoptions = --no-ff
+  mergeoptions = --no-ff
+
 [user]
 	name = Caspar Nettelbladt
 	email = caspar.n@gmail.com
@@ -58,4 +67,12 @@
   diffFilter = diff-so-fancy --patch
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
+  navigate = true  # use n and N to move between diff sections
+
+[credential "https://github.com"]
+	helper =
+	helper = !/home/tibber/.local/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/home/tibber/.local/bin/gh auth git-credential
