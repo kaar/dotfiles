@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# This script create a new journal for each day.
+# It opens a file in $EDITOR and saves it under $NOTES/journal/YYYY-MM-DD.md
+# If the file already exists, it opens the existing file.
+
+$EDITOR "$NOTES/journal/$(date +%F).md"
+
+cd "$NOTES"
+git add journal
+git commit -m "Journal update $(date +%F)"
+git push
