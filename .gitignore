@@ -105,3 +105,4 @@ tibber-notes
 tmp/
 tibber-logs/
 DataGripProjects/
+.config/shell.d/*.sh
