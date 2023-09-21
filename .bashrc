@@ -185,11 +185,6 @@ for file in ~/.config/shell.d/*.sh ; do
   [ -f "$file" ] && source $file
 done
 
-# Bash Completion
-if [ -f /etc/bash_completion ]; then
-   source /etc/bash_completion
-fi
-
 # Local bash completion
 for bcfile in ~/.config/bash_completion.d/* ; do
   [ -f "$bcfile" ] && source $bcfile
