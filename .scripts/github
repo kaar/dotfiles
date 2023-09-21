@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if gh repo view --web &> /dev/null; then
+  # If we're in a repo, open that repo's page
+  exit 0
+fi
+open "https://github.com/"
