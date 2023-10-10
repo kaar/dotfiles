@@ -34,7 +34,8 @@ esac
 
 # https://www.atlassian.com/git/tutorials/dotfiles
 # Create an alias config which will be used instead of the regular git to interact with configuration repository.
-alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# Replacd with script ~/.scripts/config
 
 # ----------------------- environment variables ----------------------
 export EDITOR=lvim
