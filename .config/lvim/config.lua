@@ -115,10 +115,12 @@ formatters.setup {
   -- { exe = "ruff",  filetype = { "python" } },
   {
     exe = "prettier",
-    filetypes = { "javascript", "typescript", "css", "html", "yaml" },
+    filetypes = { "javascript", "typescript", "css", "html", "yaml", "graphql" },
     args = { "--print-width 180", "--single-quote", "--trailing-comma", "none" },
   },
-  { exe = "sqlformat", filetypes = { "sql" }, args = { "--reindent", "--keywords upper" } }
+  { exe = "sqlformat", filetypes = { "sql" }, args = { "--reindent", "--keywords upper" } },
+  { exe = "buf",       filetypes = { "proto" } }
+
 }
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
