@@ -1,3 +1,6 @@
+-- TODO:
+-- Add formatting python, <leader>lf
+--
 -- See `:help mapleader`
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
