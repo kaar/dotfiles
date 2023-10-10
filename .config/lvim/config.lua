@@ -15,6 +15,11 @@ lvim.format_on_save = {
   pattern = "*.lua",
   timeout = 1000,
 }
+lvim.format_on_save = {
+  enabled = true,
+  pattern = "*.py",
+  timeout = 1000,
+}
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
