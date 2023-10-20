@@ -118,14 +118,14 @@ formatters.setup {
     filetypes = { "javascript", "typescript", "css", "html", "yaml", "graphql" },
     args = { "--print-width 180", "--single-quote", "--trailing-comma", "none" },
   },
-  { exe = "sqlformat", filetypes = { "sql" }, args = { "--reindent", "--keywords upper" } },
+  { exe = "sqlformat", filetypes = { "sql" },  args = { "--reindent", "--keywords upper" } },
   { exe = "buf",       filetypes = { "proto" } }
 
 }
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { exe = "flake8",     filetypes = { "python" },                                 args = { "--max-line-length=120" } },
+  -- { exe = "flake8",     filetypes = { "python" },                                 args = { "--max-line-length=120" } },
   { exe = "shellcheck", filetypes = { "sh", "bash" },                             args = { "--severity", "warning" } },
   { exe = "codespell",  filetypes = { "tex", "markdown", "python", "javascript" } },
   -- args = { "--ignore-words", "spell/en.utf-8.add" } },
