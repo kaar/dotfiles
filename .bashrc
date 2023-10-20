@@ -147,7 +147,7 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 alias d='docker'
-alias g='git'
+alias g='ag'
 alias gist='gh gist'
 
 alias n='nvim'
