@@ -3,4 +3,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-linear-cli issue list | fzf | cut -d" " -f1 | xargs linear-cli issue view
+linear-cli issue list | fzf | cut -d" " -f1 | xargs linear-cli issue view "$@"
