@@ -4,5 +4,4 @@ set -o nounset
 set -o pipefail
 
 
-diff=$(git diff --cached)
-echo "$diff" | gpt-git commit | git commit -eF -
+ag ci "$@"
