@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+aws sso login
+aws ecr get-login-password --region "eu-west-1" \
+  | docker login -u AWS --password-stdin https://945084044763.dkr.ecr.eu-west-1.amazonaws.com
