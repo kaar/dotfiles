@@ -161,9 +161,6 @@ alias ideas='gh gist edit ${GIST_IDEAS}'
 # Browser
 alias browse='firefox -new-tab'
 
-# AWS
-alias aws-session='aws sso login'
-
 # tailscale
 alias ts='tailscale'
 
