@@ -3,4 +3,14 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-ag review diff --cached
+# If no argument
+if [[ -z "${1}" ]]; then
+  ag review diff --cached
+  exit 0
+fi
+
+# If the first argument is a file
+if [[ -f "${1}" ]]; then
+  ag review file "$1"
+  exit 0
+fi
