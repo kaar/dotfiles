@@ -24,6 +24,8 @@ if [[ -n $TMUX ]]; then
   current_session=$(tmux display-message -p '#S')
   read -rp "Already in session '$current_session', switch? [y,n]? " switch_session
   if [[ ! $switch_session =~ ^[Yy] ]]; then
+    # List session without switching
+    tmux ls | cut -d: -f1
     exit
   else
     switch-session && exit;
