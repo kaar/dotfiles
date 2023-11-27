@@ -7,11 +7,18 @@ set -o pipefail
 # Take notes related to the current tmux-session name
 if [[ -n $TMUX ]]; then
   current_session=$(tmux display-message -p '#S')
-  $EDITOR "$NOTES/session-notes/${current_session}.md"
-  cd "$NOTES"
-  git add session-notes
-  git commit -m "Update session notes for $current_session"
-  git push
+  # If argument --view
+  if [[ $1 == "--view" ]]; then
+    bat "$NOTES/session-notes/${current_session}.md"
+    exit 0
+  else
+    # Default edit and commit
+    $EDITOR "$NOTES/session-notes/${current_session}.md"
+    cd "$NOTES"
+    git add session-notes
+    git commit -m "Update session notes for $current_session"
+    git push
+  fi
 else
   echo "You are not in a tmux session."
 fi
