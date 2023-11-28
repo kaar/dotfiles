@@ -1,0 +1,5 @@
+#!/bin/sh
+# https://insomnia.rest/
+url="https://aur.archlinux.org/insomnia.git"
+
+./install-aur.sh $url

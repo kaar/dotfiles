@@ -1,0 +1,5 @@
+#!/bin/sh
+
+url=https://aur.archlinux.org/watchman.git
+
+./install-aur.sh $url

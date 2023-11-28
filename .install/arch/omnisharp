@@ -1,0 +1,5 @@
+#!/bin/sh
+
+url="https://aur.archlinux.org/omnisharp-roslyn-bin.git"
+
+./install-aur.sh $url

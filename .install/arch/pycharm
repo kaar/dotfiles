@@ -1,10 +1,4 @@
 #!/bin/sh
 url="https://aur.archlinux.org/pycharm-professional.git"
 
-repo="$(mktemp -d)/$(basename $0)"
-git clone "${url}" --depth 1 "${repo}"
-
-cd "${repo}"
-makepkg -si
-rm -rf "${repo}"
-
+./install-aur.sh $url

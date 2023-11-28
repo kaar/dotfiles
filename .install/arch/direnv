@@ -1,0 +1,5 @@
+#!/bin/sh
+# https://github.com/alex-courtis/xlayoutdisplay
+url="https://aur.archlinux.org/direnv.git"
+
+./install-aur.sh $url

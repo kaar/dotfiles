@@ -1,0 +1,5 @@
+#!/bin/sh
+# https://meetfranz.com/
+url="https://aur.archlinux.org/franz.git"
+
+./install-aur.sh "${url}"

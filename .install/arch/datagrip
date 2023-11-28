@@ -3,10 +3,5 @@
 # https://www.jetbrains.com/datagrip/
 # Database IDE
 
-repo="$(mktemp -d)/datagrip"
 url="https://aur.archlinux.org/datagrip.git"
-git clone "${url}" --depth 1 "${repo}"
-
-cd "${repo}"
-makepkg -si
-rm -rf "${repo}"
+./install-aur.sh "$url"

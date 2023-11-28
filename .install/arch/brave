@@ -2,6 +2,8 @@
 # https://aur.archlinux.org/packages/brave-bin
 url=https://aur.archlinux.org/brave-bin.git
 
+./install-aur.sh $url
+
 repo="$(mktemp -d)/$(basename $0)"
 git clone "${url}" --depth 1 "${repo}"
 

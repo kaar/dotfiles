@@ -78,12 +78,7 @@
 
 url="https://aur.archlinux.org/awsvpnclient.git"
 
-repo="$(mktemp -d)/$(basename $0)"
-git clone "${url}" --depth 1 "${repo}"
-
-cd $repo || exit 1
-makepkg -si
-rm -rf "${repo}"
+./install-aur.sh $url
 
 # Restart serviced
 sudo systemctl restart awsvpnclient

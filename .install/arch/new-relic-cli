@@ -1,0 +1,6 @@
+#!/bin/sh
+# https://docs.newrelic.com/docs/new-relic-solutions/tutorials/new-relic-cli/
+# https://github.com/newrelic/newrelic-cli
+url="https://aur.archlinux.org/newrelic-cli.git"
+
+./install-aur.sh $url
