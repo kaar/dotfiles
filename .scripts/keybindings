@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+DOCS=${DOCS:-"${HOME}/docs"}
+FILES=$(fd -d 2 keybindings.md "${DOCS}" | sort -n)
+usage() {
+  echo "Usage: keybindings <app> [options]"
+  echo ""
+  echo "Options:"
+  echo "  -l, --list: List all the keybindings"
+  echo "  -h, --help: Show this message"
+  echo ""
+  echo "Examples:"
+  echo "  keybindings tmux"
+  echo ""
+  echo "Apps:"
+  for file in $FILES; do
+    dir_name=$(echo "$file" | cut -d'/' -f5)
+    echo "  $dir_name"
+  done
+  echo ""
+  echo "Environment variables:"
+  echo "  DOCS: The directory where the docs are stored (default: \$HOME/docs)"
+  exit 1
+}
+
+if [[ -z $1 ]]; then
+  usage
+fi
+
+if [[ $1 == "--help" || $1 == "-h" ]]; then
+  usage
+fi
+
+for file in $FILES; do
+  dir_name=$(echo "$file" | cut -d'/' -f5)
+  if [[ $1 == "--list" || $1 == "-l" ]]; then
+    echo "$dir_name"
+  else
+    if [[ $1 == "$dir_name" ]]; then
+      bat "${DOCS}/$1/keybindings.md"
+    fi
+  fi
+done

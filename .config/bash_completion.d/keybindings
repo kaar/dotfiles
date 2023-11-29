@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+_keyb_completion()
+{
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+  files=$(keybindings --list)
+  COMPREPLY=( $(compgen -W "${files}" -- "${current_word}") )
+
+  # local options="--list --help -h -l"
+  # COMPREPLY+=( $(compgen -W "${options}" -- "${current_word}") )
+}
+
+complete -F _keyb_completion keybindings
