@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Argument parser for session management
 
 set -o errexit
 set -o pipefail
+
 
 
 usage() {
@@ -10,16 +10,15 @@ usage() {
   echo ""
   echo "Options:"
   echo "  -l, --list: List all the sessions"
-  echo "  -s, --switch: Switch to a session"
+  echo "  -s, --switch [session]: Switch to a session"
   echo ""
   echo "Examples:"
   echo "  sessions -l"
   echo "  sessions -s"
   echo ""
   echo "Sessions:"
-  tmux ls | awk -F: '{print $1}'
+  tmux ls | awk -F: '{print "  " $1}'
   echo ""
-  echo "Environment variables:"
   exit 1
 }
 
@@ -38,13 +37,16 @@ fi
 
 # -s, --switch
 if [[ "$1" == "-s" || "$1" == "--switch" ]]; then
-  target=$(tmux ls | cut -d: -f1| fzf --reverse)
-  [ -z "$target" ] && exit 1
+  session="$2"
+  if [[ -z $session ]]; then
+    session=$(tmux ls | cut -d: -f1| fzf --reverse)
+    [ -z "$session" ] && exit 1
+  fi
 
   if [[ "$TMUX" ]]; then
-    tmux switch-client -t "$target"
+    tmux switch-client -t "$session"
   else
-    tmux attach-session -t "$target"
+    tmux attach-session -t "$session"
   fi
   exit
 fi
