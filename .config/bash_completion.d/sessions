@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+_sessions_completion()
+{
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+  files=$(sessions --list)
+  # COMPREPLY=( $(compgen -W "${files}" -- "${current_word}") )
+  # Only for option -s or --switch
+  if [[ "${COMP_WORDS[COMP_CWORD-1]}" == "-s" || "${COMP_WORDS[COMP_CWORD-1]}" == "--switch" ]]; then
+    COMPREPLY=( $(compgen -W "${files}" -- "${current_word}") )
+  fi
+}
+
+complete -F _sessions_completion sessions

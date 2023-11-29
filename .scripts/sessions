@@ -1,35 +1,50 @@
 #!/usr/bin/env bash
-# Attach to tmux sessions
+# Argument parser for session management
 
 set -o errexit
 set -o pipefail
 
-switch-session() {
-  local target
-  target=$(tmux ls | cut -d: -f1 | fzf --reverse)
-  [ -z "$target" ] && exit 1;
 
-  tmux switch -t "$target"
+usage() {
+  echo "Usage: sessions [OPTIONS]"
+  echo ""
+  echo "Options:"
+  echo "  -l, --list: List all the sessions"
+  echo "  -s, --switch: Switch to a session"
+  echo ""
+  echo "Examples:"
+  echo "  sessions -l"
+  echo "  sessions -s"
+  echo ""
+  echo "Sessions:"
+  tmux ls | awk -F: '{print $1}'
+  echo ""
+  echo "Environment variables:"
+  exit 1
 }
 
-attach-to-session() {
-  local target
-  target=$(tmux ls | cut -d: -f1 | fzf --reverse)
-  [ -z "$target" ] && exit 1;
-
-  tmux attach-session -t "$target"
-}
-
-if [[ -n $TMUX ]]; then
-  current_session=$(tmux display-message -p '#S')
-  read -rp "Already in session '$current_session', switch? [y,n]? " switch_session
-  if [[ ! $switch_session =~ ^[Yy] ]]; then
-    # List session without switching
-    tmux ls | cut -d: -f1
-    exit
-  else
-    switch-session && exit;
-  fi
+if [[ -z $1 ]]; then
+  tmux ls | awk -F: '{print $1}'
 fi
 
-attach-to-session
+# -l, --list
+if [[ "$1" == "-l" || "$1" == "--list" ]]; then
+  tmux ls | awk -F: '{print $1}'
+fi
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  usage
+fi
+
+# -s, --switch
+if [[ "$1" == "-s" || "$1" == "--switch" ]]; then
+  target=$(tmux ls | cut -d: -f1| fzf --reverse)
+  [ -z "$target" ] && exit 1
+
+  if [[ "$TMUX" ]]; then
+    tmux switch-client -t "$target"
+  else
+    tmux attach-session -t "$target"
+  fi
+  exit
+fi
