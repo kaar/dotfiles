@@ -331,15 +331,16 @@ window.opacity: 1.0
 
 # Allow terminal applications to change Alacritty's window title.
 #dynamic_title: true
-
 cursor:
-  # Cursor style
-  #
   # Values for `style`:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Beam
+  # Note! nvim (lvim) is messing up my cursor when I exit.
+  style:
+    shape: Beam
+  vi_mode_style:
+    shape: Block
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
