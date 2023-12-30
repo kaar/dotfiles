@@ -183,6 +183,15 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+-- configure copilot
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+
+vim.g.copilot_no_tab_map = true
+vim.keymap.set('i', '<C-E>', 'copilot#Accept("<CR>")', {expr = true,
+  replace_keycodes = false
+})
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
