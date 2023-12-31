@@ -267,6 +267,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+
+-- Reset the cursor shape by briefly toggling insert mode when nvim starts.
+local group = vim.api.nvim_create_augroup("reset_cursor_shape", { clear = true })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = group,
+  pattern = "*",
+  callback = function()
+    vim.cmd("normal! :startinsert :stopinsert")
+    vim.cmd("redraw!")
+  end
+})
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
