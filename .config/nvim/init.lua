@@ -75,7 +75,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',       opts = {} },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -190,7 +190,8 @@ vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
 
 vim.g.copilot_no_tab_map = true
-vim.keymap.set('i', '<C-E>', 'copilot#Accept("<CR>")', {expr = true,
+vim.keymap.set('i', '<C-E>', 'copilot#Accept("<CR>")', {
+  expr = true,
   replace_keycodes = false
 })
 
