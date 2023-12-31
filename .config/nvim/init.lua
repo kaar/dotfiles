@@ -29,6 +29,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   'christoomey/vim-tmux-navigator',
+  -- My own plugins
+  -- { dir = "~/Dev/plugins/ai.nvim" },
 
   -- Git related plugins
   'tpope/vim-fugitive',
