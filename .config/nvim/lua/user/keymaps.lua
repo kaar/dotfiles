@@ -1,5 +1,13 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
+
+keymap('n', '<leader>h', '<cmd>nohlsearch<CR>', opts)
+keymap('n', '<leader>q', '<cmd>confirm q<CR>', opts)
+keymap('n', '<leader>w', '<cmd>w!<CR>', opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true })
 --
 -- keymap("n", "<Space>", "", opts)
 -- vim.g.mapleader = " "
@@ -45,3 +53,12 @@ keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
 --
 --
 -- vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
+--
+--
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Remap for dealing with word wrap
+keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
