@@ -201,6 +201,8 @@ export NVM_DIR="$HOME/.config/nvm"
 # ------------------------------ bind ---------------------------------
 # bind -x '"\C-j":sessions'
 
+bind '"\C-f":"file-search-preview\n"'
+
 # ------------------------------ prompt -------------------------------
 source $HOME/.config/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1

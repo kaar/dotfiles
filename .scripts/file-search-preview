@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+fzf --preview 'bat --color=always {}' --preview-window 'right,border-left,<30(up,30%,border-bottom)'
