@@ -127,7 +127,7 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   -- { exe = "flake8",     filetypes = { "python" },                                 args = { "--max-line-length=120" } },
   { exe = "shellcheck", filetypes = { "sh", "bash" },                             args = { "--severity", "warning" } },
-  { exe = "codespell",  filetypes = { "tex", "markdown", "python", "javascript" } },
+  { exe = "codespell",  filetypes = { "tex", "markdown", "python", "javascript", "gitcommit" } },
   -- args = { "--ignore-words", "spell/en.utf-8.add" } },
   { exe = "eslint",     filetypes = { "javascript", "typescript" } },
   { exe = "ruff",       filetypes = { "python" } },
