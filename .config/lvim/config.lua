@@ -279,6 +279,16 @@ function gpt_open()
   -- call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
 end
 
+vim.api.nvim_create_user_command("GitHub", function(opts)
+  -- Open the current file in GitHub
+  -- TODO: Open the file in the current branch, default in main branch
+  local filepath = vim.fn.expand("%:p:~:.")  -- Get the relative path
+  local command = "gh browse " .. filepath .. ":" .. vim.fn.line(".")
+  vim.fn.system(command)
+end, {
+  nargs = "*",
+})
+
 vim.api.nvim_create_user_command("GPT", function(opts)
   -- require("neoai").smart_toggle(opts.args)
   -- gpt_open()
