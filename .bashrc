@@ -199,9 +199,12 @@ export NVM_DIR="$HOME/.config/nvm"
 
 
 # ------------------------------ bind ---------------------------------
-# bind -x '"\C-j":sessions'
+# Disable the "XON/XOFF" flow control to free up Ctrl-S and Ctrl-Q
+stty -ixon
 
-bind '"\C-f":"file-search-preview\n"'
+# This binding does not work unless the .bashrc is re-sources
+# Not sure why that is so I'm disabling it for now.
+# bind '"\C-f":"file-search-preview\n"'
 
 # ------------------------------ prompt -------------------------------
 source $HOME/.config/git/git-prompt.sh
@@ -245,8 +248,6 @@ shopt -s cmdhist        # save multi-line commands in history as single line
 shopt -s dotglob
 shopt -s expand_aliases # expand aliases
 
-# Free up flow control keys like Ctrl+Q, Ctrl+S for more usefull bindings
-stty -ixon
 
 # direnv
 # eval "$(direnv hook bash)"
