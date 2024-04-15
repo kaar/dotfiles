@@ -3,6 +3,22 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-aws sso login
+# Config files
+# ~/.aws/config
+
+# Improvments:
+# - Be able to select which profile to use
+# - Show which profile is being used in i3status
+# - Show which VPN connection is active in i3status
+
+AWS_PROFILE=${1:-"default"}
+
+ECR_REPO=https://945084044763.dkr.ecr.eu-west-1.amazonaws.com
+
+aws sso login --profile "${AWS_PROFILE}"
 aws ecr get-login-password --region "eu-west-1" \
-  | docker login -u AWS --password-stdin https://945084044763.dkr.ecr.eu-west-1.amazonaws.com
+  | docker login -u AWS --password-stdin "$ECR_REPO"
+
+echo "AWS_PROFILE=${AWS_PROFILE}"
+echo "AWS_DEFAULT_REGION=eu-west-1"
+echo "AWS_REGION=eu-west-1"
