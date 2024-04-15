@@ -70,10 +70,13 @@ export PIPENV_VENV_IN_PROJECT=1
 # /home/tibber/repos/kaar/gpt-cli
 # export PYTHONPATH="$HOME/repos/kaar/gpt-cli"
 
+# poetry
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
 # ------------------------------ cdpath ------------------------------
 
 export CDPATH=.:~/Dev/:
-
 
 # ------------------------------- path -------------------------------
 
@@ -111,9 +114,6 @@ export MANPAGER="$EDITOR +Man!"
 # export LESS="--RAW-CONTROL-CHARS"
 # export MANPAGER="lvim -c 'set ft=man' -"
 
-# poetry
-export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
-export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 # ----------------------------- dircolors ----------------------------
 eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/gruvbox)"
