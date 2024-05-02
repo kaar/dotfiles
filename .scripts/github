@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# If $1 is a file, open that file in the browser using gh browse
+if [ -e "$1" ]; then
+  gh browse "$1"
+  exit 0
+fi
+
 if gh repo view --web &> /dev/null; then
   # If we're in a repo, open that repo's page
   exit 0
 fi
+
 open "https://github.com/"
