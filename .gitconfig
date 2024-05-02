@@ -76,3 +76,6 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/home/tibber/.local/bin/gh auth git-credential
+
+[rerere]
+	enabled = true
