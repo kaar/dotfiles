@@ -2,7 +2,7 @@
   l = log --oneline --graph --decorate --all
   dc = diff --cached
   co = checkout
-  ci = commit
+  ci = !ci --history 5
   st = status
   br = branch
   s = switch
