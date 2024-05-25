@@ -28,6 +28,17 @@ keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "<A-j>", ":m '>+1<CR>gv-gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 
+-- Use s-h/l for beginning/end of line
+keymap({ "n", "o", "x" }, "<s-h>", "^", opts)
+keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
+
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+--
+keymap("x", "p", [["_dP]])
+
 -- keymap("n", "n", "nzz", opts)
 -- keymap("n", "N", "Nzz", opts)
 -- keymap("n", "*", "*zz", opts)
@@ -35,11 +46,7 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 -- keymap("n", "g*", "g*zz", opts)
 -- keymap("n", "g#", "g#zz", opts)
 --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
---
-keymap("x", "p", [["_dP]])
+
 --
 -- vim.cmd [[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]]
 -- vim.cmd [[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]]
@@ -49,9 +56,6 @@ keymap("x", "p", [["_dP]])
 -- vim.keymap.set("n", "<Tab>", "<cmd>:popup mousemenu<CR>")
 --
 -- -- more good
--- Use s-h/l for beginning/end of line
-keymap({ "n", "o", "x" }, "<s-h>", "^", opts)
-keymap({ "n", "o", "x" }, "<s-l>", "g_", opts)
 --
 -- -- tailwind bearable to work with
 -- keymap({ "n", "x" }, "j", "gj", opts)
