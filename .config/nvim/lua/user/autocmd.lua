@@ -1,12 +1,3 @@
-require ("user.keymaps")
-require ("user.lazy")
-require ("user.launch")
-require ("user.options")
-require ("user.telescope")
-require ("user.treesitter")
-require ("user.lsp")
--- require ("user.copilot")
-
 -- [[ Remember last cursor position ]]
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
@@ -31,6 +22,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- [[ Reset cursor ]]
 -- Reset the cursor shape by briefly toggling insert mode when nvim starts.
 local group = vim.api.nvim_create_augroup("reset_cursor_shape", { clear = true })
 
@@ -43,10 +35,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end
 })
 
--- -- Keymaps for better default experience
--- -- See `:help vim.keymap.set()`
--- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
---
--- -- Remap for dealing with word wrap
--- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
--- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

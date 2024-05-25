@@ -73,6 +73,14 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- Autopairs
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup {}
+    end,
+  },
+
 
   -- LSP
   {
@@ -90,6 +98,11 @@ require('lazy').setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
+  },
+  {
+    -- GitHub Copilot
+    -- https://github.com/github/copilot.vim
+    'github/copilot.vim',
   },
 
   -- {
