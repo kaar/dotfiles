@@ -25,6 +25,8 @@ keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 -- Move current line / block with Alt-j/k
 keymap("n", "<A-j>", ":m .+1<CR>==", opts)
 keymap("n", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "<A-j>", ":m '>+1<CR>gv-gv", opts)
+keymap("v", "<A-k>", ":m '<-2<CR>gv-gv", opts)
 
 -- keymap("n", "n", "nzz", opts)
 -- keymap("n", "N", "Nzz", opts)
