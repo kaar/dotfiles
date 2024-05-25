@@ -63,8 +63,7 @@ require('lazy').setup({
     end,
   },
 
-  -- Treesitter
-  -- Highlight, edit, and navigate code
+  -- Treesitter, highlight, edit, and navigate code
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -84,11 +83,10 @@ require('lazy').setup({
 
   -- LSP
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
+      { 'williamboman/mason.nvim',          config = true },
       { 'williamboman/mason-lspconfig.nvim' },
 
       -- Useful status updates for LSP
