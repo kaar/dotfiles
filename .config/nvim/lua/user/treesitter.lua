@@ -1,6 +1,6 @@
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim'},
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
   -- Autoinstall languages that are not installed
   auto_install = true,
   highlight = { enable = true },
