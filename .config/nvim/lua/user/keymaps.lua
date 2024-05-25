@@ -8,19 +8,24 @@ keymap('n', '<leader>h', '<cmd>nohlsearch<CR>', opts)
 keymap('n', '<leader>q', '<cmd>confirm q<CR>', opts)
 keymap('n', '<leader>w', '<cmd>w!<CR>', opts)
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true })
---
--- keymap("n", "<Space>", "", opts)
--- vim.g.mapleader = " "
--- vim.g.maplocalleader = " "
--- keymap("n", "<C-i>", "<C-i>", opts)
---
--- -- Better window navigation
+
+-- Better window navigation
 keymap("n", "<m-h>", "<C-w>h", opts)
 keymap("n", "<m-j>", "<C-w>j", opts)
 keymap("n", "<m-k>", "<C-w>k", opts)
 keymap("n", "<m-l>", "<C-w>l", opts)
 keymap("n", "<m-tab>", "<c-6>", opts)
---
+
+-- Resize with arrows
+keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+
+-- Move current line / block with Alt-j/k
+keymap("n", "<A-j>", ":m .+1<CR>==", opts)
+keymap("n", "<A-k>", ":m .-2<CR>==", opts)
+
 -- keymap("n", "n", "nzz", opts)
 -- keymap("n", "N", "Nzz", opts)
 -- keymap("n", "*", "*zz", opts)
