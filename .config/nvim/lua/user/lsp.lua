@@ -52,7 +52,13 @@ local servers = {
 
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      workspace = {
+        checkThirdParty = false,
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- neovim uses LuaJIT runtime
+      runtime = { version = "LuaJIT", },
       telemetry = { enable = false },
       diagnostics = { globals = { 'vim' } },
     },
