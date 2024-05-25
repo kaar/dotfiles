@@ -5,7 +5,7 @@ require ("user.options")
 require ("user.telescope")
 require ("user.treesitter")
 require ("user.lsp")
--- require ("user.copilot")
+require ("user.copilot")
 
 -- [[ Remember last cursor position ]]
 vim.api.nvim_create_autocmd("BufReadPost", {
