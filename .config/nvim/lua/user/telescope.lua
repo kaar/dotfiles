@@ -27,3 +27,5 @@ keymap('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
+keymap('n', '<leader>st', require('telescope.builtin').live_grep, { desc = '[S]earch [T]ext' })
+keymap('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
