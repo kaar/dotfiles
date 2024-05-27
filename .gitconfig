@@ -22,6 +22,7 @@
   ; recent = "!f() { git s $(git br --sort=committerdate | grep -v '*' | fzf; ); }; f"
   recent = branch --sort=committerdate
   untracked = ls-files --others --exclude-standard
+  fp = push --force-with-lease
 
 [add.interactive]
   useBuiltin = false
