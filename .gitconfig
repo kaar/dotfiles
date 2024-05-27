@@ -2,8 +2,8 @@
   l = log --oneline --graph --decorate --all
   dc = diff --cached
   co = checkout
-  ci = !ci --history 5
   st = status
+  ci = commit
   br = branch
   s = switch
   cp = cherry-pick
