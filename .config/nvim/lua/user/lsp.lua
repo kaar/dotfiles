@@ -65,14 +65,6 @@ local servers = {
   },
 }
 
--- https://neovim.io/doc/user/lsp.html
--- vim.lsp.start({
---   name = 'pyright',
---   cmd = {'pyright-langserver', '--stdio'},
---   root_dir = vim.fs.dirname(vim.fs.find({'pyproject.toml'}, { upward = true })[1]),
--- })
-
-
 --
 -- -- Setup neovim lua configuration
 -- require('neodev').setup()
