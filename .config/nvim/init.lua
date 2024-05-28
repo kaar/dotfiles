@@ -1,11 +1,13 @@
-require ("user.keymaps")
-require ("user.lazy")
-require ("user.launch")
-require ("user.options")
-require ("user.telescope")
-require ("user.treesitter")
-require ("user.lsp")
-require ("user.copilot")
+require("user.keymaps")
+require("user.lazy")
+require("user.launch")
+require("user.options")
+require("user.telescope")
+require("user.treesitter")
+require("user.lsp")
+require("user.formatters")
+require("user.copilot")
+require("user.psql")
 
 -- [[ Remember last cursor position ]]
 vim.api.nvim_create_autocmd("BufReadPost", {
