@@ -28,6 +28,25 @@ require("lazy").setup({
 		end,
 	},
 
+	-- OIL, File explorer
+	-- https://github.com/stevearc/oil.nvim
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("oil").setup {
+				columns = {
+					"icon",
+				},
+				view_options = {
+					show_hidden = true,
+				},
+				default_file_explorer = true,
+			}
+		end,
+	},
+
 	-- Colorscheme
 	{
 		"sainnhe/gruvbox-material",
