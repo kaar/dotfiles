@@ -27,14 +27,11 @@ require("lazy").setup(
   }
 )
 
--- require("user.lazy")
 require("user.keymaps")
 require("user.launch")
 require("user.options")
 require("user.telescope")
 require("user.treesitter")
-require("user.lsp")
-require("user.copilot")
 require("user.psql")
 
 -- [[ Remember last cursor position ]]
