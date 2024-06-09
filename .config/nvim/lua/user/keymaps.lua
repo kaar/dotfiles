@@ -10,8 +10,8 @@ keymap('n', '<leader>w', '<cmd>w!<CR>', opts)
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true })
 
 -- Oil, https://github.com/stevearc/oil.nvim
-keymap('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-keymap('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+keymap('n', '-', '<CMD>Oil<CR>', { desc = 'Oil, Open parent directory' })
+keymap('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Oil, Open parent directory' })
 -- keymap('n', '<leader>e', require("oil").toggle_float)
 
 -- Better window navigation
