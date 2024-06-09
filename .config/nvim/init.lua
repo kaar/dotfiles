@@ -57,17 +57,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
--- Reset the cursor shape by briefly toggling insert mode when nvim starts.
-local group = vim.api.nvim_create_augroup("reset_cursor_shape", { clear = true })
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = group,
-  pattern = "*",
-  callback = function()
-    vim.cmd("normal! :startinsert :stopinsert")
-    vim.cmd("redraw!")
-  end
 })
 
 -- -- Keymaps for better default experience
