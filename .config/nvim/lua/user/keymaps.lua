@@ -44,6 +44,10 @@ keymap("v", ">", ">gv", opts)
 --
 keymap("x", "p", [["_dP]])
 
+-- Split navigation like I do in tmux
+keymap("n", "<leader>-", "<C-w>s", opts)
+keymap("n", "<leader>|", "<C-w>v", opts)
+
 -- keymap("n", "n", "nzz", opts)
 -- keymap("n", "N", "Nzz", opts)
 -- keymap("n", "*", "*zz", opts)
