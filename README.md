@@ -13,6 +13,12 @@ config checkout
 config config --local status.showUntrackedFiles no
 ```
 
+## NVIM
+
+```sh
+~/.install/source/nvim
+```
+
 ## Usage
 Example
 ```
