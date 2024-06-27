@@ -6,6 +6,12 @@
 curl -fsSL https://gist.github.com/9c338d1ec5ed9df6c76471b46709ed09 | sh
 ```
 
+```sh
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+git clone --bare https://github.com/kaar/dotfiles.git "$HOME/.cfg"
+config checkout
+config config --local status.showUntrackedFiles no
+```
 
 ## Usage
 Example
