@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Usage:
+#   qlink "https://example.com"
+#   qlink --web "https://example.com"
+#   echo "https://example.com" | qlink
+#   echo "https://example.com" | qlink --web
+# Options:
+#   --web, opens the QR code as an image in the web browser
+
+TMP_PNG=$(mktemp --suffix=.png)
+web=0
+text=""
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -w|--web) web=1; ;;
+        *) text=$1; ;;
+    esac
+    shift
+done
+
+if [[ $web -eq 1 ]]; then
+  qr "$text" > "$TMP_PNG" && open "$TMP_PNG"
+else
+  qr --ascii "$text"
+fi
