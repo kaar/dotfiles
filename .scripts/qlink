@@ -11,12 +11,14 @@ set -o pipefail
 #   qlink --web "https://example.com"
 #   echo "https://example.com" | qlink
 #   echo "https://example.com" | qlink --web
+#
 # Options:
 #   --web, opens the QR code as an image in the web browser
 
 TMP_PNG=$(mktemp --suffix=.png)
 web=0
 text=""
+
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -26,6 +28,23 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
+# If nothing in stdin and nothing in text, take from clipboard
+if [[ -t 0 ]] && [[ -z "$text" ]]; then
+  text=$(xclip -o -selection clipboard)
+fi
+
+# If text is still empty read from stdin into text
+if [[ -z "$text" ]]; then
+  text=$(cat -)
+fi
+
+# If text is still empty, exit
+if [[ -z "$text" ]]; then
+  echo "No text provided"
+  exit 1
+fi
+
+# Generate QR code and open in browser if --web flag is set
 if [[ $web -eq 1 ]]; then
   qr "$text" > "$TMP_PNG" && open "$TMP_PNG"
 else
