@@ -3,6 +3,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Requirements:
+#   qr - QR python library, https://github.com/lincolnloop/python-qrcode
+#
 # Usage:
 #   qlink "https://example.com"
 #   qlink --web "https://example.com"
