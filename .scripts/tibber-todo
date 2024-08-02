@@ -2,10 +2,12 @@
 set -o errexit
 set -o pipefail
 
+GIST_ID="$(pass GitHub/gist-tibber-todo)"
+
 if [[ "$1" == "--web" ]]; then
   shift
-  gh gist view "$(pass GitHub/gist-todo-tibber)" "$@" --web
+  gh gist view "$GIST_ID" "$@" --web
   exit 0
 fi
 
-gh gist edit "$(pass GitHub/gist-todo-tibber)" "$@"
+gh gist edit "$GIST_ID" "$@"
