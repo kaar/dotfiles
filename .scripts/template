@@ -1,44 +1,58 @@
 #!/usr/bin/env bash
 
 set -o errexit
-set -o nounset
 set -o pipefail
 
 TEMPLATES=${TEMPLATES:-${XDG_CONFIG_HOME}/templates}
 
-usage="Usage: $(basename $0) <template name>
-list - list templates"
+usage="Usage: $(basename "$0") <template name>
+Templates are stored in $TEMPLATES
+list - list templates
+help - show this help
+<template name> - show content of template"
 
-# if argument is empty print usage
-if [[ -z "${1}" ]]; then
+
+cmd_usage() {
   echo "${usage}"
   exit 1
-fi
+}
 
-# if first argument is equal to list then list all templates
-if [[ "$1" == "list" ]]; then
+cmd_list() {
   ls "$TEMPLATES"
   exit 0
-fi
+}
 
-# if content of argument is file then cat it
-if [[ -f "${TEMPLATES}/${1}" ]]; then
-  cat "$TEMPLATES/$1"
-else
-  echo "Template not found"
-  exit 1
-fi
-
-# if content of argument is a directory copy all files to current directory
-if [[ -d "$TEMPLATES/$1" ]]; then
-  # ask if user want to copy all files
-  read -p "Do you want to copy all files from template? [y/N] " -n 1 -r
-  # if yes then copy all files
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    cp -r "$TEMPLATES/$1"/* .
-  else
-    echo "Files will be copied to current directory"
+cmd_run() {
+  if [[ -z "${1}" ]]; then
+    echo "${usage}"
+    exit 1
   fi
-fi
 
+  # if content of argument is file then cat it
+  if [[ -f "${TEMPLATES}/${1}" ]]; then
+    cat "$TEMPLATES/$1"
+  else
+    echo "Template not found"
+    exit 1
+  fi
 
+  # if content of argument is a directory copy all files to current directory
+  if [[ -d "$TEMPLATES/$1" ]]; then
+    # ask if user want to copy all files
+    read -p "Do you want to copy all files from template? [y/N] " -n 1 -r
+    # if yes then copy all files
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      cp -r "$TEMPLATES/$1"/* .
+    else
+      echo "Files will be copied to current directory"
+    fi
+  fi
+
+  exit 0
+}
+
+case "$1" in
+  help|--help|-h) shift; cmd_usage "$@" ;;
+  list) shift; cmd_list "$@" ;;
+  *) cmd_run "$@" ;;
+esac
