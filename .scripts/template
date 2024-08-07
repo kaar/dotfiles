@@ -39,14 +39,26 @@ cmd_list() {
 
 cmd_add() {
   add_usage="Usage: $(basename "$0") add <template name>"
-
   if [[ -z "${1}" ]]; then
     echo "$add_usage"
     exit 1
   fi
-
   if [[ -f "${TEMPLATES}/${1}" ]]; then
     echo "Template already exists"
+    exit 1
+  fi
+  cat > "${TEMPLATES}/${1}"
+  exit 0
+}
+
+cmd_update() {
+  update_usage="Usage: $(basename "$0") update <template name>"
+  if [[ -z "${1}" ]]; then
+    echo "$update_usage"
+    exit 1
+  fi
+  if [[ ! -f "${TEMPLATES}/${1}" ]]; then
+    echo "Template not found"
     exit 1
   fi
 
@@ -87,5 +99,6 @@ case "$1" in
   help|--help|-h) shift; cmd_usage "$@" ;;
   list) shift; cmd_list "$@" ;;
   add) shift; cmd_add "$@" ;;
+  update) shift; cmd_update "$@" ;;
   *) cmd_run "$@" ;;
 esac
