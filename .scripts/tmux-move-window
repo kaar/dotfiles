@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Move the current window to another session
+# TODO:
+#
+# if $1 is not empty, use it as the session name
+# if a session with that name does not exist, ask if it should be created
+# if [ -n "${1:-}" ]; then
+#   session=$1
+#   if ! tmux has-session -t "$session"; then
+#     read -rp "Session $session does not exist. Create it? [y/N] " answer
+#     if [ "$answer" = "y" ]; then
+#       tmux new-session -d -s "$session"
+#     else
+#       exit 1
+#     fi
+#   fi
+# else
+#   session=$(tmux display-message -p '#S')
+# fi
+session=$(
+  tmux list-sessions -F '#{session_name}' |\
+  grep -v "$(tmux display-message -p '#S')" |\
+  fzf --reverse --prompt="Move to session: "
+)
+tmux move-window -t "$session"
+tmux switch-client -t "$session"
