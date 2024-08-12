@@ -206,10 +206,12 @@ stty -ixon
 # bind '"\C-f":"file-search-preview\n"'
 
 # ------------------------------ prompt -------------------------------
-source $HOME/.config/git/git-prompt.sh
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
+# https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
+source "$HOME/.config/git/git-prompt.sh"
 
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[1;33m\]"
