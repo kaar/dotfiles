@@ -59,7 +59,7 @@
   prompt = false
 
 [core]
-  editor = lvim
+  editor = $EDITOR
   pager = diff-so-fancy | less --tabs=4 -RFX
   whitespace = blank-at-eol,blank-at-eof
 
