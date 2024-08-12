@@ -20,7 +20,6 @@
   recent = branch --sort=committerdate
   untracked = ls-files --others --exclude-standard
   fp = push --force-with-lease
-
   # Log
   # pretty-format; https://git-scm.com/docs/pretty-formats
   # The basic colors: black, red, green, yellow, blue, magenta, cyan, white and default.
@@ -30,7 +29,6 @@
   ll =  log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset'
   lll = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %+b'
   lg = log --color --graph --decorate --all --abbrev-commit --date=relative
-
   # Stash
   sl = stash list
   sll = stash-list
