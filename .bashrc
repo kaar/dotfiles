@@ -153,7 +153,6 @@ alias gist='gh gist'
 alias n='nvim'
 alias v='vim'
 alias l='lvim'
-alias diff='difft'
 
 # Gists
 alias ideas='gh gist edit ${GIST_IDEAS}'
