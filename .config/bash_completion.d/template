@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-_template_completion()
-{
-    COMPREPLY=( $(compgen -W "$(template list)" -- "${COMP_WORDS[COMP_CWORD]}") )
-}
-
-complete -F _template_completion template
