@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Set stdin or argument "<title>" as input
+body="${1:-$(cat)}"
+# Make sure its only one argument in '"' or "'"
+if [[ "$#" -gt 1 || "$body" == "" ]]; then
+  echo "Usage: $0 \"<body>\""
+  exit 1
+fi
+echo "$body"
+gh pr edit --body "${body}" && gh pr view --web
