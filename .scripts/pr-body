@@ -3,12 +3,26 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Set stdin or argument "<title>" as input
-body="${1:-$(cat)}"
-# Make sure its only one argument in '"' or "'"
-if [[ "$#" -gt 1 || "$body" == "" ]]; then
-  echo "Usage: $0 \"<body>\""
-  exit 1
+# pr-body - Edit the body of a pull request
+# Usage: pr-body [<body>]
+# If no argument is passed, read the existing body and use it as input
+# If one argument is passed as a string take that as body
+# If data on stdin, use that as body
+body=""
+# If data on stdin, use that as body
+if [ -p /dev/stdin ]; then
+  body=$(cat)
 fi
-echo "$body"
+# If one argument is passed as a string take that as body
+if [[ "$#" -eq 1 ]]; then
+  body="$1"
+fi
+# If no argument is passed, read the existing body and use it as input
+if [[ -z "$body" ]]; then
+  body_file=$(mktemp --suffix=.md)
+  gh pr view --json body -q .body > "$body_file"
+  $EDITOR "$body_file"
+  body=$(cat "$body_file")
+fi
+
 gh pr edit --body "${body}" && gh pr view --web
