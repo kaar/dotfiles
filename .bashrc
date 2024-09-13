@@ -236,6 +236,22 @@ PS1='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
 # ------------------------------ settings -----------------------------
 
 set -o vi               # replace readline with vi mode
+
+# HISTORY
+export HISTFILE="$PWD/.bash_history"
+# export BASH_BACKUP_REPOSITORY=kaar/bash-backup
+export HIST_BACKUP_DIR="$HOME/repos/kaar/bash-backup/bash_history"
+copy_history() {
+  mkdir -p "$HIST_BACKUP_DIR"
+  # Save the current history
+  history -a
+  cat "$HISTFILE" >> "$HIST_BACKUP_DIR/.bash_history_consolidated"
+  sort -u "$HIST_BACKUP_DIR/.bash_history_consolidated" -o "$HIST_BACKUP_DIR/.bash_history_consolidated"
+}
+
+# Save history on exit
+trap copy_history EXIT
+
 HISTCONTROL=ignoreboth  # No duplicated lines
 HISTSIZE=1000
 HISTFILESIZE=2000
