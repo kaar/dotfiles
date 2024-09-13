@@ -1,57 +1,72 @@
+version: "1"
 # What protocol to use when performing git operations. Supported values: ssh, https
 git_protocol: ssh
 # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
-editor: lvim
+editor: nvim
 # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
 prompt: disable
 # A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
 pager: less
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    reviews: search prs --review-requested "kaar" --state open
-    # gist
-    gist-view: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist view "$id"'
-    gist-edit: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist edit "$id"'
-    # pr
-    pv: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view "$id" --comments'
-    prs: pr list
-    pc: pr checks --watch
-    view: pr view --web
-    diff: pr diff
-    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
-    # issue
-    issues: issue list --limit 50
-    iv: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
-    io: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue edit "$id"'
-    bug: issue create --label "bug"
-    bugs: issue list --label "bug"
-    feature: issue create --label "enhancement"
-    features: issue list --label "feature"
-    repos: |
-        !gh api --paginate graphql -f owner="$1" -f query='
-          query($owner: String!, $per_page: Int = 100, $endCursor: String) {
-            repositoryOwner(login: $owner) {
-              repositories(first: $per_page, after: $endCursor, ownerAffiliations: OWNER) {
-                  nodes { nameWithOwner }
-                  pageInfo { hasNextPage endCursor }
-                }
-              }
-            }
-          ' | jq -r '.data.repositoryOwner.repositories.nodes[].nameWithOwner' | sort
-    orgs: |
-        !gh api --paginate graphql  -f query='
-        query {
-          viewer {
-            id
-            name
-            organizations(first: 100) {
-              nodes {
-                id
-                name
-              }
+  reviews: search prs --review-requested "kaar" --state open
+  # gist
+  gist-view: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist view "$id"'
+  gist-edit: '!id="$(gh gist list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh gist edit "$id"'
+  # pr
+  pv: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view "$id" --comments'
+  prs: pr list
+  pc: pr checks --watch
+  view: pr view --web
+  diff: pr diff
+  co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+  # issue
+  issues: issue list --limit 50
+  iv: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
+  io: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue edit "$id"'
+  bug: issue create --label "bug"
+  bugs: issue list --label "bug"
+  feature: issue create --label "enhancement"
+  features: issue list --label "feature"
+  me: pr list --author "@me" --state all
+  title: pr list --author "@me" --state all
+  teams: |
+    !gh api /orgs/${1}/teams | jq -r '.[] | "\(.name) \t\t \(.html_url)"'
+  # Atlantis commands to trigger plan and apply in PRs
+  atlantis-plan: pr comment --body "atlantis plan"
+  atlantis-apply: pr comment --body "atlantis apply"
+  repos: |
+    !gh api --paginate graphql -f owner="$1" -f query='
+      query($owner: String!, $per_page: Int = 100, $endCursor: String) {
+        repositoryOwner(login: $owner) {
+          repositories(first: $per_page, after: $endCursor, ownerAffiliations: OWNER) {
+              nodes { nameWithOwner }
+              pageInfo { hasNextPage endCursor }
             }
           }
-        } ' | jq -r '.data.viewer.organizations[][] | .id + " " + .name'
-    status: |
-        !gh api graphql -f emoji="${1%% *}" -f msg="${1#* }" -f query='mutation ($msg: String!, $emoji: String) {changeUserStatus(input:{message:$msg,emoji:$emoji}) {status { message, emoji }}}'
-    question: issue create --label "question"
+        }
+      ' | jq -r '.data.repositoryOwner.repositories.nodes[].nameWithOwner' | sort
+  orgs: |
+    !gh api --paginate graphql  -f query='
+    query {
+      viewer {
+        id
+        name
+        organizations(first: 100) {
+          nodes {
+            id
+            name
+          }
+        }
+      }
+    } ' | jq -r '.data.viewer.organizations[][] | .id + " " + .name'
+  status: |
+    !gh api graphql -f emoji="${1%% *}" -f msg="${1#* }" -f query='mutation ($msg: String!, $emoji: String) {changeUserStatus(input:{message:$msg,emoji:$emoji}) {status { message, emoji }}}'
+  question: issue create --label "question"
+  deps: pr list --label "dependencies"
+  deps-view: |
+    !gh pr list --label "dependencies" --state open | awk '{print $1}' | xargs -I {} gh pr view {} --comments
+  deps-diff: |
+    !gh pr list --label "dependencies" --state open | awk '{print $1}' | xargs -I {} gh pr diff {}
+  deps-merge: |
+    !gh pr list --label "dependencies" --state open | awk '{print $1}' | xargs -I {} gh pr merge {} --squash --auto
