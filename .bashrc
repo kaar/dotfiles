@@ -238,23 +238,31 @@ PS1='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
 set -o vi               # replace readline with vi mode
 
 # HISTORY
-export HISTFILE="$PWD/.bash_history"
-# export BASH_BACKUP_REPOSITORY=kaar/bash-backup
-export HIST_BACKUP_DIR="$HOME/repos/kaar/bash-backup/bash_history"
-copy_history() {
-  mkdir -p "$HIST_BACKUP_DIR"
-  # Save the current history
-  history -a
-  cat "$HISTFILE" >> "$HIST_BACKUP_DIR/.bash_history_consolidated"
-  sort -u "$HIST_BACKUP_DIR/.bash_history_consolidated" -o "$HIST_BACKUP_DIR/.bash_history_consolidated"
+# Save .bash_history in $HIST_REPO under a path that mirrors the current
+# directory structure, excluding the home directory
+# https://datawookie.dev/blog/2023/04/configuring-bash-history/
+# https://github.com/kaar/bash-backup
+export HIST_REPO="$HOME/repos/kaar/bash-backup/bash_history"
+export HISTFILE="$HIST_REPO/${PWD/$HOME/}/.bash_history"
+mkdir -p "$(dirname "$HISTFILE")"
+# Append commands to history file immediately
+# Enables access to history in new terminal from active session
+export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
+clean_history() {
+  # Clean up $HISTFILE
+  echo "TODO: backup and maybe clean up history"
+  # sort -u -o "$HISTFILE" "$HISTFILE"
+  # Remove empty ls commands like `ls -l` and `ls -al`
+  sed -i '/^ls\s*$/d' "$HISTFILE"
+  # Remove empty cd commands like `cd` and `cd ~`
+  sed -i '/^cd\s*$/d' "$HISTFILE"
 }
+# Clean up history when exiting shell
+trap clean_history EXIT
 
-# Save history on exit
-trap copy_history EXIT
-
-HISTCONTROL=ignoreboth  # No duplicated lines
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTCONTROL=ignoreboth  # No duplicated lines and lines starting with space
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
 shopt -s histappend     # don't override history
