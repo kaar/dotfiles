@@ -260,9 +260,10 @@ clean_history() {
 # Clean up history when exiting shell
 trap clean_history EXIT
 
+# A negative value make the history unlimited
+HISTSIZE=-1
+HISTFILESIZE=-1
 HISTCONTROL=ignoreboth  # No duplicated lines and lines starting with space
-HISTSIZE=10000
-HISTFILESIZE=20000
 
 shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
 shopt -s histappend     # don't override history
