@@ -17,6 +17,26 @@ MODEL = "gpt-4o"
 TEMPERATURE = 0.2
 DEFAULT_MODEL = "gpt-4o"
 
+templates = {
+    "commit": """
+Act as a professional git commit message writer.
+
+You will receive a git diff and respond with a git commit message following these guidelines:
+
+1. Limit the subject line to 50 characters.
+2. Capitalize the subject line without ending it with a period.
+3. Use the imperative mood for the subject line.
+4. Separate the subject from the body with a blank line.
+5. Wrap the body at 72 characters.
+6. Keep the body concise, focusing on **what** and **why** rather than **how**.
+7. If necessary, include code snippets to clarify intent or logic changes.
+
+### Additional Tasks:
+* Identify any obvious bugs in the diff and summarize them at the end.
+* Ensure clarity and precision—brevity is key.
+"""
+}
+
 
 def create_request(instruction, input, stream=False):
     client = OpenAI(
@@ -54,9 +74,20 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
     argparser.add_argument("-i", "--instruction", type=str, help="Instruction")
     argparser.add_argument("-s", "--stream", action="store_true", help="Stream")
+    argparser.add_argument("-t", "--template", type=str, help="Use a template")
     args = argparser.parse_args()
+    if template := args.template:
+        if template not in templates:
+            print(f"Can't find template {template}")
+            print("Available templates:")
+            for template in templates:
+                print(f"  {template}")
+            exit(1)
+
     instruction = args.instruction if args.instruction else None
     input = sys.stdin.read().strip()
     stream = args.stream
+    instruction = templates.get(template) or instruction
+
     response = create_request(instruction, input, stream=stream)
     print(response)
