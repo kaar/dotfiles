@@ -1,0 +1,62 @@
+#!/home/tibber/.scripts/py-scripts/.venv/bin/python3
+# TODO:
+# Fix the .venv path, create one for scripts
+
+import sys
+import os
+import logging
+import argparse
+
+from openai import OpenAI
+
+LOG_LEVEL = logging.WARNING
+logging.basicConfig(level=LOG_LEVEL, format="%(message)s")
+LOGGER = logging.getLogger(__name__)
+
+MODEL = "gpt-4o"
+TEMPERATURE = 0.2
+DEFAULT_MODEL = "gpt-4o"
+
+
+def create_request(instruction, input, stream=False):
+    client = OpenAI(
+        # This is the default and can be omitted
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
+    if input == "":
+        raise ValueError("Input cannot be empty")
+
+    messages = []
+    if instruction:
+        messages.append({"role": "system", "content": f"{instruction}"})
+
+    messages.append({"role": "user", "content": f"{input}"})
+    if stream:
+        stream = client.chat.completions.create(
+            messages=messages,
+            model=MODEL,
+            temperature=TEMPERATURE,
+            stream=True,
+        )
+        for chunk in stream:
+            print(chunk.choices[0].delta.content or "", end="")
+        return
+
+    response = client.chat.completions.create(
+        messages=messages,
+        model=MODEL,
+        temperature=TEMPERATURE,
+    )
+    return response.choices[0].message.content
+
+
+if __name__ == "__main__":
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument("-i", "--instruction", type=str, help="Instruction")
+    argparser.add_argument("-s", "--stream", action="store_true", help="Stream")
+    args = argparser.parse_args()
+    instruction = args.instruction if args.instruction else None
+    input = sys.stdin.read().strip()
+    stream = args.stream
+    response = create_request(instruction, input, stream=stream)
+    print(response)
