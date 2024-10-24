@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+# https://chatgpt.com/c/671aa9ec-4e00-8003-8e11-14b7ec4e3c63
+
+# # Read the URL from the clipboard
+# if command -v xclip &> /dev/null; then
+#     url=$(xclip -o -selection clipboard)
+# elif command -v pbpaste &> /dev/null; then
+#     url=$(pbpaste)
+# elif command -v wl-paste &> /dev/null; then
+#     url=$(wl-paste)
+# else
+#     echo "No clipboard utility found. Install xclip, pbpaste, or wl-paste."
+#     exit 1
+# fi
+#
+# # Prompt for link text
+# read -p "Link text: " text
+#
+# # Use URL as text if none provided
+# if [ -z "$text" ]; then
+#   text="$url"
+# fi
+#
+# # Output the markdown link
+# echo "[$text]($url)"
+#
+
+# https://chatgpt.com/c/671aaa96-8510-8003-9bcb-7337ea572066
+# #!/bin/bash
+
+# Function to get clipboard content
+get_clipboard() {
+    if command -v xclip >/dev/null 2>&1; then
+        xclip -selection clipboard -o
+    elif command -v xsel >/dev/null 2>&1; then
+        xsel --clipboard --output
+    elif command -v pbpaste >/dev/null 2>&1; then
+        pbpaste
+    else
+        echo "Error: No clipboard utility found."
+        exit 1
+    fi
+}
+
+# Get URL from clipboard
+url=$(get_clipboard)
+
+if [ -z "$url" ]; then
+    echo "Error: Clipboard is empty."
+    exit 1
+fi
+
+# Get link text from argument or stdin
+if [ $# -ge 1 ]; then
+    text="$*"
+else
+    # echo -n "Enter link text: "
+    read text
+fi
+
+# Create Markdown link
+echo "* [$text]($url)"
