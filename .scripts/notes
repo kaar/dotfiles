@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+NOTES_GITHUB_URL=https://github.com/kaar/notes
+NOTES_REPOSITORY=$HOME/repos/kaar/notes/
+
+
+if [ ! -d "$NOTES_REPOSITORY" ]; then
+  echo "Notes repository does not exist"
+  echo "Clone the repository from $NOTES_GITHUB_URL"
+  exit 1
+fi
+
+NOTES_FILENAME="${1:-NOTES.md}"
+# Current path should be mirrored in the repository
+LOCAL_PATH=$(pwd)
+NOTES_PATH="${NOTES_REPOSITORY}/local-notes/${LOCAL_PATH}"
+
+if [ ! -d "$NOTES_PATH" ]; then
+  mkdir -p "$NOTES_PATH"
+fi
+
+$EDITOR +2 "$NOTES_FILENAME"
+
+# exit if :cq, or exit with 0 if :wq
+if [ $? -eq 1 ]; then
+  exit 0
+fi
+
+# Create a hard link to the local file if not exists in the repository
+if [ ! -f "$NOTES_PATH/$NOTES_FILENAME" ]; then
+  ln "$NOTES_FILENAME" "$NOTES_PATH/$NOTES_FILENAME"
+fi
+
+# Commit the changes if any, use return type from the $EDITOR
+git -C "$NOTES_REPOSITORY" add "$NOTES_PATH/$NOTES_FILENAME"
+git -C "$NOTES_REPOSITORY" commit -m "Update notes for $LOCAL_PATH"
