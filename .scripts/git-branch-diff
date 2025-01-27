@@ -3,5 +3,14 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Diff current branch from where it split from master
-git diff "$(git merge-base --fork-point master)"
+# Note:
+# $(pwd) is going to be repo root and not the current directory when running as a git alias
+# See ~./gitconfig, bdiff = !git-branch-diff
+from_branch="master"
+
+# If main exists, use that instead of master
+if git rev-parse --verify "main" > /dev/null; then
+  from_branch="main"
+fi
+# Diff current branch from where it split from main/master branch
+git diff "$(git merge-base --fork-point "${from_branch}")"
