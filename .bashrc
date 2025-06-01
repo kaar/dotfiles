@@ -63,6 +63,12 @@ export PATH="$GOBIN:$PATH"
 
 # dotnet
 export DOTNET_TOOLS="$HOME/.dotnet/tools"
+# This is my own hack as I can't understand how to install dotnet correctly.
+# Rider and IDEs like that looks for dotnet in $HOME/.dotnet
+# So I add it to the path and be done with it.
+# Stupid Microsoft, have to make everything so complicated.
+DOTNET_PATH=$HOME/.dotnet/
+export PATH="$DOTNET_PATH:$PATH"
 
 # python
 # makes pipenv install packages in the project directory
