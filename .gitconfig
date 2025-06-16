@@ -3,7 +3,7 @@
   co = checkout
   st = status
   ci = commit
-  aci = !ci --history 5
+  ca = commit --amend
   br = branch
   s = switch
   cp = cherry-pick
@@ -15,7 +15,7 @@
   ld = log -p
   wt = worktree
   get = co origin/master --
-  bdiff = !git-branch-diff main
+  bdiff = !git-branch-diff
   # recent = "!f() { git s $(git br --sort=committerdate | grep -v '*' | fzf; ); }; f"
   recent = branch --sort=committerdate
   untracked = ls-files --others --exclude-standard
@@ -29,13 +29,10 @@
   ll =  log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset'
   lll = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %+b'
   lg = log --color --graph --decorate --all --abbrev-commit --date=relative
-  # Stash
-  sl = stash list
-  sll = stash-list
-  slll = stash-list --full
-  ss = stash save
-  sa = "!sh -c 'git stash apply stash@{$1}' -"
-  sd = "!sh -c 'git stash drop stash@{$1}' -"
+
+  # Rebase interactive
+  ri = rebase -i --autosquash
+
 
 [add.interactive]
   useBuiltin = false
@@ -63,6 +60,9 @@
 
 [apply]
   whitespace = fix
+
+[rebase]
+  autoStash = true
 
 [pull]
   rebase = true
@@ -93,3 +93,9 @@
 
 [rerere]
 	enabled = true
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
