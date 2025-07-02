@@ -1,2 +1,4 @@
 # https://github.com/kaar/linear-cli
-eval "$(_LI_COMPLETE=bash_source li)"
+if test -x li; then
+  eval "$(_LI_COMPLETE=bash_source li)"
+fi
