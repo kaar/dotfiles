@@ -1,33 +1,29 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
+# Based on /etc/sway/config
 # Read `man 5 sway` for a complete reference.
+
+
+# TODO: Take some inspiration from the EndeavourOS Sway config
+# https://github.com/EndeavourOS-Community-Editions/sway/blob/main/.config/sway/
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Logo key
+# Vim bindings
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+## Terminal
+# foot - https://codeberg.org/dnkl/foot/wiki
 set $term foot
-# Your preferred application launcher
+# Application Launcher
 set $menu wmenu-run
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# See outputs: swaymsg -t get_outputs
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+
 
 ### Idle configuration
 #
@@ -43,6 +39,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
+# `man 5 sway-input`
 #
 # Example configuration:
 #
