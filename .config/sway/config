@@ -20,6 +20,8 @@ set $term foot
 # Application Launcher
 set $menu wmenu-run
 
+font pango:DejaVu Sans Mono 10
+
 ### Output configuration
 # See outputs: swaymsg -t get_outputs
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
@@ -226,6 +228,20 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
 bindsym Print exec grim
 
+# https://github.com/morhetz/gruvbox
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+set $header #1d2021
+set $fg #ebdbb2
+
 #
 # Status Bar:
 #
@@ -237,10 +253,16 @@ bar {
     # The default just shows the current date and time.
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
+    font pango:DejaVu Sans Mono 10
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        statusline $yellow
+        background $bg
+
+        #                   border    backgr.   text
+        focused_workspace   $aqua     $aqua     $darkgray
+        inactive_workspace  $darkgray $darkgray $yellow
+        active_workspace    $darkgray $darkgray $yellow
+        urgent_workspace    $red      $red      $bg
     }
 }
 
