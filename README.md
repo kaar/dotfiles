@@ -13,6 +13,13 @@ config checkout
 config config --local status.showUntrackedFiles no
 ```
 
+## Compositor
+
+### Wayland
+* [Wayland](https://wiki.archlinux.org/title/Wayland#Compositors)
+
+~/.config/sway/config
+
 ## NVIM
 
 ```sh
