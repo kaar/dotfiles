@@ -106,3 +106,5 @@ tmp/
 tibber-logs/
 DataGripProjects/
 .config/shell.d/*.sh
+.config/go/telemetry
+.config/tailscale/ssh_known_hosts
