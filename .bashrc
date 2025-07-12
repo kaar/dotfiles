@@ -250,23 +250,16 @@ set -o vi               # replace readline with vi mode
 # === HISTORY ===
 # Avoid duplicates and commands starting with space
 HISTCONTROL=ignoredups:erasedups:ignorespace
-HISTSIZE=100000
-HISTFILESIZE=200000
-HISTTIMEFORMAT='%F %T '
-
-# Ignore trivial/unimportant commands
-HISTIGNORE="ls*:cd*:pwd:clear:exit"
-
-# Append instead of overwrite
-shopt -s histappend
-
-# Save after every command
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
 # A negative value make the history unlimited
 HISTSIZE=-1
 HISTFILESIZE=-1
-HISTCONTROL=ignoreboth  # No duplicated lines and lines starting with space
+HISTTIMEFORMAT='%F %T '
+# Ignore trivial/unimportant commands
+HISTIGNORE="ls*:cd*:pwd:clear:exit"
+# Append instead of overwrite
+shopt -s histappend
+# Save after every command
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
 shopt -s histappend     # don't override history
