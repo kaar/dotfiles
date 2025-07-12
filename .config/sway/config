@@ -176,6 +176,9 @@ bindsym $mod+space focus mode_toggle
 # Move focus to the parent container
 bindsym $mod+a focus parent
 
+# remove window borders/title bars
+default_border none
+
 #
 # Scratchpad:
 #
