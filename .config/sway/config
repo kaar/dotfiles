@@ -245,6 +245,9 @@ set $darkgray #1d2021
 set $header #1d2021
 set $fg #ebdbb2
 
+#
+# Status Bar:
+# ../waybar/config.jsonc
 bar {
   swaybar_command waybar
 }
