@@ -32,12 +32,16 @@ case $- in
       *) return;;
 esac
 
-# https://www.atlassian.com/git/tutorials/dotfiles
-# Create an alias config which will be used instead of the regular git to interact with configuration repository.
+# dotfiles config, see: ./README.md
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-# Replacd with script ~/.scripts/config
 
-# ----------------------- environment variables ----------------------
+if test -x /usr/bin/foot ; then
+  export TERM=foot
+else
+  # Fallback to xterm-256color if foot is not installed
+  export TERM=xterm-256color
+fi
+
 export EDITOR=nvim
 export VISUAL=nvim
 export EDITOR_PREFIX=nvim
