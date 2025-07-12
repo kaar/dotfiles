@@ -290,3 +290,10 @@ shopt -s expand_aliases # expand aliases
 if [ -f /.cargo/env ]; then
    source "$HOME/.cargo/env"
 fi
+
+# zoxide
+# https://github.com/ajeetdsouza/zoxide
+if test -x /usr/bin/zoxide; then
+  eval "$(zoxide init bash)"
+  alias cd='z'
+fi
