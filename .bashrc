@@ -247,28 +247,21 @@ PS1='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
 
 set -o vi               # replace readline with vi mode
 
-# HISTORY
-# Save .bash_history in $HIST_REPO under a path that mirrors the current
-# directory structure, excluding the home directory
-# https://datawookie.dev/blog/2023/04/configuring-bash-history/
-# https://github.com/kaar/bash-backup
-export HIST_REPO="$HOME/repos/kaar/bash-backup/bash_history"
-export HISTFILE="$HIST_REPO/${PWD/$HOME/}/.bash_history"
-mkdir -p "$(dirname "$HISTFILE")"
-# Append commands to history file immediately
-# Enables access to history in new terminal from active session
-export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
-clean_history() {
-  # Clean up $HISTFILE
-  echo "TODO: backup and maybe clean up history"
-  # sort -u -o "$HISTFILE" "$HISTFILE"
-  # Remove empty ls commands like `ls -l` and `ls -al`
-  sed -i '/^ls\s*$/d' "$HISTFILE"
-  # Remove empty cd commands like `cd` and `cd ~`
-  sed -i '/^cd\s*$/d' "$HISTFILE"
-}
-# Clean up history when exiting shell
-trap clean_history EXIT
+# === HISTORY ===
+# Avoid duplicates and commands starting with space
+HISTCONTROL=ignoredups:erasedups:ignorespace
+HISTSIZE=100000
+HISTFILESIZE=200000
+HISTTIMEFORMAT='%F %T '
+
+# Ignore trivial/unimportant commands
+HISTIGNORE="ls*:cd*:pwd:clear:exit"
+
+# Append instead of overwrite
+shopt -s histappend
+
+# Save after every command
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # A negative value make the history unlimited
 HISTSIZE=-1
