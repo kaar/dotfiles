@@ -245,28 +245,8 @@ set $darkgray #1d2021
 set $header #1d2021
 set $fg #ebdbb2
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    font pango:DejaVu Sans Mono 10
-    colors {
-        statusline $yellow
-        background $bg
-
-        #                   border    backgr.   text
-        focused_workspace   $aqua     $aqua     $darkgray
-        inactive_workspace  $darkgray $darkgray $yellow
-        active_workspace    $darkgray $darkgray $yellow
-        urgent_workspace    $red      $red      $bg
-    }
+  swaybar_command waybar
 }
 
 include /etc/sway/config.d/*

@@ -1,0 +1,74 @@
+/* Gruvbox Dark Colors */
+@define-color bg      #282828;
+@define-color fg      #ebdbb2;
+@define-color red     #cc241d;
+@define-color green   #98971a;
+@define-color yellow  #d79921;
+@define-color blue    #458588;
+@define-color purple  #b16286;
+@define-color aqua    #689d6a;
+@define-color gray    #a89984;
+@define-color dark0   #1d2021;
+@define-color light0  #fbf1c7;
+
+* {
+    font-family: JetBrainsMono Nerd Font, monospace;
+    font-size: 13px;
+    color: @fg;
+}
+
+window#waybar {
+    background-color: @bg;
+    border-bottom: 2px solid @bg;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background: transparent;
+    border: none;
+    color: @gray;
+}
+
+#workspaces button.focused {
+    color: @light0;
+    background: @dark0;
+}
+
+#workspaces button.urgent {
+    color: @red;
+    background: @dark0;
+}
+
+#mode {
+    background-color: @yellow;
+    color: @dark0;
+    padding: 0 10px;
+}
+
+#clock,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#battery,
+#temperature,
+#tray,
+#backlight {
+    padding: 0 10px;
+    /* background-color: @dark0; */
+    background-color: @bg;
+    margin: 0 2px;
+    border-radius: 5px;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#pulseaudio.muted {
+    color: @gray;
+}
