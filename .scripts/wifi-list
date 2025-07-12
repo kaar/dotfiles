@@ -1,5 +1,10 @@
 #!/bin/sh
 
-# iwctl station wlan0 get-networks
-nmcli device wifi list
-
+if command -v iwctl >/dev/null 2>&1; then
+    iwctl station wlan0 get-networks
+elif command -v nmcli >/dev/null 2>&1; then
+    nmcli device wifi list
+else
+    echo "No suitable command found to list Wi-Fi networks."
+    exit 1
+fi
