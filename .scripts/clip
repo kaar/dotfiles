@@ -4,14 +4,24 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# set the default clipboard command
+if command -v wl-copy &> /dev/null; then
+  CLIP_CMD="wl-copy"
+elif command -v xclip &> /dev/null; then
+  CLIP_CMD="xclip -selection clipboard"
+else
+  echo "No clipboard command (wl-copy or xclip) found." >&2
+  exit 1
+fi
+
 # if no argument are passed
 if [ $# -eq 0 ] ; then
   # copy from stdin
-  xclip -rmlastnl -sel clip
+  $CLIP_CMD
 fi
 
 # if one argument is passed and is a file
 if [ $# -eq 1 ] && [ -f $1 ] ; then
   # copy content of file
-  xclip -sel clip "$1"
+  $1 > $CLIP_CMD
 fi
