@@ -59,8 +59,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_TMUX=1
 
 # go
-export GOPATH=~/.local/share/go
-export GOBIN=~/.local/bin/go/
+export GOPATH=/usr/local/go
+export GOBIN="$GOPATH/bin"
 export GOPROXY=direct
 export CGO_ENABLED=0
 export PATH="$GOBIN:$PATH"
