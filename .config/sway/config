@@ -51,7 +51,7 @@ input * {
   repeat_delay 250
   repeat_rate 100
   xkb_layout us,se
-  xkb_options "caps:escape"
+  xkb_options "caps:escape,grp:alt_shift_toggle"
 }
 
 
