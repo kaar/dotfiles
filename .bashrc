@@ -259,7 +259,12 @@ HISTIGNORE="ls:ls -l:ls -la:cd:cd -:pwd:clear:history:exit"
 # Append instead of overwrite
 shopt -s histappend
 # Save after every command
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# This is not very good as it messes up the history between terminals.
+#
+# Save history on terminal close
+# PROMPT_COMMAND='history -a'
+# This does not work as it break my terminal for some reason. Don't have time for this...
 
 shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
 shopt -s histappend     # don't override history
