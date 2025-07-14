@@ -255,7 +255,7 @@ HISTSIZE=-1
 HISTFILESIZE=-1
 HISTTIMEFORMAT='%F %T '
 # Ignore trivial/unimportant commands
-HISTIGNORE="ls*:cd*:pwd:clear:exit"
+HISTIGNORE="ls:ls -l:ls -la:cd:cd -:pwd:clear:history:exit"
 # Append instead of overwrite
 shopt -s histappend
 # Save after every command
