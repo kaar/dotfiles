@@ -42,6 +42,11 @@ else
   export TERM=xterm-256color
 fi
 
+# XDG
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
 export EDITOR=nvim
 export VISUAL=nvim
 export EDITOR_PREFIX=nvim
@@ -49,7 +54,6 @@ export EDITOR_PREFIX=nvim
 export PACKAGE_INSTALL="${HOME}/.install"
 export SCRIPTS="${HOME}/.scripts"
 export NOTES="${HOME}/notes"
-export XDG_CONFIG_HOME="${HOME}/.config"
 export REPOS="${HOME}/repos"
 export BROWSER=firefox
 
