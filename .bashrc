@@ -62,13 +62,6 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_TMUX=1
 
-# go
-export GOPATH=/usr/local/go
-export GOBIN="$GOPATH/bin"
-export GOPROXY=direct
-export CGO_ENABLED=0
-export PATH="$GOBIN:$PATH"
-
 # dotnet
 export DOTNET_TOOLS="$HOME/.dotnet/tools"
 # This is my own hack as I can't understand how to install dotnet correctly.
