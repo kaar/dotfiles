@@ -1,0 +1,12 @@
+# systemctl --user enable flatpak-update.service
+# systemctl --user start flatpak-update.service
+[Unit]
+Description=Run flatpak update at user login
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=flatpak update -y
+
+[Install]
+WantedBy=default.target
