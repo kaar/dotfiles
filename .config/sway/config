@@ -114,10 +114,12 @@ bindsym $mod+Shift+Right move right
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 
+# For icons
+# https://fontawesome.com/
 set $ws1 "1: term"
 set $ws2 "2: Firefox"
-set $ws3 "3:📅 Meetings"
-set $ws4 "4: Slack"
+set $ws3 "3: Mail"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
