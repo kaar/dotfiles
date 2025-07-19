@@ -241,7 +241,7 @@
         "warning": 30,
         "critical": 15
       },
-      "format": "{icon}",
+      "format": "{icon} {capacity}%",
       "format-plugged": " {capacity}%",
       "format-alt": "{icon} {capacity}%",
       "format-icons": [
