@@ -285,3 +285,12 @@ if test -x /usr/bin/zoxide; then
   eval "$(zoxide init bash)"
   alias cd='z'
 fi
+
+# wayland notifications
+# https://github.com/kaar/mako
+# $REPOS/kaar/mako/build/mako
+# ./.config/systemd/user/mako.service
+# notify-send "Title" "Message"
+if test -x "$REPOS/kaar/mako/build/mako" ; then
+  export PATH="$REPOS/kaar/mako/build:$PATH"
+fi

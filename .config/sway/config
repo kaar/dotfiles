@@ -43,6 +43,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # uncomment `HandleLidSwitch=suspend` in /etc/systemd/logind.conf
 exec_always swayidle -w before-sleep swaylock
 
+### Notifucation
+# https://github.com/kaar/mako
+set $notify /home/kaar/repos/kaar/mako/build/mako
+exec_always $notify
 
 ### Input configuration
 # `man 5 sway-input`
