@@ -63,7 +63,8 @@
       "cpu",
       "memory",
       "disk",
-      "network"
+      "network",
+      "battery"
       // "temperature#cpu",
       // "pulseaudio",
       // "clock#local",
@@ -73,8 +74,7 @@
       // "tray"
     ],
     "modules-right": [
-      "clock",
-      "battery"
+      "clock"
     ],
     // "modules-right": [
     //   "clock#local"
