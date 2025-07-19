@@ -65,9 +65,9 @@
       "disk",
       "network",
       "battery",
-      "backlight"
+      "backlight",
+      "pulseaudio"
       // "temperature#cpu",
-      // "pulseaudio",
       // "clock#local",
       // "keyboard-state",
       // "custom/swaync",
