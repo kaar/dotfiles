@@ -64,7 +64,8 @@
       "memory",
       "disk",
       "network",
-      "battery"
+      "battery",
+      "backlight"
       // "temperature#cpu",
       // "pulseaudio",
       // "clock#local",
@@ -118,6 +119,13 @@
     //     "default": ""
     //   }
     // },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{percent}% {icon}",
+      "format-icons": [
+        ""
+      ]
+    },
     "network": {
       "format-wifi": " {signalStrength}%",
       "format-ethernet": "",
