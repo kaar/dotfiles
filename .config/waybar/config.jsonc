@@ -151,7 +151,7 @@
     },
     "disk": {
       "interval": 30,
-      "format": " {percentage_free}%",
+      "format": " {percentage_used}%",
       "path": "/"
     },
     "pulseaudio": {
