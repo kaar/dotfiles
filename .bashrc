@@ -286,6 +286,10 @@ if test -x /usr/bin/zoxide; then
   alias cd='z'
 fi
 
+# npm
+export NPM_PREFIX="$HOME/.npm-global"
+export PATH="$NPM_PREFIX/bin:$PATH"
+
 # wayland notifications
 # https://github.com/kaar/mako
 # $REPOS/kaar/mako/build/mako
