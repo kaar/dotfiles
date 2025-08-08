@@ -21,7 +21,7 @@ cwd() { echo "$input" | jq -r '.cwd'; }
 
 APP_NAME=Claude
 ICON=$HOME/.claude/claude.png
-EXPIRE_TIME=5000
+EXPIRE_TIME=2000
 URGENCY=normal
 
 CWD=$(cwd)
