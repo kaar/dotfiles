@@ -35,12 +35,15 @@ esac
 # dotfiles config, see: ./README.md
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-if test -x /usr/bin/foot ; then
-  export TERM=foot
-else
-  # Fallback to xterm-256color if foot is not installed
-  export TERM=xterm-256color
-fi
+# TODO: If I set foot as TERM it messes up the colors when I ssh into machines.
+# Can not use less and all the colors are non existing.
+export TERM=xterm-256color
+# if test -x /usr/bin/foot ; then
+#   export TERM=foot
+# else
+#   # Fallback to xterm-256color if foot is not installed
+#   export TERM=xterm-256color
+# fi
 
 # XDG
 export XDG_CONFIG_HOME="${HOME}/.config"
