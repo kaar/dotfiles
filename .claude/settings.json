@@ -8,5 +8,29 @@
     "allow": [
       "WebFetch(domain:docs.anthropic.com)"
     ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/notification.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/stop.sh"
+          }
+        ]
+      }
+    ]
   }
 }
