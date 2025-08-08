@@ -298,3 +298,7 @@ export PATH="$NPM_PREFIX/bin:$PATH"
 if test -x "$REPOS/kaar/mako/build/mako" ; then
   export PATH="$REPOS/kaar/mako/build:$PATH"
 fi
+
+# After installing claude globally I ran `claude migrate-installer`
+# That moved the binary to ~/.claude/local/claude, which requires this alias.
+alias claude="/home/kaar/.claude/local/claude"
