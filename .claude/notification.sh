@@ -4,7 +4,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-
+# https://docs.anthropic.com/en/docs/claude-code/hooks#notification
+# - “Claude needs your permission to use Bash”
+# - “Claude is waiting for your input”
 # Input:
 #
 # Test: `cat notification.json | ./notification.sh`
@@ -18,21 +20,26 @@ set -o pipefail
 # }
 
 input=$(cat)
-
 hook_event_name() { echo "$input" | jq -r '.hook_event_name'; }
 transcript_path() { echo "$input" | jq -r '.transcript_path'; }
 session_id() { echo "$input" | jq -r '.session_id'; }
 cwd() { echo "$input" | jq -r '.cwd'; }
 message() { echo "$input" | jq -r '.message'; }
 
+APP_NAME=Claude
+ICON=$HOME/.claude/claude.png
+EXPIRE_TIME=5000
+URGENCY=normal
+
 CWD=$(cwd)
-MESSAGE=$(message)
 PROJECT="${CWD##*/}"
+MESSAGE=$(message)
+
 
 notify-send \
-  --app-name=Claude \
-  --urgency=normal \
-  --icon="$HOME/.claude/claude.png" \
-  --expire-time=5000 \
+  --app-name="$APP_NAME" \
+  --urgency="$URGENCY" \
+  --icon="$ICON" \
+  --expire-time=$EXPIRE_TIME \
   "$PROJECT" \
   "$MESSAGE"

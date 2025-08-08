@@ -4,30 +4,34 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Input:
-#
+# Example:
 # {
-#   "session_id": "abc123",
-#   "transcript_path": "~/.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl",
+#   "session_id": "061e6421-dccd-4ebb-97fa-1daa947288c3",
+#   "transcript_path": "/home/kaar/.claude/projects/-home-kaar--claude/061e6421-dccd-4ebb-97fa-1daa947288c3.jsonl",
+#   "cwd": "/home/kaar/.claude",
 #   "hook_event_name": "Stop",
-#   "stop_hook_active": true
+#   "stop_hook_active": false
 # }
 
 input=$(cat)
-
 hook_event_name() { echo "$input" | jq -r '.hook_event_name'; }
 transcript_path() { echo "$input" | jq -r '.transcript_path'; }
 session_id() { echo "$input" | jq -r '.session_id'; }
+cwd() { echo "$input" | jq -r '.cwd'; }
 
-HOOK_EVENT=$(hook_event_name)
+APP_NAME=Claude
+ICON=$HOME/.claude/claude.png
+EXPIRE_TIME=5000
+URGENCY=normal
+
+CWD=$(cwd)
+PROJECT="${CWD##*/}"
 MESSAGE="Completed"
-TITLE="$HOOK_EVENT"
-BODY=$MESSAGE
 
 notify-send \
-  --app-name=Claude \
-  --urgency=normal \
-  --icon="$PWD/claude.png" \
-  --expire-time=5000 \
-  "$TITLE" \
-  "$BODY"
+  --app-name="$APP_NAME" \
+  --urgency="$URGENCY" \
+  --icon="$ICON" \
+  --expire-time=$EXPIRE_TIME \
+  "$PROJECT" \
+  "$MESSAGE"
