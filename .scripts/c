@@ -3,6 +3,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Monitoring - https://docs.anthropic.com/en/docs/claude-code/monitoring-usage
+# Setup - https://docs.anthropic.com/en/docs/claude-code/setup#local-installation
 # Settings - https://docs.anthropic.com/en/docs/claude-code/settings
-claude --permission-mode acceptEdits "$@"
+# Monitoring - https://docs.anthropic.com/en/docs/claude-code/monitoring-usage
+
+exec "$HOME/.claude/local/node_modules/.bin/claude" --permission-mode acceptEdits "$@"

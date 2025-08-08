@@ -5,5 +5,6 @@ set -o pipefail
 
 # Run a chat session based on the claude-chat repository.
 CHAT_DIR=$REPOS/kaar/claude-chat
+
 cd "$CHAT_DIR" && \
-  claude --permission-mode acceptEdits "$@"
+  exec "$HOME/.claude/local/node_modules/.bin/claude" --permission-mode acceptEdits "$@"
