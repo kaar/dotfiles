@@ -1,28 +1,24 @@
 sort=-time
 layer=overlay
-# RGBA: last two hex chars set opacity (80 = ~50% opacity)
-background-color=#2e344080
-width=300
-height=110
-border-size=0
-border-color=#88c0d0
-border-radius=15
-icons=1
-max-icon-size=64
+anchor=top-right
+margin=10
+padding=12
+
+width=380
+height=100
+border-radius=10
+font=monospace 10
+text-color=#e5e9f0
+background-color=#2e344085
+border-size=1
+border-color=#4c566a
 default-timeout=5000
-ignore-timeout=1
-font=monospace 14
+markup=1
 
-[urgency=low]
-border-color=#cccccc
-
-[urgency=normal]
-border-color=#d08770
-
-[urgency=high]
+[urgency=critical]
 border-color=#bf616a
 default-timeout=0
 
 [category=mpd]
+border-color=#8fbcbb
 default-timeout=2000
-group-by=category
