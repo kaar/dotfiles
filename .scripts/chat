@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Run a chat session based on the claude-chat repository.
+CHAT_DIR=$REPOS/kaar/claude-chat
+cd "$CHAT_DIR" && \
+  claude --permission-mode acceptEdits "$@"
