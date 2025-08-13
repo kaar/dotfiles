@@ -43,17 +43,6 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "uv run ~/.claude/hooks/user-prompt-submit.py"
-          }
-        ]
-      }
-    ],
     "SubagentStop": [
       {
         "matcher": "",
@@ -61,6 +50,17 @@
           {
             "type": "command",
             "command": "uv run ~/.claude/hooks/subagent-stop.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/stop.py"
           }
         ]
       }
@@ -87,13 +87,13 @@
         ]
       }
     ],
-    "Stop": [
+    "UserPromptSubmit": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "uv run ~/.claude/hooks/stop.py"
+            "command": "uv run ~/.claude/hooks/user-prompt-submit.py"
           }
         ]
       }
