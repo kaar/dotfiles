@@ -16,7 +16,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/notification.sh"
+            "command": "uv run ~/.claude/hooks/notification.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv run ~/.claude/hooks/post-tool-use.py"
           }
         ]
       }
@@ -27,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/stop.sh"
+            "command": "uv run ~/.claude/hooks/stop.py"
           }
         ]
       }
