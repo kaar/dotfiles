@@ -237,12 +237,18 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
 # bindsym Print exec grim
 
-# Wayland portal env + services (needed for Flameshot on Wayland)
-# exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
-# exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-# (Re)start portals after Sway is up
-# exec_always systemctl --user restart xdg-desktop-portal-wlr.service xdg-desktop-portal.service
-
+# https://wiki.archlinux.org/title/Sway#Configuration
+# /etc/sway/config.d/50-systemd-user.conf
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY \
+                                         SWAYSOCK \
+                                         WAYLAND_DISPLAY \
+                                         XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY \
+                                                  SWAYSOCK \
+                                                  XDG_CURRENT_DESKTOP=sway \
+                                                  WAYLAND_DISPLAY
 # Screenshots
 bindsym Print exec flameshot gui -c
 
