@@ -235,7 +235,16 @@ bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ t
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
-bindsym Print exec grim
+# bindsym Print exec grim
+
+# Wayland portal env + services (needed for Flameshot on Wayland)
+# exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+# exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+# (Re)start portals after Sway is up
+# exec_always systemctl --user restart xdg-desktop-portal-wlr.service xdg-desktop-portal.service
+
+# Screenshots
+bindsym Print exec flameshot gui -c
 
 # https://github.com/morhetz/gruvbox
 # set primary gruvbox colorscheme colors
