@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [WINDOW_NUMBER]
+
+Move a tmux window to another session using fzf for selection.
+
+Arguments:
+    WINDOW_NUMBER    Window number to move (defaults to current window)
+
+Examples:
+    $(basename "$0")     # Move current window
+    $(basename "$0") 3   # Move window 3
+EOF
+}
+
+if ! tmux info &>/dev/null; then
+    echo "Error: tmux is not running" >&2
+    exit 1
+fi
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+current_window=$(tmux display-message -p '#I')
+current_session=$(tmux display-message -p '#S')
+window_to_move="${1:-$current_window}"
+session_to_move_to=$(tmux list-sessions -F '#{session_name}' | \
+    grep -v "^${current_session}$" | \
+    fzf --height 40% \
+        --reverse \
+        --prompt "Move window $window_to_move from '$current_session' to: " \
+        --preview 'tmux list-windows -t {} -F "#{window_index}: #{window_name}"' \
+        --preview-window 'right:50%')
+
+if [[ -z "$session_to_move_to" ]]; then
+    echo "No session selected. Operation cancelled." >&2
+    exit 1
+fi
+
+if [[ -z "$session_to_move_to" ]]; then
+  echo "No session selected. Exiting."
+  exit 1
+fi
+
+tmux move-window -s "$window_to_move" -t "$session_to_move_to"
