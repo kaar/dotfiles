@@ -30,7 +30,7 @@ session=$(tmux list-sessions -F '#{?session_attached,,#{session_name}}' | \
         --preview 'tmux list-windows -t {} -F "#{window_index}: #{window_name}"')
 
 
-if [ -z "$TMUX" ]; then
+if [ -z "${TMUX-}" ]; then
     tmux attach-session -t "$session"
 else
     tmux switch-client -t "$session"
