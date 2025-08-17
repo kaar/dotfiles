@@ -66,32 +66,20 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_TMUX=1
 
 # dotnet
-export DOTNET_TOOLS="$HOME/.dotnet/tools"
 # This is my own hack as I can't understand how to install dotnet correctly.
 # Rider and IDEs like that looks for dotnet in $HOME/.dotnet
 # So I add it to the path and be done with it.
 # Stupid Microsoft, have to make everything so complicated.
-DOTNET_PATH=$HOME/.dotnet/
-export PATH="$DOTNET_PATH:$PATH"
-
-# python
-# makes pipenv install packages in the project directory
-export PIPENV_VENV_IN_PROJECT=1
-# /home/tibber/repos/kaar/gpt-cli
-# export PYTHONPATH="$HOME/repos/kaar/gpt-cli"
-
-# poetry
-export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
-export POETRY_VIRTUALENVS_IN_PROJECT=true
-
-# ------------------------------ cdpath ------------------------------
-
-export CDPATH=.:~/Dev/:
+if test -d "$HOME/.dotnet" ; then
+  export DOTNET_TOOLS="$HOME/.dotnet/tools"
+  export DOTNET_ROOT="$HOME/.dotnet"
+  export PATH="$DOTNET_PATH:$PATH"
+  export PATH="$DOTNET_TOOLS:$PATH"
+fi
 
 # ------------------------------- path -------------------------------
 
 export PATH="$SCRIPTS:$PATH"
-export PATH="$DOTNET_TOOLS:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # ------------------------------- pager ------------------------------
@@ -101,7 +89,7 @@ if test -x /usr/bin/lesspipe; then
 fi
 
 
-# Use $EDITOR (nvim/lvim) as manpager
+# Use $EDITOR (nvim) as manpager
 export MANPAGER="$EDITOR +Man!"
 
 # "bat" as manpager
@@ -180,6 +168,7 @@ alias aws-iam='open ${AWS_URL_IAM}'
 
 # python
 alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
+
 
 # secrets
 alias source-secrets='. ~/.config/secrets.env'
@@ -273,11 +262,8 @@ shopt -s dotglob
 shopt -s expand_aliases # expand aliases
 
 
-# direnv
-# eval "$(direnv hook bash)"
-if [ -f /.cargo/env ]; then
-   source "$HOME/.cargo/env"
-fi
+# Cargo
+[[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
 
 # zoxide
 # https://github.com/ajeetdsouza/zoxide
