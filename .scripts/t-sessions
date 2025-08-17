@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0")
+
+Select and attach/switch to a tmux session using fzf.
+
+Options:
+    -h, --help    Show this help message
+
+Examples:
+    $(basename "$0")    # Select session interactively
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+session=$(tmux list-sessions -F '#{?session_attached,,#{session_name}}' | \
+    sed '/^$/d' | \
+    fzf --reverse \
+        --header "Jump to tmux session" \
+        --preview 'tmux list-windows -t {} -F "#{window_index}: #{window_name}"')
+
+
+if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$session"
+else
+    tmux switch-client -t "$session"
+fi
