@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-if command -v iwctl >/dev/null 2>&1; then
-    iwctl station wlan0 get-networks
-elif command -v nmcli >/dev/null 2>&1; then
-    nmcli device wifi list
-else
-    echo "No suitable command found to list Wi-Fi networks."
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Check that network manager is running
+if ! systemctl is-active --quiet NetworkManager; then
+    echo "NetworkManager is not running. Please start it first."
     exit 1
 fi
+
+nmcli device wifi list
