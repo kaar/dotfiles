@@ -290,6 +290,11 @@ fi
 export NPM_PREFIX="$HOME/.npm-global"
 export PATH="$NPM_PREFIX/bin:$PATH"
 
+# Golang
+GO_PATH="$HOME/go"
+export GOPATH="$GO_PATH"
+export PATH="$GOPATH/bin:$PATH"
+
 # wayland notifications
 # https://github.com/kaar/mako
 # $REPOS/kaar/mako/build/mako
