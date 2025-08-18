@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+pgrep -vx tmux > /dev/null && \
+  tmux new -d -s delete-me && \
+  tmux run-shell ~/.config/tmux/plugins/tmux-resurrect/scripts/restore.sh && \
+  tmux kill-session -t delete-me
