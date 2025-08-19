@@ -111,3 +111,6 @@ DataGripProjects/
 
 # Claude Code, this configuration is stored in a separate repository
 .claude/
+
+# Golang
+go/
