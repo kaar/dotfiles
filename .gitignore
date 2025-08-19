@@ -108,3 +108,6 @@ DataGripProjects/
 .config/shell.d/*.sh
 .config/go/telemetry
 .config/tailscale/ssh_known_hosts
+
+# Claude Code, this configuration is stored in a separate repository
+.claude/
