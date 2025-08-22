@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# This script works quite well but it has some limitations:
+# - The start_time argument is not refelected in the Chromecast UI (so the start is interpreted as 0).
+# - When the connection is lost the port is stiil open and needs to be closed through pkill. See Troubleshooting section below.
+
+file=$1
+minutes=${2:-}
+
+start_time_arg=()
+
+if [[ -n "$minutes" ]]; then
+    start_time=$((minutes * 60))
+    start_time_arg=(--start-time="$start_time")
+fi
+
+
+#
+# cvlc -vvv "$file" \
+#   --sout '#transcode{acodec=mp4a,ab=192,channels=2,samplerate=48000}:chromecast{ip=192.168.68.101,port=8009}' \
+#   --demux-filter=demux_chromecast \
+#   --sout-keep --aout=dummy --vout=dummy
+#
+#
+
+cvlc -vvv "$file" \
+  "${start_time_arg[@]}" \
+  --sout '#transcode{acodec=mp4a,ab=192,channels=2,samplerate=48000}:chromecast{ip=192.168.68.101,port=8009}' \
+  --demux-filter=demux_chromecast \
+  --sout-keep --aout=dummy --vout=dummy
+
+# Troubleshooting
+# Sometimes the chromecast is not found, so we can try to find it.
+#
+# find what owns 8010
+# sudo ss -ltnp | grep :8010
