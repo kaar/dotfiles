@@ -241,18 +241,10 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 # https://wiki.archlinux.org/title/Sway#Configuration
 # /etc/sway/config.d/50-systemd-user.conf
-exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-exec systemctl --user import-environment DISPLAY \
-                                         SWAYSOCK \
-                                         WAYLAND_DISPLAY \
-                                         XDG_CURRENT_DESKTOP
-exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY \
-                                                  SWAYSOCK \
-                                                  XDG_CURRENT_DESKTOP=sway \
-                                                  WAYLAND_DISPLAY
-# Screenshots
-bindsym Print exec flameshot gui -c
+
+# Screenshot
+# using grim and slurp, copy to clipboard using wl-copy
+bindsym $mod+Shift+f exec grim -g "$(slurp)" - | wl-copy
 
 # https://github.com/morhetz/gruvbox
 # set primary gruvbox colorscheme colors
