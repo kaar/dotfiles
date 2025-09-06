@@ -1,0 +1,10 @@
+[Unit]
+Description=Mail Link Service Timer - Run every 5 minutes
+Requires=mail-link.service
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+
+[Install]
+WantedBy=timers.target

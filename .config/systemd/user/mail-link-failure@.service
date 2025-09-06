@@ -1,0 +1,9 @@
+[Unit]
+Description=Mail Link Failure Notification
+DefaultDependencies=false
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/notify-send -u critical "Mail Link Service Failed" "Service %i has failed. Check logs with: journalctl --user -u %i"
+User=%i

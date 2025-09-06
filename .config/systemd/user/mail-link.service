@@ -1,0 +1,16 @@
+[Unit]
+Description=Mail Link Service - ProtonMail Integration
+After=network.target
+OnFailure=mail-link-failure@%n.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/kaar/repos/kaar/mail-link
+Environment=PATH=/home/kaar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+EnvironmentFile=/home/kaar/repos/kaar/mail-link/.env
+ExecStart=/home/kaar/repos/kaar/mail-link/src/main.py
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
