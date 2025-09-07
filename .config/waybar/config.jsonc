@@ -10,13 +10,54 @@
       "memory",
       "disk",
       "network",
+      "custom/left-arrow-dark",
+      "clock#2",
+      "custom/right-arrow-dark",
       "battery",
       "backlight",
       "pulseaudio"
     ],
     "modules-right": [
-      "clock"
+      "group/podman"
     ],
+    "group/podman": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": true
+      },
+      "modules": [
+        "custom/podman",
+        "custom/jellyfin"
+      ]
+    },
+    "custom/podman": {
+      "exec": "~/.config/waybar/podman.py info",
+      "interval": 10,
+      "return-type": "json",
+      "format": "{} "
+    },
+    "custom/jellyfin": {
+      "exec": "~/.config/waybar/podman.py status jellyfin",
+      "interval": 10,
+      "return-type": "json",
+      "format": "{}",
+      "on-click": "xdg-open http://localhost:8096"
+    },
+    "custom/left-arrow-dark": {
+      "format": "",
+      "tooltip": false
+    },
+    "custom/right-arrow-dark": {
+      "format": "",
+      "tooltip": false
+    },
+    "clock#2": {
+      // "format": "{:%H:%M}", // Example: 14:23
+      "format": "{:%b %d %H:%M}", // Example: Jun 15 14:23
+      "tooltip": false
+    },
     "backlight": {
       "device": "intel_backlight",
       "format": "{percent}% {icon}",

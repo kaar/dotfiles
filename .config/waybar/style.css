@@ -40,9 +40,26 @@ window#waybar {
 }
 
 #mode {
-    background-color: @yellow;
-    color: @dark0;
-    padding: 0 10px;
+  background-color: @yellow;
+  color: @dark0;
+  padding: 0 10px;
+
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+  color: @gray;
+}
+
+
+#clock.2 {
+  color: @dark0;
+  background: @gray;
+  font-weight: bold;
+  padding: 0 16px;
+  margin: 0;
+  border: 2px solid @gray;
+  border-radius: 0;
 }
 
 #clock,
@@ -54,21 +71,21 @@ window#waybar {
 #temperature,
 #tray,
 #backlight {
-    padding: 0 10px;
-    /* background-color: @dark0; */
-    background-color: @bg;
-    margin: 0 2px;
-    border-radius: 5px;
+  padding: 0 10px;
+  /* background-color: @dark0; */
+  background-color: @bg;
+  margin: 0 2px;
+  border-radius: 5px;
 }
 
 #battery.warning {
-    color: @yellow;
+  color: @yellow;
 }
 
 #battery.critical {
-    color: @red;
+  color: @red;
 }
 
 #pulseaudio.muted {
-    color: @gray;
+  color: @gray;
 }
