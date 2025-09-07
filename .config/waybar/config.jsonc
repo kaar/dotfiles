@@ -144,7 +144,8 @@
         "",
         "",
         ""
-      ]
+      ],
+      "interval": 5
     },
     "tray": {
       "show-passive-items": true,
