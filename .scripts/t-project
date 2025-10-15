@@ -38,17 +38,32 @@ project_exists() {
   [[ -d "$project_dir" ]]
 }
 
+format_project_title() {
+  local name=$1
+
+  # Replace hyphens and underscores with spaces
+  name="${name//-/ }"
+  name="${name//_/ }"
+
+  # Replace dots with spaces (will handle version numbers like 2.1 later)
+  name="${name//./ }"
+
+  # Insert space before uppercase letters that follow lowercase (camelCase)
+  name=$(echo "$name" | sed 's/\([a-z]\)\([A-Z]\)/\1 \2/g')
+
+  # Insert space before numbers that follow letters
+  name=$(echo "$name" | sed 's/\([a-zA-Z]\)\([0-9]\)/\1 \2/g')
+
+  # Capitalize first letter of each word
+  local result=""
+  for word in $name; do
+    result="$result ${word^}"
+  done
+
+  echo "${result# }"
+}
+
 create_project() {
-  # TODO: Replace any special characters with spaces.
-  # Examples:
-  #   project-name -> Project Name
-  #   project_name -> Project Name
-  #   project.name -> Project Name
-  #   projectName -> Project Name
-  #   projectName123 -> Project Name 123
-  #   project-name_v2 -> Project Name V2
-  #   project-name_v2.1 -> Project Name V2.1
-  #
   local project_name=$1
   local project_dir=~/repos/kaar/"$project_name"
   if [ -d "$project_dir" ]; then
@@ -60,7 +75,11 @@ create_project() {
   mkdir -p "$project_dir"
   cd "$project_dir" || exit 1
   git init
-  echo "# $project_name" >README.md
+
+  local project_title
+  project_title=$(format_project_title "$project_name")
+  echo "# $project_title" >README.md
+
   git add README.md
   git commit -m "Initial commit"
   # Ask if to create a GitHub repository.
