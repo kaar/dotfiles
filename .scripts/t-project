@@ -3,11 +3,15 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+
+
 # t-project: Create or switch to a tmux session named after the current directory.
 # The project directory is a ~/repos/kaar/<project-name> structure.
-ROOT_DIR="$HOME/repos/kaar"
+# Each project has its own tmux session.
 # Each project is a git repository.
-create_project_directory() {
+ROOT_DIR="$HOME/repos/kaar"
+
+create_project() {
   # TODO: Replace any special characters with spaces.
   # Examples:
   #   project-name -> Project Name
@@ -50,7 +54,6 @@ list_projects() {
   find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;
 }
 
-# Each project has its own tmux session.
 
 usage() {
   cat <<EOF
@@ -88,9 +91,9 @@ else
 fi
 project_dir="$ROOT_DIR/$project_name"
 
-# If the project directory doesn't exist, create it.
+# Create project if it doesn't exist.
 if [ ! -d "$project_dir" ]; then
-  create_project_directory "$project_name"
+  create_project "$project_name"
 fi
 
 echo "Switching to project directory $project_dir"
@@ -101,47 +104,9 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
   tmux new-session -ds "$session_name" -c "$project_dir"
 fi
 
+# Attach or switch tmux session
 if [ -z "${TMUX-}" ]; then
   tmux attach-session -t "$session_name"
 else
   tmux switch-client -t "$session_name"
 fi
-
-# ~/.scripts/t-sessions
-# #!/usr/bin/env bash
-# set -o errexit
-# set -o nounset
-# set -o pipefail
-#
-#
-# show_help() {
-#     cat << EOF
-# Usage: $(basename "$0")
-#
-# Select and attach/switch to a tmux session using fzf.
-#
-# Options:
-#     -h, --help    Show this help message
-#
-# Examples:
-#     $(basename "$0")    # Select session interactively
-# EOF
-# }
-#
-# if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-#     show_help
-#     exit 0
-# fi
-#
-# session=$(tmux list-sessions -F '#{?session_attached,,#{session_name}}' | \
-#     sed '/^$/d' | \
-#     fzf --reverse \
-#         --header "Jump to tmux session" \
-#         --preview 'tmux list-windows -t {} -F "#{window_index}: #{window_name}"')
-#
-#
-# if [ -z "${TMUX-}" ]; then
-#     tmux attach-session -t "$session"
-# else
-#     tmux switch-client -t "$session"
-# fi
