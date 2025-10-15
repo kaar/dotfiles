@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# t-project: Create or switch to a tmux session named after the current directory.
+# The project directory is a ~/repos/kaar/<project-name> structure.
+ROOT_DIR="$HOME/repos/kaar"
+# Each project is a git repository.
+create_project_directory() {
+  # TODO: Replace any special characters with spaces.
+  # Examples:
+  #   project-name -> Project Name
+  #   project_name -> Project Name
+  #   project.name -> Project Name
+  #   projectName -> Project Name
+  #   projectName123 -> Project Name 123
+  #   project-name_v2 -> Project Name V2
+  #   project-name_v2.1 -> Project Name V2.1
+  #
+  local project_name=$1
+  local project_dir=~/repos/kaar/"$project_name"
+  if [ -d "$project_dir" ]; then
+    echo "Project directory $project_dir already exists."
+    exit 1
+  fi
+
+  echo "Creating project directory $project_dir"
+  mkdir -p "$project_dir"
+  cd "$project_dir" || exit 1
+  git init
+  echo "# $project_name" >README.md
+  git add README.md
+  git commit -m "Initial commit"
+  # Ask if to create a GitHub repository.
+  read -r -p "Create a private GitHub repository for $project_name? (y/n) " response
+  if [[ ! "$response" =~ ^[Yy]$ ]]; then
+    return
+  fi
+  echo "Creating GitHub repository kaar/$project_name"
+  gh repo create kaar/"$project_name" --private --source=. --remote=origin --push
+  echo "Project $project_name created at $project_dir and pushed to GitHub."
+}
+
+session_exists() {
+  tmux has-session -t "$1" 2>/dev/null
+}
+
+list_projects() {
+  find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;
+}
+
+# Each project has its own tmux session.
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options]
+Create or attach to a tmux session named after the current project directory.
+Options:
+  -h, --help     Show this help message
+EOF
+}
+
+case "${1:-}" in
+-h | --help | "")
+  usage
+  [[ -z "${1:-}" ]] && exit 1 || exit 0
+  ;;
+esac
+
+# Features:
+# - If no project name is given, select from existing projects using fzf.
+# - Add `ls` command to list all projects.
+
+
+
+
+project_name="${1}"
+project_dir="$ROOT_DIR/$project_name"
+
+# If the project directory doesn't exist, create it.
+if [ ! -d "$project_dir" ]; then
+  create_project_directory "$project_name"
+fi
+
+echo "Switching to project directory $project_dir"
+
+# TODO: Check if we already have a tmux session for this project, switch to it if exists.
+
+session_name="$project_name"
+tmux has-session -t "$session_name" 2>/dev/null ||
+  tmux new-session -ds "$session_name" -c "$project_dir" &&
+  tmux send-keys -t "$session_name" "cd $project_dir" C-m
+
+if [ -z "${TMUX-}" ]; then
+  tmux attach-session -t "$session_name"
+else
+  tmux switch-client -t "$session_name"
+fi
+
+# ~/.scripts/t-sessions
+# #!/usr/bin/env bash
+# set -o errexit
+# set -o nounset
+# set -o pipefail
+#
+#
+# show_help() {
+#     cat << EOF
+# Usage: $(basename "$0")
+#
+# Select and attach/switch to a tmux session using fzf.
+#
+# Options:
+#     -h, --help    Show this help message
+#
+# Examples:
+#     $(basename "$0")    # Select session interactively
+# EOF
+# }
+#
+# if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+#     show_help
+#     exit 0
+# fi
+#
+# session=$(tmux list-sessions -F '#{?session_attached,,#{session_name}}' | \
+#     sed '/^$/d' | \
+#     fzf --reverse \
+#         --header "Jump to tmux session" \
+#         --preview 'tmux list-windows -t {} -F "#{window_index}: #{window_name}"')
+#
+#
+# if [ -z "${TMUX-}" ]; then
+#     tmux attach-session -t "$session"
+# else
+#     tmux switch-client -t "$session"
+# fi
