@@ -54,10 +54,11 @@ list_projects() {
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [options]
+Usage: $(basename "$0") [options] [project-name]
 Create or attach to a tmux session named after the current project directory.
 Options:
   -h, --help     Show this help message
+  ls             List all projects
 EOF
 }
 
@@ -66,11 +67,14 @@ case "${1:-}" in
   usage
   [[ -z "${1:-}" ]] && exit 1 || exit 0
   ;;
+ls)
+  list_projects
+  exit 0
+  ;;
 esac
 
 # Features:
 # - If no project name is given, select from existing projects using fzf.
-# - Add `ls` command to list all projects.
 
 
 
