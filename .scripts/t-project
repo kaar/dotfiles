@@ -18,11 +18,13 @@ Manage project-specific tmux sessions in ~/repos/kaar/
 Each project is a git repository with its own dedicated tmux session.
 
 Commands:
+  $(basename "$0")                   Interactive project selection using fzf
   $(basename "$0") co                Interactive project selection using fzf
   $(basename "$0") co <name>         Switch to existing project (errors if not found)
   $(basename "$0") new <name>        Create new project and switch to it
   $(basename "$0") ls                List all projects
   $(basename "$0") help, -h, --help  Show this help message
+  $(basename "$0") --completion      Output bash completion script
 
 Behavior:
   - Switching: Creates tmux session if needed, then attaches/switches
@@ -36,6 +38,7 @@ Examples:
   $(basename "$0") co my-app    # Switch to 'my-app' (must already exist)
   $(basename "$0") new my-app   # Create new project 'my-app'
   $(basename "$0") ls           # List all projects
+  $(basename "$0") --completion > ~/.bash_completion.d/t-project
 EOF
 }
 
@@ -70,8 +73,6 @@ format_project_title() {
 create_project() {
   local project_name=$1
   local project_dir="$ROOT_DIR/$project_name"
-
-
 
   echo "Creating project directory $project_dir"
   mkdir -p "$project_dir"
@@ -169,6 +170,62 @@ select_project() {
   echo "${project}"
 }
 
+generate_completion() {
+  cat <<'EOF'
+#!/usr/bin/env bash
+
+_t_project_completion() {
+  # cur/prev with or without bash-completion
+  if declare -F _get_comp_words_by_ref >/dev/null; then
+    local cur prev
+    _get_comp_words_by_ref cur prev
+  else
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local prev="${COMP_WORDS[COMP_CWORD-1]}"
+  fi
+
+  COMPREPLY=()
+  local -a commands=(co new ls help)
+  local -a opts=(--help --completion)
+
+  # Complete subcommands and options
+  if [[ ${COMP_CWORD} -eq 1 ]]; then
+    if [[ $cur == -* ]]; then
+      COMPREPLY=( $(compgen -W "${opts[*]}" -- "$cur") )
+    else
+      COMPREPLY=( $(compgen -W "${commands[*]}" -- "$cur") )
+    fi
+    return 0
+  fi
+
+  # If previous word was 'new', stop completing (user will type a name)
+  [[ $prev == new ]] && return 0
+
+  # For 'co' command, complete with project names
+  if [[ ${COMP_WORDS[1]} == co ]]; then
+    # Project dirs (configurable)
+    local root_dir="${T_PROJECT_ROOT:-$HOME/repos/kaar}"
+    [[ -d $root_dir ]] || return 0
+
+    # Make filename-like completion (handles spaces)
+    compopt -o filenames 2>/dev/null
+
+    # Read projects safely (NUL-delimited) and complete
+    local -a projects=()
+    while IFS= read -r -d '' p; do
+      projects+=( "$p" )
+    done < <(find "$root_dir" -mindepth 1 -maxdepth 1 -type d -printf '%f\0' 2>/dev/null)
+
+    ((${#projects[@]})) && COMPREPLY=( $(compgen -W "${projects[*]}" -- "$cur") )
+  fi
+
+  return 0
+}
+
+complete -o nosort -F _t_project_completion t-project
+EOF
+}
+
 command="${1:-}"
 
 case "$command" in
@@ -178,6 +235,10 @@ help | -h | --help)
   ;;
 ls)
   list_projects
+  exit 0
+  ;;
+--completion)
+  generate_completion
   exit 0
   ;;
 new)
