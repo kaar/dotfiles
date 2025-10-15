@@ -49,15 +49,6 @@ project_exists() {
   [[ -d "$ROOT_DIR/$project_name" ]]
 }
 
-validate_project_name() {
-  local project_name=$1
-  if [[ "$project_name" =~ [^a-zA-Z0-9._-] ]]; then
-    echo "Error: Invalid project name '$project_name'"
-    echo "Use only: letters, numbers, dots (.), hyphens (-), underscores (_)"
-    return 1
-  fi
-}
-
 format_project_title() {
   local name=$1
 
@@ -84,6 +75,12 @@ format_project_title() {
 create_project() {
   local project_name=$1
   local project_dir="$ROOT_DIR/$project_name"
+
+  if [[ "$project_name" =~ [^a-zA-Z0-9._-] ]]; then
+    echo "Error: Invalid project name '$project_name'"
+    echo "Use only: letters, numbers, dots (.), hyphens (-), underscores (_)"
+    return 1
+  fi
 
   if [[ -d "$project_dir" ]]; then
     echo "Project directory $project_dir already exists."
@@ -139,7 +136,7 @@ list_projects() {
   )
 }
 
-switch_to_project() {
+open_project() {
   local project_name=$1
   local project_dir="$ROOT_DIR/$project_name"
   local session_name="$project_name"
@@ -197,13 +194,12 @@ case "${1:-}" in
     exit 1
   fi
   project_name="${2}"
-  validate_project_name "$project_name" || exit 1
   if project_exists "$project_name"; then
     echo "Error: Project '$project_name' already exists"
     exit 1
   fi
   create_project "$project_name"
-  switch_to_project "$project_name"
+  open_project "$project_name"
   exit 0
   ;;
 esac
@@ -217,13 +213,10 @@ if [[ -z "$project_name" ]]; then
   fi
 fi
 
-validate_project_name "$project_name" || exit 1
-
-# Switch to existing project only
 if ! project_exists "$project_name"; then
   echo "Error: Project '$project_name' does not exist"
   echo "Create it with: $(basename "$0") -n $project_name"
   exit 1
 fi
 
-switch_to_project "$project_name"
+open_project "$project_name"
