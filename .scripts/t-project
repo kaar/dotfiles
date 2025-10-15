@@ -49,9 +49,11 @@ format_project_title() {
   name="${name//./ }"
 
   # Insert space before uppercase letters that follow lowercase (camelCase)
+  # shellcheck disable=SC2001
   name=$(echo "$name" | sed 's/\([a-z]\)\([A-Z]\)/\1 \2/g')
 
   # Insert space before numbers that follow letters
+  # shellcheck disable=SC2001
   name=$(echo "$name" | sed 's/\([a-zA-Z]\)\([0-9]\)/\1 \2/g')
 
   # Capitalize first letter of each word
