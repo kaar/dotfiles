@@ -63,9 +63,9 @@ EOF
 }
 
 case "${1:-}" in
--h | --help | "")
+-h | --help)
   usage
-  [[ -z "${1:-}" ]] && exit 1 || exit 0
+  exit 0
   ;;
 ls)
   list_projects
@@ -73,13 +73,19 @@ ls)
   ;;
 esac
 
-# Features:
-# - If no project name is given, select from existing projects using fzf.
+# If no project name is given, select from existing projects using fzf.
+if [[ -z "${1:-}" ]]; then
+  project_name=$(list_projects | fzf --reverse \
+    --header "Select project" \
+    --preview "ls -la $ROOT_DIR/{}")
 
-
-
-
-project_name="${1}"
+  if [[ -z "$project_name" ]]; then
+    echo "No project selected."
+    exit 1
+  fi
+else
+  project_name="${1}"
+fi
 project_dir="$ROOT_DIR/$project_name"
 
 # If the project directory doesn't exist, create it.
@@ -89,12 +95,11 @@ fi
 
 echo "Switching to project directory $project_dir"
 
-# TODO: Check if we already have a tmux session for this project, switch to it if exists.
-
+# Check if tmux session exists, create it if it doesn't
 session_name="$project_name"
-tmux has-session -t "$session_name" 2>/dev/null ||
-  tmux new-session -ds "$session_name" -c "$project_dir" &&
-  tmux send-keys -t "$session_name" "cd $project_dir" C-m
+if ! tmux has-session -t "$session_name" 2>/dev/null; then
+  tmux new-session -ds "$session_name" -c "$project_dir"
+fi
 
 if [ -z "${TMUX-}" ]; then
   tmux attach-session -t "$session_name"
