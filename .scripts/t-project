@@ -14,21 +14,28 @@ Each project is a git repository with its own dedicated tmux session.
 
 Commands:
   $(basename "$0")                 Interactive project selection using fzf
-  $(basename "$0") <project-name>  Create or switch to named project
-  $(basename "$0") ls              List all projects
-  $(basename "$0") --help          Show this help message
+  $(basename "$0") <project-name>  Switch to existing project (errors if not found)
+  $(basename "$0") -n <name>       Create new project and switch to it
+  $(basename "$0") -l              List all projects
+  $(basename "$0") -h              Show this help message
+
+Options:
+  -n, --new <name>    Create new project with git repo and optional GitHub repo
+  -l, --list          List all projects in ~/repos/kaar
+  -h, --help          Show this help message
 
 Behavior:
-  - If project exists: Creates/switches to its tmux session
-  - If project doesn't exist: Initializes new git repo with README.md
-                              Optionally creates private GitHub repository
+  - Switching: Creates tmux session if needed, then attaches/switches
+  - Creating: Initializes git repo with formatted README.md title
+              Prompts to create private GitHub repository
   - When inside tmux: Switches to the project session
   - When outside tmux: Attaches to the project session
 
 Examples:
-  $(basename "$0")              # Select project interactively
-  $(basename "$0") my-app       # Switch to or create 'my-app' project
-  $(basename "$0") ls           # List all projects in ~/repos/kaar
+  $(basename "$0")              # Select from existing projects interactively
+  $(basename "$0") my-app       # Switch to 'my-app' (must already exist)
+  $(basename "$0") -n my-app    # Create new project 'my-app'
+  $(basename "$0") -l           # List all projects
 EOF
 }
 
@@ -98,13 +105,48 @@ list_projects() {
   find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;
 }
 
+switch_to_project() {
+  local project_name=$1
+  local project_dir="$ROOT_DIR/$project_name"
+
+  echo "Switching to project directory $project_dir"
+
+  # Check if tmux session exists, create it if it doesn't
+  local session_name="$project_name"
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux new-session -ds "$session_name" -c "$project_dir"
+  fi
+
+  # Attach or switch tmux session
+  if [ -z "${TMUX-}" ]; then
+    tmux attach-session -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
+}
+
 case "${1:-}" in
 -h | --help)
   usage
   exit 0
   ;;
-ls)
+-l | --list)
   list_projects
+  exit 0
+  ;;
+-n | --new)
+  if [[ -z "${2:-}" ]]; then
+    echo "Error: Project name required for -n/--new flag"
+    echo "Usage: $(basename "$0") -n <project-name>"
+    exit 1
+  fi
+  project_name="${2}"
+  if project_exists "$project_name"; then
+    echo "Error: Project '$project_name' already exists"
+    exit 1
+  fi
+  create_project "$project_name"
+  switch_to_project "$project_name"
   exit 0
   ;;
 esac
@@ -122,23 +164,12 @@ if [[ -z "${1:-}" ]]; then
 else
   project_name="${1}"
 fi
-project_dir="$ROOT_DIR/$project_name"
 
+# Switch to existing project only
 if ! project_exists "$project_name"; then
-  create_project "$project_name"
+  echo "Error: Project '$project_name' does not exist"
+  echo "Create it with: $(basename "$0") -n $project_name"
+  exit 1
 fi
 
-echo "Switching to project directory $project_dir"
-
-# Check if tmux session exists, create it if it doesn't
-session_name="$project_name"
-if ! tmux has-session -t "$session_name" 2>/dev/null; then
-  tmux new-session -ds "$session_name" -c "$project_dir"
-fi
-
-# Attach or switch tmux session
-if [ -z "${TMUX-}" ]; then
-  tmux attach-session -t "$session_name"
-else
-  tmux switch-client -t "$session_name"
-fi
+switch_to_project "$project_name"
