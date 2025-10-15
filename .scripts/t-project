@@ -12,22 +12,17 @@ ROOT_DIR="$HOME/repos/kaar"
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [options] [project-name]
+Usage: $(basename "$0") [command] [arguments]
 
 Manage project-specific tmux sessions in ~/repos/kaar/
 Each project is a git repository with its own dedicated tmux session.
 
 Commands:
-  $(basename "$0")                 Interactive project selection using fzf
-  $(basename "$0") <project-name>  Switch to existing project (errors if not found)
-  $(basename "$0") -n <name>       Create new project and switch to it
-  $(basename "$0") -l              List all projects
-  $(basename "$0") -h              Show this help message
-
-Options:
-  -n, --new <name>    Create new project with git repo and optional GitHub repo
-  -l, --list          List all projects (● active, ○ inactive)
-  -h, --help          Show this help message
+  $(basename "$0") co                Interactive project selection using fzf
+  $(basename "$0") co <name>         Switch to existing project (errors if not found)
+  $(basename "$0") new <name>        Create new project and switch to it
+  $(basename "$0") ls                List all projects
+  $(basename "$0") help, -h, --help  Show this help message
 
 Behavior:
   - Switching: Creates tmux session if needed, then attaches/switches
@@ -37,10 +32,10 @@ Behavior:
   - When outside tmux: Attaches to the project session
 
 Examples:
-  $(basename "$0")              # Select from existing projects interactively
-  $(basename "$0") my-app       # Switch to 'my-app' (must already exist)
-  $(basename "$0") -n my-app    # Create new project 'my-app'
-  $(basename "$0") -l           # List all projects
+  $(basename "$0")              # Select and open project interactively with fzf
+  $(basename "$0") co my-app    # Switch to 'my-app' (must already exist)
+  $(basename "$0") new my-app   # Create new project 'my-app'
+  $(basename "$0") ls           # List all projects
 EOF
 }
 
@@ -146,9 +141,14 @@ open_project() {
 }
 
 select_project() {
+  local query="${1:-}"
+  local fzf_opts=(--reverse --ansi --header "Select project")
+
+  # Add query if provided
+  [[ -n "$query" ]] && fzf_opts+=(--query "$query")
+
   local selection
-  selection=$(list_projects | fzf --reverse --ansi \
-    --header "Select project" \
+  selection=$(list_projects | fzf "${fzf_opts[@]}" \
     --preview "PROJECT=\$(echo {} | sed 's/^[●○] //'); \
                echo -e '\033[1;34mPath:\033[0m $ROOT_DIR/\$PROJECT'; \
                echo -e '\033[2m───────────────────────────────────────\033[0m'; \
@@ -169,22 +169,25 @@ select_project() {
   echo "${project}"
 }
 
-case "${1:-}" in
--h | --help)
+command="${1:-}"
+
+case "$command" in
+help | -h | --help)
   usage
   exit 0
   ;;
--l | --list)
+ls)
   list_projects
   exit 0
   ;;
--n | --new)
-  if [[ -z "${2:-}" ]]; then
-    echo "Error: Project name required for -n/--new flag"
-    echo "Usage: $(basename "$0") -n <project-name>"
+new)
+  shift
+  project_name="${1:-}"
+  if [[ -z "$project_name" ]]; then
+    echo "Error: Project name required for 'new' command"
+    echo "Usage: $(basename "$0") new <project-name>"
     exit 1
   fi
-  project_name="${2}"
   if [[ "$project_name" =~ [^a-zA-Z0-9._-] ]]; then
     echo "Error: Invalid project name '$project_name'"
     echo "Use only: letters, numbers, dots (.), hyphens (-), underscores (_)"
@@ -198,21 +201,38 @@ case "${1:-}" in
   open_project "$project_name"
   exit 0
   ;;
-esac
+co)
+  shift
+  project_name="${1:-}"
 
-project_name="${1:-}"
+  # If no project name given, use fzf to select
+  if [[ -z "$project_name" ]]; then
+    if ! project_name=$(select_project); then
+      exit 1
+    fi
+  else
+    # If project exists, open it directly; otherwise use fzf with the name as filter
+    if ! project_exists "$project_name"; then
+      if ! project_name=$(select_project "$project_name"); then
+        exit 1
+      fi
+    fi
+  fi
 
-# If no project name is given, select from existing projects using fzf.
-if [[ -z "$project_name" ]]; then
+  open_project "$project_name"
+  exit 0
+  ;;
+"")
+  # No command given, default to 'co' behavior (fzf selection)
   if ! project_name=$(select_project); then
     exit 1
   fi
-fi
-
-if ! project_exists "$project_name"; then
-  echo "Error: Project '$project_name' does not exist"
-  echo "Create it with: $(basename "$0") -n $project_name"
+  open_project "$project_name"
+  exit 0
+  ;;
+*)
+  echo "Error: Unknown command '$command'"
+  echo "Run '$(basename "$0") help' for usage information"
   exit 1
-fi
-
-open_project "$project_name"
+  ;;
+esac
