@@ -3,13 +3,40 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-
-
-# t-project: Create or switch to a tmux session named after the current directory.
-# The project directory is a ~/repos/kaar/<project-name> structure.
-# Each project has its own tmux session.
-# Each project is a git repository.
 ROOT_DIR="$HOME/repos/kaar"
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options] [project-name]
+
+Manage project-specific tmux sessions in ~/repos/kaar/
+Each project is a git repository with its own dedicated tmux session.
+
+Commands:
+  $(basename "$0")                 Interactive project selection using fzf
+  $(basename "$0") <project-name>  Create or switch to named project
+  $(basename "$0") ls              List all projects
+  $(basename "$0") --help          Show this help message
+
+Behavior:
+  - If project exists: Creates/switches to its tmux session
+  - If project doesn't exist: Initializes new git repo with README.md
+                              Optionally creates private GitHub repository
+  - When inside tmux: Switches to the project session
+  - When outside tmux: Attaches to the project session
+
+Examples:
+  $(basename "$0")              # Select project interactively
+  $(basename "$0") my-app       # Switch to or create 'my-app' project
+  $(basename "$0") ls           # List all projects in ~/repos/kaar
+EOF
+}
+
+project_exists() {
+  local project_name=$1
+  local project_dir=~/repos/kaar/"$project_name"
+  [[ -d "$project_dir" ]]
+}
 
 create_project() {
   # TODO: Replace any special characters with spaces.
@@ -46,23 +73,8 @@ create_project() {
   echo "Project $project_name created at $project_dir and pushed to GitHub."
 }
 
-session_exists() {
-  tmux has-session -t "$1" 2>/dev/null
-}
-
 list_projects() {
   find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;
-}
-
-
-usage() {
-  cat <<EOF
-Usage: $(basename "$0") [options] [project-name]
-Create or attach to a tmux session named after the current project directory.
-Options:
-  -h, --help     Show this help message
-  ls             List all projects
-EOF
 }
 
 case "${1:-}" in
@@ -91,8 +103,7 @@ else
 fi
 project_dir="$ROOT_DIR/$project_name"
 
-# Create project if it doesn't exist.
-if [ ! -d "$project_dir" ]; then
+if ! project_exists "$project_name"; then
   create_project "$project_name"
 fi
 
