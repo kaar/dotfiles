@@ -21,7 +21,7 @@ Commands:
 
 Options:
   -n, --new <name>    Create new project with git repo and optional GitHub repo
-  -l, --list          List all projects in ~/repos/kaar
+  -l, --list          List all projects (● active, ○ inactive)
   -h, --help          Show this help message
 
 Behavior:
@@ -102,7 +102,35 @@ create_project() {
 }
 
 list_projects() {
-  find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;
+  local use_color=${1:-false}
+  local active_projects=()
+  local inactive_projects=()
+
+  while IFS= read -r project; do
+    if tmux has-session -t "$project" 2>/dev/null; then
+      active_projects+=("$project")
+    else
+      inactive_projects+=("$project")
+    fi
+  done < <(find "$ROOT_DIR" -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
+
+  # Output active projects first
+  for project in "${active_projects[@]}"; do
+    if [[ "$use_color" == "true" ]]; then
+      echo -e "\033[1;32m● $project\033[0m"
+    else
+      echo "$project"
+    fi
+  done
+
+  # Then inactive projects
+  for project in "${inactive_projects[@]}"; do
+    if [[ "$use_color" == "true" ]]; then
+      echo -e "\033[2m○ $project\033[0m"
+    else
+      echo "$project"
+    fi
+  done
 }
 
 switch_to_project() {
@@ -125,13 +153,34 @@ switch_to_project() {
   fi
 }
 
+select_project() {
+  local selection
+  selection=$(list_projects true | fzf --reverse --ansi \
+    --header "Select project" \
+    --preview "PROJECT=\$(echo {} | sed 's/^[●○] //'); \
+               echo -e '\033[1;34mPath:\033[0m $ROOT_DIR/\$PROJECT'; \
+               echo -e '\033[2m───────────────────────────────────────\033[0m'; \
+               if tmux has-session -t \$PROJECT 2>/dev/null; then \
+                 echo -e '\033[1;32m● Active tmux session\033[0m'; \
+               else \
+                 echo -e '\033[2m○ No active session\033[0m'; \
+               fi; \
+               echo -e '\033[2m───────────────────────────────────────\033[0m'; \
+               git -C $ROOT_DIR/\$PROJECT log -1 --format='%C(yellow)Last commit:%C(reset) %ar%n%C(yellow)Author:%C(reset) %an' 2>/dev/null || echo -e '\033[2mNo commits yet\033[0m'; \
+               echo -e '\033[2m───────────────────────────────────────\033[0m'; \
+               ls -1 $ROOT_DIR/\$PROJECT")
+
+  [[ -z "$selection" ]] && return 1
+  printf '%s\n' "${selection#[●○] }"
+}
+
 case "${1:-}" in
 -h | --help)
   usage
   exit 0
   ;;
 -l | --list)
-  list_projects
+  list_projects true
   exit 0
   ;;
 -n | --new)
@@ -151,18 +200,13 @@ case "${1:-}" in
   ;;
 esac
 
+project_name="${1:-}"
 # If no project name is given, select from existing projects using fzf.
-if [[ -z "${1:-}" ]]; then
-  project_name=$(list_projects | fzf --reverse \
-    --header "Select project" \
-    --preview "ls -la $ROOT_DIR/{}")
-
-  if [[ -z "$project_name" ]]; then
-    echo "No project selected."
+if [[ -z "$project_name" ]]; then
+  if ! project_name=$(select_project); then
+    # No project selected, exit.
     exit 1
   fi
-else
-  project_name="${1}"
 fi
 
 # Switch to existing project only
