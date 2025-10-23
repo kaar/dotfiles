@@ -1,0 +1,254 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Usage information
+usage() {
+  cat <<EOF
+Usage: wifi <command> [options]
+
+Commands:
+  connect [SSID]        Connect to a wifi network (interactive if SSID not provided)
+  list                  List available wifi networks
+  scan                  Rescan for wifi networks
+  show                  Show current wifi connection details
+  status                Show comprehensive network status (wifi, IPs, ports, DNS)
+  start                 Start the iwd service
+  hotspot               Setup wifi hotspot (not working - hardware limitation)
+  completion            Generate bash completion script
+
+  Quick connects:
+    iphone              Connect to "Caspar iPhone" using iwctl
+
+Examples:
+  wifi connect              # Interactive network selection
+  wifi connect MyNetwork    # Connect to specific network
+  wifi list                 # List available networks
+  wifi status               # Show detailed network status
+  wifi iphone               # Quick connect to iPhone hotspot
+
+Tab Completion:
+  wifi completion > ~/.local/share/bash-completion/completions/wifi
+  source ~/.local/share/bash-completion/completions/wifi
+
+EOF
+  exit 0
+}
+
+# Connect to wifi with retries
+cmd_connect() {
+
+  local ssid=${1-$(nmcli -t -f SSID dev wifi list | sort -u | awk "NF" | fzf)}
+
+  echo "Connecting to: $ssid"
+  local n=0
+  until [ "$n" -ge 5 ]; do
+    if nmcli dev wifi connect "$ssid"; then
+      echo "Successfully connected to $ssid"
+      return 0
+    fi
+    n=$((n + 1))
+    echo "Retry $n/5..."
+    sleep 3
+  done
+
+  echo "Failed to connect to $ssid after 5 attempts"
+  exit 1
+}
+
+# Connect to iPhone hotspot
+cmd_iphone() {
+  local SSID="Caspar iPhone"
+  local CONNECT_CMD="iwctl station wlan0 connect \"$SSID\""
+  local SCAN_CMD="iwctl station wlan0 scan"
+
+  echo -n "Trying to connect to $SSID"
+
+  local n=0
+  until [ "$n" -ge 10 ]; do
+    echo -n "."
+    if eval "$CONNECT_CMD" 2>/dev/null; then
+      echo ""
+      echo "Successfully connected to $SSID"
+      return 0
+    fi
+    eval "$SCAN_CMD"
+    n=$((n + 1))
+    sleep 3
+  done
+
+  echo ""
+  echo "Failed to connect to $SSID"
+  exit 1
+}
+
+# Show comprehensive network status
+cmd_status() {
+  IFS=: read -r _ ssid signal security channel freq <<< \
+    "$(nmcli -t -f ACTIVE,SSID,SIGNAL,SECURITY,CHAN,FREQ dev wifi list 2>/dev/null | grep '^yes')"
+
+  case $((signal / 20)) in
+    5|4) bars="▂▄▆█"; quality="Excellent" ;;
+    3)   bars="▂▄▆_"; quality="Good" ;;
+    2)   bars="▂▄__"; quality="Fair" ;;
+    *)   bars="▂___"; quality="Poor" ;;
+  esac
+
+  # Determine connection status
+  local status="Connected"
+
+  echo "WiFi Connection: $ssid ($security) - $status"
+  echo "Signal Strength: $bars ${signal}% ($quality)"
+
+  # Get link speed if available
+  local speed=$(nmcli -t -f GENERAL.SPEED device show wlan0 2>/dev/null | cut -d: -f2)
+  if [ -n "$speed" ]; then
+    echo "Link Speed: $speed Mbps"
+  fi
+
+  # Frequency band
+  if [ -n "$freq" ]; then
+    local band=""
+    if [[ "$freq" =~ ^2[0-9]{3} ]]; then
+      band="2.4 GHz"
+    elif [[ "$freq" =~ ^5[0-9]{3} ]]; then
+      band="5 GHz"
+    fi
+    echo "Frequency: $band (Channel $channel)"
+  fi
+
+  # IP Address for wlan0
+  local wlan_ip=$(ip -4 addr show wlan0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}/\d+')
+  if [ -n "$wlan_ip" ]; then
+    echo "IP Address (wlan0): ${wlan_ip%/*} ${wlan_ip}"
+  fi
+
+  # VPN Status (check for tailscale)
+  if command -v tailscale &>/dev/null; then
+    local vpn_status=$(tailscale status --json 2>/dev/null | grep -q '"BackendState":"Running"' && echo "Connected" || echo "Disconnected")
+    echo "VPN Status: $vpn_status (Tailscale)"
+  fi
+
+  # Gateway
+  local gateway=$(ip route show default 2>/dev/null | head -1)
+  if [ -n "$gateway" ]; then
+    local gw_ip=$(echo "$gateway" | awk '{print $3}')
+    local gw_dev=$(echo "$gateway" | awk '{print $5}')
+    local gw_src=$(echo "$gateway" | grep -oP '(?<=src )\S+')
+    echo "Gateway: $gw_ip ($gw_dev) ${gw_src:-}"
+  fi
+
+  # DNS Servers
+  local dns_servers=""
+  if command -v resolvectl &>/dev/null; then
+    dns_servers=$(resolvectl status 2>/dev/null | grep -oP '(?<=DNS Servers: ).*' | head -1)
+  fi
+  if [ -z "$dns_servers" ]; then
+    dns_servers=$(grep nameserver /etc/resolv.conf 2>/dev/null | awk '{print $2}' | tr '\n' ' ')
+  fi
+  if [ -n "$dns_servers" ]; then
+    echo "DNS Servers: $dns_servers"
+  fi
+}
+
+# Generate bash completion
+cmd_completion() {
+  cat <<'EOF'
+_wifi_completion() {
+  local cur prev commands
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  commands="connect list scan show status start hotspot iphone completion help"
+
+  case "${COMP_CWORD}" in
+    1)
+      # Complete main commands
+      COMPREPLY=($(compgen -W "${commands}" -- "${cur}"))
+      ;;
+    2)
+      # Complete SSIDs for 'connect' command
+      if [[ "${prev}" == "connect" ]]; then
+        local ssids
+        ssids=$(nmcli -t -f SSID dev wifi list 2>/dev/null | sort -u | awk 'NF')
+        COMPREPLY=($(compgen -W "${ssids}" -- "${cur}"))
+      fi
+      ;;
+  esac
+
+  return 0
+}
+
+complete -F _wifi_completion wifi
+EOF
+}
+
+# Hotspot (not working) running on my Lenovo Thinkpad X1 Gen 13
+cmd_hotspot() {
+  cat <<EOF
+Setting up Wi-Fi hotspot (AP+STA concurrent mode) using NetworkManager did not work.
+
+This feature is not supported because:
+- The hardware must support AP+STA concurrent mode
+- F&F network runs on channel 36 which is not supported
+- iPhone shared hotspot on channel 2 causes wifi disconnection
+
+Check your hardware support with:
+  iw list | grep -A 10 "Supported interface modes"
+
+For more details, see:
+  https://chatgpt.com/c/68c0339d-cd3c-8321-816a-e27a630ae81f
+EOF
+  exit 1
+}
+
+if ! systemctl is-active --quiet NetworkManager; then
+  echo "NetworkManager is not running. Please start it first."
+  exit 1
+fi
+
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+cmd=$1
+
+shift
+case "$cmd" in
+connect)
+  cmd_connect "$@"
+  ;;
+list)
+  nmcli device wifi list "$@"
+  ;;
+scan)
+  nmcli dev wifi rescan "$@"
+  ;;
+show)
+  nmcli dev wifi show "$@"
+  ;;
+status)
+  cmd_status "$@"
+  ;;
+start)
+  sudo systemctl start iwd.service "$@"
+  ;;
+iphone)
+  cmd_iphone "$@"
+  ;;
+hotspot)
+  cmd_hotspot "$@"
+  ;;
+completion)
+  cmd_completion "$@"
+  ;;
+-h | --help | help)
+  usage
+  ;;
+*)
+  echo "Unknown command: $cmd"
+  echo ""
+  usage
+  ;;
+esac
