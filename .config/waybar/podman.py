@@ -45,7 +45,7 @@ class SwayResponse:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Simple status command",
+        description="Waybar podman script",
     )
     parser.add_argument(
         "command",
