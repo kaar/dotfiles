@@ -24,7 +24,10 @@ font pango:DejaVu Sans Mono 10
 
 ### Output configuration
 # See outputs: swaymsg -t get_outputs
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# See: /home/kaar/repos/kaar/ai-bg-img/
+# output * bg /home/kaar/repos/kaar/ai-bg-img/bg.png fill
+output * bg ~/Pictures/matrix.jpg fill
 
 # Hide cursor after 3 seconds of inactivity
 seat * hide_cursor 3000
