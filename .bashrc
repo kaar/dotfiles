@@ -28,8 +28,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # dotfiles config, see: ./README.md
@@ -70,7 +70,7 @@ export FZF_TMUX=1
 # Rider and IDEs like that looks for dotnet in $HOME/.dotnet
 # So I add it to the path and be done with it.
 # Stupid Microsoft, have to make everything so complicated.
-if test -d "$HOME/.dotnet" ; then
+if test -d "$HOME/.dotnet"; then
   export DOTNET_TOOLS="$HOME/.dotnet/tools"
   export DOTNET_ROOT="$HOME/.dotnet"
   export PATH="$DOTNET_PATH:$PATH"
@@ -83,11 +83,11 @@ export PATH="$SCRIPTS:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # ------------------------------- pager ------------------------------
+# I don't have lesspipe installed. Not sure what I needed this for...
 if test -x /usr/bin/lesspipe; then
-  export LESSOPEN="| /usr/bin/lesspipe %s";
-  export LESSCLOSE="/usr/bin/lesspipe %s %s";
+  export LESSOPEN="| /usr/bin/lesspipe %s"
+  export LESSCLOSE="/usr/bin/lesspipe %s %s"
 fi
-
 
 # Use $EDITOR (nvim) as manpager
 export MANPAGER="$EDITOR +Man!"
@@ -150,36 +150,17 @@ alias gist='gh gist'
 
 alias n='nvim'
 alias v='vim'
-alias l='lvim'
-
-# Gists
-alias ideas='gh gist edit ${GIST_IDEAS}'
-
-# Browser
-alias browse='firefox -new-tab'
 
 # tailscale
 alias ts='tailscale'
 
-# other
-alias aws-cloudwatch='open ${AWS_URL_CLOUDWATCH}'
-alias aws-console='open ${AWS_URL_CONSOLE}'
-alias aws-iam='open ${AWS_URL_IAM}'
-
-# python
-alias set-python-path='export PYTHONPATH="$PYTHONPATH:$PWD/src:$PWD/test"'
-
-
-# secrets
-alias source-secrets='. ~/.config/secrets.env'
-
 # Load all scripts in shell.d
-for file in ~/.config/shell.d/*.sh ; do
+for file in ~/.config/shell.d/*.sh; do
   [ -f "$file" ] && source $file
 done
 
 # Local bash completion
-for bcfile in ~/.config/bash_completion.d/* ; do
+for bcfile in ~/.config/bash_completion.d/*; do
   [ -f "$bcfile" ] && source $bcfile
 done
 
@@ -286,7 +267,7 @@ export PATH="$GOPATH/bin:$PATH"
 # $REPOS/kaar/mako/build/mako
 # ./.config/systemd/user/mako.service
 # notify-send "Title" "Message"
-if test -x "$REPOS/kaar/mako/build/mako" ; then
+if test -x "$REPOS/kaar/mako/build/mako"; then
   export PATH="$REPOS/kaar/mako/build:$PATH"
 fi
 
