@@ -187,39 +187,34 @@ stty -ixon
 # Not sure why that is so I'm disabling it for now.
 # bind '"\C-f":"file-search-preview\n"'
 
-# ------------------------------ prompt -------------------------------
+# ------------------------------ colors & prompt ------------------------------
 
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-# https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
-source "$HOME/.config/git/git-prompt.sh"
+BLACK='\[\e[30m\]'
+RED='\[\e[31m\]'
+GREEN='\[\e[32m\]'
+YELLOW='\[\e[33m\]'
+BLUE='\[\e[34m\]'
+PURPLE='\[\e[35m\]' # magenta
+CYAN='\[\e[36m\]'
+WHITE='\[\e[37m\]'
 
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[1;33m\]"
-GREEN="\[\033[0;32m\]"
-BLUE="\[\033[1;34m\]"
-PURPLE="\[\033[0;35m\]"
-LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-WHITE="\[\033[1;37m\]"
-LIGHT_GRAY="\[\033[0;37m\]"
-COLOR_NONE="\[\e[0m\]"
+GRAY='\[\e[90m\]'
+LIGHT_RED='\[\e[91m\]'
+LIGHT_GREEN='\[\e[92m\]'
+LIGHT_YELLOW='\[\e[93m\]'
+LIGHT_BLUE='\[\e[94m\]'
+LIGHT_PURPLE='\[\e[95m\]'
+LIGHT_CYAN='\[\e[96m\]'
+LIGHT_WHITE='\[\e[97m\]'
 
-if test -z "$VIRTUAL_ENV" ; then
-    PYTHON_VIRTUALENV=""
-else
-    PYTHON_VIRTUALENV="${YELLOW}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
-fi
+RESET='\[\e[0m\]'
 
-PROMPT_COMMAND='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
-PS1='__git_ps1 "${PYTHON_VIRTUALENV}${BLUE}\W${COLOR_NONE}" "${COLOR_NONE} "'
+PS1="${YELLOW}\w${RESET}\n${GREEN}\$ ${RESET}"
 
 # ------------------------------ settings -----------------------------
+# replace readline with vi mode
+set -o vi
 
-set -o vi               # replace readline with vi mode
-
-# === HISTORY ===
 # Avoid duplicates and commands starting with space
 HISTCONTROL=ignoredups:erasedups:ignorespace
 # A negative value make the history unlimited
