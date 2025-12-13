@@ -164,6 +164,11 @@ for bcfile in ~/.config/bash_completion.d/*; do
   [ -f "$bcfile" ] && source $bcfile
 done
 
+# system bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
+
 # aws
 complete -C 'aws_completer' aws
 
