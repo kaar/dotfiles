@@ -272,3 +272,4 @@ fi
 # After installing claude globally I ran `claude migrate-installer`
 # That moved the binary to ~/.claude/local/claude, which requires this alias.
 alias claude="/home/kaar/.claude/local/claude"
+export ANTHROPIC_MODEL="claude-opus-4-5-20251101"
