@@ -223,8 +223,6 @@ HISTFILESIZE=-1
 HISTTIMEFORMAT='%F %T '
 # Ignore trivial/unimportant commands
 HISTIGNORE="ls:ls -l:ls -la:cd:cd -:pwd:clear:history:exit"
-# Append instead of overwrite
-shopt -s histappend
 # Save after every command
 # PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # This is not very good as it messes up the history between terminals.
@@ -233,15 +231,15 @@ shopt -s histappend
 # PROMPT_COMMAND='history -a'
 # This does not work as it break my terminal for some reason. Don't have time for this...
 
+# === shopt ===
+
 shopt -s checkwinsize   # check the window size and update LINES,COLUMNS
 shopt -s histappend     # don't override history
-shopt -s autocd         # change to named directory
 shopt -s cdspell        # autocorrects cd misspellings
 shopt -s autocd         # change to named directory
 shopt -s cmdhist        # save multi-line commands in history as single line
-shopt -s dotglob
+shopt -s dotglob        # include dotfiles in pathname expansion
 shopt -s expand_aliases # expand aliases
-
 
 # Cargo
 [[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
