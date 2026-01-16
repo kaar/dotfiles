@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -o errexit
-set -o nounset
-set -o pipefail
-
-open "https://calendar.google.com/calendar/u/0/r"
