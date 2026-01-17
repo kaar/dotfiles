@@ -1,9 +1,1 @@
-#!/bin/sh
-
-# update keyring
-pacman -Sy archlinux-keyring
-# upgrade packages
-pacman -Syu
-
-# install all packages in arch file
-# sudo pacman -Syy --needed - < "${PACKAGE_INSTALL}/arch/packages"
+/home/kaar/.install/arch/arch-install.sh
