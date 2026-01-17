@@ -1,303 +1,147 @@
 # Pacman packages to install on Arch Linux
 # This file is loaded by ~/.install/arch/arch-install.sh
 
-### General
+### Core utilities
 tree
 less
 man
 man-pages
 git
+jq
+bat
+wget
+curl
 
+### Shell
+bash-completion
+fzf
+zoxide
+ripgrep
+fd
+exa
 
-# File watching utility
+### Terminal
+alacritty
+ghostty
+tmux
+
+### Editors
+nvim
+vim
+shellcheck
+
+### File watching
 # https://github.com/eradman/entr
-# https://man.archlinux.org/man/entr.1.en
 entr
 
-## Security
-# https://www.passwordstore.org/
-pass
-
-## Containerization
-docker
-docker-compose
-# https://podman.io/getting-started/installation
-podman
-podman-compose
-
-# https://github.com/jqlang/jq
-jq
-# https://github.com/sharkdp/bat
-bat
-
-# better diffs in git
-diff-so-fancy
-# fuzy search
-fzf
-
-# dotfiles management
-stow
+### Version control
 github-cli
 tig
 jujutsu
+diff-so-fancy
+stow
 
-# shell
-bash-completion
+### Containerization
+docker
+docker-compose
+podman
+podman-compose
 
-# terminal
-alacritty
-ghostty
+### Virtualization
+qemu
+libvirt
+virt-manager
 
-# TODO: I need to add the plugin install thing.
-tmux
+### Security
+pass
 
-# Default nvim install, replace by own compiled version through ~/.install/arch/nvim-source.sh
-nvim
-vim
-
-# lsp for bash
-shellcheck
-
-# support clipboard between wayland and nvim
-# for x11, use xclip
+### Clipboard
+# Wayland: wl-clipboard, X11: xclip
 # see ~/.scripts/clip
 wl-clipboard
 
-# required by nvim and mason
+### Build tools
+gcc
+meson
+scdoc
 zip
 unzip
 npm
+wayland-protocols
 
-# browser
-firefox
+### Networking
+networkmanager
+nmap
+openbsd-netcat
+bind
+wireless_tools
+wpa_supplicant
+dnsmasq
+tailscale
 
-# replacement for ls
-exa
-# rg, replacement for grep
-ripgrep
-# replacement of find
-fd
-# replacement/smart cd
-zoxide
-
-
-# process management tool
-btop
-
-## Desktop
-
-# TODO
-# Add all the wayland and sway stuff. Also clipboard manager and the other stuff.
-# .config/sway/config
+### Desktop (Sway/Wayland)
 sway
 swaybg
 swayidle
 swaylock
-
-
+waybar
 wmenu
-wpa_supplicant
 xdg-utils
 xorg-server
 xorg-xinit
 xorg-xwayland
 
-# screenshots, not tried on wayland and sway
-# Using grim, slurp and wl-copy
-# Old
-# flameshot
-# To use Flameshot on Wayland, you need to install the xdg-desktop-portal
-# package and the xdg-desktop-portal-gnome package.
-# https://flameshot.org/docs/guide/wayland-help/
-# xdg-desktop-portal
-# xdg-desktop-portal-gnome
-
-# Sway setup may use xdg-desktop-portal-wlr
-# https://wiki.archlinux.org/title/XDG_Desktop_Portal
-# xdg-desktop-portal-wlr
-
-
-# Bluetooth
-# https://wiki.archlinux.org/title/Bluetooth
-bluez
-
-### Firmware update tool
-#
-# sudo fwupdmgr refresh       # update metadata
-# sudo fwupdmgr get-updates   # list updates
-# sudo fwupdmgr update        # install updates
-fwupd
-
-# UDisks2 is required by fwupd to detect some devices, e.g. NVMe drives.
-# https://github.com/fwupd/fwupd/wiki/PluginFlag:esp-not-found
-# https://wiki.archlinux.org/title/Udisks
-udisks2
-
-
-### Power management
-# https://wiki.archlinux.org/title/TLP
-tlp
-
-### Sway and Wayland
-# https://github.com/Alexays/Waybar
-waybar
-
-# build system and package manager
-gcc
-meson
-
-# build man pages
-scdoc
-
-# to build kaar/mako
-wayland-protocols
-
-# send notifications
-# https://man.archlinux.org/man/notify-send.1.en
-# https://wiki.archlinux.org/title/Desktop_notifications
-# $ notify-send "Hello World" "This is a test notification"
+### Notifications
+# https://github.com/kaar/mako
 libnotify
 
+### Bluetooth
+bluez
 
-### Virtualization
-#
-# https://github.com/qemu/qemu
-qemu
+### Power management
+tlp
 
-# Libvirt API for virtualization
-# https://github.com/libvirt/libvirt
-libvirt
+### Firmware
+fwupd
+udisks2
 
-# Desktop tool for managing virtual machines via libvirt
-# https://github.com/virt-manager/virt-manager
-virt-manager
+### Browser
+firefox
 
-# Email
+### Email
 thunderbird
 
-# PyGObject
-python-gobject
-
-
-# Roblox
-flatpak
-
-
-# vinegar
-# https://github.com/vinegarhq/vinegar
-# required for make
-# wine, ... I don't thin so
-# vulkan-icd-loader
-# vulkan-intel
-
-
-### Videos, Media and Music
+### Media
 vlc
 vlc-plugins-extra
 vlc-plugin-ffmpeg
 ffmpeg
-
-### Torrent client
-transmission-gtk
-
-# I was experimenting with why VLC did not have working steaming support.
 avahi
 
-### Networking
-# Add iwd as a backend for NetworkManager
-#
-# /etc/NetworkManager/conf.d/wifi-backend.conf
-#
-# [device]
-# wifi.backend=iwd
-#
-# Verify that wpa_supplicant is not running
-# systemctl status wpa_supplicant.service
-networkmanager
-nmap
-openbsd-netcat
-# To include dig
-# https://man.archlinux.org/man/dig.1
-bind
+### Torrent
+transmission-gtk
 
+### Fonts
+noto-fonts-emoji
 
-wireless_tools
-wget
-curl
-
-# https://wiki.archlinux.org/title/Dnsmasq
-# Needed to support hotspot in NetworkManager, see ~/.scripts/wifi-hotspot
-dnsmasq
-
-# VPN
-# https://tailscale.com/kb/1036/install-arch
-tailscale
-
-### UI
-# TODO: Add rofi as an application launcher
-# https://wiki.archlinux.org/title/Rofi
-
-
-### Gaming, Games
-
-# Minecraft
-# See: ./install/arch/minecraft
-
+### Gaming
 steam
-
 vulkan-intel
-
-# World of Warcraft, Battle.net
-# https://chatgpt.com/c/6915a63f-345c-8328-be15-2447fcc59409
-######
-# cd ~/.steam/root/compatibilitytools.d
-# git clone https://github.com/GloriousEggroll/proton-ge-custom.git
-# Add Battle.net to Steam:
-#
-# 1. In Steam → Games → Add a Non-Steam Game...
-#
-# 2. Browse to Battle.net installer (download from Blizzard’s site).
-#
-# 3. Set compatibility:
-# Properties → Force the use of a specific Steam Play compatibility tool → Proton-GE
-#
-# 4. Run the installer.
-#
-# 5. Once installed, use it to install World of Warcraft.
-#
-# Clone did not work. Followed the instructions in README instead. Got it to work.
-# wget https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton10-25/GE-Proton10-25.tar.gz
-# tar -xf GE-Proton*.tar.gz -C ~/.steam/steam/compatibilitytools.d/
-# After this I could install battle.net and start downloading World of Warcraft.
-# Not sure if I actually needed to install the dependencies below
 wine
 winetricks
 lutris
+flatpak
 
-
-## Web Development
-
-# https://github.com/kaar/skiftcykel
-# https://archlinux.org/packages/?name=certbot
-# https://certbot.eff.org/instructions
+### Web development
 certbot
 goaccess
 
-
-## Android Development (Google TV, Chromecast)
-# To do remote debugging and troubleshooting of Chromecast as the wifi is not stable.
+### Android development
 android-tools
 
-## Random stuff
+### Python
+python-gobject
+
+### Misc
+btop
 cmatrix
-
-# Fonts
-# To get color emojis working in terminal and nvim
-# See: ~/.config/foot/foot.ini:30
-# font=DejaVu Sans Mono:size=10, Noto Color Emoji:size=10, Noto Sans CJK JP:size=10
-noto-fonts-emoji
-
-# TODO
-# I also use nerdfonts.com/cheat-sheet. This is not doumented.
-# Think I'm installing some package for that....
-# https://www.nerdfonts.com/cheat-sheet
