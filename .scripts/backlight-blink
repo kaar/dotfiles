@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# First argument: number of seconds to blink
+COUNT=${1:-5}
+
+# Delay in seconds
+DELAY=0.3
+
+for i in $(seq 1 $COUNT); do
+    backlight-toggle
+    sleep "$DELAY"
+done

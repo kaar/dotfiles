@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Add udev rule to set group ownership and permissions for keyboard backlight control
+
+# Check if the rule already exists
+# RULE_FILE="/etc/udev/rules.d/90-thinkpad-kbd.rules"
+#
+#   sudo tee "$RULE_FILE" <<'EOF'
+# SUBSYSTEM=="leds", KERNEL=="tpacpi::kbd_backlight", MODE="0664", GROUP="kaar"
+# EOF
+#   sudo udevadm control --reload-rules
+#
+# Note, using /etc/udev/rules.d did not work.
+# I had to do
+#
+# sudo tee /etc/tmpfiles.d/thinkpad-kbd.conf <<'EOF'
+# z /sys/class/leds/tpacpi::kbd_backlight/brightness 0664 root kaar -
+# EOF
+#
+# And then run:
+# sudo systemd-tmpfiles --create
+#
+# Reason why:
+# * /sys/class/leds/... is part of sysfs, a virtual filesystem managed by the kernel.
+# * sysfs resets permissions every time a device is created.
+# * udev runs at device creation, but sysfs often overrides the permissions immediately after.
+# * Arch (and Linux in general) prevents udev from reliably setting write permissions for sysfs “attribute files” like brightness.
+BRIGHTNESS="/sys/class/leds/tpacpi::kbd_backlight/brightness"
+if [[ ! -w "$BRIGHTNESS" ]]; then
+  echo "You do not have permission to write to $BRIGHTNESS."
+  sudo tee /etc/tmpfiles.d/thinkpad-kbd.conf <<'EOF'
+z /sys/class/leds/tpacpi::kbd_backlight/brightness 0664 root kaar -
+EOF
+  echo "Created /etc/tmpfiles.d/thinkpad-kbd.conf to set permissions."
+  echo "Applying tmpfiles configuration..."
+  sudo systemd-tmpfiles --create
+  if [[ ! -w "$BRIGHTNESS" ]]; then
+    echo "Failed to gain write permission to $BRIGHTNESS. Please check your group membership and permissions."
+    exit 1
+  fi
+fi
+
+# p=/sys/class/leds/tpacpi::kbd_backlight/brightness
+MAX=$(cat /sys/class/leds/tpacpi::kbd_backlight/max_brightness)
+CURRENT=$(cat $BRIGHTNESS)
+echo $(((CURRENT + 1) % (MAX + 1))) | sudo tee $BRIGHTNESS
