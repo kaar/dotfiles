@@ -2,8 +2,6 @@
 
 Personal dotfiles managed with a bare Git repository cloned into `$HOME/.cfg`.
 
-<img width="2878" height="1800" alt="image" src="https://github.com/user-attachments/assets/5a5c9c2e-3800-4e6a-8fbb-d909cc143585" />
-
 + **OS**: [Arch Linux](https://archlinux.org/)
 + **Shell**: [Bash](.bashrc)
 + **Terminal**: Foot
@@ -12,6 +10,9 @@ Personal dotfiles managed with a bare Git repository cloned into `$HOME/.cfg`.
 + **Editor**: [Neovim](https://github.com/kaar/nvim-config)
 + **Multiplexer**: [Tmux](https://github.com/kaar/tmux-config)
 + **Status Bar**: [Waybar](.config/waybar/config.jsonc)
+
+<img width="2878" height="1800" alt="image" src="https://github.com/user-attachments/assets/5a5c9c2e-3800-4e6a-8fbb-d909cc143585" />
+
 
 ## Setup
 ```sh
