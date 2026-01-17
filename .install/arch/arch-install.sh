@@ -4,6 +4,15 @@ set -euo pipefail
 # PACMAN_SRC_FILE="missing.txt"
 PACMAN_SRC_FILE=$HOME/.install/arch/packages.txt
 
+# Handle --edit option
+if [[ "${1:-}" == "--edit" ]]; then
+    if [[ -z "${EDITOR:-}" ]]; then
+        echo "EDITOR environment variable is not set." >&2
+        exit 1
+    fi
+    exec "$EDITOR" "$PACMAN_SRC_FILE"
+fi
+
 # Check if running as root
 if [[ $EUID -eq 0 ]]; then
     echo "Do not run as root. Will prompt for sudo when required." >&2
