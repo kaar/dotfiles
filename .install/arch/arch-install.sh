@@ -31,9 +31,8 @@ sudo pacman -Syu
 echo "System packages updated."
 
 echo "Installing base packages..."
-src_file=missing.txt
 # Skip comments
-grep -v '^\s*#' "$src_file" \
+grep -v '^\s*#' "$PACMAN_SRC_FILE" \
   | sudo pacman -S --needed -
 echo "Base packages installed."
 
