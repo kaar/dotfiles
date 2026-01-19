@@ -1,0 +1,8 @@
+# This file lists AUR packages installation that is not part of pacman -S so Arch
+
+### Databases
+# Set of tools and libraries to access human-editable, plain text databases called recfiles.
+# https://www.gnu.org/software/recutils/
+# It is used for t-ticket (ticketing system in t-project),
+# See: github.com/kaar/t-project
+https://aur.archlinux.org/recutils.git
