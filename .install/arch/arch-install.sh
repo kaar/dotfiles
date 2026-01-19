@@ -30,13 +30,17 @@ fi
 # Function to install AUR packages
 install_aur_package() {
   url="$1"
-  # TODO: Check if package is already installed
-
   if [ -z "${url}" ]; then
     echo "Usage: install-aur.sh <url>"
     exit 1
   fi
+  package_name=$(basename "$url" .git)
+  if pacman -Q "$package_name" &>/dev/null; then
+    echo "warning: ${package_name} is already installed -- skipping"
+    return 0
+  fi
 
+  echo "Installing ${package_name} from ${url}"
   repo=$(mktemp -d)/$(basename "$0")
   echo "Cloning ${url} into ${repo}"
   git clone "${url}" --depth 1 "${repo}"
@@ -45,19 +49,17 @@ install_aur_package() {
   makepkg -si --noconfirm --needed --skippgpcheck --skipchecksums --noprogressbar
   cd - || exit 1
   rm -rf "${repo}"
+  echo "Installed ${package_name} from AUR."
 }
 
 # Install AUR packages listed in $AUR_SRC
 install_aur_packages() {
-  echo "Installing AUR packages..."
   while IFS= read -r line || [[ -n "$line" ]]; do
     # Skip comments and empty lines
     [[ "$line" =~ ^\s*# ]] && continue
     [[ -z "$line" ]] && continue
-    echo "Installing AUR package: $line"
     install_aur_package "$line"
   done <"$AUR_SRC"
-  echo "AUR packages installed."
 }
 
 # Update packages
