@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+section() { echo -e "\n\033[1;34m══ $1 ══\033[0m"; }
+
 PACMAN_SRC_FILE=$HOME/.install/arch/packages.txt
 [[ ! -f $PACMAN_SRC_FILE ]] && {
   echo "'$PACMAN_SRC_FILE' not found." >&2
@@ -27,72 +29,49 @@ if [[ $EUID -eq 0 ]]; then
   exit 1
 fi
 
-# Function to install AUR packages
 install_aur_package() {
-  url="$1"
-  if [ -z "${url}" ]; then
-    echo "Usage: install-aur.sh <url>"
-    exit 1
-  fi
-  package_name=$(basename "$url" .git)
+  local url="$1"
+  local package_name=$(basename "$url" .git)
   if pacman -Q "$package_name" &>/dev/null; then
-    echo "warning: ${package_name} is already installed -- skipping"
+    echo "✓ $package_name (already installed)"
     return 0
   fi
-
-  echo "Installing ${package_name} from ${url}"
-  repo=$(mktemp -d)/$(basename "$0")
-  echo "Cloning ${url} into ${repo}"
-  git clone "${url}" --depth 1 "${repo}"
-
-  cd "${repo}" || exit 1
-  makepkg -si --noconfirm --needed --skippgpcheck --skipchecksums --noprogressbar
-  cd - || exit 1
-  rm -rf "${repo}"
-  echo "Installed ${package_name} from AUR."
+  echo "→ Installing $package_name..."
+  local repo=$(mktemp -d)/$package_name
+  git clone "$url" --depth 1 "$repo" --quiet
+  (cd "$repo" && makepkg -si --noconfirm --needed --skippgpcheck --skipchecksums --noprogressbar)
+  rm -rf "$repo"
 }
 
-# Install AUR packages listed in $AUR_SRC
 install_aur_packages() {
   while IFS= read -r line || [[ -n "$line" ]]; do
-    # Skip comments and empty lines
-    [[ "$line" =~ ^\s*# ]] && continue
-    [[ -z "$line" ]] && continue
+    [[ "$line" =~ ^\s*# || -z "$line" ]] && continue
     install_aur_package "$line"
   done <"$AUR_SRC"
 }
 
-# Update packages
-echo "Updating system packages..."
+section "System Update"
 sudo pacman -Syu
-echo "System packages updated."
 
-echo "Installing base packages..."
-# Skip comments
-grep -v '^\s*#' "$PACMAN_SRC_FILE" |
-  sudo pacman -S --needed -
-echo "Base packages installed."
+section "Base Packages"
+grep -v '^\s*#' "$PACMAN_SRC_FILE" | sudo pacman -S --needed -
 
-# Remove orphaned packages
-echo "Removing orphaned packages..."
+section "Cleanup: Orphaned Packages"
 sudo pacman -Rns "$(pacman -Qdtq)" || true
-echo "Orphaned packages removed."
 
-# Install AUR packages
+section "AUR Packages"
 install_aur_packages
 
-# Firmware updates
-echo "Checking for firmware updates..."
-sudo fwupdmgr refresh     # update metadata
-sudo fwupdmgr get-updates # list updates
-sudo fwupdmgr update      # install updates
-echo "Firmware updates checked."
+section "Firmware Updates"
+sudo fwupdmgr refresh || true
+sudo fwupdmgr get-updates || true
+sudo fwupdmgr update || true
 
-# Enable flatpak update service
-# .config/systemd/user/flatpak-update.service
-echo "Enabling flatpak update service..."
+section "Flatpak Services"
 systemctl --user enable flatpak-update.service
 systemctl --user start flatpak-update.service
+
+flatpak update --user -y
 
 ### systemd services
 if ! systemctl is-active --quiet dnsmasq; then
@@ -126,16 +105,14 @@ fi
 # Templates
 # https://github.com/kaar/template
 #
-# Virtualization
-# Enable systemd services
-echo "Enabling virtualization services..."
+section "Virtualization Services"
 sudo systemctl enable --now libvirtd
-echo "Virtualization services enabled."
 
-# Rust
+section "Rust"
 if ! command -v rustup &>/dev/null; then
-  echo "Installing rust..."
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else
+  echo "rustup already installed"
 fi
 
 # Firmware updates
@@ -153,8 +130,7 @@ fi
 #
 #
 
-### NPM
-# check NPM_PREFIX is set
+section "NPM Packages"
 if [ -z "$NPM_PREFIX" ]; then
   echo "NPM_PREFIX is not set."
   exit 1
@@ -166,16 +142,12 @@ if [ "$(npm config get prefix)" != "$NPM_PREFIX" ]; then
 fi
 
 npm_install() {
-  local package_name=$1
-
-  npm list -g "$package_name" >/dev/null 2>&1 ||
-    npm install -g "$package_name"
-
-  if npm outdated -g "$package_name" | grep -q "${package_name##*/}"; then
-    echo "Update available. Updating..."
-    npm update -g "$package_name"
+  local pkg=$1
+  npm list -g "$pkg" &>/dev/null || npm install -g "$pkg"
+  if npm outdated -g "$pkg" | grep -q "${pkg##*/}"; then
+    npm update -g "$pkg"
   else
-    echo "$package_name is up to date"
+    echo "✓ ${pkg##*/} (up to date)"
   fi
 }
 
@@ -208,5 +180,11 @@ npm_install @openai/codex
 # # -- Data is authenticated: no; Data was acquired via local or encrypted transport: no
 # resolvectl query <hostname from SRV>
 
-### Go
-go install github.com/vishen/go-chromecast@latest
+section "Go Packages"
+go_install() {
+  local pkg=$1
+  echo "→ $(basename "${pkg%@*}")"
+  go install "$pkg"
+}
+
+go_install github.com/vishen/go-chromecast@latest
