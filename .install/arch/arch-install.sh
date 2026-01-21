@@ -30,14 +30,17 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 install_aur_package() {
-  local url="$1"
-  local package_name=$(basename "$url" .git)
+  local url package_name repo
+  url="$1"
+  package_name=$(basename "$url" .git)
+
   if pacman -Q "$package_name" &>/dev/null; then
     echo "✓ $package_name (already installed)"
     return 0
   fi
   echo "→ Installing $package_name..."
-  local repo=$(mktemp -d)/$package_name
+  repo=$(mktemp -d)/$package_name
+  echo "Cloning from $url to $repo"
   git clone "$url" --depth 1 "$repo" --quiet
   (cd "$repo" && makepkg -si --noconfirm --needed --skippgpcheck --skipchecksums --noprogressbar)
   rm -rf "$repo"
@@ -49,6 +52,9 @@ install_aur_packages() {
     install_aur_package "$line"
   done <"$AUR_SRC"
 }
+
+section "Package Tracking Check"
+"$HOME/.install/arch/arch-install-check.sh" || true
 
 section "System Update"
 sudo pacman -Syu

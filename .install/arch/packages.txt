@@ -1,11 +1,33 @@
 # Pacman packages to install on Arch Linux
 # This file is loaded by ~/.install/arch/arch-install.sh
 
+### Core system packages
+# Essential packages for a bootable Arch Linux system
+base
+base-devel
+linux
+linux-firmware
+efibootmgr
+btrfs-progs
+sof-firmware
+zram-generator
+
+### Intel hardware
+intel-ucode
+intel-media-driver
+libva-intel-driver
+
 ### Core utilities
 tree
 less
 man
+man-db
 man-pages
+
+# https://www.smartmontools.org/wiki/TocDoc
+# man 8 smartctl
+smartmontools
+usbutils
 git
 jq
 bat
@@ -18,15 +40,17 @@ fzf
 zoxide
 ripgrep
 fd
-exa
+eza
 
 ### Terminal
 alacritty
+foot
 ghostty
 tmux
 
 ### Editors
-nvim
+nano
+neovim
 vim
 shellcheck
 
@@ -48,7 +72,7 @@ podman
 podman-compose
 
 ### Virtualization
-qemu
+qemu-base
 libvirt
 virt-manager
 
@@ -76,11 +100,17 @@ wayland-protocols
 networkmanager
 nmap
 openbsd-netcat
+openssh
 bind
+iwd
 wireless_tools
 wpa_supplicant
 dnsmasq
 tailscale
+
+### Display manager
+lightdm
+lightdm-gtk-greeter
 
 ### Desktop (Sway/Wayland)
 sway
@@ -89,6 +119,9 @@ swayidle
 swaylock
 waybar
 wmenu
+brightnessctl
+grim
+slurp
 xdg-utils
 xorg-server
 xorg-xinit
@@ -97,6 +130,10 @@ xorg-xwayland
 ### Notifications
 # https://github.com/kaar/mako
 libnotify
+
+### Audio
+pavucontrol
+pulseaudio
 
 ### Bluetooth
 bluez
@@ -120,6 +157,7 @@ vlc-plugins-extra
 vlc-plugin-ffmpeg
 ffmpeg
 avahi
+libmicrodns
 
 ### Torrent
 transmission-gtk
@@ -144,7 +182,9 @@ android-tools
 
 ### Python
 python-gobject
+python-pyqt6
 
 ### Misc
 btop
+htop
 cmatrix
