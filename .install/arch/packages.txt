@@ -54,6 +54,9 @@ virt-manager
 
 ### Security
 pass
+# Application firewall
+# https://github.com/evilsocket/opensnitch
+opensnitch
 
 ### Clipboard
 # Wayland: wl-clipboard, X11: xclip
