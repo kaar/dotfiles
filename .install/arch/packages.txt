@@ -33,6 +33,7 @@ jq
 bat
 wget
 curl
+rsync
 
 ### Shell
 bash-completion
@@ -80,7 +81,7 @@ virt-manager
 pass
 # Application firewall
 # https://github.com/evilsocket/opensnitch
-opensnitch
+# opensnitch
 
 ### Clipboard
 # Wayland: wl-clipboard, X11: xclip

@@ -54,7 +54,7 @@ install_aur_packages() {
 }
 
 section "Package Tracking Check"
-"$HOME/.install/arch/arch-install-check.sh" || true
+"$HOME/.install/arch/arch-install-check.sh"
 
 section "System Update"
 sudo pacman -Syu
