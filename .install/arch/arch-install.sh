@@ -136,6 +136,21 @@ fi
 #
 #
 
+section "pnpm"
+if ! command -v pnpm &>/dev/null; then
+  echo "Installing pnpm..."
+  curl -fsSL https://get.pnpm.io/install.sh | sh -
+  # Source the updated environment to make pnpm available
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+  export PATH="$PNPM_HOME:$PATH"
+else
+  echo "pnpm already installed, checking for updates..."
+  pnpm self-update || true
+fi
+echo "pnpm version: $(pnpm --version)"
+echo "pnpm binary:  $(command -v pnpm)"
+echo "pnpm home:    ${PNPM_HOME:-$HOME/.local/share/pnpm}"
+
 section "NPM Packages"
 if [ -z "$NPM_PREFIX" ]; then
   echo "NPM_PREFIX is not set."

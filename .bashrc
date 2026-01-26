@@ -278,3 +278,11 @@ export ANTHROPIC_MODEL="claude-opus-4-5-20251101"
 
 # Podman
 alias p=podman
+
+# pnpm
+export PNPM_HOME="/home/kaar/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
