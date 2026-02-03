@@ -273,7 +273,7 @@ fi
 # That moved the binary to ~/.claude/local/claude, which requires this alias.
 
 # TODO: Add completion
-alias claude="/home/kaar/.claude/local/claude"
+# https://platform.claude.com/docs/en/about-claude/models/overview#model-names
 export ANTHROPIC_MODEL="claude-opus-4-5-20251101"
 
 # Podman
@@ -285,4 +285,3 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
