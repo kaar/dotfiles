@@ -43,9 +43,42 @@ class SwayResponse:
         return json.dumps(self.__dict__)
 
 
+WAYBAR_CONFIG = """
+Waybar configuration example:
+
+    "group/podman": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": true
+      },
+      "modules": [
+        "custom/podman",
+        "custom/jellyfin"
+      ]
+    },
+    "custom/podman": {
+      "exec": "~/.config/waybar/podman.py info",
+      "interval": 10,
+      "return-type": "json",
+      "format": "{} "
+    },
+    "custom/jellyfin": {
+      "exec": "~/.config/waybar/podman.py status jellyfin",
+      "interval": 10,
+      "return-type": "json",
+      "format": "{}",
+      "on-click": "xdg-open http://localhost:8096"
+    }
+"""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Waybar podman script",
+        epilog=WAYBAR_CONFIG,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "command",
