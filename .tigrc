@@ -1,0 +1,11 @@
+# Tig configuration
+#
+# Please see 'man tigrc' for a complete reference.
+# man tigrc(5) for a full list.
+# https://github.com/jonas/tig/blob/master/tigrc
+
+# When the file is selected, pressing V would pop into Vim (read-only mode via -R)
+bind generic V !sh -c 'git show %(commit):%(file) | $EDITOR -'
+
+# When in the main view, revert the commit under the cursor
+bind main R !git revert %(commit)
