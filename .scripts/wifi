@@ -65,10 +65,11 @@ cmd_iphone() {
 
   echo -n "Trying to connect to $SSID"
 
+  eval "$SCAN_CMD"
   local n=0
   until [ "$n" -ge 10 ]; do
     echo -n "."
-    if eval "$CONNECT_CMD" 2>/dev/null; then
+    if eval "$CONNECT_CMD" &>/dev/null; then
       echo ""
       echo "Successfully connected to $SSID"
       return 0
