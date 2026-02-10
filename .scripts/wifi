@@ -66,6 +66,7 @@ cmd_iphone() {
   echo -n "Trying to connect to $SSID"
 
   eval "$SCAN_CMD"
+  sleep 2
   local n=0
   until [ "$n" -ge 10 ]; do
     echo -n "."
