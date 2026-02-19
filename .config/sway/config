@@ -15,8 +15,8 @@ set $down j
 set $up k
 set $right l
 ## Terminal
-# foot - https://codeberg.org/dnkl/foot/wiki
-set $term foot
+# ghostty - https://ghostty.org/, https://github.com/ghostty-org/ghostty
+set $term ghostty
 # Application Launcher
 set $menu wmenu-run
 
