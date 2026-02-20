@@ -21,6 +21,20 @@ if [[ -n "$untracked" ]]; then
     echo "  - $pkg"
   done
   echo ""
-  exit 1
+
+  to_remove=()
+  while read -r pkg; do
+    read -rp "Uninstall '$pkg'? [y/N/q] " answer </dev/tty
+    case "$answer" in
+      y|Y) to_remove+=("$pkg") ;;
+      q|Q) echo "Skipping remaining packages."; break ;;
+      *) ;;
+    esac
+  done <<< "$untracked"
+
+  if [[ ${#to_remove[@]} -gt 0 ]]; then
+    echo "Removing: ${to_remove[*]}"
+    sudo pacman -Rns "${to_remove[@]}"
+  fi
 fi
-echo "✓ All installed packages are tracked"
+echo "✓ Package tracking check complete"
