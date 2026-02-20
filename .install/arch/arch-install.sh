@@ -1,5 +1,7 @@
-#!/bin/bash
-set -euo pipefail
+#!/usr/bin/env bash
+
+set -o nounset
+set -o pipefail
 
 section() { echo -e "\n\033[1;34m══ $1 ══\033[0m"; }
 
@@ -156,24 +158,12 @@ if [ -z "$NPM_PREFIX" ]; then
   echo "NPM_PREFIX is not set."
   exit 1
 fi
-# check npm config prefix is set
-if [ "$(npm config get prefix)" != "$NPM_PREFIX" ]; then
-  echo "npm config set prefix $NPM_PREFIX"
+# check npm global config prefix is set (use --location=global to avoid project .npmrc interference)
+if [ "$(npm config get prefix --location=global)" != "$NPM_PREFIX" ]; then
+  echo "npm global prefix not set. Run: npm config set prefix $NPM_PREFIX --location=global"
   exit 1
 fi
 
-npm_install() {
-  local pkg=$1
-  npm list -g "$pkg" &>/dev/null || npm install -g "$pkg"
-  if npm outdated -g "$pkg" | grep -q "${pkg##*/}"; then
-    npm update -g "$pkg"
-  else
-    echo "✓ ${pkg##*/} (up to date)"
-  fi
-}
-
-npm_install @anthropic-ai/claude-code
-npm_install @openai/codex
 
 # # Check if systemd-resolved is running
 # systemctl status systemd-resolved
