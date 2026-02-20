@@ -48,6 +48,14 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+### Font and Theme ###
 font-family = DejaVu Sans Mono
 font-size = 10
 theme = Gruvbox Material Dark
+
+### Notifications ###
+# ghostty +show-config --docs --default | grep -B30 app-notifications
+# app-notifications = clipboard-copy,config-reload (default)
+# app-notifications = no-clipboard-copy,no-config-reload (disable specific)
+# app-notifications = false (disable all)
+app-notifications = false
