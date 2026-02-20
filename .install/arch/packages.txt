@@ -12,6 +12,11 @@ btrfs-progs
 sof-firmware
 zram-generator
 
+# Needed to build neovim
+# See: https://github.com/neovim/neovim/blob/master/BUILD.md#build-prerequisites
+cmake
+ninja
+
 ### Intel hardware
 intel-ucode
 intel-media-driver
@@ -46,7 +51,9 @@ eza
 ### Terminal
 alacritty
 foot
-ghostty
+# I'm installing ghostty from source.
+# See: $HOME/repos/ghostty-org/ghostty
+# ghostty
 tmux
 
 ### Editors
@@ -171,7 +178,6 @@ steam
 vulkan-intel
 wine
 winetricks
-lutris
 flatpak
 
 ### Web development
@@ -184,6 +190,22 @@ android-tools
 ### Python
 python-gobject
 python-pyqt6
+
+### dotnet
+dotnet-sdk
+dotnet-runtime
+aspnet-runtime
+# NET 10 preview + Arch packaging mismatch.
+# Your SDK is 10.0.100, but Arch doesn’t ship matching prune package data yet.
+dotnet-sdk-8.0
+aspnet-runtime-8.0
+
+### Zig
+zig
+
+# Needed to build ghostty from source.
+# See: ~/repos/ghostty-org/ghostty/HACKING.md
+blueprint-compiler
 
 ### Misc
 btop
