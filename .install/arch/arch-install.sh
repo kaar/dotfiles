@@ -199,3 +199,19 @@ go_install() {
 }
 
 go_install github.com/vishen/go-chromecast@latest
+
+# Claude Code
+# https://code.claude.com/docs/en/overview
+if ! command -v claude &>/dev/null; then
+  curl -fsSL https://claude.ai/install.sh | bash
+else
+  echo "claude already installed"
+fi
+
+# OpenClaw
+# Installed from source
+# if ! command -v openclaw &>/dev/null; then
+#   npm install -g openclaw@latest
+# else
+#   npm install -g openclaw@latest
+# fi
