@@ -62,7 +62,7 @@ section "System Update"
 sudo pacman -Syu
 
 section "Base Packages"
-grep -v '^\s*#' "$PACMAN_SRC_FILE" | sudo pacman -S --needed -
+grep -v '^\s*#' "$PACMAN_SRC_FILE" | sudo pacman -S --needed - 2> >(grep -v 'is up to date -- skipping' >&2)
 
 section "Cleanup: Orphaned Packages"
 sudo pacman -Rns "$(pacman -Qdtq)" || true
