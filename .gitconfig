@@ -88,3 +88,24 @@
 
 [branch]
 	sort = -committerdate
+
+# diff-so-fancy started to crash with 1.4.8, and I had to set these colors manually
+# https://github.com/so-fancy/diff-so-fancy/blob/next/docs/pro-tips.md#improved-colors-for-the-highlighted-bits
+# https://github.com/so-fancy/diff-so-fancy/issues/521
+[color]
+	ui = true
+
+[color "diff-highlight"]
+	newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
