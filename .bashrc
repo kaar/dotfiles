@@ -262,6 +262,9 @@ GO_PATH="$HOME/go"
 export GOPATH="$GO_PATH"
 export PATH="$GOPATH/bin:$PATH"
 
+# Dev/Project Dir (h-open)
+export DEV="$HOME/Dev"
+
 # wayland notifications
 # https://github.com/kaar/mako
 # $REPOS/kaar/mako/build/mako
