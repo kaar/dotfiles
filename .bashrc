@@ -37,7 +37,9 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # TODO: If I set foot as TERM it messes up the colors when I ssh into machines.
 # Can not use less and all the colors are non existing.
-export TERM=xterm-256color
+# export TERM=xterm-256color
+# When I set anything but xterm-256color dir colors changes.
+export TERM=ghostty
 # if test -x /usr/bin/foot ; then
 #   export TERM=foot
 # else
