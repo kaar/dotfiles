@@ -70,12 +70,29 @@ window#waybar {
 #battery,
 #temperature,
 #tray,
-#backlight {
+#backlight,
+#custom-iphone,
+#custom-airpods {
     padding: 0 10px;
     /* background-color: @dark0; */
     background-color: @bg;
     margin: 0 2px;
     border-radius: 5px;
+}
+
+#custom-iphone,
+#custom-airpods {
+    color: @gray;
+}
+
+#custom-iphone.connected,
+#custom-airpods.connected {
+    color: @aqua;
+}
+
+#custom-iphone.unavailable,
+#custom-airpods.unavailable {
+    color: @red;
 }
 
 #battery.warning {

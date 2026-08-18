@@ -18,9 +18,18 @@
       "pulseaudio"
     ],
     "modules-right": [
+      "custom/iphone",
       "custom/airpods",
       "custom/openclaw"
     ],
+    "custom/iphone": {
+      "exec": "~/.config/waybar/iphone.sh status",
+      "interval": 5,
+      "signal": 9,
+      "return-type": "json",
+      "format": "{}",
+      "on-click": "~/.config/waybar/iphone.sh connect"
+    },
     "custom/airpods": {
       "exec": "~/.config/waybar/airpods.sh status",
       "interval": 5,
