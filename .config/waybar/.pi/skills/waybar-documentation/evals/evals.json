@@ -1,0 +1,39 @@
+{
+  "skill_name": "waybar-documentation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Refresh every official Waybar documentation reference in this project and make sure AGENTS.md links every fetched document.",
+      "expected_output": "The official repository and wiki documentation are fetched, indexed, and fully referenced in one generated AGENTS.md block.",
+      "files": [],
+      "assertions": [
+        "The canonical man-page sources, official wiki, maintained examples, contributor docs, and protocol references are fetched from official Alexays/Waybar repositories.",
+        "AGENTS.md contains exactly one complete generated Waybar documentation block.",
+        "Every fetched documentation file is referenced in both references/INDEX.md and AGENTS.md.",
+        "Exact upstream commit identifiers are recorded."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Update the Waybar docs index, but preserve the hand-written project instructions already in AGENTS.md.",
+      "expected_output": "The marked Waybar block is replaced idempotently while all text outside the block is unchanged.",
+      "files": [],
+      "assertions": [
+        "Content before and after the generated markers is preserved.",
+        "Repeated synchronization does not duplicate the generated block.",
+        "The refreshed block references every fetched documentation file."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Find the authoritative Waybar documentation I should use to change the network module tooltip and CSS states on this machine.",
+      "expected_output": "The response checks the installed Waybar version and points to the canonical network, styles, and states man sources, using wiki material only as a supplement.",
+      "files": [],
+      "assertions": [
+        "The installed Waybar version is checked for version-sensitive behavior.",
+        "The canonical waybar-network, waybar-styles, and waybar-states man sources are selected.",
+        "The response distinguishes canonical man sources from supplemental wiki content."
+      ]
+    }
+  ]
+}

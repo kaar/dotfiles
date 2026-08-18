@@ -1,0 +1,378 @@
+waybar-clock(5) "waybar-clock" "User Manual"
+
+# NAME
+
+waybar - clock module
+
+# DESCRIPTION
+
+*clock* module displays current date and time.
+
+There are two implementations:
+
+- *clock*: Full-featured implementation, including the calendar and timezone
+  support described below. Enabled at build time when either C++20 concepts
+  (\_\_cpp\_concepts >= 201907, gcc >= 13) are available, or the HowardHinnant date
+  library <https://github.com/HowardHinnant/date> is installed.
+- *simpleclock*: Fallback that provides date and time display only. Used when the
+  above build conditions are not met.
+
+# FILES
+
+$XDG_CONFIG_HOME/waybar/config ++
+	Per user configuration file
+
+# CONFIGURATION
+
+1. Addressed by *clock*
+[- *Option*
+:- *Typeof*
+:- *Default*
+:- *Description*
+|[ *interval*
+:[ integer
+:[ 60
+:[ The interval in which the information gets polled
+|[ *format*
+:[ string
+:[ *{:%H:%M}*
+:[ The format, how the date and time should be displayed. See format options
+   below. Split the braces to insert literal text, e.g. *{0:%H}text{0:%M}*
+|[ *timezone*
+:[ string
+:[
+:[ The timezone to display the time in, e.g. America/New_York. "" represents
+   the system's local timezone. See Wikipedia's unofficial list of timezones <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+|[ *timezones*
+:[ list of strings
+:[
+:[ A list of timezones (as in *timezone*) to use for time display, changed using
+   the scroll wheel. Do not specify *timezone* option when *timezones* is specified.
+   "" represents the system's local timezone
+|[ *timezone-tooltip-format*
+:[ string
+:[
+:[ Format to use for displaying timezones in the tooltip. When set, this allows showing
+   timezone information (like timezone abbreviations) in the tooltip while keeping the
+   main display clean. Uses the same format options as *format*
+|[ *locale*
+:[ string
+:[
+:[ A locale to be used to display the time. Intended to render times in custom
+   timezones with the proper language and format
+|[ *max-length*
+:[ integer
+:[
+:[ The maximum length in character the module should display
+|[ *rotate*
+:[ integer
+:[
+:[ Positive value to rotate the text label (in 90 degree increments)
+|[ *on-click*
+:[ string
+:[
+:[ Command to execute when clicked on the module
+|[ *on-click-middle*
+:[ string
+:[
+:[ Command to execute when you middle clicked on the module using mousewheel
+|[ *on-click-right*
+:[ string
+:[
+:[ Command to execute when you right-click on the module
+|[ *on-scroll-up*
+:[ string
+:[
+:[ Command to execute when scrolling up on the module
+|[ *on-scroll-down*
+:[ string
+:[
+:[ Command to execute when scrolling down on the module
+|[ *smooth-scrolling-threshold*
+:[ double
+:[
+:[ Threshold to be used when scrolling
+|[ *tooltip*
+:[ bool
+:[ true
+:[ Option to enable tooltip on hover
+|[ *tooltip-format*
+:[ string
+:[ same as format
+:[ Tooltip on hover
+|[ *menu*
+:[ string
+:[
+:[ Action that popups the menu.
+|[ *menu-file*
+:[ string
+:[
+:[ Location of the menu descriptor file. There need to be an element of type GtkMenu with id *menu*
+|[ *menu-actions*
+:[ array
+:[
+:[ The actions corresponding to the buttons of the menu.
+|[ *expand*:
+:[ bool
+:[ false
+:[ Enables this module to consume all left over space dynamically.
+
+View all valid format options in *strftime(3)* or have a look https://en.cppreference.com/w/cpp/chrono/duration/formatter
+
+2. Addressed by *clock: calendar*
+[- *Option*
+:- *Typeof*
+:- *Default*
+:- *Description*
+|[ *mode*
+:[ string
+:[ month
+:[ Calendar view mode. Possible values: year|month
+|[ *mode-mon-col*
+:[ integer
+:[ 1
+:[ Relevant for *mode=year*. Count of months per row. Must be a divisor of 12
+   (one of 1, 2, 3, 4, 6, 12); an invalid value falls back to 3
+|[ *weeks-pos*
+:[ string
+:[
+:[ The position where week numbers should be displayed. Disabled when is empty.
+   Possible values: left|right
+|[ *on-scroll*
+:[ integer
+:[ 1
+:[ Value to scroll months/years forward/backward. Can be negative. Is
+   configured under *on-scroll* option
+|[ *iso8601*
+:[ bool
+:[ false
+:[ When enabled, the calendar follows the ISO 8601 standard: weeks begin on
+   Monday, and the first week of the year is numbered 1. The default week format is
+   '{:%V}'.
+|[ *weeks-numbering*
+:[ string
+:[
+:[ Override the week number calculation method, independent of *iso8601* and
+   locale settings. Possible values: *iso* (ISO 8601, {:%V}), *monday*
+   (Monday-based, {:%W}), *sunday* (Sunday-based, {:%U}). When not set, the
+   method is derived from *iso8601* or the locale.
+|[ *first-day-of-week*
+:[ integer
+:[
+:[ The first day of the week, where 0 is Sunday and 6 is Saturday.
+   When not set, the first day of the week is determined by the locale settings.
+
+3. Addressed by *clock: calendar: format*
+[- *Option*
+:- *Typeof*
+:- *Default*
+:- *Description*
+|[ *months*
+:[ string
+:[
+:[ Format is applied to months header(January, February,...etc.)
+|[ *days*
+:[ string
+:[
+:[ Format is applied to days
+|[ *weeks*
+:[ string
+:[ *{:%U}*
+:[ Format is applied to week numbers. The *{}* placeholder is replaced with the
+   format determined by *weeks-numbering* (if set), otherwise by *iso8601* or the
+   locale: '{:%V}' for ISO 8601, '{:%W}' when week starts with Monday, '{:%U}' otherwise
+|[ *weekdays*
+:[ string
+:[
+:[ Format is applied to weeks header(Su,Mo,...etc.)
+|[ *today*
+:[ string
+:[ *<b><u>{}</u></b>*
+:[ Format is applied to Today
+
+## Actions
+
+[- *String*
+:- *Action*
+|[ *mode*
+:[ Switch calendar mode between year/month
+|[ *tz_up*
+:[ Switch to the next provided time zone
+|[ *tz_down*
+:[ Switch to the previously provided time zone
+|[ *shift_up*
+:[ Switch to the next calendar month/year
+|[ *shift_down*
+:[ Switch to the previous calendar month/year
+|[ *shift_reset*
+:[ Reset the calendar shift back to the current month/year
+|[ *exec <cmd>*
+:[ Execute the specified command
+
+# FORMAT REPLACEMENTS
+
+- *{calendar}*: Current month calendar
+- *{tz_list}*: List of time in the rest timezones, if more than one timezone is set in the config
+- *{ordinal_date}*: The current day in (English) ordinal form, e.g. 21st
+
+# EXAMPLES
+
+1. General
+
+```
+"clock": {
+	"interval": 60,
+	"format": "{:%H:%M}",
+	"max-length": 25
+}
+```
+
+2. Calendar
+
+```
+"clock": {
+	"format": "{:%H:%M}  ",
+	"format-alt": "{:%A, %B %d, %Y (%R)} 󰃰 ",
+	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+	"calendar": {
+		"mode"             : "year",
+		"mode-mon-col"     : 3,
+		"weeks-pos"        : "right",
+		"first-day-of-week": 1,
+		"on-scroll"        : 1,
+		"on-click-right"   : "mode",
+		"format": {
+			"months":     "<span color='#ffead3'><b>{}</b></span>",
+			"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+			"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+			"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+			"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+		}
+	},
+	"actions": {
+		"on-click-right": "mode",
+		"on-click-forward": "tz_up",
+		"on-click-backward": "tz_down",
+		"on-scroll-up": "shift_up",
+		"on-scroll-down": "shift_down"
+	}
+},
+```
+
+3. Full date on hover
+
+```
+"clock": {
+	"interval": 60,
+	"tooltip": true,
+	"format": "{:%H.%M}",
+	"tooltip-format": "{:%Y-%m-%d}",
+}
+```
+
+4. Show timezone in tooltip only
+
+```
+"clock": {
+	"interval": 60,
+	"format": "{:%H:%M}",
+	"timezone-tooltip-format": "{:%H:%M %Z}",
+	"timezones": [
+		"",
+		"America/Chicago",
+		"America/Los_Angeles",
+		"Europe/Paris",
+		"UTC"
+	],
+	"tooltip": true,
+	"tooltip-format": "{tz_list}"
+}
+```
+5. Simple calendar tooltip
+
+```
+"clock": {
+"format": "{:%H:%M}",
+"tooltip-format": "<tt>{calendar}</tt>",
+"calendar": {
+"format": {
+"today": "<span color='#ffcc66'><b>{}</b></span>"
+}
+}
+}
+```
+# STYLE
+
+- *#clock*
+
+If displaying seconds causes other modules to shift side to side, the cause is
+usually proportional-width digits. If your font supports it, add
+*font-feature-settings: "tnum";* to the *#clock* style (or wherever you set the bar
+font) to use fixed-width numbers.
+
+The following classes are used only inside the *{calendar}* tooltip. Their
+foreground *color* is read and applied to the corresponding calendar cells in
+the tooltip markup:
+
+- *.calendar-today*: The current day
+- *.calendar-days*: The day numbers
+- *.calendar-weeks*: The week numbers
+- *.calendar-weekdays*: The weekday header (Su, Mo, ...)
+- *.calendar-months*: The month header (January, February, ...)
+
+# Troubleshooting
+
+If clock module is disabled at startup with locale::facet::\_S\_create\_c\_locale ++
+name not valid error message try one of the following:
+
+- check if LC_TIME is set properly (glibc)
+- set locale to C in the config file (musl)
+
+When using *clock* instead of *simpleclock*, the locale defaults to *C* regardless
+of the locale settings. To override this, prepend *L* to the format string, e.g.
+*{:%a %m %d}* becomes *{:L%a %m %d}*.
+
+The locale option must be set for {calendar} to use the correct start-of-week, regardless of system locale.
+
+## Calendar in Chinese. Alignment
+
+In order to have aligned Chinese calendar there are some useful recommendations:
+
+. Use "WenQuanYi Zen Hei Mono" which is provided in most Linux distributions
+. Try different font sizes and find best for you. size = 9pt should be fine
+. In case when "WenQuanYi Zen Hei Mono" font is used disable monospace font pango tag
+
+Example of working config
+
+```
+"clock": {
+	"format": "{:%H:%M}  ",
+	"format-alt": "{:%A, %B %d, %Y (%R)} 󰃰 ",
+	"tooltip-format": "\n<span size='9pt' font='WenQuanYi Zen Hei Mono'>{calendar}</span>",
+	"calendar": {
+		"mode"          : "year",
+		"mode-mon-col"  : 3,
+		"weeks-pos"     : "right",
+		"on-scroll"     : 1,
+		"on-click-right": "mode",
+		"format": {
+			"months":     "<span color='#ffead3'><b>{}</b></span>",
+			"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+			"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+			"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+			"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+		}
+	},
+	"actions": {
+		"on-click-right": "mode",
+		"on-click-forward": "tz_up",
+		"on-click-backward": "tz_down",
+		"on-scroll-up": "shift_up",
+		"on-scroll-down": "shift_down"
+	}
+},
+```
+
+# AUTHOR
+
+Alexis Rouillard <contact@arouillard.fr>
