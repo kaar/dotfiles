@@ -18,8 +18,18 @@
       "pulseaudio"
     ],
     "modules-right": [
+      "custom/airpods",
       "custom/openclaw"
     ],
+    "custom/airpods": {
+      "exec": "~/.config/waybar/airpods.sh status",
+      "interval": 5,
+      "signal": 8,
+      "return-type": "json",
+      "format": "{}",
+      "on-click": "~/.config/waybar/airpods.sh connect",
+      "on-click-right": "blueman-manager"
+    },
     "custom/openclaw": {
       "exec": "~/.config/waybar/openclaw.py",
       "interval": 10,
