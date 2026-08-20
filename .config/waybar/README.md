@@ -32,11 +32,49 @@ waybar --config ~/.config/waybar/config.jsonc --log-level debug
 Provides the Waybar AirPods status indicator and one-click A2DP audio selection. The script locates the trusted Caspar AirPods by name without storing their Bluetooth address.
 
 - `status` emits compact JSON with `connected`, `disconnected`, or `unavailable` as the Waybar class. When A2DP is also present and selected as the default sink, the class array contains both `connected` and `audio-connected`.
+- `pair` scans for discoverable Caspar AirPods, pairs them, and marks them trusted without storing or printing their Bluetooth address. It refuses to choose when multiple matching devices are discovered and never removes an existing bond.
 - Clicking the module runs `connect`, requests the A2DP Audio Sink profile, makes it the default PulseAudio sink, and moves active playback streams.
 - `connect` is a no-op when the AirPods are already connected and their A2DP sink is already the default.
-- Desktop notifications report connection success or failure, and Waybar is refreshed with real-time signal 8.
+- Desktop notifications report pairing or connection success and failure, and Waybar is refreshed with real-time signal 8.
+
+#### Dependencies
+
+The helper uses the following Arch packages:
+
+- `bash`: runs the script.
+- `bluez` and `bluez-utils`: provide the Bluetooth service and `bluetoothctl` for discovery, pairing, trust, and connection.
+- `pulseaudio`, `pulseaudio-bluetooth`, and `libpulse`: provide the PulseAudio server, Bluetooth A2DP support, and `pactl`.
+- `ripgrep`: provides `rg` for parsing BlueZ and PulseAudio state.
+- `jq`: produces the JSON consumed by Waybar.
+- `coreutils`: provides `sleep` while waiting for the A2DP sink.
+- `systemd`: manages the Bluetooth and user audio services.
+- `waybar` and `procps-ng`: provide the bar and `pkill` used to request a module refresh.
+- `libnotify` (optional): provides `notify-send` for desktop notifications. The helper still works without it.
+
+Install the required packages and the optional notification integration:
 
 ```bash
+sudo pacman -S bash bluez bluez-utils coreutils jq libnotify libpulse procps-ng pulseaudio pulseaudio-bluetooth ripgrep systemd waybar
+```
+
+Enable BlueZ and ensure PulseAudio is available through its user socket:
+
+```bash
+sudo systemctl enable --now bluetooth.service
+systemctl --user enable --now pulseaudio.socket
+systemctl --user restart pulseaudio.service
+```
+
+This configuration uses PulseAudio directly. Do not install `pipewire-pulse` alongside it because both provide the PulseAudio server interface.
+
+#### Pairing and use
+
+Put the AirPods in pairing mode by opening their case and holding the setup button until its light flashes white, then run:
+
+```bash
+# Pair and trust discoverable Caspar AirPods
+~/.config/waybar/airpods.sh pair
+
 # Inspect Waybar status
 ~/.config/waybar/airpods.sh status | jq .
 
@@ -44,7 +82,7 @@ Provides the Waybar AirPods status indicator and one-click A2DP audio selection.
 ~/.config/waybar/airpods.sh connect
 ```
 
-Normal use requires an existing trusted, paired, and bonded record. See [`AIRPODS_FIX.md`](./AIRPODS_FIX.md) only for one-time pairing repair or `br-connection-key-missing` recovery.
+Normal use requires an existing trusted, paired, and bonded record. Pairing does not remove or repair an invalid existing bond.
 
 ### openclaw.py
 

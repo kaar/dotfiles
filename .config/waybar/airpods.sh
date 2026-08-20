@@ -14,8 +14,15 @@ readonly A2DP_SINK_UUID="0000110b-0000-1000-8000-00805f9b34fb"
 readonly WAYBAR_SIGNAL=8
 
 usage() {
-    echo "Usage: ${0##*/} {status|connect}" >&2
+    echo "Usage: ${0##*/} {status|connect|pair}" >&2
     exit 2
+}
+
+require_bluetoothctl() {
+    command -v bluetoothctl >/dev/null || {
+        echo "bluetoothctl is not installed; install the Arch package bluez-utils" >&2
+        return 1
+    }
 }
 
 find_airpods() {
@@ -36,6 +43,21 @@ find_airpods() {
     done < <(bluetoothctl devices Trusted 2>/dev/null || true)
 
     return 1
+}
+
+find_pairing_candidates() {
+    local line
+    local address
+    local name
+
+    while IFS= read -r line; do
+        [[ "$line" == Device\ * ]] || continue
+        line="${line#Device }"
+        address="${line%% *}"
+        name="${line#* }"
+
+        [[ "$name" == *"$AIRPODS_OWNER"* && "$name" == *AirPods* ]] && printf '%s\n' "$address"
+    done < <(bluetoothctl devices 2>/dev/null || true)
 }
 
 is_paired() {
@@ -64,7 +86,10 @@ print_status() {
     local audio_connected=false
     local tooltip=$'AirPods disconnected\rClick to connect'
 
-    if ! systemctl is-active --quiet bluetooth.service; then
+    if ! command -v bluetoothctl >/dev/null; then
+        state="unavailable"
+        tooltip="Bluetooth tools unavailable"
+    elif ! systemctl is-active --quiet bluetooth.service; then
         state="unavailable"
         tooltip="Bluetooth unavailable"
     elif ! address="$(find_airpods)" || ! is_paired "$address"; then
@@ -147,6 +172,8 @@ select_audio() {
 connect_airpods() {
     local address
 
+    require_bluetoothctl || return
+
     systemctl is-active --quiet bluetooth.service || {
         echo "Bluetooth service is not running" >&2
         return 1
@@ -168,11 +195,67 @@ connect_airpods() {
     echo "AirPods connected and selected for A2DP audio"
 }
 
+pair_airpods() {
+    local address
+    local output
+    local -a candidates=()
+
+    require_bluetoothctl || return
+
+    systemctl is-active --quiet bluetooth.service || {
+        echo "Bluetooth service is not running" >&2
+        return 1
+    }
+
+    echo "Open the AirPods case and hold its setup button until the light flashes white." >&2
+    echo "Scanning for $AIRPODS_OWNER AirPods for 20 seconds..." >&2
+    bluetoothctl --timeout 20 scan on >/dev/null 2>&1 || true
+    mapfile -t candidates < <(find_pairing_candidates)
+
+    case "${#candidates[@]}" in
+        0)
+            echo "$AIRPODS_OWNER AirPods were not found; confirm pairing mode and try again" >&2
+            return 1
+            ;;
+        1)
+            address="${candidates[0]}"
+            ;;
+        *)
+            echo "Multiple $AIRPODS_OWNER AirPods were found; refusing to choose a device" >&2
+            return 1
+            ;;
+    esac
+
+    if ! is_paired "$address"; then
+        if ! output="$(bluetoothctl --timeout 30 pair "$address" 2>&1)"; then
+            printf '%s\n' "${output//$address/<device>}" >&2
+            return 1
+        fi
+    fi
+
+    if ! output="$(bluetoothctl trust "$address" 2>&1)"; then
+        printf '%s\n' "${output//$address/<device>}" >&2
+        return 1
+    fi
+
+    check_pairing "$address" || return
+    echo "AirPods paired and trusted"
+}
+
 run_connect() {
     if connect_airpods; then
         notify "Connected and selected for A2DP audio"
     else
         notify "A2DP audio connection failed"
+        return 1
+    fi
+}
+
+run_pair() {
+    if pair_airpods; then
+        notify "Paired and trusted"
+    else
+        notify "Pairing failed"
         return 1
     fi
 }
@@ -184,6 +267,10 @@ case "${1:-}" in
     connect)
         trap refresh_waybar EXIT
         run_connect
+        ;;
+    pair)
+        trap refresh_waybar EXIT
+        run_pair
         ;;
     *)
         usage
