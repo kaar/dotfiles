@@ -8,7 +8,7 @@ Personal dotfiles managed with a bare Git repository cloned into `$HOME/.cfg`.
 + **Display Server**: [Wayland](https://wayland.freedesktop.org/)
 + **Compositor**: [Sway](.config/sway/config)
 + **Editor**: [Neovim](https://github.com/kaar/nvim-config)
-+ **Multiplexer**: [Tmux](https://github.com/kaar/tmux-config)
++ **Multiplexers**: [Herdr](https://github.com/kaar/herdr-config), [Tmux](https://github.com/kaar/tmux-config)
 + **Status Bar**: [Waybar](.config/waybar/config.jsonc)
 
 <img width="2878" height="1800" alt="image" src="https://github.com/user-attachments/assets/5a5c9c2e-3800-4e6a-8fbb-d909cc143585" />
@@ -26,8 +26,14 @@ config checkout
 config config --local status.showUntrackedFiles no
 ```
 
-## Additional external configs
+## Separate configuration repositories
 
+The following configurations now live in their own repositories:
+
++ Multiplexers: [Herdr](https://github.com/kaar/herdr-config), [Tmux](https://github.com/kaar/tmux-config)
++ Editor: [Neovim](https://github.com/kaar/nvim-config)
++ Agent: [Pi](https://github.com/kaar/pi-config)
++ Git: [git-config](https://github.com/kaar/git-config)
 
 ```sh
 # Nvim
